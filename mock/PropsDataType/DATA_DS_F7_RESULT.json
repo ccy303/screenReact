@@ -1,0 +1,250 @@
+{
+  "data": {
+    "number": "123123_1",
+    "dimParams": [
+      {
+        "valuetype": 4,
+        "number": "Entity",
+        "shortNumber": "E",
+        "isDim": "1",
+        "entityName": "bcm_entitymembertree",
+        "name": "组织",
+        "member": {
+
+        },
+        "id": "1545055038479631386"
+      },
+      {
+        "valuetype": 4,
+        "number": "Year",
+        "shortNumber": "FY",
+        "isDim": "1",
+        "entityName": "bcm_fymembertree",
+        "name": "财年",
+        "member": {
+
+        },
+        "id": "1545055038479631387"
+      },
+      {
+        "valuetype": 4,
+        "number": "Period",
+        "shortNumber": "P",
+        "isDim": "1",
+        "entityName": "bcm_periodmembertree",
+        "name": "期间",
+        "member": {
+
+        },
+        "id": "1545055038479631380"
+      },
+      {
+        "valuetype": 4,
+        "number": "Scenario",
+        "shortNumber": "S",
+        "isDim": "1",
+        "entityName": "bcm_scenemembertree",
+        "name": "情景",
+        "member": {
+
+        },
+        "id": "1545055038479631382"
+      },
+      {
+        "valuetype": 4,
+        "number": "Process",
+        "shortNumber": "BP",
+        "isDim": "1",
+        "entityName": "bcm_processmembertree",
+        "name": "过程",
+        "member": {
+
+        },
+        "id": "1545055038479631385"
+      },
+      {
+        "valuetype": 4,
+        "number": "Currency",
+        "shortNumber": "C",
+        "isDim": "1",
+        "entityName": "bcm_currencymembertree",
+        "name": "币别",
+        "member": {
+
+        },
+        "id": "1545055038479631377"
+      },
+      {
+        "valuetype": 4,
+        "number": "AuditTrail",
+        "shortNumber": "AT",
+        "isDim": "1",
+        "entityName": "bcm_audittrialmembertree",
+        "name": "审计线索",
+        "member": {
+
+        },
+        "id": "1545055038479631379"
+      },
+      {
+        "valuetype": 4,
+        "number": "MultiGAAP",
+        "shortNumber": "MG",
+        "isDim": "1",
+        "entityName": "bcm_rulemembertree",
+        "name": "准则",
+        "member": {
+
+        },
+        "id": "1545055038479631374"
+      },
+      {
+        "valuetype": 4,
+        "number": "DataSort",
+        "shortNumber": "DS",
+        "isDim": "1",
+        "entityName": "bcm_datasortmembertree",
+        "name": "数据分类",
+        "member": {
+
+        },
+        "id": "1545055038479631384"
+      }
+    ],
+    "columns": [
+      {
+        "number": "Entity",
+        "id": "Entity",
+        "name": "组织",
+        "type": "LCD",
+        "member": [
+          "$Cur"
+        ],
+        "col_type": "1"
+      },
+      {
+        "number": "Year",
+        "id": "Year",
+        "name": "财年",
+        "type": "LCD",
+        "member": [
+          "$Cur"
+        ],
+        "col_type": "1"
+      },
+      {
+        "number": "Period",
+        "id": "Period",
+        "name": "期间",
+        "type": "LCD",
+        "member": [
+          "$Cur"
+        ],
+        "col_type": "1"
+      },
+      {
+        "number": "Scenario",
+        "id": "Scenario",
+        "name": "情景",
+        "type": "LCD",
+        "member": [
+          "$Cur"
+        ],
+        "col_type": "1"
+      },
+      {
+        "number": "Process",
+        "id": "Process",
+        "name": "过程",
+        "type": "LCD",
+        "member": [
+          "$Cur"
+        ],
+        "col_type": "1"
+      },
+      {
+        "number": "Currency",
+        "id": "Currency",
+        "name": "币别",
+        "type": "LCD",
+        "member": [
+          "$Cur"
+        ],
+        "col_type": "1"
+      },
+      {
+        "number": "AuditTrail",
+        "id": "AuditTrail",
+        "name": "审计线索",
+        "type": "LCD",
+        "member": [
+          "$Cur"
+        ],
+        "col_type": "1"
+      },
+      {
+        "number": "MultiGAAP",
+        "id": "MultiGAAP",
+        "name": "准则",
+        "type": "LCD",
+        "member": [
+          "$Cur"
+        ],
+        "col_type": "1"
+      },
+      {
+        "number": "DataSort",
+        "id": "DataSort",
+        "name": "数据分类",
+        "type": "LCD",
+        "member": [
+          "$Cur"
+        ],
+        "col_type": "1"
+      },
+      {
+        "number": "Account",
+        "id": "Account",
+        "name": "科目",
+        "type": "LCD",
+        "member": [
+          "R2008",
+          "R2009",
+          "R2010",
+          "R2013",
+          "R2014",
+          "R2011",
+          "R2012",
+          "R2015"
+        ],
+        "col_type": "1"
+      },
+      {
+        "number": "ChangeType",
+        "id": "ChangeType",
+        "name": "变动类型",
+        "type": "LCD",
+        "member": [
+          "YTD",
+          "CurrentPeriod"
+        ],
+        "col_type": "1"
+      },
+      {
+        "number": "FMONEY",
+        "name": "度量值",
+        "id": "FMONEY",
+        "type": "DM",
+        "col_type": "2"
+      }
+    ],
+    "name": "123313",
+    "datesetFilterItems": [],
+    "id": "1645067538528258048",
+    "type": "2",
+    "varParams": []
+  },
+  "t": "2023-10-18 14:42:20",
+  "dataType": "DATA_DS_F7_RESULT",
+  "primaryKey": ""
+}

@@ -1,0 +1,110 @@
+.dw-design-right {
+  position: relative;
+
+  &-properties-view {
+    overflow: auto;
+    height: calc(100% - 73px);
+
+    &-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      height: 30px;
+
+      &-label {
+        width: 100px;
+        flex-shrink: 0;
+        line-height: 30px;
+      }
+
+      &-component {
+        flex: 1;
+      }
+    }
+  }
+
+  &-display-view {
+    &-data {
+      position: absolute;
+      right: 300px;
+      top: 0;
+      width: 200px;
+      height: 100%;
+      overflow: auto;
+      background: #f4f4f4;
+      z-index: 9999999;
+
+      > div {
+        position: relative;
+      }
+
+      &-title {
+        padding: 10px;
+        font-size: 14px;
+        font-weight: bold;
+      }
+    }
+
+    &-form {
+      .form-item {
+        margin-top: 20px;
+      }
+
+      .form-label {
+        padding-left: 10px;
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      .form-select {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+
+        > div:nth-child(1) {
+          width: 80px;
+          padding-left: 10px;
+        }
+
+        > div:nth-child(2) {
+          flex: 1;
+          padding-right: 10px;
+        }
+
+        .kd-select {
+          width: 100%;
+        }
+      }
+    }
+
+    &-drop {
+      margin: 10px;
+      border: 0.5px dotted #b2b2b2;
+      color: #b2b2b2;
+
+
+      &-default {
+        height: 30px;
+        line-height: 30px;
+        padding-left: 20px;
+      }
+    }
+
+    &-item {
+      height: 28px;
+      line-height: 28px;
+      width: 100%;
+      padding-left: 20px;
+      background: #c4d5ff;
+      color: #6875f9;
+    }
+
+    &-item + &-item {
+      margin-top: 2px;
+    }
+  }
+
+  .kd-carousel-root {
+    display: none;
+  }
+}

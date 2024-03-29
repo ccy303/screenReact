@@ -1,0 +1,147 @@
+.dw-design-center {
+  position: relative;
+  height: 100%;
+
+  &-container {
+    position: relative;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    padding: 20px 20px 20px 35px;
+
+    &-setting {
+      font-size: 30px;
+      position: absolute;
+      right: 10px;
+      top: 30px;
+      cursor: pointer;
+      color: #b2b2b2;
+      z-index: 99;
+
+      &:hover {
+        color: #c2d7ff;
+      }
+    }
+
+    &-canvas {
+      position: relative;
+      background: #f2f3f5;
+
+      &-item {
+        &-main {
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  &-float-button {
+    position: relative;
+  }
+}
+
+.dw-design-center-float-button-container{
+  height: 300px;
+  width: 200px;
+  background: #fff;
+}
+
+.top.hidden {
+  opacity: 0;
+  z-index: -1!important;
+  visibility: hidden;
+}
+
+.dw-ruler-horizontal {
+  background: transparent;
+  color: #9f9d9d;
+  position: absolute;
+  top: -20px;
+  left: 0;
+
+  .dw-ruler {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+
+    > div {
+      width: 1px;
+    }
+
+    .dw-ruler-px-100 {
+      position: relative;
+
+      > div:nth-child(1) {
+        border-left: 1px solid;
+        height: 70%;
+      }
+
+      > div:nth-child(2) {
+        position: absolute;
+        font-size: 11px;
+        bottom: 1px;
+        transform: scale(0.8);
+      }
+    }
+
+    .dw-ruler-px-10 {
+      height: 100%;
+
+      > div {
+        border-left: 0.5px solid;
+        height: 30%;
+      }
+    }
+  }
+}
+
+.dw-ruler-vertical {
+  background: transparent;
+  color: #9f9d9d;
+  position: absolute;
+  top: 0;
+  left: -20px;
+
+  .dw-ruler {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+
+    > div {
+      height: 1px;
+    }
+
+    .dw-ruler-px-100 {
+      position: relative;
+
+      > div:nth-child(1) {
+        border-bottom: 1px solid;
+        width: 70%;
+      }
+
+      > div:nth-child(2) {
+        position: absolute;
+        font-size: 11px;
+        bottom: 4px;
+        transform: scale(0.8) rotate(270deg);
+      }
+    }
+
+    .dw-ruler-px-10 {
+      > div {
+        border-bottom: 0.5px solid;
+        width: 30%;
+      }
+    }
+  }
+}
+
+.dw-ruler-vertical, .dw-ruler-horizontal {
+  .active {
+    background: #c2d7ff;
+  }
+}

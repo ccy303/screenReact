@@ -1,0 +1,30 @@
+{
+  "data": [
+    {
+      "name": "组件分类",
+      "number": "root",
+      "parent": "0",
+      "id": "1483926491673705472",
+      "type": "",
+      "moduleType": "0"
+    },
+    {
+      "name": "test1",
+      "number": "test1",
+      "parent": "1483926491673705472",
+      "id": "1502896018935545856",
+      "type": "",
+      "moduleType": "1"
+    },
+    {
+      "name": "test01",
+      "number": "test01",
+      "parent": "1483926491673705472",
+      "id": "1502896755715342336",
+      "type": "",
+      "moduleType": "1"
+    }
+  ],
+  "t": "2022-09-05 14:28:01",
+  "dataType": "DATA_MODULE_REFRESH"
+}

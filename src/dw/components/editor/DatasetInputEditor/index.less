@@ -1,0 +1,47 @@
+.dw-design-editor-dataset-input {
+  position: relative;
+
+  i {
+    cursor: pointer;
+  }
+}
+
+.guides-modal {
+  &-top {
+    padding: 10px;
+  }
+
+  &-main {
+    font-size: 13px;
+
+    &-item {
+      display: flex;
+      align-items: center;
+
+      &-form {
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        margin: 0 10px 10px 0;
+
+        &-label {
+
+        }
+
+        &-value {
+          flex: 1;
+          margin-left: 10px;
+
+          .kd-select {
+            width: 100%;
+          }
+        }
+      }
+
+      &-form:last-child {
+        width: 50px;
+        flex: 0;
+      }
+    }
+  }
+}

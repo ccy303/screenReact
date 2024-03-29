@@ -1,0 +1,62 @@
+.dw-collapse {
+  &-level-one {
+    background: #F5FAFF;
+    height: 44px;
+    font-family: MicrosoftYaHeiSemibold;
+    font-size: 14px;
+    color: #022433;
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+    font-weight: bold;
+    justify-content: space-between;
+    padding-right: 15px;
+
+    > div:nth-child(1) {
+      cursor: pointer;
+      margin-right: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    i {
+      color: #B2B2B2;
+      transition: all 0.3s;
+    }
+  }
+
+  &-level-two {
+    height: 32px;
+    line-height: 32px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f5f7fa;
+    }
+
+    > div:nth-child(1) {
+      margin-right: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    i {
+      color: #B2B2B2;
+      transition: all 0.3s;
+    }
+  }
+
+  &-main {
+    transition: height 0.3s, opacity 0.15s;
+
+    &-card {
+      padding: 20px 4px 8px 16px;
+
+      &-title {
+        font-size: 14px;
+        color: #5C6D74;
+        margin-bottom: 12px;
+      }
+    }
+  }
+}
