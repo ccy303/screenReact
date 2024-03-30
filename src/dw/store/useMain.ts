@@ -3,7 +3,7 @@ import _ from 'lodash'
 import moment from 'moment'
 import { v4 as uuidv4 } from 'uuid'
 import { ReactNode, useEffect } from 'react'
-import { DEFAULT_PAGE_CONFIG, DEFAULT_QUERY_CONFIG, pageGroup, pageGroupMap } from 'dw/control/pageControl'
+import { DEFAULT_PAGE_CONFIG, pageGroup, pageGroupMap } from 'dw/control/pageControl'
 import { controlMap } from 'dw/control'
 import { DEFAULT_DATASET, LAYOUT } from 'dw/control/common'
 import { Message } from '@kdcloudjs/kdesign'
@@ -149,7 +149,6 @@ export type GlobalConfigProps = {
   selectType: string
   pageControl: {
     pageConfig: any
-    queryConfig: any
   }
 }
 
@@ -162,6 +161,7 @@ export type ChangeItemProps = {
 export type GroupProps = {
   groups: ControlGroupProps[]
   current: string
+  category?: string
 }
 
 export type TreeNodeProps = {
@@ -198,7 +198,6 @@ const globalConfigState = atom<GlobalConfigProps>({
     selectType: '',
     pageControl: {
       pageConfig: DEFAULT_PAGE_CONFIG,
-      queryConfig: DEFAULT_QUERY_CONFIG,
     },
   },
 })
@@ -246,7 +245,7 @@ const useMain = () => {
     const controlProps: ControlProps = _.cloneDeep(c)
     const rootId = uuidv4().replace(/-/g, '')
     let item: any = {}
-    const { group: grp } = controlProps
+    const { group: grp, category } = controlProps
 
     grp.forEach((g, i) => {
       const { properties: pros } = g
@@ -277,7 +276,7 @@ const useMain = () => {
       type: controlProps.type,
     }
     console.log('addItem', c, item)
-    setGroup({ groups: grp, current: grp[0].id })
+    setGroup({ groups: grp, current: grp[0].id, category })
     setItemList([...itemList, item])
     setGlobalConfig({ ...globalConfig, selectId: rootId })
   }
@@ -469,7 +468,7 @@ const useMain = () => {
       })
       console.log('selectItem', rootId, currentItem, currentProp, cloneItemList)
       setItemList(cloneItemList)
-      setGroup({ groups: currentProp, current: currentProp[0].id })
+      setGroup({ groups: currentProp, current: currentProp[0].id, category: controlMap[type].category })
       setGlobalConfig({ ...globalConfig, selectId: currentItem.id })
     }
   }
@@ -511,8 +510,7 @@ const useMain = () => {
         }
       })
       pageItem = { ...pageItem, ...globalConfig.pageControl }
-
-      setGroup({ groups: pageProp, current: pageProp[0].id })
+      setGroup({ groups: pageProp, current: pageProp[0].id, category: pageProp[0].id })
       setGlobalConfig({ ...globalConfig, pageControl: pageItem, selectId: '' })
     }
   }

@@ -66,7 +66,6 @@ export const PropertiesContainer: FC<any> = (props) => {
         ? properties.map((p) => {
             const { id, name = '', visible = true, show, nodes, defaultOpen } = p
             const v = getVisible(visible)
-
             if (v) {
               return (
                 <Collapse
@@ -103,9 +102,15 @@ export const PropertiesContainer: FC<any> = (props) => {
           })
         : null}
 
-      {group.current == 'screenConfig' && (
-        <div className='w-100 flex-center mb-20'>
-          <Button type='primary'>大屏数据保存</Button>
+      {group.category == 'screenConfig' && (
+        <div className="w-100 flex-center mb-20">
+          <Button type="primary">大屏配置保存</Button>
+        </div>
+      )}
+
+      {group.category == 'charts' && (
+        <div className="w-100 flex-center mb-20">
+          <Button type="primary">图表配置保存</Button>
         </div>
       )}
     </div>

@@ -16,6 +16,7 @@ import CompItem from 'dw/views/Design/layout/Left/CompItem'
 import CompList from 'dw/views/Design/layout/Left/CompList'
 import CompVariable from 'dw/views/Design/layout/Left/CompVariable'
 import CompDataSet from 'dw/views/Design/layout/Left/CompDataSet'
+import { echaetComponents } from 'dw/api/ComponentsList'
 
 import './index.less'
 
@@ -44,7 +45,8 @@ const Left: FC<any> = (props) => {
       <Tabs activeKey={active} onChange={(v) => setActive(v)}>
         <Tabs.TabPane key="design" tab="设计">
           <div>
-            <CompList list={vslzModulesTree[0].nodes} title="可视化组件" />
+            <CompList list={echaetComponents.nodes} title="可视化组件" />
+            {/* <CompList list={vslzModulesTree[0].nodes} title="可视化组件" /> */}
             <CompList list={gnrModulesTree[0].nodes} title="通用组件" />
             {/* <CompModule moduleList={moduleList} /> */}
             <CompItem />

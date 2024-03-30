@@ -46,10 +46,12 @@ const Center: FC<any> = (props) => {
   }
 
   const onDragOver = (e: any) => {
+    console.log('onDragOver');
     e.preventDefault()
   }
 
-  const onDrop = (e: any) => {
+  const onDrop = (e: any) => {9
+    console.log('onDrop');
     e.preventDefault()
     console.log('onDrop', e?.dataTransfer?.getData('Type'))
     const type = e?.dataTransfer?.getData('Type')

@@ -1,35 +1,29 @@
 // noinspection DuplicatedCode
 
 import React from 'react'
-import { Icon } from '@kdcloudjs/kdesign'
-import { ControlGroupProps, ControlProps, PropertiesProps } from 'dw/control/interface'
+import { ControlGroupProps } from 'dw/control/interface'
 import i18n from 'dw/api/I18n'
 import { Button } from '@kdcloudjs/kdesign'
 import * as constants from 'dw/api/Constants'
 import './pageControl.less'
 
 export const DEFAULT_PAGE_CONFIG = {
+  size: '6',
   backgroundColor: '#f2f3f5',
   backgroundSize: 'auto auto',
   height: 768,
   scale: 'none',
-  size: '2',
   url: '',
   width: 1024,
   id: null,
   number: null,
-}
-
-export const DEFAULT_QUERY_CONFIG = {
-  dimList: [],
-  floatButton: {
-    X: 100,
-    Y: 400,
-    hide: true,
-  },
-  name: '',
-  id: null,
-  number: null,
+  name: null,
+  configtag: null,
+  version: null,
+  versiondescribe: null,
+  themename: null,
+  themecode: null,
+  ispublish: '1',
 }
 
 export const pageGroup: ControlGroupProps[] = [
@@ -241,18 +235,17 @@ export const pageGroup: ControlGroupProps[] = [
         nodes: [
           {
             visible: true,
-            id: 'queryConfig.floatButton.name',
+            id: 'pageConfig.name',
             name: '大屏名称',
             editor: {
               component: 'Input',
               dataType: 'string',
-              defaultValue: DEFAULT_QUERY_CONFIG.name,
               borderType: 'bordered',
             },
           },
           {
             visible: true,
-            id: 'queryConfig.floatButton.mark',
+            id: 'pageConfig.configtag',
             name: '大屏标识',
             editor: {
               component: 'Input',
@@ -264,7 +257,7 @@ export const pageGroup: ControlGroupProps[] = [
           },
           {
             visible: true,
-            id: 'queryConfig.floatButton.version',
+            id: 'pageConfig.version',
             name: '版本',
             editor: {
               component: 'Input',
@@ -275,7 +268,7 @@ export const pageGroup: ControlGroupProps[] = [
           },
           {
             visible: true,
-            id: 'queryConfig.floatButton.versionMarker',
+            id: 'pageConfig.versiondescribe',
             name: '版本表述',
             editor: {
               component: 'Input',
@@ -286,7 +279,7 @@ export const pageGroup: ControlGroupProps[] = [
           },
           {
             visible: true,
-            id: 'queryConfig.floatButton.theme',
+            id: 'pageConfig.themename',
             name: '主题名称',
             editor: {
               component: 'Input',
@@ -297,7 +290,7 @@ export const pageGroup: ControlGroupProps[] = [
           },
           {
             visible: true,
-            id: 'queryConfig.floatButton.themeCode',
+            id: 'pageConfig.themecode',
             name: '主题编码',
             editor: {
               component: 'Input',
@@ -308,7 +301,7 @@ export const pageGroup: ControlGroupProps[] = [
           },
           {
             visible: true,
-            id: 'queryConfig.floatButton.isPublish',
+            id: 'pageConfig.ispublish',
             name: '是否发布',
             editor: {
               component: 'Select',

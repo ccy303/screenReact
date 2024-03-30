@@ -24,8 +24,8 @@ import * as constants from 'dw/api/Constants'
 import i18n from 'dw/api/I18n'
 
 const analysisPieChartPie: ControlProps = {
-  name: TYPE_PIE.name,
-  type: TYPE_PIE.type,
+  name: '饼图',
+  type: 'analysis_pie_chart_pie',
   category: 'charts',
   group: [
     {
