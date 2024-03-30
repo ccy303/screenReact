@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react'
+import React, { CSSProperties, ReactElement } from 'react'
 import { EditorMapProp } from 'dw/components/editor'
 
 export type ValueProp = any
@@ -46,7 +46,7 @@ export type ControlNodeProps = {
 }
 
 export type ControlProProps = {
-  id: string
+  id?: string
   name?: string
   defaultOpen?: boolean
   visible?: VisibleProp

@@ -17,7 +17,6 @@ const Index: FC<any> = (props) => {
       url: '',
       dataType: 'DATA_INIT',
       designMode: true,
-      // t: '',
     },
     model: {
       isvId: 'kingdee',
@@ -129,7 +128,7 @@ const Index: FC<any> = (props) => {
       })
     })
 
-    invoke('propsDataTest', { item: 'DATA_INIT' })
+    // invoke('propsDataTest', { item: 'DATA_INIT' })
 
     return () => {
       if (updateSub) {

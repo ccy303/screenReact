@@ -4,7 +4,6 @@ import React from 'react'
 import useMain from 'dw/store/useMain'
 import { Button } from '@kdcloudjs/kdesign'
 import useBase from 'dw/store/useBase'
-import FloatButton from 'dw/views/Design/layout/Center/FloatButton'
 
 const Preview = () => {
   const {
@@ -35,7 +34,6 @@ const Preview = () => {
           backgroundRepeat: 'no-repeat',
         }}
       >
-        <FloatButton />
         {itemList.map((it: ComponentItemProps) => {
           const { id, type, x, y, w, h, zIndex } = it
           const Component = itemMap[type]

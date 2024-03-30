@@ -286,7 +286,6 @@ const useMain = () => {
     if (type in controlMap) {
       addItem(controlMap[type], sources)
     } else {
-      console.log('addItemWithType')
       Message.error('组件暂未配置')
     }
   }

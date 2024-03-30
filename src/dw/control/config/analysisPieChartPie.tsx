@@ -16,6 +16,7 @@ import {
   PIE_OTHER_PROP,
   POSITION_PROP,
   TITLE_PROP,
+  CHART_BASE_INFO
 } from 'dw/control/common'
 import _ from 'lodash'
 import { TYPE_PIE } from 'dw/api/Constants'
@@ -29,19 +30,19 @@ const analysisPieChartPie: ControlProps = {
   group: [
     {
       id: 'data',
-      name: i18n.msg('design7'),
-      properties: [DATASET_PROP, DATASET_VAR_PROP, DATASET_DIM_PROP, BASE_PROP],
+      name: '基本信息',
+      // properties: [DATASET_PROP, DATASET_VAR_PROP, DATASET_DIM_PROP, BASE_PROP],
+      properties: [CHART_BASE_INFO],
     },
     {
-      id: LAYOUT,
-      name: i18n.msg('design8'),
+      id: "dataSet",
+      name: '数据配置',
       properties: [],
       displayDataShow: true,
-      display: DEFAULT_DISPLAY,
     },
     {
       id: 'format',
-      name: i18n.msg('design9'),
+      name: '样式',
       properties: [
         TITLE_PROP,
         LEGEND_PROP,

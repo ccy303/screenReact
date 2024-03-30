@@ -4,7 +4,9 @@ import useMain, { ChangeItemProps } from 'dw/store/useMain'
 import { ControlNodeProps, PropertiesItemProps, VisibleProp } from 'dw/control/interface'
 import NameTipWrapper from 'dw/components/common/NameTipWrapper'
 import editorMap from 'dw/components/editor'
+import { Button } from '@kdcloudjs/kdesign'
 import _ from 'lodash'
+import './PropertiesContainer.less'
 
 export const PropertiesItem: FC<PropertiesItemProps> = (props) => {
   const {
@@ -32,9 +34,11 @@ export const PropertiesContainer: FC<any> = (props) => {
   const {
     properties,
     globalConfig: { selectId, selectType, pageControl },
+    group,
     changeItem,
     getCurrentItem,
   } = useMain()
+
   const prefixCls = 'dw-design-right-properties-view'
   const currentItem = getCurrentItem()
 
@@ -98,6 +102,12 @@ export const PropertiesContainer: FC<any> = (props) => {
             return null
           })
         : null}
+
+      {group.current == 'screenConfig' && (
+        <div className='w-100 flex-center mb-20'>
+          <Button type='primary'>大屏数据保存</Button>
+        </div>
+      )}
     </div>
   )
 }

@@ -5,7 +5,6 @@ import { ComponentItemProps } from 'dw/control/interface'
 import _ from 'lodash'
 import Ruler from 'dw/views/Design/layout/Center/Ruler'
 import ComponentItem from 'dw/views/Design/layout/Center/ComponentItem'
-import FloatButton from 'dw/views/Design/layout/Center/FloatButton'
 import { Icon } from '@kdcloudjs/kdesign'
 import { getMidCoordinate } from '../../../../../../util'
 
@@ -264,7 +263,6 @@ const ComponentContainer = (props: any) => {
     <>
       <Ruler length={pageConfig.width} actives={activeX} type="horizontal" />
       <Ruler length={pageConfig.height} actives={activeY} type="vertical" />
-      <FloatButton />
       {itemList.map((it: ComponentItemProps) => {
         const { x, y, w, h, id, zIndex } = it
         return (

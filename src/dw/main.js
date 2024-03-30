@@ -1,8 +1,8 @@
 /* eslint-disable */
 import React from 'react'
-import { createRoot,  } from 'react-dom/client'
+import { createRoot } from 'react-dom/client'
 import ViewItem from './views/ViewItem'
-import eventBus from '../../util/eventBus'
+import eventBus from 'dw/api/EventBus'
 
 /**
  * 在setHtml中声明Root类，使用ReactDOM.render将其渲染在model.dom中
@@ -12,8 +12,8 @@ import eventBus from '../../util/eventBus'
  * 在destoryed里，使用ReactDOM.unmountComponentAtNode卸载Root
  * 注意loadFile中index.css的引入路径，因为webpack打包后将其放在了css文件夹里，所以路径是./css/index.css
  */
-(function (KDApi) {
-  function MyComponent (model) {
+;(function (KDApi) {
+  function MyComponent(model) {
     this._setModel(model)
   }
 
@@ -32,8 +32,8 @@ import eventBus from '../../util/eventBus'
     },
     destoryed: function () {
       console.log('-----destoryed', this.model)
-      this.root.unmount();
-    }
+      this.root.unmount()
+    },
   }
 
   var setHtml = function (model, primaryProps) {
@@ -43,26 +43,22 @@ import eventBus from '../../util/eventBus'
           super(props)
           this.state = {
             customProps: props.customProps,
-            model: props.model
+            model: props.model,
           }
         }
-        componentDidMount () {
+        componentDidMount() {
           const { model } = this.state
-          this.updateSub = eventBus.sub(model, 'update', (updateProps) => {
-            this.setState({ customProps: updateProps})
-          })
+          // this.updateSub = eventBus.sub(model, 'update', (updateProps) => {
+          //   this.setState({ customProps: updateProps })
+          // })
         }
-        shouldComponentUpdate () {
-
-        }
-        componentWillUnmount () {
+        shouldComponentUpdate() {}
+        componentWillUnmount() {
           eventBus.unsub(this.updateSub)
         }
-        render () {
+        render() {
           const { customProps, model } = this.state
-          return (
-            <ViewItem model={model} customProps={customProps} />
-          )
+          return <ViewItem model={model} customProps={customProps} />
         }
       }
       this.root.render(<Root model={model} customProps={primaryProps} />)
@@ -70,5 +66,5 @@ import eventBus from '../../util/eventBus'
   }
 
   // 注册自定义组件
-  KDApi.register('todolistreact', MyComponent)
+  KDApi.register('echartReact', MyComponent)
 })(window.KDApi)

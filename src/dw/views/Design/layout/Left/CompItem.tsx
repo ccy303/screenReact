@@ -51,16 +51,7 @@ const CompItem = () => {
   }, [itemList])
 
   return (
-    <NavCard
-      title={i18n.msg('design5')}
-      operate={
-        <div>
-          <Icon type="search" />
-          <Icon type="search" />
-          <Icon type="search" />
-        </div>
-      }
-    >
+    <NavCard title={i18n.msg('design5')} operate={<div></div>}>
       <div className={`${prefixClsLeft}-comp-item-main`}>
         <div className={`${prefixClsLeft}-comp-item-top`}>
           <Icon type="address" />

@@ -4,7 +4,9 @@ import React from 'react'
 import { Icon } from '@kdcloudjs/kdesign'
 import { ControlGroupProps, ControlProps, PropertiesProps } from 'dw/control/interface'
 import i18n from 'dw/api/I18n'
+import { Button } from '@kdcloudjs/kdesign'
 import * as constants from 'dw/api/Constants'
+import './pageControl.less'
 
 export const DEFAULT_PAGE_CONFIG = {
   backgroundColor: '#f2f3f5',
@@ -32,12 +34,12 @@ export const DEFAULT_QUERY_CONFIG = {
 
 export const pageGroup: ControlGroupProps[] = [
   {
-    id: 'data',
-    name: i18n.msg('design7'),
+    id: 'screenConfig',
+    name: '大屏配置',
     properties: [
       {
         id: 'canvasGroup',
-        name: i18n.msg('pageConfig1'),
+        name: '大屏尺寸',
         defaultOpen: true,
         order: 0,
         nodes: [
@@ -233,14 +235,14 @@ export const pageGroup: ControlGroupProps[] = [
       },
       {
         id: 'ballGroup',
-        name: i18n.msg('floatButton'),
+        name: '大屏设置',
         defaultOpen: true,
         order: 1,
         nodes: [
           {
             visible: true,
             id: 'queryConfig.floatButton.name',
-            name: i18n.msg('c60'),
+            name: '大屏名称',
             editor: {
               component: 'Input',
               dataType: 'string',
@@ -250,40 +252,73 @@ export const pageGroup: ControlGroupProps[] = [
           },
           {
             visible: true,
-            id: 'queryConfig.floatButton.hide',
-            name: i18n.msg('hidefloatButton'),
+            id: 'queryConfig.floatButton.mark',
+            name: '大屏标识',
             editor: {
-              component: 'Switch',
-              dataType: 'boolean',
-              defaultValue: DEFAULT_QUERY_CONFIG.floatButton.hide,
+              component: 'Input',
+              dataType: 'string',
+              defaultValue: '',
+              borderType: 'bordered',
+              addonAfter: <Button type="primary">查询</Button>,
             },
           },
           {
             visible: true,
-            id: 'queryConfig.floatButton.X',
-            name: i18n.msg('floatButtonxposition'),
+            id: 'queryConfig.floatButton.version',
+            name: '版本',
             editor: {
-              component: 'Stepper',
-              dataType: 'number',
-              defaultValue: DEFAULT_QUERY_CONFIG.floatButton.X,
-              type: 'embed',
+              component: 'Input',
+              dataType: 'string',
+              defaultValue: '',
+              borderType: 'bordered',
             },
           },
           {
             visible: true,
-            id: 'queryConfig.floatButton.Y',
-            name: i18n.msg('floatButtonyposition'),
+            id: 'queryConfig.floatButton.versionMarker',
+            name: '版本表述',
             editor: {
-              component: 'Stepper',
-              dataType: 'number',
-              defaultValue: DEFAULT_QUERY_CONFIG.floatButton.Y,
-              type: 'embed',
+              component: 'Input',
+              dataType: 'string',
+              defaultValue: '',
+              borderType: 'bordered',
             },
           },
           {
-            visible: false,
-            id: 'queryConfig.dimList',
-            editor: { dataType: 'array', defaultValue: DEFAULT_QUERY_CONFIG.dimList },
+            visible: true,
+            id: 'queryConfig.floatButton.theme',
+            name: '主题名称',
+            editor: {
+              component: 'Input',
+              dataType: 'string',
+              defaultValue: '',
+              borderType: 'bordered',
+            },
+          },
+          {
+            visible: true,
+            id: 'queryConfig.floatButton.themeCode',
+            name: '主题编码',
+            editor: {
+              component: 'Input',
+              dataType: 'string',
+              defaultValue: '',
+              borderType: 'bordered',
+            },
+          },
+          {
+            visible: true,
+            id: 'queryConfig.floatButton.isPublish',
+            name: '是否发布',
+            editor: {
+              component: 'Select',
+              dataType: 'string',
+              options: [
+                { name: '是', value: '1' },
+                { name: '否', value: '0' },
+              ],
+              defaultValue: '1',
+            },
           },
         ],
       },

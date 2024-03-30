@@ -42,52 +42,20 @@ const Left: FC<any> = (props) => {
     <div className={`${prefixClsLeft}`}>
       <Icon onClick={() => setLeft(false)} className="dw-design-arrow left" type="arrow-left-solid" />
       <Tabs activeKey={active} onChange={(v) => setActive(v)}>
-        <Tabs.TabPane key="data" tab={i18n.msg('design7')}>
+        <Tabs.TabPane key="design" tab="设计">
+          <div>
+            <CompList list={vslzModulesTree[0].nodes} title="可视化组件" />
+            <CompList list={gnrModulesTree[0].nodes} title="通用组件" />
+            {/* <CompModule moduleList={moduleList} /> */}
+            <CompItem />
+          </div>
+        </Tabs.TabPane>
+        {/* <Tabs.TabPane key="data" tab={i18n.msg('design7')}>
           <div>
             <CompVariable />
             <CompDataSet />
           </div>
-        </Tabs.TabPane>
-        <Tabs.TabPane key="design" tab={i18n.msg('design1')}>
-          <div>
-            <CompList list={vslzModulesTree[0].nodes} title={i18n.msg('design12')} />
-            <CompList list={gnrModulesTree[0].nodes} title={i18n.msg('design12')} />
-            <CompModule moduleList={moduleList} />
-            <CompItem />
-            {process.env.NODE_ENV === 'development' && (
-              <NavCard title="test">
-                <div className={`${prefixClsLeft}-container`}>
-                  <Button
-                    style={{ margin: 10 }}
-                    onClick={() => {
-                      setViewUrl('Home')
-                    }}
-                  >
-                    Home page
-                  </Button>
-                  <Button
-                    style={{ margin: 10 }}
-                    onClick={() => {
-                      setDesignMode(false)
-                    }}
-                  >
-                    preview
-                  </Button>
-                  <Button
-                    style={{ margin: 10 }}
-                    onClick={() => {
-                      invoke('propsDataTest', { item: 'DATA_INIT' })
-                    }}
-                  >
-                    refresh
-                  </Button>
-                  {/* <Button style={{ margin: 10 }}>redo</Button> */}
-                  {/* <Button style={{ margin: 10 }}>undo</Button> */}
-                </div>
-              </NavCard>
-            )}
-          </div>
-        </Tabs.TabPane>
+        </Tabs.TabPane> */}
       </Tabs>
     </div>
   )

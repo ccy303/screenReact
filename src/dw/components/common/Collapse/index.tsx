@@ -45,7 +45,7 @@ const Collapse: FC<CollapseProps> = ({
             }}
           >
             <div>{title}</div>
-            <Icon type="arrow-up-solid" style={{ transform: open ? 'rotate(0)' : 'rotate(90deg)' }} />
+            {open ? <Icon type="hide" /> : <Icon type="preview" />}
           </div>
           {showCheck && (
             <div>
@@ -62,7 +62,7 @@ const Collapse: FC<CollapseProps> = ({
           }}
         >
           <div>
-            <Icon type="arrow-up-solid" style={{ transform: open ? 'rotate(0)' : 'rotate(90deg)' }} />
+            {open ? <Icon type="hide" /> : <Icon type="preview" />}
             <div>{title}</div>
           </div>
         </div>

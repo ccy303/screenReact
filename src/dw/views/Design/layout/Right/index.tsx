@@ -28,8 +28,8 @@ const Right: FC<any> = (props) => {
 
   return (
     <div className="dw-design-right">
-      <NavCard title="配置" operate={<Icon style={{ cursor: 'pointer' }} onClick={closeConfig} type="close" />}>
-        <Tabs activeKey={current} onChange={tabChange} size={'large' as any}>
+      <NavCard title="" operate={<Icon style={{ cursor: 'pointer' }} onClick={closeConfig} type="close" />}>
+        <Tabs activeKey={current} onChange={tabChange} size={'middle' as any}>
           {groups.map((item: any) => (
             <Tabs.TabPane key={item.id} tab={item.name} />
           ))}
