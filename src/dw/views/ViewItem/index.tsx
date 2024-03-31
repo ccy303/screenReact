@@ -40,7 +40,7 @@ const BaseView = () => {
   )
 }
 
-const ViewItem: FC<ViewItemProps> = (props) => {
+const ViewItem: FC<any> = (props) => {
   const value = {
     ...props,
     invoke: (...arr: any) => {

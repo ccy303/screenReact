@@ -24,6 +24,9 @@ const Design = () => {
 
   useEffect(() => {
     console.log('---design-propsData---', propsData)
+    if (!propsData) {
+      return
+    }
     updatePropsData(propsData)
   }, [propsData, propsData?.t])
 

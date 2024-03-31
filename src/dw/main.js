@@ -23,8 +23,8 @@ import eventBus from 'dw/api/EventBus'
       this.root = createRoot(model.dom)
     },
     init: function (props) {
-      console.log('-----init', this.model.style, props)
-      setHtml(this.model, props)
+      console.log('-----init', this.model, props)
+      setHtml.call(this, this.model, props)
     },
     update: function (props) {
       console.log('-----update', this.model, props)
@@ -36,8 +36,10 @@ import eventBus from 'dw/api/EventBus'
     },
   }
 
-  var setHtml = function (model, primaryProps) {
-    KDApi.loadFile('./style/index.css', model, () => {
+  const setHtml = (model, primaryProps) => {
+    KDApi.loadFile('./index.css', model, () => {
+      console.log('this', this)
+      console.log('model', model)
       class Root extends React.Component {
         constructor(props) {
           super(props)
@@ -61,7 +63,8 @@ import eventBus from 'dw/api/EventBus'
           return <ViewItem model={model} customProps={customProps} />
         }
       }
-      this.root.render(<Root model={model} customProps={primaryProps} />)
+      const root = createRoot(model.dom)
+      root.render(<Root model={model} customProps={primaryProps} />)
     })
   }
 
