@@ -24,6 +24,8 @@ import eventBus from 'dw/api/EventBus'
     },
     init: function (props) {
       console.log('-----init', this.model, props)
+      model.dom.style.height = '100vh'
+      model.dom.style.width = '100vw'
       setHtml.call(this, this.model, props)
     },
     update: function (props) {
@@ -36,7 +38,7 @@ import eventBus from 'dw/api/EventBus'
     },
   }
 
-  const setHtml = (model, primaryProps) => {
+  const setHtml = function (model, primaryProps) {
     KDApi.loadFile('./index.css', model, () => {
       console.log('this', this)
       console.log('model', model)
@@ -63,8 +65,7 @@ import eventBus from 'dw/api/EventBus'
           return <ViewItem model={model} customProps={customProps} />
         }
       }
-      const root = createRoot(model.dom)
-      root.render(<Root model={model} customProps={primaryProps} />)
+      this.root.render(<Root model={model} customProps={primaryProps} />)
     })
   }
 

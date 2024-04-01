@@ -17,6 +17,7 @@ const Right: FC<any> = (props) => {
     group: { groups, current },
     changeGroupCurrent,
     globalConfig,
+    itemList
   } = useMain()
 
   const closeConfig = () => {
@@ -29,6 +30,7 @@ const Right: FC<any> = (props) => {
 
   const save = () => {
     console.log(1111111, globalConfig)
+    console.log(2222222, itemList)
   }
 
   return (
