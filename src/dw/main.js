@@ -24,8 +24,8 @@ import eventBus from 'dw/api/EventBus'
     },
     init: function (props) {
       console.log('-----init', this.model, props)
-      model.dom.style.height = '100vh'
-      model.dom.style.width = '100vw'
+      this.model.dom.style.height = '100vh'
+      this.model.dom.style.width = '100vw'
       setHtml.call(this, this.model, props)
     },
     update: function (props) {

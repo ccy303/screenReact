@@ -19,128 +19,6 @@ import {
   PropertiesProps,
 } from 'dw/control/interface'
 
-const testItem = {
-  dataset: {
-    name: '',
-    datesetFilterItemsStr: '',
-    detail: [],
-    datesetFilterItems: [],
-    request: {
-      legendReName: null,
-      displayReName: null,
-      legendDetailReName: null,
-      xAxisReName: '',
-      yAxisReName: '',
-      customValueX: '',
-      customValueY: '',
-      xTitleShow: false,
-      yTitleShow: false,
-      xnameRotate: 0,
-      ynameRotate: 90,
-      yLineSubRotate: -90,
-      yAxisLineReName: null,
-      smallSeriesLegendReName: null,
-      sortSelectX: '',
-      sortSelectY: '',
-      xAxisNumber: null,
-      yAxisNumber: null,
-      smallSeriesChartNumber: null,
-      yAxisLineNumbers: [],
-      TableColumns: [],
-      legendNumber: '',
-      displayValueNumber: '',
-      legendDetailNumber: '',
-    },
-    varParams: [],
-    dimParams: [],
-  },
-  c: {
-    form: { dynamicItem: '' },
-    title: {
-      show: true,
-      fontWeight: 'normal',
-      fontStyle: 'normal',
-      underline: 'none',
-      fontSize: 14,
-      fontStyleArray: [],
-      align: 'center',
-      fontColor: '#2a2a2a',
-      backColor: '#fff',
-    },
-    config: {
-      charts: {
-        legend: {
-          show: true,
-          left: 'auto',
-          right: 'auto',
-          bottom: 'auto',
-          top: 'auto',
-          align: 'auto',
-          orient: 'horizontal',
-          textStyle: { fontWeight: 'normal', fontStyle: 'normal', fontSize: 12, color: '#2a2a2a' },
-        },
-        series: [
-          {
-            name: '',
-            type: 'pie',
-            radius: '70%',
-            startAngle: 0,
-            data: [],
-            label: {
-              show: true,
-              position: 'outside',
-              fontWeight: 'normal',
-              fontStyle: 'normal',
-              fontSize: 12,
-              color: '#2a2a2a',
-            },
-            emphasis: { itemStyle: { shadowBlur: 10, shadowOffsetX: 0, shadowColor: 'rgba(0, 0, 0, 0.5)' } },
-            starAngle: 90,
-          },
-        ],
-      },
-      legendPos: 2,
-      fontStyleArray: [],
-      label: { fontStyleArray: [] },
-      digitalFormat: {
-        dataLabelType: 'classificationdatavalue',
-        digitalType: 'digital',
-        currencySymbols: '¥',
-        unit: 1,
-        decimalPlace: 2,
-        enableThousands: false,
-        unitarea: 1,
-      },
-      unit: 1,
-      showStarAngle: false,
-    },
-    showBak: true,
-    bkColor: '#fff',
-    opacity: 1,
-    showBorder: true,
-    borderColor: '#2a2a2a',
-    borderOpacity: 1,
-    borderWidth: 0,
-    borderStyle: 'dotted',
-    desc: { show: false, content: '' },
-    chartParameters: true,
-  },
-  name: '饼图',
-  zIndex: 1,
-  data: '',
-  title: '标题',
-  x: 24,
-  y: 33,
-  h: 300,
-  w: 400,
-  t: '2023-10-24 17:23:15',
-  id: '974970b559244573b824cf035cb225ea',
-  type: 'analysis_pie_chart_pie',
-  backgroundSize: 'auto auto',
-  backgroundColor: '#f2f3f5',
-  url: '',
-}
-
 let zIndexNumber = 1
 let componentNumner = 1
 
@@ -253,7 +131,6 @@ const useMain = () => {
         const { nodes } = p
         nodes.forEach((n) => {
           const { id, editor } = n
-
           _.set(item, id, editor?.defaultValue)
         })
       })
@@ -262,10 +139,12 @@ const useMain = () => {
         setProperties(pros)
       }
     })
-
+    
     if (!_.isEmpty(sources)) {
       item = _.merge(item, sources)
     }
+
+    console.log(1234, item)
 
     item = {
       ...item,
@@ -274,6 +153,7 @@ const useMain = () => {
       t: moment().format('yyyy-MM-DD HH:mm:ss'),
       id: rootId,
       type: controlProps.type,
+      kdId: '',
     }
     console.log('addItem', c, item)
     setGroup({ groups: grp, current: grp[0].id, category })
