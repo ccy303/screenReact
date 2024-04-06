@@ -1095,31 +1095,31 @@ export const DIGITAL_FORMAT_PROP: ControlProProps = {
 
 // 新增-图表基本信息
 export const CHART_BASE_INFO: any = {
-  id: 'c.config.echartBaseInfo',
+  id: 'echartOption',
   name: '基本信息',
   defaultOpen: true,
   nodes: [
     {
       visible: true,
-      id: 'c.config.echartBaseInfo.version',
+      id: 'echartOption.version',
       name: '版本',
       editor: { component: 'Input' },
     },
     {
       visible: true,
-      id: 'c.config.echartBaseInfo.versionDesc',
+      id: 'echartOption.versionDesc',
       name: '版本描述',
       editor: { component: 'Input' },
     },
     {
       visible: true,
-      id: 'c.config.echartBaseInfo.pluginName',
+      id: 'echartOption.pluginName',
       name: '插件标识',
       editor: { component: 'Input' },
     },
     {
       visible: true,
-      id: 'c.config.isPublish',
+      id: 'echartOption.isPublish',
       name: '是否发布',
       editor: {
         component: 'Select',

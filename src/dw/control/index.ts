@@ -6,5 +6,5 @@ import analysisPieChartPie from 'dw/control/config/analysisPieChartPie'
 
 export const controlMap: any = {
   [TYPE_TEXT.type]: analysisText,
-  [TYPE_PIE.type]: analysisPieChartPie,
+  ['analysis_pie_chart_pie']: analysisPieChartPie,
 }
