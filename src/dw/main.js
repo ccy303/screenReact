@@ -13,33 +13,9 @@ import eventBus from 'dw/api/EventBus'
  * 注意loadFile中index.css的引入路径，因为webpack打包后将其放在了css文件夹里，所以路径是./css/index.css
  */
 ;(function (KDApi) {
-  function MyComponent(model) {
-    this._setModel(model)
-  }
-
-  MyComponent.prototype = {
-    _setModel: function (model) {
-      this.model = model
-      this.root = createRoot(model.dom)
-    },
-    init: function (props) {
-      console.log('-----init', this.model, props)
-      model.dom.style.height = '100vh'
-      model.dom.style.width = '100vw'
-      setHtml.call(this, this.model, props)
-    },
-    update: function (props) {
-      console.log('-----update', this.model, props)
-      eventBus.pub(this.model, 'update', props)
-    },
-    destoryed: function () {
-      console.log('-----destoryed', this.model)
-      this.root.unmount()
-    },
-  }
-
   const setHtml = function (model, primaryProps) {
     KDApi.loadFile('./index.css', model, () => {
+      console.log('loadFileSuccess')
       console.log('this', this)
       console.log('model', model)
       class Root extends React.Component {
@@ -68,6 +44,34 @@ import eventBus from 'dw/api/EventBus'
       this.root.render(<Root model={model} customProps={primaryProps} />)
     })
   }
+
+  function MyComponent(model) {
+    this._setModel(model)
+  }
+
+  MyComponent.prototype = {
+    _setModel: function (model) {
+      this.model = model
+      this.root = createRoot(model.dom)
+    },
+    init: function (props) {
+      console.log('-----init', this.model, props)
+      this.model.dom.style.height = '100vh'
+      this.model.dom.style.width = '100vw'
+      console.log(this.model.dom.style.width, this.model.dom.style.height)
+      setHtml.call(this, this.model, props)
+    },
+    update: function (props) {
+      console.log('-----update', this.model, props)
+      eventBus.pub(this.model, 'update', props)
+    },
+    destoryed: function () {
+      console.log('-----destoryed', this.model)
+      this.root.unmount()
+    },
+  }
+
+  console.log('MyComponent', MyComponent)
 
   // 注册自定义组件
   KDApi.register('echartReact', MyComponent)
