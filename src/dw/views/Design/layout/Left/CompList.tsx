@@ -30,9 +30,9 @@ const CompList: FC<CompListProp> = ({ title, list }) => {
               key={d.componentType}
               draggable
               onDragStart={(e: any) => onDragStart(e, d)}
-              onClick={() => addComponents(d.componentType)}
+              onClick={() => addComponents(d)}
             >
-              <img className={`${prefixClsLeft}-main-item-img`} src={require(`assets/img/${d.componentImgName}.png`)} />
+              <img className={`${prefixClsLeft}-main-item-img`} src={d.icon} />
             </div>
           )
         })}

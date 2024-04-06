@@ -1,14 +1,13 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { RecoilRoot } from 'recoil'
 import 'dw/style/reset.less'
 import '@kdcloudjs/kdesign/dist/kdesign.css'
 import 'dw/style/reset-kdesign.less'
-
+import JSON from '../../../../mock/PropsDataType/DATA_INIT.json'
 // main
 import './index.less'
 import Design from 'dw/views/Design/Design'
-import Home from 'dw/views/Home/Home'
-import useBase from 'dw/store/useBase'
+import useMain from '@/dw/store/useMain'
 
 export interface ViewItemProps {
   model: any
@@ -31,11 +30,15 @@ export const defaultViewItemContext: ViewItemProps = {
 export const ViewItemContext = React.createContext<ViewItemProps>(defaultViewItemContext)
 
 const BaseView = () => {
-  const { viewUrl } = useBase()
+  const { initPage } = useMain()
+
+  useEffect(() => {
+    initPage(JSON)
+  }, [])
+
   return (
     <div className="dw-view-item">
-      {viewUrl === 'Design' && <Design />}
-      {viewUrl === 'Home' && <Home />}
+      <Design />
     </div>
   )
 }
@@ -43,10 +46,6 @@ const BaseView = () => {
 const ViewItem: FC<any> = (props) => {
   const value = {
     ...props,
-    invoke: (...arr: any) => {
-      console.log('---invoke---', ...arr)
-      props?.invoke(...arr)
-    },
   }
 
   return (

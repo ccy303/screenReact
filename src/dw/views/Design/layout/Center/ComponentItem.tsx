@@ -1,14 +1,12 @@
 import { ComponentItemProps } from 'dw/control/interface'
 import useMain from 'dw/store/useMain'
 import itemMap from 'dw/components/item'
+import EchartItem from 'dw/components/item/EchartItem'
 import React from 'react'
 
 export const ComponentItem = (props: ComponentItemProps) => {
   const { selectItem } = useMain()
-  const { type, id } = props
-
-  const Component = itemMap[type]
-
+  const { id } = props
   const onItemClick = (e: React.MouseEvent) => {
     e.stopPropagation()
     selectItem(id)
@@ -27,7 +25,7 @@ export const ComponentItem = (props: ComponentItemProps) => {
 
   return (
     <div className={`${props.prefixClx}-item-main`} onClick={onItemClick} onDragOver={onDragOver} onDrop={onDrop}>
-      <Component {...props} />
+      {props.category == 'charts' && <EchartItem {...props} />}
     </div>
   )
 }

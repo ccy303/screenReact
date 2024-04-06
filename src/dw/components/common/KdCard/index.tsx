@@ -24,7 +24,7 @@ const KdCardTitle: FC<{ item: ComponentItemProps; showDesp: boolean }> = ({ item
     width: '100%',
     maxWidth: '-webkit-fill-available',
     padding: 10,
-    marginBottom: 16,
+    marginBottom: 6,
   }
 
   const styleSpan = {

@@ -12,89 +12,39 @@
     "type": "60",
     "id": "1533407264080191488"
   },
-  "t": "2022-11-01 19:01:27",
-  "queryConfig": {
-    "number": "QueryConfig",
-    "dimList": [
-      {
-        "number": "Year",
-        "shortNumber": "FY",
-        "entityName": "bcm_fymembertree",
-        "name": "财年",
-        "member": {
-          "number": "FY2018",
-          "name": "2018年",
-          "id": "1371554147400203297"
-        },
-        "id": "1371554147349914631"
-      }
-    ],
-    "name": "QueryConfig",
-    "id": "1533407264155689984",
-    "type": "61",
-    "floatButton": {
-      "X": 100,
-      "name": "维度配置",
-      "hide": false,
-      "Y": 400
-    }
-  },
-  "dataType": "DATA_PREVIEW_RESULT",
-  "designMode": false,
   "itemList": [
     {
+      "echartOption": {
+        "version": "1",
+        "versionDesc": "2",
+        "pluginName": "3"
+      },
       "dataset": {
-        "name": "",
-        "datesetFilterItemsStr": "",
-        "detail": [
+        "dataindex": [
+            ["acctusage1", "账户用途1", 1, false],
+            ["acctusage", "账户用途", 1, false],
+            ["acctcount", "分布数量", 2, false],
+            ["qingsort", "排序列", 2, false]
         ],
-        "datesetFilterItems": [
-        ],
-        "request": {
-          "legendReName": null,
-          "displayReName": null,
-          "legendDetailReName": null,
-          "xAxisReName": "",
-          "yAxisReName": "",
-          "customValueX": "",
-          "customValueY": "",
-          "xTitleShow": false,
-          "yTitleShow": false,
-          "xnameRotate": 0,
-          "ynameRotate": 90,
-          "yLineSubRotate": -90,
-          "yAxisLineReName": null,
-          "smallSeriesLegendReName": null,
-          "sortSelectX": "",
-          "sortSelectY": "",
-          "xAxisNumber": null,
-          "yAxisNumber": null,
-          "smallSeriesChartNumber": null,
-          "yAxisLineNumbers": [
-          ],
-          "TableColumns": [
-          ],
-          "legendNumber": "",
-          "displayValueNumber": "",
-          "legendDetailNumber": ""
-        },
-        "varParams": [
-        ],
-        "dimParams": [
+        "rows": [
+            ["账户用途1","账户用途", "分布数量", "排序列"],
+            ["活期1","活期1", 7577, 0],
+            ["结算类","结算类", 1012, 1],
+            ["我是空","我是空", 639, 2],
+            ["余额模型测试","余额模型测试", 49, 3],
+            ["12312","12312", 44, 4],
+            ["TEST0001","TEST0001", 44, 5],
+            ["其他","其他", 78, 6]
         ]
       },
       "c": {
-        "form": {
-          "dynamicItem": ""
-        },
         "title": {
           "show": true,
           "fontWeight": "normal",
           "fontStyle": "normal",
           "underline": "none",
           "fontSize": 14,
-          "fontStyleArray": [
-          ],
+          "fontStyleArray": [],
           "align": "center",
           "fontColor": "#2a2a2a",
           "backColor": "#fff"
@@ -118,37 +68,22 @@
             },
             "series": [
               {
-                "name": "",
-                "type": "pie",
-                "radius": "70%",
-                "startAngle": 0,
-                "data": [
-                ],
                 "label": {
                   "show": true,
-                  "position": "outside",
                   "fontWeight": "normal",
                   "fontStyle": "normal",
                   "fontSize": 12,
-                  "color": "#2a2a2a"
-                },
-                "emphasis": {
-                  "itemStyle": {
-                    "shadowBlur": 10,
-                    "shadowOffsetX": 0,
-                    "shadowColor": "rgba(0, 0, 0, 0.5)"
-                  }
+                  "color": "#2a2a2a",
+                  "position": "outside"
                 },
                 "starAngle": 90
               }
             ]
           },
           "legendPos": 2,
-          "fontStyleArray": [
-          ],
+          "fontStyleArray": [],
           "label": {
-            "fontStyleArray": [
-            ]
+            "fontStyleArray": []
           },
           "digitalFormat": {
             "dataLabelType": "classificationdatavalue",
@@ -176,20 +111,18 @@
         },
         "chartParameters": true
       },
-      "name": "饼图",
-      "zIndex": 1,
-      "data": "",
       "title": "标题",
-      "x": 24,
-      "y": 33,
+      "x": 10,
+      "y": 10,
       "h": 300,
       "w": 400,
-      "t": "2023-10-24 17:23:15",
-      "id": "974970b559244573b824cf035cb225ea",
-      "type": "analysis_pie_chart_pie"
+      "zIndex": 1,
+      "name": "饼图1",
+      "t": "2024-04-06 19:47:57",
+      "id": "2523143ce65541e2a5cceb1bc1c4761c",
+      "type": "pie",
+      "category": "charts",
+      "kdId": ""
     }
-  ],
-  "i18n": {
-    "lang": "zh-CN"
-  }
+  ]
 }

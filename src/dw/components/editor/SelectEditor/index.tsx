@@ -19,7 +19,6 @@ const SelectEditor = (props: PropertiesItemProps) => {
     onChange([{ prop: id, value: v, actions }])
   }
 
-  // return <Checkbox value={innerValue} onChange={changeHandle} {...rest} />
   return (
     <Select onChange={changeHandle} value={innerValue} {...rest}>
       {options?.map((o) => {

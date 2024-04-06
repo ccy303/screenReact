@@ -1132,3 +1132,18 @@ export const CHART_BASE_INFO: any = {
     },
   ],
 }
+
+export const CHART_DARA_SET: any = {
+  id: 'userDataSelct',
+  name: '基本信息',
+  defaultOpen: true,
+  nodes: [
+    {
+      visible: true,
+      id: 'echartOption',
+      name: '',
+      editor: { component: 'EchartDataSet' },
+      style: { height: '100px' },
+    },
+  ],
+}

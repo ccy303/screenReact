@@ -18,6 +18,7 @@ import {
   MarkProps,
   PropertiesProps,
 } from 'dw/control/interface'
+import { ComponentControlMap } from 'dw/views/Design/layout/Left/LeftControl'
 
 let zIndexNumber = 1
 let componentNumner = 1
@@ -119,54 +120,45 @@ const useMain = () => {
   const [moduleList, setModuleList] = useRecoilState<ModuleProps[]>(moduleListState)
   const [datasetConfig, setDatasetConfig] = useRecoilState<DatasetConfigProps>(datasetConfigState)
 
-  const addItem = (c: ControlProps, sources: any = {}) => {
-    const controlProps: ControlProps = _.cloneDeep(c)
+  const addItem = (c: any, sources: any = {}) => {
+    const { category } = c
+    const controlProps: any = _.cloneDeep(ComponentControlMap[category])
     const rootId = uuidv4().replace(/-/g, '')
     let item: any = {}
-    const { group: grp, category } = controlProps
-
-    grp.forEach((g, i) => {
+    const { group: grp } = controlProps
+    grp.forEach((g: any, i: any) => {
       const { properties: pros } = g
-      pros.forEach((p) => {
+      pros.forEach((p: any) => {
         const { nodes } = p
-        nodes.forEach((n) => {
+        nodes.forEach((n: any) => {
           const { id, editor } = n
           _.set(item, id, editor?.defaultValue)
         })
       })
-
       if (i === 0) {
         setProperties(pros)
       }
     })
-    
     if (!_.isEmpty(sources)) {
       item = _.merge(item, sources)
     }
-
-    console.log(1234, item)
-
     item = {
       ...item,
       zIndex: zIndexNumber++,
-      name: controlProps.name + componentNumner++,
+      name: c.name + componentNumner++,
       t: moment().format('yyyy-MM-DD HH:mm:ss'),
       id: rootId,
-      type: controlProps.type,
+      type: c.componentType,
+      category,
       kdId: '',
     }
-    console.log('addItem', c, item)
     setGroup({ groups: grp, current: grp[0].id, category })
     setItemList([...itemList, item])
     setGlobalConfig({ ...globalConfig, selectId: rootId })
   }
 
-  const addItemWithType = (type: string, sources: any = {}) => {
-    if (type in controlMap) {
-      addItem(controlMap[type], sources)
-    } else {
-      Message.error('组件暂未配置')
-    }
+  const addItemWithType = (item: any, sources: any = {}) => {
+    addItem(item, sources)
   }
 
   const changeStatusAndProp = (
@@ -264,27 +256,6 @@ const useMain = () => {
     return ret
   }
 
-  // const changeShow = (showId: string, value: boolean, actions: ControlAction[]) => {
-  //   const rootId = globalConfig.selectId
-  //   const { currentItem, cloneItl, currentProp, cloneGrs } = getCurrent(rootId)
-  //   currentProp.forEach((cpd: ControlProProps) => {
-  //     if (cpd.id === showId) {
-  //       _.set(cpd, 'show.value', value)
-  //     }
-  //   })
-  //   changeByAction(actions, currentProp, currentItem, value)
-  //   if (rootId) {
-  //     setItemList(cloneItl)
-  //   } else {
-  //     setGlobalConfig({ ...globalConfig, pageConfig: currentItem })
-  //   }
-  //   setItemList(cloneItl)
-  //   setGroup({ ...group, groups: cloneGrs })
-  //   setProperties(currentProp)
-  //
-  //   console.log('changeShow', showId, value, actions, currentItem, currentProp)
-  // }
-
   const changeItem = (arr: ChangeItemProps[] = [], rootId = '', showObj: any = {}) => {
     const cloneGrs: any = _.cloneDeep(group.groups)
     const currentProp = cloneGrs.filter((f: any) => f.id === group.current)[0].properties
@@ -327,10 +298,10 @@ const useMain = () => {
     if (globalConfig.selectId !== rootId) {
       const cloneItemList = _.cloneDeep(itemList)
       const currentItem = cloneItemList.filter((f: any) => f.id === rootId)[0]
-      const type = currentItem.type
+      const category = currentItem.category
       _.set(currentItem, 'zIndex', zIndexNumber++)
       // @ts-ignore
-      const currentProp: ControlGroupProps[] = _.cloneDeep(controlMap[type]).group
+      const currentProp: ControlGroupProps[] = _.cloneDeep(ComponentControlMap[category]).group
 
       currentProp.forEach((g, i) => {
         const { properties: pros } = g
@@ -348,7 +319,7 @@ const useMain = () => {
       })
       console.log('selectItem', rootId, currentItem, currentProp, cloneItemList)
       setItemList(cloneItemList)
-      setGroup({ groups: currentProp, current: currentProp[0].id, category: controlMap[type].category })
+      setGroup({ groups: currentProp, current: currentProp[0].id, category })
       setGlobalConfig({ ...globalConfig, selectId: currentItem.id })
     }
   }

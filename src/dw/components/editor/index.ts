@@ -11,6 +11,7 @@ import StepperEditor from 'dw/components/editor/StepperEditor'
 import SwitchEditor from 'dw/components/editor/SwitchEditor'
 import TextAreaEditor from 'dw/components/editor/TextAreaEditor'
 import TextEditor from 'dw/components/editor/TextEditor'
+import EchartDataSet from 'dw/components/editor/EchartDataSet'
 
 export type EditorMapProp = {
   Button: any
@@ -26,6 +27,7 @@ export type EditorMapProp = {
   Switch: any
   TextArea: any
   Text: any
+  EchartDataSet: any
 }
 const editorMap: EditorMapProp = {
   Button: ButtonEditor,
@@ -41,5 +43,6 @@ const editorMap: EditorMapProp = {
   Switch: SwitchEditor,
   TextArea: TextAreaEditor,
   Text: TextEditor,
+  EchartDataSet: EchartDataSet,
 }
 export default editorMap

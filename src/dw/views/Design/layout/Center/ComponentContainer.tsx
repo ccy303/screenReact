@@ -29,7 +29,7 @@ const ComponentContainer = (props: any) => {
     itemList,
     changeItem,
     globalConfig: {
-      pageControl: { queryConfig, pageConfig },
+      pageControl: { pageConfig },
       selectId,
     },
   } = useMain()
