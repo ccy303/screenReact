@@ -1,6 +1,5 @@
 import _ from 'lodash'
 import * as i18n from './I18n'
-// import * as eo from './EChartsOption'
 
 export const defaultPageWidth = 1600
 export const defaultPageHeight = 900
@@ -38,15 +37,6 @@ export const dashBoardList = [
     value: 'dynamic',
   },
 ]
-// export const weekendList = [
-//   i18n.msg("Sunday"),
-//   i18n.msg("Monday"),
-//   i18n.msg("Tuesday"),
-//   i18n.msg("Wednesday"),
-//   i18n.msg("Thursday"),
-//   i18n.msg("Friday"),
-//   i18n.msg("Saturday"),
-// ];
 
 export const BorderStyleList = [
   {
