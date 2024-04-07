@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import { RecoilRoot } from 'recoil'
 import 'dw/style/reset.less'
 import '@kdcloudjs/kdesign/dist/kdesign.css'

@@ -1,6 +1,5 @@
-import React, { FC, useEffect, forwardRef, useImperativeHandle, useState, useRef } from 'react'
-import { Icon, Message } from '@kdcloudjs/kdesign'
-import { ViewItemProps } from 'dw/views/ViewItem'
+import React, { FC, useRef } from 'react'
+import { Icon } from '@kdcloudjs/kdesign'
 import ComponentContainer from 'dw/views/Design/layout/Center/ComponentContainer'
 import useBase from 'dw/store/useBase'
 import useMain from 'dw/store/useMain'
@@ -51,17 +50,15 @@ const Center: FC<any> = (props) => {
   }
 
   const onDrop = (e: any) => {
-    9
-    console.log('onDrop')
+    console.log('onDrop', e?.dataTransfer?.getData('Data'))
     e.preventDefault()
-    console.log('onDrop', e?.dataTransfer?.getData('Type'))
-    const type = e?.dataTransfer?.getData('Type')
+    const data = JSON.parse(e?.dataTransfer?.getData('Data'))
     const sources = {
       x: e.clientX - 350,
       y: e.clientY - 35,
     }
-    if (type) {
-      addItemWithType(type, sources)
+    if (data) {
+      addItemWithType(data, sources)
     }
   }
 

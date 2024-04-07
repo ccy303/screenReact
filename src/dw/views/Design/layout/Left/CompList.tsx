@@ -2,7 +2,6 @@ import React, { FC, useCallback, useMemo, useState } from 'react'
 import NavCard from 'dw/components/common/NavCard'
 import useMain from 'dw/store/useMain'
 import { prefixClsLeft } from 'dw/views/Design/layout/Left/index'
-import { RFC_2822 } from 'moment'
 
 export type CompListProp = {
   title: string
@@ -12,12 +11,12 @@ export type CompListProp = {
 const CompList: FC<CompListProp> = ({ title, list }) => {
   const { addItemWithType } = useMain()
 
-  const addComponents = (d: string) => {
+  const addComponents = (d: any) => {
     addItemWithType(d)
   }
 
   const onDragStart = (e: any, d: any) => {
-    e.dataTransfer.setData('Type', d.componentType)
+    e.dataTransfer.setData('Data', JSON.stringify(d))
   }
 
   return (

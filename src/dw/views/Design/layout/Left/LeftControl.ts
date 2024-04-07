@@ -8,7 +8,10 @@ import {
   POSITION_PROP,
   TITLE_PROP,
   CHART_BASE_INFO,
-  CHART_DARA_SET
+  CHART_DARA_SET,
+
+  // 文本
+  BASE_PROP,
 } from 'dw/control/common'
 
 const echartControls: any = {
@@ -41,8 +44,133 @@ const echartControls: any = {
   ],
 }
 
+const textControls: any = {
+  group: [
+    {
+      id: 'data',
+      name: '数据',
+      properties: [BASE_PROP],
+    },
+    {
+      id: 'format',
+      name: '格式',
+      properties: [
+        {
+          id: 'text',
+          name: '文本设置',
+          defaultOpen: true,
+          order: 0,
+          nodes: [
+            {
+              visible: true,
+              id: 'c.config.fontSize',
+              name: '字号',
+              editor: {
+                component: 'Stepper',
+                dataType: 'number',
+                defaultValue: 14,
+                type: 'embed',
+              },
+            },
+            {
+              visible: true,
+              id: 'c.config.color',
+              name: '字体颜色',
+              editor: {
+                component: 'ColorPicker',
+                dataType: 'string',
+                defaultValue: '#000',
+              },
+            },
+            {
+              visible: true,
+              id: 'c.config.textAlign',
+              name: '水平方向',
+              editor: {
+                component: 'Stepper',
+                dataType: 'number',
+                defaultValue: 14,
+                type: 'embed',
+              },
+            },
+            {
+              visible: true,
+              id: 'c.config.fontStyle',
+              name: '样式',
+              editor: {
+                component: 'Select',
+                options: [
+                  { value: 'fontWeight', name: 'bold-solid' },
+                  { value: 'fontStyle', name: 'oblique-solid' },
+                  { value: 'textDecoration', name: 'underline-solid' },
+                ],
+                defaultValue: '',
+              },
+            },
+          ],
+        },
+        BACKGROUND_PROP,
+        BORDER_PROP,
+        DESC_PROP,
+        {
+          id: 'position',
+          name: '尺寸和位置',
+          defaultOpen: true,
+          nodes: [
+            {
+              visible: true,
+              id: 'x',
+              name: '水平方向',
+              editor: {
+                component: 'Stepper',
+                dataType: 'number',
+                defaultValue: 10,
+                type: 'embed',
+              },
+            },
+            {
+              visible: true,
+              id: 'y',
+              name: '垂直方向',
+              editor: {
+                component: 'Stepper',
+                dataType: 'number',
+                defaultValue: 10,
+                type: 'embed',
+              },
+            },
+            {
+              visible: true,
+              id: 'h',
+              name: '高度',
+              editor: {
+                component: 'Stepper',
+                dataType: 'number',
+                defaultValue: 120,
+                type: 'embed',
+              },
+            },
+            {
+              visible: true,
+              id: 'w',
+              name: '宽度',
+              editor: {
+                component: 'Stepper',
+                dataType: 'number',
+                defaultValue: 500,
+                type: 'embed',
+              },
+            },
+          ],
+        },
+      ],
+    },
+  ],
+}
+
 export const ComponentControlMap: any = {
   charts: echartControls,
+  text: textControls,
 }
 
 export const chartList = [
@@ -53,16 +181,28 @@ export const chartList = [
     name: '饼图',
     category: 'charts',
   },
-  // {
-  //   componentType: 'analysis_line_chart_polyline',
-  //   componentImgName: 'analysis_line_chart_polyline',
-  //   componentDesc: '折线图',
-  //   componentDescId: '折线图',
-  // },
-  // {
-  //   componentType: 'analysis_bar_chart_bar_areata',
-  //   componentImgName: 'analysis_bar_chart_bar_areata',
-  //   componentDesc: '柱状图',
-  //   componentDescId: '柱状图',
-  // },
+  {
+    componentType: 'bar',
+    icon: require(`assets/img/analysis_bar_chart_bar_areata.png`),
+    desc: '柱状图',
+    name: '柱状图',
+    category: 'charts',
+  },
+  {
+    componentType: 'line',
+    icon: require(`assets/img/analysis_line_chart_polyline.png`),
+    desc: '折线图',
+    name: '折线图',
+    category: 'charts',
+  },
+]
+
+export const otherComp = [
+  {
+    componentType: 'text',
+    icon: require(`assets/img/analysis_text.png`),
+    desc: '文字',
+    name: '文字',
+    category: 'text',
+  },
 ]

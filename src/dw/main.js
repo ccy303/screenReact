@@ -28,9 +28,6 @@ import eventBus from 'dw/api/EventBus'
         }
         componentDidMount() {
           const { model } = this.state
-          // this.updateSub = eventBus.sub(model, 'update', (updateProps) => {
-          //   this.setState({ customProps: updateProps })
-          // })
         }
         shouldComponentUpdate() {}
         componentWillUnmount() {

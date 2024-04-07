@@ -17,7 +17,8 @@
       "echartOption": {
         "version": "1",
         "versionDesc": "2",
-        "pluginName": "3"
+        "pluginName": "3",
+        "isPublish": "1"
       },
       "dataset": {
         "dataindex": [
@@ -111,6 +112,8 @@
         },
         "chartParameters": true
       },
+      "userXIndex": ["账户用途1"],
+      "userYIndex": ["排序列"],
       "title": "标题",
       "x": 10,
       "y": 10,

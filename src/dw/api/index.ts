@@ -1,6 +1,4 @@
 import i18n from 'dw/api/I18n'
-import * as constants from 'dw/api/Constants'
-import comm from 'dw/api/Common'
 
 export const legendPositionDefault = [
   { id: 'c.config.charts.legend.left', changeValue: 'auto' },
@@ -109,17 +107,4 @@ export const hideLoading = (ref: any) => {
     const instance = ref.current.getEchartsInstance()
     instance.hideLoading()
   }
-}
-
-export const getPieTooltipFormat = (a: any, item: any) => {
-  const value = comm.formatAmount(a.value, item.c.config.unit) + comm.getCompany(item.c.config.unit)
-  let dtl = ''
-  if (a.data.detailName) dtl = ` - ${a.data.detailName}`
-  return `<div class="showBox">
-            <div>${a.name}${dtl}</div>
-            <div class="showBoxLine">
-              ${a.marker}
-              <span>${value}  ${(a.percent || '0').toFixed(item.c.config.digitalFormat.decimalPlace)}%</span>
-            </div>
-          </div>`
 }

@@ -1,9 +1,7 @@
-import React, { FC, useEffect, forwardRef, useImperativeHandle, useMemo } from 'react'
-import { Icon, Message, Tooltip } from '@kdcloudjs/kdesign'
-import { ViewItemProps } from 'dw/views/ViewItem'
+import React, { FC, useMemo } from 'react'
+import { Icon, Tooltip } from '@kdcloudjs/kdesign'
 import './index.less'
 import { ComponentItemProps } from 'dw/control/interface'
-import { calculateUnitArea } from 'dw/api/ChartCompute'
 
 export type KdCardProps = {
   item: ComponentItemProps
@@ -14,10 +12,6 @@ export type KdCardProps = {
 const prefix = 'dw-kd-card'
 
 const KdCardTitle: FC<{ item: ComponentItemProps; showDesp: boolean }> = ({ item, showDesp = false }) => {
-  const unit = useMemo(() => calculateUnitArea(item) as any, [item])
-
-  const { unitareastyle = {}, notaftertitle = true, unitName = '' } = unit
-
   const styleMain = {
     textAlign: item.c.title.align,
     background: item.c.title.backColor,
@@ -39,7 +33,6 @@ const KdCardTitle: FC<{ item: ComponentItemProps; showDesp: boolean }> = ({ item
   return (
     <div style={styleMain} id={`${item.id}_title`}>
       <span style={styleSpan}>&nbsp;&nbsp; {item.title} &nbsp;&nbsp;</span>
-      <span style={{ ...unitareastyle, fontSize: notaftertitle ? 12 : undefined }}> {unitName} </span>
       {showDesp && (
         <Tooltip tip={item.c.desp.content}>
           <Icon type="question" />

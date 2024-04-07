@@ -4,17 +4,13 @@ import moment from 'moment'
 import { v4 as uuidv4 } from 'uuid'
 import { ReactNode, useEffect } from 'react'
 import { DEFAULT_PAGE_CONFIG, pageGroup, pageGroupMap } from 'dw/control/pageControl'
-import { controlMap } from 'dw/control'
 import { DEFAULT_DATASET, LAYOUT } from 'dw/control/common'
-import { Message } from '@kdcloudjs/kdesign'
 import {
   ComponentItemProps,
   ControlAction,
   ControlActionDo,
   ControlGroupProps,
   ControlProProps,
-  ControlProps,
-  DisplayProps,
   MarkProps,
   PropertiesProps,
 } from 'dw/control/interface'
@@ -123,6 +119,7 @@ const useMain = () => {
   const addItem = (c: any, sources: any = {}) => {
     const { category } = c
     const controlProps: any = _.cloneDeep(ComponentControlMap[category])
+    console.log(controlProps)
     const rootId = uuidv4().replace(/-/g, '')
     let item: any = {}
     const { group: grp } = controlProps
@@ -287,7 +284,6 @@ const useMain = () => {
     } else {
       setGlobalConfig({ ...globalConfig, pageControl: currentItem })
     }
-
     setGroup({ ...group, groups: cloneGrs })
     setProperties(currentProp)
 
@@ -390,6 +386,14 @@ const useMain = () => {
     })
   }
 
+  // 设置echart 数据
+  const changeDataSet = (data: any, rootId = '') => {
+    const cloneItl = _.cloneDeep(itemList)
+    const currentItem = cloneItl.filter((f: any) => f.id === rootId)[0]
+    _.set(currentItem, data.prop, data.value)
+    setItemList(cloneItl)
+  }
+
   return {
     initPage,
     itemList,
@@ -403,6 +407,7 @@ const useMain = () => {
     globalConfig,
     setGlobalConfig,
     changeItem,
+    changeDataSet,
     group,
     changeGroupCurrent,
     selectPageGroup,

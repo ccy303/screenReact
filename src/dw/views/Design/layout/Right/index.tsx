@@ -1,14 +1,9 @@
 import React, { FC } from 'react'
 import { Icon, Tabs, Button } from '@kdcloudjs/kdesign'
 import useMain from 'dw/store/useMain'
-
 import './index.less'
 import useBase from 'dw/store/useBase'
 import { PropertiesContainer } from 'dw/views/Design/layout/Right/PropertiesContainer'
-import { LAYOUT } from 'dw/control/common'
-import DisplayContainer from 'dw/views/Design/layout/Right/DisplayContainer'
-import { HTML5Backend } from 'react-dnd-html5-backend'
-import { DndProvider } from 'react-dnd'
 import NavCard from 'dw/components/common/NavCard'
 
 const Right: FC<any> = (props) => {
@@ -17,7 +12,7 @@ const Right: FC<any> = (props) => {
     group: { groups, current },
     changeGroupCurrent,
     globalConfig,
-    itemList
+    itemList,
   } = useMain()
 
   const closeConfig = () => {
@@ -47,14 +42,7 @@ const Right: FC<any> = (props) => {
           ))}
         </Tabs>
       </NavCard>
-
-      {current === LAYOUT ? (
-        <DndProvider backend={HTML5Backend}>
-          <DisplayContainer />
-        </DndProvider>
-      ) : (
-        <PropertiesContainer />
-      )}
+      <PropertiesContainer />
     </div>
   )
 }

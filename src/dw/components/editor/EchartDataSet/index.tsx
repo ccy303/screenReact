@@ -9,12 +9,18 @@ export default (props: any) => {
     node: { id, actions = [], editor },
   } = props
 
-  const { getCurrentItem } = useMain()
+  const {
+    getCurrentItem,
+    globalConfig: { selectId },
+    changeItem,
+    changeDataSet,
+  } = useMain()
 
-  const { dataset } = getCurrentItem()
+  const { dataset, userXIndex, userYIndex } = getCurrentItem()
 
   const xIndex = useMemo(() => {
-    const { dataindex } = dataset
+    const { dataindex } = dataset || {}
+    if (!dataindex) return
     const xIndex = []
     for (let i = 0; i < dataindex.length; i++) {
       const item = dataindex[i]
@@ -26,7 +32,8 @@ export default (props: any) => {
   }, [dataset])
 
   const yIndex = useMemo(() => {
-    const { dataindex } = dataset
+    const { dataindex } = dataset || {}
+    if (!dataindex) return
     const xIndex = []
     for (let i = 0; i < dataindex.length; i++) {
       const item = dataindex[i]
@@ -38,7 +45,11 @@ export default (props: any) => {
   }, [dataset])
 
   const onSelChange = (type: any, e: any) => {
-    console.log(e)
+    if (type == 'xIndex') {
+      onChange([{ prop: 'userXIndex', value: e }])
+    } else if (type == 'yIndex') {
+      onChange([{ prop: 'userYIndex', value: e }])
+    }
   }
 
   return (
@@ -46,7 +57,13 @@ export default (props: any) => {
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <div style={{ width: '50px' }}>横轴</div>
         <div style={{ flex: 1 }}>
-          <Select onChange={(e) => onSelChange('xIndex', e)} style={{ width: '100%' }} placeholder="横轴" mode="multiple">
+          <Select
+            onChange={(e) => onSelChange('xIndex', e)}
+            style={{ width: '100%' }}
+            placeholder="横轴"
+            mode="multiple"
+            value={userXIndex}
+          >
             {xIndex?.map((o) => {
               return (
                 <Select.Option key={`${o.value}`} value={o.value}>
@@ -61,7 +78,13 @@ export default (props: any) => {
       <div style={{ display: 'flex', marginTop: '10px', alignItems: 'center' }}>
         <div style={{ width: '50px' }}>纵轴</div>
         <div style={{ flex: 1 }}>
-          <Select onChange={(e) => onSelChange('yIndex', e)} style={{ width: '100%' }} placeholder="横轴" mode="multiple">
+          <Select
+            onChange={(e) => onSelChange('yIndex', e)}
+            style={{ width: '100%' }}
+            placeholder="纵轴"
+            mode="multiple"
+            value={userYIndex}
+          >
             {yIndex?.map((o) => {
               return (
                 <Select.Option key={`${o.value}`} value={o.value}>

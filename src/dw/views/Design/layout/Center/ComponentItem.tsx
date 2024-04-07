@@ -1,7 +1,7 @@
 import { ComponentItemProps } from 'dw/control/interface'
 import useMain from 'dw/store/useMain'
-import itemMap from 'dw/components/item'
 import EchartItem from 'dw/components/item/EchartItem'
+import Text from 'dw/components/item/Text'
 import React from 'react'
 
 export const ComponentItem = (props: ComponentItemProps) => {
@@ -26,6 +26,7 @@ export const ComponentItem = (props: ComponentItemProps) => {
   return (
     <div className={`${props.prefixClx}-item-main`} onClick={onItemClick} onDragOver={onDragOver} onDrop={onDrop}>
       {props.category == 'charts' && <EchartItem {...props} />}
+      {props.category == 'text' && <Text {...props} />}
     </div>
   )
 }

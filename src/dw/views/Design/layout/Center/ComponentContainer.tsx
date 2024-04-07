@@ -5,7 +5,6 @@ import { ComponentItemProps } from 'dw/control/interface'
 import _ from 'lodash'
 import Ruler from 'dw/views/Design/layout/Center/Ruler'
 import ComponentItem from 'dw/views/Design/layout/Center/ComponentItem'
-import { Icon } from '@kdcloudjs/kdesign'
 import { getMidCoordinate } from '../../../../../../util'
 
 export interface ILine {
@@ -20,7 +19,6 @@ type TAdsorbResult = { x: number | null; y: number | null; w: number | null; h: 
 const coordinateMap: Map<string, ComponentItemProps[]> = new Map()
 const guidelineWidth = 2
 const threshold = 3
-const onAdsorb = true
 let tempList: ComponentItemProps[] = []
 
 const ComponentContainer = (props: any) => {
