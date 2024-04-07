@@ -1,10 +1,10 @@
-import { atom, RecoilState, useRecoilState, useRecoilValue } from 'recoil'
+import { atom, useRecoilState } from 'recoil'
 import _ from 'lodash'
 import moment from 'moment'
 import { v4 as uuidv4 } from 'uuid'
-import { ReactNode, useEffect } from 'react'
+import { ReactNode } from 'react'
 import { DEFAULT_PAGE_CONFIG, pageGroup, pageGroupMap } from 'dw/control/pageControl'
-import { DEFAULT_DATASET, LAYOUT } from 'dw/control/common'
+import { DEFAULT_DATASET } from 'dw/control/common'
 import {
   ComponentItemProps,
   ControlAction,
@@ -241,18 +241,6 @@ const useMain = () => {
     return currentItem ? _.cloneDeep(currentItem) : _.cloneDeep({ dataset: DEFAULT_DATASET })
   }
 
-  const getCurrentDisplay = (): ControlGroupProps => {
-    let ret: ControlGroupProps = { display: [], id: '', name: '', properties: [], displayDataShow: false }
-    if (group.groups.length) {
-      const r = group.groups.filter((d: any) => d.id === LAYOUT)
-      if (r.length) {
-        ret = r[0]
-      }
-    }
-
-    return ret
-  }
-
   const changeItem = (arr: ChangeItemProps[] = [], rootId = '', showObj: any = {}) => {
     const cloneGrs: any = _.cloneDeep(group.groups)
     const currentProp = cloneGrs.filter((f: any) => f.id === group.current)[0].properties
@@ -414,7 +402,6 @@ const useMain = () => {
     selectItem,
     addItemWithType,
     getCurrentItem,
-    getCurrentDisplay,
   }
 }
 

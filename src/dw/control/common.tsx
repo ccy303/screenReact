@@ -26,8 +26,6 @@ import {
 } from 'dw/api/Constants'
 import { legendPositionList, unitarea, units } from 'dw/api/EchartsOption'
 
-export const LAYOUT: any = 'layoutContainer'
-
 export const DEFAULT_REQUEST_PROP: RequestProps = {
   legendReName: null,
   displayReName: null,
@@ -69,35 +67,6 @@ export const DEFAULT_STYLE = {
   background: '#fff',
 }
 
-// 共用
-export const DEFAULT_DISPLAY: DisplayProps[] = [
-  {
-    label: i18n.msg('c5'),
-    component: 'DisplayItem',
-    valueProp: 'legendNumber',
-    nameProp: 'legendReName',
-    isSort: true,
-    sortProp: 'sortSelectX',
-    sortCustomProp: 'customValueX',
-  },
-  {
-    label: i18n.msg('c7'),
-    component: 'DisplayItem',
-    valueProp: 'displayValueNumber',
-    nameProp: 'displayReName',
-    isSort: false,
-  },
-  {
-    label: i18n.msg('c8'),
-    component: 'DisplayItem',
-    valueProp: 'legendDetailNumber',
-    nameProp: 'legendDetailReName',
-    isSort: true,
-    sortProp: 'sortSelectY',
-    sortCustomProp: 'customValueY',
-  },
-]
-
 export const BASE_PROP: ControlProProps = {
   id: 'base',
   name: i18n.msg('baseInfo'),
@@ -107,10 +76,7 @@ export const BASE_PROP: ControlProProps = {
       visible: true,
       id: 'name',
       name: '组件名称',
-      editor: {
-        component: 'Input',
-        defaultValue: 'name',
-      },
+      editor: { component: 'Input', defaultValue: 'name' },
     },
     {
       visible: true,
@@ -134,140 +100,6 @@ export const BASE_PROP: ControlProProps = {
         placeholder: '请输入内容',
       },
       style: {
-        alignItems: 'start',
-        height: 'auto',
-      },
-    },
-    {
-      visible: true,
-      id: 'save',
-      editor: {
-        component: 'Button',
-        label: i18n.msg('c59'),
-        type: 'primary',
-        block: true,
-      },
-      style: {
-        height: 'auto',
-        padding: 20,
-      },
-    },
-  ],
-}
-
-export const DATASET_PROP: ControlProProps = {
-  id: 'dataset',
-  name: i18n.msg('dataset8'), // '数据集',
-  defaultOpen: true,
-  nodes: [
-    {
-      visible: true,
-      id: 'dataset.name',
-      name: i18n.msg('dataset8'), // '数据集',
-      editor: {
-        component: 'DatasetInput',
-        type: 'add',
-        defaultValue: '',
-      },
-      style: {
-        display: 'block',
-        height: 'auto',
-      },
-    },
-    {
-      visible: {
-        conditionId: 'dataset.name',
-        type: 'string',
-        mark: 'noEmpty',
-      },
-      id: 'dataset.datesetFilterItemsStr',
-      name: i18n.msg('c55'), // '筛选',
-      editor: {
-        component: 'DatasetInput',
-        type: 'filter',
-        defaultValue: '',
-      },
-      style: {
-        display: 'block',
-        height: 'auto',
-      },
-    },
-    // {
-    //   visible: {
-    //     conditionId: 'dataset.name',
-    //     type: 'string',
-    //     mark: 'noEmpty',
-    //   },
-    //   id: 'c.form.dynamicItem',
-    //   name: i18n.msg('guides'), // '参考线',
-    //   editor: {
-    //     component: 'DatasetInput',
-    //     type: 'guide',
-    //     defaultValue: '',
-    //   },
-    //   style: {
-    //     display: 'block',
-    //     height: 'auto',
-    //   },
-    // },
-    {
-      id: 'dataset.detail',
-      editor: { defaultValue: [] },
-    },
-    {
-      id: 'dataset.datesetFilterItems',
-      editor: { defaultValue: [] },
-    },
-    {
-      id: 'dataset.request',
-      editor: { defaultValue: { ..._.cloneDeep(DEFAULT_REQUEST_PROP) } },
-    },
-  ],
-}
-
-export const DATASET_VAR_PROP: ControlProProps = {
-  visible: {
-    conditionId: 'dataset.varParams',
-    mark: 'noEmpty',
-  },
-  id: 'dataset.varParams',
-  name: i18n.msg('var3'), // '变量',
-  defaultOpen: true,
-  nodes: [
-    {
-      visible: true,
-      id: 'dataset.varParams',
-      editor: {
-        component: 'DatasetVariable',
-        defaultValue: [],
-      },
-      style: {
-        display: 'block',
-        height: 'auto',
-      },
-    },
-  ],
-}
-
-export const DATASET_DIM_PROP: ControlProProps = {
-  visible: {
-    conditionId: 'dataset.dimParams',
-    mark: 'noEmpty',
-  },
-  id: 'dataset.dimParams',
-  name: i18n.msg('var4'), // '维度变量',
-  defaultOpen: true,
-  nodes: [
-    {
-      visible: true,
-      id: 'dataset.dimParams',
-      editor: {
-        component: 'DatasetVariable',
-        type: 'dimParams',
-        defaultValue: [],
-      },
-      style: {
-        display: 'block',
         alignItems: 'start',
         height: 'auto',
       },
