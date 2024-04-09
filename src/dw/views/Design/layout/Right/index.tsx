@@ -1,13 +1,16 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
 import { Icon, Tabs, Button } from '@kdcloudjs/kdesign'
 import useMain from 'dw/store/useMain'
-import './index.less'
+import { ViewItemContext } from 'dw/views/ViewItem'
 import useBase from 'dw/store/useBase'
 import { PropertiesContainer } from 'dw/views/Design/layout/Right/PropertiesContainer'
 import NavCard from 'dw/components/common/NavCard'
+import './index.less'
 
 const Right: FC<any> = (props) => {
   const { setRight } = useBase()
+  const { model } = useContext(ViewItemContext)
+
   const {
     group: { groups, current },
     changeGroupCurrent,
@@ -24,8 +27,9 @@ const Right: FC<any> = (props) => {
   }
 
   const save = () => {
-    console.log(1111111, globalConfig)
-    console.log(2222222, itemList)
+    const data = { ...(globalConfig as any), itemList }
+    console.log(`%c提交数据`, 'color:#00ff00', data)
+    model?.invoke?.('save', JSON.stringify(data))
   }
 
   return (

@@ -1,11 +1,11 @@
 // noinspection DuplicatedCode
 
-import React from 'react'
+import React, { useContext } from 'react'
 import { ControlGroupProps } from 'dw/control/interface'
 import i18n from 'dw/api/I18n'
-import { Button } from '@kdcloudjs/kdesign'
 import * as constants from 'dw/api/Constants'
 import './pageControl.less'
+import { Button } from '@kdcloudjs/kdesign'
 
 export const DEFAULT_PAGE_CONFIG = {
   size: '6',
@@ -247,12 +247,12 @@ export const pageGroup: ControlGroupProps[] = [
             visible: true,
             id: 'pageConfig.configtag',
             name: '大屏标识',
+            addonAfterBtn: true,
             editor: {
               component: 'Input',
               dataType: 'string',
               defaultValue: '',
               borderType: 'bordered',
-              addonAfter: <Button type="primary">查询</Button>,
             },
           },
           {

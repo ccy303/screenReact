@@ -26,13 +26,9 @@ import eventBus from 'dw/api/EventBus'
             model: props.model,
           }
         }
-        componentDidMount() {
-          const { model } = this.state
-        }
+        componentDidMount() {}
         shouldComponentUpdate() {}
-        componentWillUnmount() {
-          eventBus.unsub(this.updateSub)
-        }
+        componentWillUnmount() {}
         render() {
           const { customProps, model } = this.state
           return <ViewItem model={model} customProps={customProps} />

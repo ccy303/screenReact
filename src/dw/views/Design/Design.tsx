@@ -7,15 +7,15 @@ import Right from 'dw/views/Design/layout/Right'
 import useMain from 'dw/store/useMain'
 
 import './index.less'
-import Preview from 'dw/views/Design/layout/Preview'
+// import Preview from 'dw/views/Design/layout/Preview'
 
 const Design = () => {
   const {
     base: { showRight, showLeft, designMode },
   } = useBase()
-  const { globalConfig, selectPageGroup } = useMain()
+  const { selectPageGroup } = useMain()
 
-  const { propsData, invoke } = useContext(ViewItemContext)
+  const { model } = useContext(ViewItemContext)
 
   useEffect(() => {
     selectPageGroup(true)
@@ -24,7 +24,8 @@ const Design = () => {
   return (
     <div className="dw-design">
       {!designMode ? (
-        <Preview />
+        // <Preview />
+        <></>
       ) : (
         <>
           {showLeft && <Left />}

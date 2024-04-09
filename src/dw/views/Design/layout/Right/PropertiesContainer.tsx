@@ -16,12 +16,22 @@ export const PropertiesItem: FC<PropertiesItemProps> = (props) => {
   if (editor?.component) {
     const comp = editor.component
     const Component = editorMap[comp]
+    const _props = {
+      ...props,
+      node: {
+        ...props.node,
+        editor: {
+          ...props.node.editor,
+          addonAfter: props.addonAfterBtn ? <Button type="primary">查询</Button> : '',
+        },
+      },
+    }
 
     return (
       <div className={`${prefixCls}-item`} key={id} style={style}>
         {name && <NameTipWrapper className={`${prefixCls}-item-label`} label={name} />}
         <div className={`${prefixCls}-item-component`}>
-          <Component {...props} />
+          <Component {..._props} />
         </div>
       </div>
     )
@@ -79,6 +89,7 @@ export const PropertiesContainer: FC<any> = (props) => {
                 >
                   <div style={{ padding: 10 }}>
                     {nodes.map((node: ControlNodeProps) => {
+                      console.log(node)
                       const propertiesItemProps: PropertiesItemProps = {
                         value: _.get(selectId ? currentItem : pageControl, node.id),
                         node,
@@ -87,6 +98,7 @@ export const PropertiesContainer: FC<any> = (props) => {
                         selectId,
                         currentItem,
                         prefixCls,
+                        addonAfterBtn: node.addonAfterBtn,
                       }
                       const vn = getVisible(node.visible)
                       if (vn) {

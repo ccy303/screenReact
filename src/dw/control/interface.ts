@@ -41,6 +41,7 @@ export type ControlNodeProps = {
     defaultValue?: ValueProp
     [key: string]: ValueProp
   }
+  [key: string]: any
   actions?: ControlAction[]
   style?: CSSProperties
 }
@@ -122,6 +123,7 @@ export type PropertiesItemProps = {
   currentItem?: ComponentItemProps
   selectId?: string
   selectType?: string
+  [key: string]: any
 }
 
 export type ComponentItemProps = {
