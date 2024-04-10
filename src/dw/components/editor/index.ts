@@ -1,8 +1,5 @@
-import ButtonEditor from 'dw/components/editor/ButtonEditor'
 import CheckboxEditor from 'dw/components/editor/CheckboxEditor'
 import ColorPickerEditor from 'dw/components/editor/ColorPickerEditor'
-import DatasetInputEditor from 'dw/components/editor/DatasetInputEditor'
-import DatasetVariableEditor from 'dw/components/editor/DatasetVariableEditor'
 import ImageEditor from 'dw/components/editor/ImageEditor'
 import InputEditor from 'dw/components/editor/InputEditor'
 import RadioEditor from 'dw/components/editor/RadioEditor'
@@ -15,11 +12,8 @@ import EchartDataSet from 'dw/components/editor/EchartDataSet'
 import VersionSelect from 'dw/components/editor/VersionSelect'
 
 export type EditorMapProp = {
-  Button: any
   Checkbox: any
   ColorPicker: any
-  DatasetInput: any
-  DatasetVariable: any
   Image: any
   Input: any
   Radio: any
@@ -33,11 +27,8 @@ export type EditorMapProp = {
 }
 
 const editorMap: EditorMapProp = {
-  Button: ButtonEditor,
   Checkbox: CheckboxEditor,
   ColorPicker: ColorPickerEditor,
-  DatasetInput: DatasetInputEditor,
-  DatasetVariable: DatasetVariableEditor,
   Image: ImageEditor,
   Input: InputEditor,
   Radio: RadioEditor,

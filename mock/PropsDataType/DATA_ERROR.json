@@ -1,7 +1,0 @@
-{
-  "data": {
-    "error": { "msg": "组件数据计算异常 java.math.BigDecimal cannot be cast to java.util.ArrayList[4b7c60542331e02a] AnalysisCalcHelper.java:130 kd.fi.bcm.formplugin.faranalysis.AnalysisCalcHelper.getDataByDataSet(AnalysisCalcHelper.java:130) \n,AnalysisServiceHelper.java:616 kd.fi.bcm.formplugin.faranalysis.AnalysisServiceHelper.previewResult(AnalysisServiceHelper.java:616) \n,AnalysisServiceHelper.java:534 kd.fi.bcm.formplugin.faranalysis.AnalysisServiceHelper.preview(AnalysisServiceHelper.java:534) \n,AbstractAnalysisPlugin.java:286 kd.fi.bcm.formplugin.faranalysis.AbstractAnalysisPlugin.evPreview2(AbstractAnalysisPlugin.java:286) \n,AbstractAnalysisPlugin.java:186 kd.fi.bcm.formplugin.faranalysis.AbstractAnalysisPlugin.customEvent(AbstractAnalysisPlugin.java:186) \n" }
-  },
-  "t": "2022-08-18 17:24:33",
-  "dataType": "DATA_ERROR"
-}

@@ -13,8 +13,8 @@ const prefix = 'dw-kd-card'
 
 const KdCardTitle: FC<{ item: ComponentItemProps; showDesp: boolean }> = ({ item, showDesp = false }) => {
   const styleMain = {
-    textAlign: item.c.title.align,
-    background: item.c.title.backColor,
+    textAlign: item.content.title.align,
+    background: item.content.title.backColor,
     width: '100%',
     maxWidth: '-webkit-fill-available',
     padding: 10,
@@ -22,19 +22,19 @@ const KdCardTitle: FC<{ item: ComponentItemProps; showDesp: boolean }> = ({ item
   }
 
   const styleSpan = {
-    fontSize: item.c.title.fontSize,
-    fontWeight: item.c.title.fontWeight,
-    fontStyle: item.c.title.fontStyle,
-    textDecoration: item.c.title.underline,
-    color: item.c.title.foreColor,
-    background: item.c.title.backColor,
+    fontSize: item.content.title.fontSize,
+    fontWeight: item.content.title.fontWeight,
+    fontStyle: item.content.title.fontStyle,
+    textDecoration: item.content.title.underline,
+    color: item.content.title.foreColor,
+    background: item.content.title.backColor,
   }
 
   return (
     <div style={styleMain} id={`${item.id}_title`}>
       <span style={styleSpan}>&nbsp;&nbsp; {item.title} &nbsp;&nbsp;</span>
       {showDesp && (
-        <Tooltip tip={item.c.desp.content}>
+        <Tooltip tip={item.content.desp.content}>
           <Icon type="question" />
         </Tooltip>
       )}
@@ -43,22 +43,22 @@ const KdCardTitle: FC<{ item: ComponentItemProps; showDesp: boolean }> = ({ item
 }
 
 const KdCard: FC<KdCardProps> = ({ item, children, showTitle }) => {
-  const showDesp = useMemo(() => item && item.c && item.c.desp && item.c.desp.show, [item])
+  const showDesp = useMemo(() => item && item.content && item.content.desp && item.content.desp.show, [item])
 
   const style = {
-    background: item.c.bkColor,
-    borderWidth: item.c.showBorder ? item.c.borderWidth : 0,
-    borderStyle: item.c.borderStyle,
-    borderColor: item.c.borderColor,
-    backgroundColor: item.c.bkColor,
-    boxShadow: item.c.showBorder ? '0 2px 12px 0 rgba(0,0,0,.1)' : 'none',
+    background: item.content.bkColor,
+    borderWidth: item.content.showBorder ? item.content.borderWidth : 0,
+    borderStyle: item.content.borderStyle,
+    borderColor: item.content.borderColor,
+    backgroundColor: item.content.bkColor,
+    boxShadow: item.content.showBorder ? '0 2px 12px 0 rgba(0,0,0,.1)' : 'none',
   }
 
   return (
     <div className={prefix} style={style}>
       {showTitle && <KdCardTitle showDesp={showDesp} item={item} />}
       {!showTitle && showDesp && (
-        <Tooltip tip={item.c.desp.content}>
+        <Tooltip tip={item.content.desp.content}>
           <Icon type="question" />
         </Tooltip>
       )}

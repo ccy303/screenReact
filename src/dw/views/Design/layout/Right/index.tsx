@@ -27,7 +27,7 @@ const Right: FC<any> = (props) => {
   }
 
   const save = () => {
-    const data = { ...(globalConfig as any), itemList }
+    const data = { ...(globalConfig.pageControl as any), itemList }
     console.log(`%c提交数据`, 'color:#00ff00', data)
     model?.invoke?.('save', JSON.stringify(data))
   }

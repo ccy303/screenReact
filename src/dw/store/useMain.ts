@@ -366,11 +366,11 @@ const useMain = () => {
   }
 
   const initPage = (data: any) => {
-    const { itemList: it, pageConfig, queryConfig } = data
+    const { itemList: it, pageConfig } = data
     setItemList(it)
     setGlobalConfig({
       ...globalConfig,
-      pageControl: formatData({ pageConfig, queryConfig }),
+      pageControl: formatData({ pageConfig }),
     })
   }
 

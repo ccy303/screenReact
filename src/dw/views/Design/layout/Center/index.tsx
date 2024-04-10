@@ -17,10 +17,8 @@ const Center: FC<any> = (props) => {
   const {
     selectPageGroup,
     addItemWithType,
-    itemList,
     globalConfig: {
       pageControl: { pageConfig },
-      selectId,
     },
   } = useMain()
   const { width, height, backgroundSize, backgroundColor, url } = pageConfig

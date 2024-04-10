@@ -4,9 +4,9 @@ import KdCard from 'dw/components/common/KdCard'
 import _ from 'lodash'
 
 const Chart = (item: any) => {
-  const { c, userXIndex, userYIndex, dataset } = item
+  const { content, userXIndex, userYIndex, dataset } = item
   const { rows } = dataset || {}
-  const { config } = c
+  const { config } = content
   const { charts } = config
 
   const _rows: any = {}
@@ -68,7 +68,7 @@ const Chart = (item: any) => {
     }
   }, [userXIndex, userYIndex, charts])
 
-  const showTitle = useMemo(() => item && item.c && item.c.title && item.c.title.show, [item])
+  const showTitle = useMemo(() => item && item.content && item.content.title && item.content.title.show, [item])
 
   const ref: any = useRef(null)
 

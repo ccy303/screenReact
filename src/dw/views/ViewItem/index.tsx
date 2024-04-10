@@ -33,7 +33,7 @@ const BaseView = () => {
   const { initPage } = useMain()
 
   useEffect(() => {
-    // initPage(JSON)
+    initPage(JSON)
   }, [])
 
   return (

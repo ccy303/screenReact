@@ -63,7 +63,7 @@ const textControls: any = {
           nodes: [
             {
               visible: true,
-              id: 'c.config.fontSize',
+              id: 'content.config.fontSize',
               name: '字号',
               editor: {
                 component: 'Stepper',
@@ -74,7 +74,7 @@ const textControls: any = {
             },
             {
               visible: true,
-              id: 'c.config.color',
+              id: 'content.config.color',
               name: '字体颜色',
               editor: {
                 component: 'ColorPicker',
@@ -84,7 +84,7 @@ const textControls: any = {
             },
             {
               visible: true,
-              id: 'c.config.textAlign',
+              id: 'content.config.textAlign',
               name: '水平方向',
               editor: {
                 component: 'Stepper',
@@ -95,7 +95,7 @@ const textControls: any = {
             },
             {
               visible: true,
-              id: 'c.config.fontStyle',
+              id: 'content.config.fontStyle',
               name: '样式',
               editor: {
                 component: 'Select',

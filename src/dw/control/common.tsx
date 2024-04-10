@@ -67,9 +67,10 @@ export const DEFAULT_STYLE = {
   background: '#fff',
 }
 
+// 文本
 export const BASE_PROP: ControlProProps = {
   id: 'base',
-  name: i18n.msg('baseInfo'),
+  name: '基本信息',
   defaultOpen: true,
   nodes: [
     {
@@ -108,7 +109,7 @@ export const BASE_PROP: ControlProProps = {
 }
 
 export const TITLE_PROP: ControlProProps = {
-  id: 'c.title',
+  id: 'content.title',
   name: '标题',
   defaultOpen: true,
   show: {
@@ -116,35 +117,35 @@ export const TITLE_PROP: ControlProProps = {
     actions: [
       {
         condition: { value: true },
-        todo: [{ id: 'c.title.show', changeValue: true }],
-        elseTodo: [{ id: 'c.title.show', changeValue: false }],
+        todo: [{ id: 'content.title.show', changeValue: true }],
+        elseTodo: [{ id: 'content.title.show', changeValue: false }],
       },
     ],
   },
   nodes: [
     {
       visible: false,
-      id: 'c.title.show',
+      id: 'content.title.show',
       editor: { defaultValue: true },
     },
     {
       visible: false,
-      id: 'c.title.fontWeight',
+      id: 'content.title.fontWeight',
       editor: { defaultValue: 'normal' },
     },
     {
       visible: false,
-      id: 'c.title.fontStyle',
+      id: 'content.title.fontStyle',
       editor: { defaultValue: 'normal' },
     },
     {
       visible: false,
-      id: 'c.title.underline',
+      id: 'content.title.underline',
       editor: { defaultValue: 'none' },
     },
     {
       visible: true,
-      id: 'c.title.fontSize',
+      id: 'content.title.fontSize',
       name: '字体大小',
       editor: {
         component: 'Stepper',
@@ -154,7 +155,7 @@ export const TITLE_PROP: ControlProProps = {
     },
     {
       visible: true,
-      id: 'c.title.fontStyleArray',
+      id: 'content.title.fontStyleArray',
       name: '样式',
       editor: {
         component: 'Checkbox',
@@ -170,24 +171,24 @@ export const TITLE_PROP: ControlProProps = {
       actions: [
         {
           condition: { value: 'fontWeight', mark: 'in' },
-          todo: [{ id: 'c.title.fontWeight', changeValue: 'bold' }],
-          elseTodo: [{ id: 'c.title.fontWeight', changeValue: 'normal' }],
+          todo: [{ id: 'content.title.fontWeight', changeValue: 'bold' }],
+          elseTodo: [{ id: 'content.title.fontWeight', changeValue: 'normal' }],
         },
         {
           condition: { value: 'fontStyle', mark: 'in' },
-          todo: [{ id: 'c.title.fontStyle', changeValue: 'italic' }],
-          elseTodo: [{ id: 'c.title.fontStyle', changeValue: 'normal' }],
+          todo: [{ id: 'content.title.fontStyle', changeValue: 'italic' }],
+          elseTodo: [{ id: 'content.title.fontStyle', changeValue: 'normal' }],
         },
         {
           condition: { value: 'textDecoration', mark: 'in' },
-          todo: [{ id: 'c.title.underline', changeValue: 'underline' }],
-          elseTodo: [{ id: 'c.title.underline', changeValue: 'none' }],
+          todo: [{ id: 'content.title.underline', changeValue: 'underline' }],
+          elseTodo: [{ id: 'content.title.underline', changeValue: 'none' }],
         },
       ],
     },
     {
       visible: true,
-      id: 'c.title.align',
+      id: 'content.title.align',
       name: '样式',
       editor: {
         component: 'Radio',
@@ -203,7 +204,7 @@ export const TITLE_PROP: ControlProProps = {
     },
     {
       visible: true,
-      id: 'c.title.fontColor',
+      id: 'content.title.fontColor',
       name: '字体颜色',
       editor: {
         component: 'ColorPicker',
@@ -213,7 +214,7 @@ export const TITLE_PROP: ControlProProps = {
     },
     {
       visible: true,
-      id: 'c.title.backColor',
+      id: 'content.title.backColor',
       name: '背景颜色',
       editor: {
         component: 'ColorPicker',
@@ -244,13 +245,13 @@ export const BORDER_PROP: ControlProProps = {
       {
         condition: { value: true },
         todo: [
-          { id: 'c.showBorder', changeValue: true },
-          { id: 'c.borderOpacity', changeValue: 1 },
-          { id: 'c.borderColor', changeValue: '#fff' },
+          { id: 'content.showBorder', changeValue: true },
+          { id: 'content.borderOpacity', changeValue: 1 },
+          { id: 'content.borderColor', changeValue: '#fff' },
         ],
         elseTodo: [
-          { id: 'c.showBorder', changeValue: false },
-          { id: 'c.borderOpacity', changeValue: 0 },
+          { id: 'content.showBorder', changeValue: false },
+          { id: 'content.borderOpacity', changeValue: 0 },
         ],
       },
     ],
@@ -258,12 +259,12 @@ export const BORDER_PROP: ControlProProps = {
   nodes: [
     {
       visible: false,
-      id: 'c.showBorder',
+      id: 'content.showBorder',
       editor: { defaultValue: true },
     },
     {
       visible: true,
-      id: 'c.borderColor',
+      id: 'content.borderColor',
       name: '颜色',
       editor: {
         component: 'ColorPicker',
@@ -273,7 +274,7 @@ export const BORDER_PROP: ControlProProps = {
     },
     {
       visible: true,
-      id: 'c.borderOpacity',
+      id: 'content.borderOpacity',
       name: '透明度',
       editor: {
         component: 'Stepper',
@@ -286,7 +287,7 @@ export const BORDER_PROP: ControlProProps = {
     },
     {
       visible: true,
-      id: 'c.borderWidth',
+      id: 'content.borderWidth',
       name: '边框线宽度',
       editor: {
         component: 'Stepper',
@@ -299,7 +300,7 @@ export const BORDER_PROP: ControlProProps = {
     },
     {
       visible: true,
-      id: 'c.borderStyle',
+      id: 'content.borderStyle',
       name: '边框样式',
       editor: {
         component: 'Select',
@@ -321,13 +322,13 @@ export const BACKGROUND_PROP: ControlProProps = {
       {
         condition: { value: true },
         todo: [
-          { id: 'c.showBak', changeValue: true },
-          { id: 'c.opacity', changeValue: 1 },
-          { id: 'c.bkColor', changeValue: '#fff' },
+          { id: 'content.showBak', changeValue: true },
+          { id: 'content.opacity', changeValue: 1 },
+          { id: 'content.bkColor', changeValue: '#fff' },
         ],
         elseTodo: [
-          { id: 'c.showBak', changeValue: false },
-          { id: 'c.opacity', changeValue: 1 },
+          { id: 'content.showBak', changeValue: false },
+          { id: 'content.opacity', changeValue: 1 },
         ],
       },
     ],
@@ -335,12 +336,12 @@ export const BACKGROUND_PROP: ControlProProps = {
   nodes: [
     {
       visible: false,
-      id: 'c.showBak',
+      id: 'content.showBak',
       editor: { defaultValue: true },
     },
     {
       visible: true,
-      id: 'c.bkColor',
+      id: 'content.bkColor',
       name: '颜色',
       editor: {
         component: 'ColorPicker',
@@ -350,7 +351,7 @@ export const BACKGROUND_PROP: ControlProProps = {
     },
     {
       visible: true,
-      id: 'c.opacity',
+      id: 'content.opacity',
       name: '透明度',
       editor: {
         component: 'Stepper',
@@ -373,20 +374,20 @@ export const DESC_PROP: ControlProProps = {
     actions: [
       {
         condition: { value: true },
-        todo: [{ id: 'c.desc.show', changeValue: true }],
-        elseTodo: [{ id: 'c.desc.show', changeValue: false }],
+        todo: [{ id: 'content.desc.show', changeValue: true }],
+        elseTodo: [{ id: 'content.desc.show', changeValue: false }],
       },
     ],
   },
   nodes: [
     {
       visible: false,
-      id: 'c.desc.show',
+      id: 'content.desc.show',
       editor: { defaultValue: false },
     },
     {
       visible: true,
-      id: 'c.desc.content',
+      id: 'content.desc.content',
       name: '内容',
       editor: {
         component: 'TextArea',
@@ -463,7 +464,7 @@ export const PIE_OTHER_PROP: ControlProProps = {
   nodes: [
     {
       visible: true,
-      id: 'c.chartParameters',
+      id: 'content.chartParameters',
       name: '图表参数',
       editor: {
         component: 'Switch',
@@ -473,7 +474,7 @@ export const PIE_OTHER_PROP: ControlProProps = {
     },
     {
       visible: true,
-      id: 'c.config.showStarAngle',
+      id: 'content.config.showStarAngle',
       name: '旋转',
       editor: {
         component: 'Switch',
@@ -485,7 +486,7 @@ export const PIE_OTHER_PROP: ControlProProps = {
           condition: { value: true },
           todo: [
             {
-              id: 'c.config.charts.series[0].starAngle',
+              id: 'content.config.charts.series[0].starAngle',
               changeType: 'node',
               changeId: 'visible',
               changeValue: true,
@@ -493,7 +494,7 @@ export const PIE_OTHER_PROP: ControlProProps = {
           ],
           elseTodo: [
             {
-              id: 'c.config.charts.series[0].starAngle',
+              id: 'content.config.charts.series[0].starAngle',
               changeType: 'node',
               changeId: 'visible',
               changeValue: false,
@@ -504,7 +505,7 @@ export const PIE_OTHER_PROP: ControlProProps = {
     },
     {
       visible: false,
-      id: 'c.config.charts.series[0].starAngle',
+      id: 'content.config.charts.series[0].starAngle',
       name: '旋转角度',
       editor: {
         component: 'Stepper',
@@ -518,7 +519,7 @@ export const PIE_OTHER_PROP: ControlProProps = {
 }
 
 export const LEGEND_PROP: ControlProProps = {
-  id: 'c.config.charts.legend',
+  id: 'content.config.charts.legend',
   name: '图例',
   defaultOpen: true,
   show: {
@@ -526,60 +527,60 @@ export const LEGEND_PROP: ControlProProps = {
     actions: [
       {
         condition: { value: true },
-        todo: [{ id: 'c.config.charts.legend.show', changeValue: true }],
-        elseTodo: [{ id: 'c.config.charts.legend.show', changeValue: false }],
+        todo: [{ id: 'content.config.charts.legend.show', changeValue: true }],
+        elseTodo: [{ id: 'content.config.charts.legend.show', changeValue: false }],
       },
     ],
   },
   nodes: [
     {
       visible: false,
-      id: 'c.config.charts.legend.show',
+      id: 'content.config.charts.legend.show',
       editor: { defaultValue: true },
     },
     {
       visible: false,
-      id: 'c.config.charts.legend.left',
+      id: 'content.config.charts.legend.left',
       editor: { defaultValue: 'auto' },
     },
     {
       visible: false,
-      id: 'c.config.charts.legend.right',
+      id: 'content.config.charts.legend.right',
       editor: { defaultValue: 'auto' },
     },
     {
       visible: false,
-      id: 'c.config.charts.legend.bottom',
+      id: 'content.config.charts.legend.bottom',
       editor: { defaultValue: 'auto' },
     },
     {
       visible: false,
-      id: 'c.config.charts.legend.top',
+      id: 'content.config.charts.legend.top',
       editor: { defaultValue: 'auto' },
     },
     {
       visible: false,
-      id: 'c.config.charts.legend.align',
+      id: 'content.config.charts.legend.align',
       editor: { defaultValue: 'auto' },
     },
     {
       visible: false,
-      id: 'c.config.charts.legend.orient',
+      id: 'content.config.charts.legend.orient',
       editor: { defaultValue: 'horizontal' },
     },
     {
       visible: false,
-      id: 'c.config.charts.legend.textStyle.fontWeight',
+      id: 'content.config.charts.legend.textStyle.fontWeight',
       editor: { defaultValue: 'normal' },
     },
     {
       visible: false,
-      id: 'c.config.charts.legend.textStyle.fontStyle',
+      id: 'content.config.charts.legend.textStyle.fontStyle',
       editor: { defaultValue: 'normal' },
     },
     {
       visible: true,
-      id: 'c.config.legendPos',
+      id: 'content.config.legendPos',
       name: '图例位置',
       editor: {
         component: 'Select',
@@ -632,7 +633,7 @@ export const LEGEND_PROP: ControlProProps = {
     },
     {
       visible: true,
-      id: 'c.config.charts.legend.textStyle.fontSize',
+      id: 'content.config.charts.legend.textStyle.fontSize',
       name: '字体大小',
       editor: {
         component: 'Stepper',
@@ -642,7 +643,7 @@ export const LEGEND_PROP: ControlProProps = {
     },
     {
       visible: true,
-      id: 'c.config.charts.legend.textStyle.color',
+      id: 'content.config.charts.legend.textStyle.color',
       name: '字体颜色',
       editor: {
         component: 'ColorPicker',
@@ -652,7 +653,7 @@ export const LEGEND_PROP: ControlProProps = {
     },
     {
       visible: true,
-      id: 'c.config.fontStyleArray',
+      id: 'content.config.fontStyleArray',
       name: '样式',
       editor: {
         component: 'Checkbox',
@@ -667,13 +668,13 @@ export const LEGEND_PROP: ControlProProps = {
       actions: [
         {
           condition: { value: 'fontWeight', mark: 'in' },
-          todo: [{ id: 'c.config.charts.legend.textStyle.fontWeight', changeValue: 'bold' }],
-          elseTodo: [{ id: 'c.config.charts.legend.textStyle.fontWeight', changeValue: 'normal' }],
+          todo: [{ id: 'content.config.charts.legend.textStyle.fontWeight', changeValue: 'bold' }],
+          elseTodo: [{ id: 'content.config.charts.legend.textStyle.fontWeight', changeValue: 'normal' }],
         },
         {
           condition: { value: 'fontStyle', mark: 'in' },
-          todo: [{ id: 'c.config.charts.legend.textStyle.fontStyle', changeValue: 'italic' }],
-          elseTodo: [{ id: 'c.config.charts.legend.textStyle.fontStyle', changeValue: 'normal' }],
+          todo: [{ id: 'content.config.charts.legend.textStyle.fontStyle', changeValue: 'italic' }],
+          elseTodo: [{ id: 'content.config.charts.legend.textStyle.fontStyle', changeValue: 'normal' }],
         },
       ],
     },
@@ -681,7 +682,7 @@ export const LEGEND_PROP: ControlProProps = {
 }
 
 export const DIGITAL_FORMAT_PROP: ControlProProps = {
-  id: 'c.config.digitalFormat',
+  id: 'content.config.digitalFormat',
   name: i18n.msg('c26'),
   defaultOpen: false,
   show: {
@@ -689,30 +690,30 @@ export const DIGITAL_FORMAT_PROP: ControlProProps = {
     actions: [
       {
         condition: { value: true },
-        todo: [{ id: 'c.config.charts.series[0].label.show', changeValue: true }],
-        elseTodo: [{ id: 'c.config.charts.series[0].label.show', changeValue: false }],
+        todo: [{ id: 'content.config.charts.series[0].label.show', changeValue: true }],
+        elseTodo: [{ id: 'content.config.charts.series[0].label.show', changeValue: false }],
       },
     ],
   },
   nodes: [
     {
       visible: false,
-      id: 'c.config.charts.series[0].label.show',
+      id: 'content.config.charts.series[0].label.show',
       editor: { defaultValue: true },
     },
     {
       visible: false,
-      id: 'c.config.charts.series[0].label.fontWeight',
+      id: 'content.config.charts.series[0].label.fontWeight',
       editor: { defaultValue: 'normal' },
     },
     {
       visible: false,
-      id: 'c.config.charts.series[0].label.fontStyle',
+      id: 'content.config.charts.series[0].label.fontStyle',
       editor: { defaultValue: 'normal' },
     },
     {
       visible: true,
-      id: 'c.config.charts.series[0].label.fontSize',
+      id: 'content.config.charts.series[0].label.fontSize',
       name: i18n.msg('c03'),
       editor: {
         component: 'Stepper',
@@ -722,7 +723,7 @@ export const DIGITAL_FORMAT_PROP: ControlProProps = {
     },
     {
       visible: true,
-      id: 'c.config.charts.series[0].label.color',
+      id: 'content.config.charts.series[0].label.color',
       name: i18n.msg('textCompConfig3'),
       editor: {
         component: 'ColorPicker',
@@ -732,7 +733,7 @@ export const DIGITAL_FORMAT_PROP: ControlProProps = {
     },
     {
       visible: true,
-      id: 'c.config.label.fontStyleArray',
+      id: 'content.config.label.fontStyleArray',
       name: '样式',
       editor: {
         component: 'Checkbox',
@@ -747,19 +748,19 @@ export const DIGITAL_FORMAT_PROP: ControlProProps = {
       actions: [
         {
           condition: { value: 'fontWeight', mark: 'in' },
-          todo: [{ id: 'c.config.charts.series[0].label.fontWeight', changeValue: 'bold' }],
-          elseTodo: [{ id: 'c.config.charts.series[0].label.fontWeight', changeValue: 'normal' }],
+          todo: [{ id: 'content.config.charts.series[0].label.fontWeight', changeValue: 'bold' }],
+          elseTodo: [{ id: 'content.config.charts.series[0].label.fontWeight', changeValue: 'normal' }],
         },
         {
           condition: { value: 'fontStyle', mark: 'in' },
-          todo: [{ id: 'c.config.charts.series[0].label.fontStyle', changeValue: 'italic' }],
-          elseTodo: [{ id: 'c.config.charts.series[0].label.fontStyle', changeValue: 'normal' }],
+          todo: [{ id: 'content.config.charts.series[0].label.fontStyle', changeValue: 'italic' }],
+          elseTodo: [{ id: 'content.config.charts.series[0].label.fontStyle', changeValue: 'normal' }],
         },
       ],
     },
     {
       visible: true,
-      id: 'c.config.charts.series[0].label.position',
+      id: 'content.config.charts.series[0].label.position',
       name: i18n.msg('labelPosition'),
       editor: {
         component: 'Select',
@@ -770,7 +771,7 @@ export const DIGITAL_FORMAT_PROP: ControlProProps = {
     },
     {
       visible: true,
-      id: 'c.config.digitalFormat.dataLabelType',
+      id: 'content.config.digitalFormat.dataLabelType',
       name: i18n.msg('c75'),
       editor: {
         component: 'Select',
@@ -781,7 +782,7 @@ export const DIGITAL_FORMAT_PROP: ControlProProps = {
     },
     {
       visible: true,
-      id: 'c.config.digitalFormat.digitalType',
+      id: 'content.config.digitalFormat.digitalType',
       name: i18n.msg('c32'),
       editor: {
         component: 'Select',
@@ -794,7 +795,7 @@ export const DIGITAL_FORMAT_PROP: ControlProProps = {
           condition: { value: 'currency' },
           todo: [
             {
-              id: 'c.config.digitalFormat.currencySymbols',
+              id: 'content.config.digitalFormat.currencySymbols',
               changeId: 'visible',
               changeValue: true,
               changeType: 'node',
@@ -802,7 +803,7 @@ export const DIGITAL_FORMAT_PROP: ControlProProps = {
           ],
           elseTodo: [
             {
-              id: 'c.config.digitalFormat.currencySymbols',
+              id: 'content.config.digitalFormat.currencySymbols',
               changeId: 'visible',
               changeValue: false,
               changeType: 'node',
@@ -813,19 +814,19 @@ export const DIGITAL_FORMAT_PROP: ControlProProps = {
           condition: { value: 'percent' },
           todo: [
             {
-              id: 'c.config.digitalFormat.unit',
+              id: 'content.config.digitalFormat.unit',
               changeId: 'visible',
               changeValue: false,
               changeType: 'node',
             },
             {
-              id: 'c.config.digitalFormat.unitarea',
+              id: 'content.config.digitalFormat.unitarea',
               changeId: 'visible',
               changeValue: false,
               changeType: 'node',
             },
             {
-              id: 'c.config.digitalFormat.enableThousands',
+              id: 'content.config.digitalFormat.enableThousands',
               changeId: 'visible',
               changeValue: false,
               changeType: 'node',
@@ -833,19 +834,19 @@ export const DIGITAL_FORMAT_PROP: ControlProProps = {
           ],
           elseTodo: [
             {
-              id: 'c.config.digitalFormat.unit',
+              id: 'content.config.digitalFormat.unit',
               changeId: 'visible',
               changeValue: true,
               changeType: 'node',
             },
             {
-              id: 'c.config.digitalFormat.unitarea',
+              id: 'content.config.digitalFormat.unitarea',
               changeId: 'visible',
               changeValue: true,
               changeType: 'node',
             },
             {
-              id: 'c.config.digitalFormat.enableThousands',
+              id: 'content.config.digitalFormat.enableThousands',
               changeId: 'visible',
               changeValue: true,
               changeType: 'node',
@@ -856,7 +857,7 @@ export const DIGITAL_FORMAT_PROP: ControlProProps = {
     },
     {
       visible: false,
-      id: 'c.config.digitalFormat.currencySymbols',
+      id: 'content.config.digitalFormat.currencySymbols',
       name: i18n.msg('c33'),
       editor: {
         component: 'Select',
@@ -867,7 +868,7 @@ export const DIGITAL_FORMAT_PROP: ControlProProps = {
     },
     {
       visible: true,
-      id: 'c.config.digitalFormat.unit',
+      id: 'content.config.digitalFormat.unit',
       name: i18n.msg('displayElement'),
       editor: {
         component: 'Select',
@@ -878,20 +879,20 @@ export const DIGITAL_FORMAT_PROP: ControlProProps = {
       actions: [
         {
           condition: { mark: 'together' },
-          todo: [{ id: 'c.config.unit', changeType: 'together' }],
+          todo: [{ id: 'content.config.unit', changeType: 'together' }],
         },
       ],
     },
     {
       visible: false,
-      id: 'c.config.unit',
+      id: 'content.config.unit',
       editor: {
         defaultValue: 1,
       },
     },
     {
       visible: true,
-      id: 'c.config.digitalFormat.decimalPlace',
+      id: 'content.config.digitalFormat.decimalPlace',
       name: i18n.msg('c34'),
       editor: {
         component: 'Stepper',
@@ -903,7 +904,7 @@ export const DIGITAL_FORMAT_PROP: ControlProProps = {
     },
     {
       visible: true,
-      id: 'c.config.digitalFormat.enableThousands',
+      id: 'content.config.digitalFormat.enableThousands',
       name: i18n.msg('c35'),
       editor: {
         component: 'Switch',
@@ -913,7 +914,7 @@ export const DIGITAL_FORMAT_PROP: ControlProProps = {
     },
     {
       visible: true,
-      id: 'c.config.digitalFormat.unitarea',
+      id: 'content.config.digitalFormat.unitarea',
       name: i18n.msg('unitarea'),
       editor: {
         component: 'Select',
@@ -927,7 +928,7 @@ export const DIGITAL_FORMAT_PROP: ControlProProps = {
 
 // 新增-图表基本信息
 export const CHART_BASE_INFO: any = {
-  id: 'echartOption',
+  id: 'chartcontrol',
   name: '基本信息',
   defaultOpen: true,
   nodes: [
@@ -940,25 +941,25 @@ export const CHART_BASE_INFO: any = {
     },
     {
       visible: true,
-      id: 'echartOption.version',
+      id: 'chartcontrol.version',
       name: '版本',
       editor: { component: 'Input' },
     },
     {
       visible: true,
-      id: 'echartOption.versionDesc',
+      id: 'chartcontrol.versionDesc',
       name: '版本描述',
       editor: { component: 'Input' },
     },
     {
       visible: true,
-      id: 'echartOption.pluginName',
+      id: 'chartcontrol.pluginName',
       name: '插件标识',
       editor: { component: 'Input' },
     },
     {
       visible: true,
-      id: 'echartOption.isPublish',
+      id: 'chartcontrol.isPublish',
       name: '是否发布',
       editor: {
         component: 'Select',
@@ -979,7 +980,7 @@ export const CHART_DARA_SET: any = {
   nodes: [
     {
       visible: true,
-      id: 'echartOption',
+      id: 'chartcontrol',
       name: '',
       editor: { component: 'EchartDataSet' },
       style: { height: '100px' },

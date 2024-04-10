@@ -44,7 +44,7 @@ export const PropertiesItem: FC<PropertiesItemProps> = (props) => {
               查询
             </Button>
           ) : (
-            ''
+            <></>
           ),
         },
       },
@@ -143,7 +143,7 @@ export const PropertiesContainer: FC<any> = (props) => {
           <Button
             type="primary"
             onClick={() => {
-              const data = pageControl.pageConfig
+              const data = pageControl.pageConfig 
               console.log(`%c大屏配置保存`, 'color:#00ff00', data)
               model?.invoke?.('saveconfig', JSON.stringify(data))
             }}

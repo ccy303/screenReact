@@ -1,5 +1,11 @@
 {
   "pageConfig": {
+    "configtag": "2",
+    "ispublish": "1",
+    "themecode": "6",
+    "themename": "5",
+    "version": "3",
+    "versiondescribe": "4",
     "size": "2",
     "width": "1024",
     "height": "768",
@@ -15,11 +21,11 @@
       { "id": "1900953719554954240", "version": "v1", "versiondescribe": "123123", "isinitial": 1 },
       { "id": "1900953719554954240", "version": "v2", "versiondescribe": "2123123" },
       { "id": "1900953719554954240", "version": "v3", "versiondescribe": "312312" }
-    ]
+    ] 
   },
   "itemList": [
     {
-      "echartOption": {
+      "chartcontrol": {
         "version": "1",
         "versionDesc": "2",
         "pluginName": "3",
@@ -43,7 +49,7 @@
             ["其他","其他", 78, 6]
         ]
       },
-      "c": {
+      "content": {
         "title": {
           "show": true,
           "fontWeight": "normal",
