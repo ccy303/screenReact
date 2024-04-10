@@ -19,7 +19,7 @@ export interface ViewItemProps {
 }
 
 export const defaultViewItemContext: ViewItemProps = {
-  model: {},
+  model: { test: true },
   propsData: {},
   getLangMsg: () => {},
   invoke: () => {},
@@ -33,7 +33,7 @@ const BaseView = () => {
   const { initPage } = useMain()
 
   useEffect(() => {
-    initPage(JSON)
+    // initPage(JSON)
   }, [])
 
   return (

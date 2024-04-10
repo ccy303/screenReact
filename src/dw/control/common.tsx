@@ -933,6 +933,13 @@ export const CHART_BASE_INFO: any = {
   nodes: [
     {
       visible: true,
+      id: '',
+      name: '版本筛选',
+      type: 'chartConfig',
+      editor: { component: 'VersionSelect' },
+    },
+    {
+      visible: true,
       id: 'echartOption.version',
       name: '版本',
       editor: { component: 'Input' },

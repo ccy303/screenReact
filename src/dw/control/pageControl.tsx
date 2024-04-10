@@ -5,7 +5,6 @@ import { ControlGroupProps } from 'dw/control/interface'
 import i18n from 'dw/api/I18n'
 import * as constants from 'dw/api/Constants'
 import './pageControl.less'
-import { Button } from '@kdcloudjs/kdesign'
 
 export const DEFAULT_PAGE_CONFIG = {
   size: '6',
@@ -32,10 +31,27 @@ export const pageGroup: ControlGroupProps[] = [
     name: '大屏配置',
     properties: [
       {
+        id: 'configversion',
+        name: '版本筛选',
+        defaultOpen: true,
+        order: 0,
+        nodes: [
+          {
+            visible: true,
+            id: '',
+            name: '版本筛选',
+            type: 'screenConfig',
+            editor: {
+              component: 'VersionSelect',
+            },
+          },
+        ],
+      },
+      {
         id: 'canvasGroup',
         name: '大屏尺寸',
         defaultOpen: true,
-        order: 0,
+        order: 1,
         nodes: [
           {
             visible: true,
@@ -231,7 +247,7 @@ export const pageGroup: ControlGroupProps[] = [
         id: 'ballGroup',
         name: '大屏设置',
         defaultOpen: true,
-        order: 1,
+        order: 2,
         nodes: [
           {
             visible: true,

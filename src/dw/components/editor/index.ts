@@ -12,6 +12,7 @@ import SwitchEditor from 'dw/components/editor/SwitchEditor'
 import TextAreaEditor from 'dw/components/editor/TextAreaEditor'
 import TextEditor from 'dw/components/editor/TextEditor'
 import EchartDataSet from 'dw/components/editor/EchartDataSet'
+import VersionSelect from 'dw/components/editor/VersionSelect'
 
 export type EditorMapProp = {
   Button: any
@@ -28,7 +29,9 @@ export type EditorMapProp = {
   TextArea: any
   Text: any
   EchartDataSet: any
+  VersionSelect: any
 }
+
 const editorMap: EditorMapProp = {
   Button: ButtonEditor,
   Checkbox: CheckboxEditor,
@@ -44,5 +47,6 @@ const editorMap: EditorMapProp = {
   TextArea: TextAreaEditor,
   Text: TextEditor,
   EchartDataSet: EchartDataSet,
+  VersionSelect: VersionSelect,
 }
 export default editorMap

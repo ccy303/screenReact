@@ -2,7 +2,7 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import ViewItem from './views/ViewItem'
-import eventBus from 'dw/api/EventBus'
+import useMain from '@/dw/store/useMain'
 
 /**
  * 在setHtml中声明Root类，使用ReactDOM.render将其渲染在model.dom中
@@ -56,7 +56,20 @@ import eventBus from 'dw/api/EventBus'
     },
     update: function (props) {
       console.log('-----update', this.model, props)
-      eventBus.pub(this.model, 'update', props)
+      const { initPage } = useMain()
+      if (props.data.data.invokeKey == 'selectconfig') {
+        // 大屏查询
+        console.log(`%c大屏查询`, 'color:#00ff00', props.data)
+        initPage(props.data.data)
+      } else if (['refresh', 'optionversion'].includes(props.data.data.invokeKey)) {
+        // 图表刷新/图表版本修改
+        console.log(`%c${props.data.data.invokeKey}`, 'color:#00ff00', props.data)
+        
+      } else if (props.data.data.invokeKey == 'configversion') {
+        // 大屏版本修改
+        console.log(`%c大屏版本修改`, 'color:#00ff00', props.data)
+        initPage(props.data.data)
+      }
     },
     destoryed: function () {
       console.log('-----destoryed', this.model)

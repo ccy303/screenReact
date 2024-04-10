@@ -1,18 +1,24 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
 import Collapse from 'dw/components/common/Collapse'
 import useMain, { ChangeItemProps } from 'dw/store/useMain'
 import { ControlNodeProps, PropertiesItemProps, VisibleProp } from 'dw/control/interface'
 import NameTipWrapper from 'dw/components/common/NameTipWrapper'
 import editorMap from 'dw/components/editor'
-import { Button } from '@kdcloudjs/kdesign'
+import { Button, Message } from '@kdcloudjs/kdesign'
 import _ from 'lodash'
+import { ViewItemContext } from 'dw/views/ViewItem'
 import './PropertiesContainer.less'
+import JSON from '../../../../../../mock/PropsDataType/DATA_INIT.json'
 
 export const PropertiesItem: FC<PropertiesItemProps> = (props) => {
   const {
     prefixCls,
     node: { name = '', editor, id, style },
   } = props
+
+  const { globalConfig, initPage } = useMain()
+  const { model } = useContext(ViewItemContext)
+
   if (editor?.component) {
     const comp = editor.component
     const Component = editorMap[comp]
@@ -22,7 +28,24 @@ export const PropertiesItem: FC<PropertiesItemProps> = (props) => {
         ...props.node,
         editor: {
           ...props.node.editor,
-          addonAfter: props.addonAfterBtn ? <Button type="primary">查询</Button> : '',
+          addonAfter: props.addonAfterBtn ? (
+            <Button
+              type="primary"
+              onClick={() => {
+                const tag = globalConfig?.pageControl?.pageConfig?.configtag
+                if (!tag) {
+                  initPage({})
+                  return Message.warning('请输入大屏标识')
+                }
+                console.log(`%c大屏标识查询`, 'color:#00ff00', tag)
+                model?.invoke?.('selectconfig', tag)
+              }}
+            >
+              查询
+            </Button>
+          ) : (
+            ''
+          ),
         },
       },
     }
@@ -48,6 +71,8 @@ export const PropertiesContainer: FC<any> = (props) => {
     changeItem,
     getCurrentItem,
   } = useMain()
+
+  const { model } = useContext(ViewItemContext)
 
   const prefixCls = 'dw-design-right-properties-view'
   const currentItem = getCurrentItem()
@@ -89,7 +114,6 @@ export const PropertiesContainer: FC<any> = (props) => {
                 >
                   <div style={{ padding: 10 }}>
                     {nodes.map((node: ControlNodeProps) => {
-                      console.log(node)
                       const propertiesItemProps: PropertiesItemProps = {
                         value: _.get(selectId ? currentItem : pageControl, node.id),
                         node,
@@ -116,13 +140,44 @@ export const PropertiesContainer: FC<any> = (props) => {
 
       {group.category == 'screenConfig' && (
         <div className="w-100 flex-center mb-20">
-          <Button type="primary">大屏配置保存</Button>
+          <Button
+            type="primary"
+            onClick={() => {
+              const data = pageControl.pageConfig
+              console.log(`%c大屏配置保存`, 'color:#00ff00', data)
+              model?.invoke?.('saveconfig', JSON.stringify(data))
+            }}
+          >
+            大屏配置保存
+          </Button>
         </div>
       )}
 
       {group.category == 'charts' && (
         <div className="w-100 flex-center mb-20">
-          <Button type="primary">图表配置保存</Button>
+          <Button
+            type="primary"
+            onClick={() => {
+              let data = getCurrentItem()
+              data = { ...data, configparentid: pageControl.pageConfig.id }
+              console.log(`%c图表配置保存`, 'color:#00ff00', data)
+              model?.invoke?.('saveoption', JSON.stringify(data))
+            }}
+          >
+            图表配置保存
+          </Button>
+          <Button
+            style={{ marginLeft: '10px' }}
+            type="primary"
+            onClick={() => {
+              let data = getCurrentItem()
+              data = { ...data, configparentid: pageControl.pageConfig.id }
+              console.log(`%c刷新`, 'color:#00ff00', data)
+              model?.invoke?.('refresh', JSON.stringify(data))
+            }}
+          >
+            刷新
+          </Button>
         </div>
       )}
     </div>

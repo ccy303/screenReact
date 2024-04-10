@@ -10,7 +10,12 @@
     "backgroundSize": "100% 100%",
     "backgroundColor": "#f2f2f2",
     "type": "60",
-    "id": "1533407264080191488"
+    "id": "1533407264080191488",
+    "configversion": [
+      { "id": "1900953719554954240", "version": "v1", "versiondescribe": "123123", "isinitial": 1 },
+      { "id": "1900953719554954240", "version": "v2", "versiondescribe": "2123123" },
+      { "id": "1900953719554954240", "version": "v3", "versiondescribe": "312312" }
+    ]
   },
   "itemList": [
     {
@@ -112,6 +117,11 @@
         },
         "chartParameters": true
       },
+      "optionversion": [
+        { "id": "1900953719554954240", "version": "v1", "versiondescribe": "123123", "isinitial": 1 },
+        { "id": "1900953719554954240", "version": "v2", "versiondescribe": "2123123" },
+        { "id": "1900953719554954240", "version": "v3", "versiondescribe": "312312" }
+      ],
       "userXIndex": ["账户用途1"],
       "userYIndex": ["排序列"],
       "title": "标题",
