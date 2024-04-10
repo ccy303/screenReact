@@ -28,7 +28,7 @@ const TextEditor = (props: any) => {
       list = currentItem.optionversion
     }
 
-    const data = list.map((item: any) => {
+    const data = (list || []).map((item: any) => {
       if (item.isinitial) {
         return { ...item, versionLabel: `${item.version}(初始)` }
       } else {
