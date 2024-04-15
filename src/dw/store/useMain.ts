@@ -119,7 +119,6 @@ const useMain = () => {
   const addItem = (c: any, sources: any = {}) => {
     const { category } = c
     const controlProps: any = _.cloneDeep(ComponentControlMap[category])
-    console.log(controlProps)
     const rootId = uuidv4().replace(/-/g, '')
     let item: any = {}
     const { group: grp } = controlProps
@@ -148,6 +147,7 @@ const useMain = () => {
       type: c.componentType,
       category,
       kdId: '',
+      pkid: '',
     }
     setGroup({ groups: grp, current: grp[0].id, category })
     setItemList([...itemList, item])

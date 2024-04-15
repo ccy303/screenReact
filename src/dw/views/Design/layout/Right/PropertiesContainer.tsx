@@ -43,9 +43,7 @@ export const PropertiesItem: FC<PropertiesItemProps> = (props) => {
             >
               查询
             </Button>
-          ) : (
-            <></>
-          ),
+          ) : null,
         },
       },
     }
@@ -70,6 +68,7 @@ export const PropertiesContainer: FC<any> = (props) => {
     group,
     changeItem,
     getCurrentItem,
+    itemList,
   } = useMain()
 
   const { model } = useContext(ViewItemContext)
@@ -138,48 +137,61 @@ export const PropertiesContainer: FC<any> = (props) => {
           })
         : null}
 
-      {group.category == 'screenConfig' && (
+      {
         <div className="w-100 flex-center mb-20">
-          <Button
-            type="primary"
-            onClick={() => {
-              const data = pageControl.pageConfig 
-              console.log(`%c大屏配置保存`, 'color:#00ff00', data)
-              model?.invoke?.('saveconfig', JSON.stringify(data))
-            }}
-          >
-            大屏配置保存
-          </Button>
+          <div className="action-group">
+            <Button
+              type="primary"
+              onClick={() => {
+                const data = { pageConfig: { ...(pageControl.pageConfig as any) }, itemList }
+                console.log(`%c提交数据`, 'color:#00ff00', data)
+                model?.invoke?.('save', JSON.stringify(data))
+              }}
+            >
+              保存
+            </Button>
+          </div>
+          {group.category == 'screenConfig' && (
+            <Button
+              type="primary"
+              onClick={() => {
+                const data = pageControl.pageConfig
+                console.log(`%c大屏配置保存`, 'color:#00ff00', data)
+                model?.invoke?.('saveconfig', JSON.stringify(data))
+              }}
+            >
+              大屏配置保存
+            </Button>
+          )}
+          {group.category == 'charts' && (
+            <>
+              <Button
+                type="primary"
+                onClick={() => {
+                  let data = getCurrentItem()
+                  data = { ...data, configparentid: pageControl.pageConfig.id }
+                  console.log(`%c图表配置保存`, 'color:#00ff00', data)
+                  model?.invoke?.('saveoption', JSON.stringify(data))
+                }}
+              >
+                图表配置保存
+              </Button>
+              <Button
+                style={{ marginLeft: '10px' }}
+                type="primary"
+                onClick={() => {
+                  let data = getCurrentItem()
+                  data = { ...data, configparentid: pageControl.pageConfig.id }
+                  console.log(`%c刷新`, 'color:#00ff00', data)
+                  model?.invoke?.('refresh', JSON.stringify(data))
+                }}
+              >
+                刷新
+              </Button>
+            </>
+          )}
         </div>
-      )}
-
-      {group.category == 'charts' && (
-        <div className="w-100 flex-center mb-20">
-          <Button
-            type="primary"
-            onClick={() => {
-              let data = getCurrentItem()
-              data = { ...data, configparentid: pageControl.pageConfig.id }
-              console.log(`%c图表配置保存`, 'color:#00ff00', data)
-              model?.invoke?.('saveoption', JSON.stringify(data))
-            }}
-          >
-            图表配置保存
-          </Button>
-          <Button
-            style={{ marginLeft: '10px' }}
-            type="primary"
-            onClick={() => {
-              let data = getCurrentItem()
-              data = { ...data, configparentid: pageControl.pageConfig.id }
-              console.log(`%c刷新`, 'color:#00ff00', data)
-              model?.invoke?.('refresh', JSON.stringify(data))
-            }}
-          >
-            刷新
-          </Button>
-        </div>
-      )}
+      }
     </div>
   )
 }

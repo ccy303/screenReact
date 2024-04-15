@@ -23,8 +23,10 @@ export const DEFAULT_PAGE_CONFIG = {
   themename: null,
   themecode: null,
   ispublish: '1',
+  pkid: '',
 }
 
+// 大屏配置
 export const pageGroup: ControlGroupProps[] = [
   {
     id: 'screenConfig',
@@ -37,6 +39,15 @@ export const pageGroup: ControlGroupProps[] = [
         order: 0,
         nodes: [
           {
+            visible: false,
+            id: 'pkid',
+            name: 'pkid',
+            type: 'screenConfig',
+            editor: {
+              component: 'Input',
+            },
+          },
+          {
             visible: true,
             id: '',
             name: '版本筛选',
@@ -48,9 +59,97 @@ export const pageGroup: ControlGroupProps[] = [
         ],
       },
       {
+        id: 'ballGroup',
+        name: '大屏设置',
+        defaultOpen: true,
+        order: 2,
+        nodes: [
+          {
+            visible: true,
+            id: 'pageConfig.name',
+            name: '大屏名称',
+            editor: {
+              component: 'Input',
+              dataType: 'string',
+              borderType: 'bordered',
+            },
+          },
+          {
+            visible: true,
+            id: 'pageConfig.configtag',
+            name: '大屏标识',
+            addonAfterBtn: true,
+            editor: {
+              component: 'Input',
+              dataType: 'string',
+              defaultValue: '',
+              borderType: 'bordered',
+            },
+          },
+          {
+            visible: true,
+            id: 'pageConfig.version',
+            name: '版本',
+            editor: {
+              component: 'Input',
+              dataType: 'string',
+              defaultValue: '',
+              borderType: 'bordered',
+            },
+          },
+          {
+            visible: true,
+            id: 'pageConfig.versiondescribe',
+            name: '版本表述',
+            editor: {
+              component: 'Input',
+              dataType: 'string',
+              defaultValue: '',
+              borderType: 'bordered',
+            },
+          },
+          {
+            visible: true,
+            id: 'pageConfig.themename',
+            name: '主题名称',
+            editor: {
+              component: 'Input',
+              dataType: 'string',
+              defaultValue: '',
+              borderType: 'bordered',
+            },
+          },
+          {
+            visible: true,
+            id: 'pageConfig.themecode',
+            name: '主题编码',
+            editor: {
+              component: 'Input',
+              dataType: 'string',
+              defaultValue: '',
+              borderType: 'bordered',
+            },
+          },
+          {
+            visible: true,
+            id: 'pageConfig.ispublish',
+            name: '是否发布',
+            editor: {
+              component: 'Select',
+              dataType: 'string',
+              options: [
+                { name: '是', value: '1' },
+                { name: '否', value: '0' },
+              ],
+              defaultValue: '1',
+            },
+          },
+        ],
+      },
+      {
         id: 'canvasGroup',
         name: '大屏尺寸',
-        defaultOpen: true,
+        defaultOpen: false,
         order: 1,
         nodes: [
           {
@@ -239,94 +338,6 @@ export const pageGroup: ControlGroupProps[] = [
                 { name: i18n.msg('pageConfig20'), value: constants.PageScaleMode.FullWidth },
               ],
               defaultValue: DEFAULT_PAGE_CONFIG.scale,
-            },
-          },
-        ],
-      },
-      {
-        id: 'ballGroup',
-        name: '大屏设置',
-        defaultOpen: true,
-        order: 2,
-        nodes: [
-          {
-            visible: true,
-            id: 'pageConfig.name',
-            name: '大屏名称',
-            editor: {
-              component: 'Input',
-              dataType: 'string',
-              borderType: 'bordered',
-            },
-          },
-          {
-            visible: true,
-            id: 'pageConfig.configtag',
-            name: '大屏标识',
-            addonAfterBtn: true,
-            editor: {
-              component: 'Input',
-              dataType: 'string',
-              defaultValue: '',
-              borderType: 'bordered',
-            },
-          },
-          {
-            visible: true,
-            id: 'pageConfig.version',
-            name: '版本',
-            editor: {
-              component: 'Input',
-              dataType: 'string',
-              defaultValue: '',
-              borderType: 'bordered',
-            },
-          },
-          {
-            visible: true,
-            id: 'pageConfig.versiondescribe',
-            name: '版本表述',
-            editor: {
-              component: 'Input',
-              dataType: 'string',
-              defaultValue: '',
-              borderType: 'bordered',
-            },
-          },
-          {
-            visible: true,
-            id: 'pageConfig.themename',
-            name: '主题名称',
-            editor: {
-              component: 'Input',
-              dataType: 'string',
-              defaultValue: '',
-              borderType: 'bordered',
-            },
-          },
-          {
-            visible: true,
-            id: 'pageConfig.themecode',
-            name: '主题编码',
-            editor: {
-              component: 'Input',
-              dataType: 'string',
-              defaultValue: '',
-              borderType: 'bordered',
-            },
-          },
-          {
-            visible: true,
-            id: 'pageConfig.ispublish',
-            name: '是否发布',
-            editor: {
-              component: 'Select',
-              dataType: 'string',
-              options: [
-                { name: '是', value: '1' },
-                { name: '否', value: '0' },
-              ],
-              defaultValue: '1',
             },
           },
         ],

@@ -18,19 +18,9 @@ const echartControls: any = {
   group: [
     {
       id: 'data',
-      name: '基本信息',
-      properties: [CHART_BASE_INFO],
-    },
-    {
-      id: 'dataSet',
-      name: '数据配置',
-      properties: [CHART_DARA_SET],
-      displayDataShow: true,
-    },
-    {
-      id: 'format',
-      name: '样式',
+      name: '属性',
       properties: [
+        CHART_BASE_INFO,
         TITLE_PROP,
         LEGEND_PROP,
         DIGITAL_FORMAT_PROP,
@@ -40,6 +30,11 @@ const echartControls: any = {
         PIE_OTHER_PROP,
         POSITION_PROP,
       ],
+    },
+    {
+      id: 'dataSet',
+      name: '数据配置',
+      properties: [CHART_DARA_SET],
     },
   ],
 }

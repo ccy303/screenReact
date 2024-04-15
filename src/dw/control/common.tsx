@@ -111,7 +111,7 @@ export const BASE_PROP: ControlProProps = {
 export const TITLE_PROP: ControlProProps = {
   id: 'content.title',
   name: '标题',
-  defaultOpen: true,
+  defaultOpen: false,
   show: {
     value: true,
     actions: [
@@ -238,7 +238,7 @@ export const TITLE_PROP: ControlProProps = {
 export const BORDER_PROP: ControlProProps = {
   id: 'border',
   name: '边框',
-  defaultOpen: true,
+  defaultOpen: false,
   show: {
     value: true,
     actions: [
@@ -315,7 +315,7 @@ export const BORDER_PROP: ControlProProps = {
 export const BACKGROUND_PROP: ControlProProps = {
   id: 'background',
   name: '背景',
-  defaultOpen: true,
+  defaultOpen: false,
   show: {
     value: true,
     actions: [
@@ -368,7 +368,7 @@ export const BACKGROUND_PROP: ControlProProps = {
 export const DESC_PROP: ControlProProps = {
   id: 'desc',
   name: '组件说明',
-  defaultOpen: true,
+  defaultOpen: false,
   show: {
     value: false,
     actions: [
@@ -408,7 +408,7 @@ export const DESC_PROP: ControlProProps = {
 export const POSITION_PROP: ControlProProps = {
   id: 'position',
   name: i18n.msg('sizeAndPosition'),
-  defaultOpen: true,
+  defaultOpen: false,
   nodes: [
     {
       visible: true,
@@ -460,7 +460,7 @@ export const POSITION_PROP: ControlProProps = {
 export const PIE_OTHER_PROP: ControlProProps = {
   id: 'pie.other',
   name: '其它',
-  defaultOpen: true,
+  defaultOpen: false,
   nodes: [
     {
       visible: true,
@@ -521,7 +521,7 @@ export const PIE_OTHER_PROP: ControlProProps = {
 export const LEGEND_PROP: ControlProProps = {
   id: 'content.config.charts.legend',
   name: '图例',
-  defaultOpen: true,
+  defaultOpen: false,
   show: {
     value: true,
     actions: [
@@ -947,19 +947,19 @@ export const CHART_BASE_INFO: any = {
     },
     {
       visible: true,
-      id: 'chartcontrol.versionDesc',
+      id: 'chartcontrol.versiondesc',
       name: '版本描述',
       editor: { component: 'Input' },
     },
     {
       visible: true,
-      id: 'chartcontrol.pluginName',
+      id: 'chartcontrol.pluginname',
       name: '插件标识',
       editor: { component: 'Input' },
     },
     {
       visible: true,
-      id: 'chartcontrol.isPublish',
+      id: 'chartcontrol.ispublish',
       name: '是否发布',
       editor: {
         component: 'Select',
@@ -979,11 +979,19 @@ export const CHART_DARA_SET: any = {
   defaultOpen: true,
   nodes: [
     {
+      visible: false,
+      id: 'pkid',
+      name: 'pkid',
+      type: 'chartConfig',
+      editor: { component: 'Input' },
+    },
+    {
       visible: true,
-      id: 'chartcontrol',
+      id: '',
       name: '',
+      type: 'chartConfig',
       editor: { component: 'EchartDataSet' },
-      style: { height: '100px' },
+      style: { height: '240px' },
     },
   ],
 }
