@@ -1,6 +1,4 @@
 .data-set-warp {
-  margin-top: 10px;
-  margin-bottom: 20px;
   height: 240px;
 
   .data-set-data {
@@ -9,13 +7,28 @@
   .data-set-dargabled {
     margin-top: 10px;
     width: 100%;
-    height: 180px;
+    height: 100px;
     overflow: auto;
     border: 1px solid #aaa;
+    border-radius: 5px;
 
     .list {
+      height: 100%;
       .list-item {
-      
+        height: 20px;
+        line-height: 20px;
+        cursor: move;
+        padding: 0 10px;
+
+        .del-icon {
+          cursor: pointer;
+          color: red;
+        }
+      }
+
+      .space-between {
+        display: flex;
+        justify-content: space-between;
       }
     }
   }

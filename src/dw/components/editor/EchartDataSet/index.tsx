@@ -1,7 +1,8 @@
 import useMain from '@/dw/store/useMain'
-import { Select } from '@kdcloudjs/kdesign'
+import { Select, Icon } from '@kdcloudjs/kdesign'
 import React, { useMemo } from 'react'
 import './index.less'
+import _ from 'lodash'
 export default (props: any) => {
   const {
     value,
@@ -11,16 +12,16 @@ export default (props: any) => {
 
   const { getCurrentItem } = useMain()
 
-  const { dataset, userXIndex, userYIndex } = getCurrentItem()
+  const { dataset, userXIndex = [], userYIndex = [] } = getCurrentItem()
 
   const xIndex = useMemo(() => {
     const { dataindex } = dataset || {}
-    if (!dataindex) return
+    if (!dataindex) return []
     const xIndex = []
     for (let i = 0; i < dataindex.length; i++) {
       const item = dataindex[i]
       if (item[2] != 2 && item[2] != 3) {
-        xIndex.push({ name: item[1], value: item[1] })
+        xIndex.push({ name: item[1], value: item[1], type: 'x' })
       }
     }
     return xIndex
@@ -28,22 +29,51 @@ export default (props: any) => {
 
   const yIndex = useMemo(() => {
     const { dataindex } = dataset || {}
-    if (!dataindex) return
+    if (!dataindex) return []
     const xIndex = []
     for (let i = 0; i < dataindex.length; i++) {
       const item = dataindex[i]
       if (item[2] == 2 || item[2] == 3) {
-        xIndex.push({ name: item[1], value: item[1] })
+        xIndex.push({ name: item[1], value: item[1], type: 'y' })
       }
     }
     return xIndex
   }, [dataset])
 
-  const onSelChange = (type: any, e: any) => {
-    if (type == 'xIndex') {
-      onChange([{ prop: 'userXIndex', value: e }])
-    } else if (type == 'yIndex') {
-      onChange([{ prop: 'userYIndex', value: e }])
+  // const onSelChange = (type: any, e: any) => {
+  //   if (type == 'xIndex') {
+  //     onChange([{ prop: 'userXIndex', value: e }])
+  //   } else if (type == 'yIndex') {
+  //     onChange([{ prop: 'userYIndex', value: e }])
+  //   }
+  // }
+
+  const onDrag = (e: any, item: any) => {
+    e.dataTransfer?.setData('dataSet', JSON.stringify(item))
+  }
+
+  const onDrop = (e: any, type: any) => {
+    e.preventDefault()
+    const data = JSON.parse(e.dataTransfer?.getData('dataSet'))
+    if (type != data.type) {
+      return
+    }
+    if (type == 'x') {
+      onChange([{ prop: 'userXIndex', value: _.uniq([...userXIndex, data.value]) }])
+    } else {
+      onChange([{ prop: 'userYIndex', value: _.uniq([...userYIndex, data.value]) }])
+    }
+  }
+
+  const allowDrop = (e: any) => {
+    e.preventDefault()
+  }
+
+  const del = (type: any, item: any) => {
+    if (type == 'x') {
+      onChange([{ prop: 'userXIndex', value: _.uniq(userXIndex.filter((v: any) => v != item)) }])
+    } else {
+      onChange([{ prop: 'userYIndex', value: _.uniq(userYIndex.filter((v: any) => v != item)) }])
     }
   }
 
@@ -53,10 +83,10 @@ export default (props: any) => {
         <div>数据</div>
         <div className="data-set-dargabled">
           <div className="list">
-            {[...(xIndex as any), ...(yIndex as any)].map((v, i) => {
+            {[...(xIndex as any), ...(yIndex as any)].map((v: any, i) => {
               return (
-                <div className="list-item">
-                  {v.name}({i < (xIndex as any).length ? '文字' : '数字'} )
+                <div key={i} className="list-item" draggable onDragStart={(e) => onDrag(e, v)}>
+                  {v.name}({v.type == 'x' ? '文字' : '数字'})
                 </div>
               )
             })}
@@ -64,10 +94,34 @@ export default (props: any) => {
         </div>
       </div>
       <div>
-        <div>横轴</div>
+        <div style={{ marginTop: '10px' }}>横轴</div>
+        <div className="data-set-dargabled">
+          <div className="list" onDragOver={allowDrop} onDrop={(e) => onDrop(e, 'x')}>
+            {userXIndex.map((v: any, i: any) => {
+              return (
+                <div key={i} className="list-item space-between" onClick={() => del('x', v)}>
+                  {v}(文字)
+                  <Icon type="delete" className="del-icon"></Icon>
+                </div>
+              )
+            })}
+          </div>
+        </div>
       </div>
       <div>
-        <div>纵轴</div>
+        <div style={{ marginTop: '10px' }}>纵轴</div>
+        <div className="data-set-dargabled">
+          <div className="list" onDragOver={allowDrop} onDrop={(e) => onDrop(e, 'y')}>
+            {userYIndex.map((v: any, i: any) => {
+              return (
+                <div key={i} className="list-item space-between" onClick={() => del('y', v)}>
+                  {v}(数字)
+                  <Icon type="delete" className="del-icon"></Icon>
+                </div>
+              )
+            })}
+          </div>
+        </div>
       </div>
       {/* <div style={{ display: 'flex', alignItems: 'center' }}>
         <div style={{ width: '50px' }}>横轴</div>
