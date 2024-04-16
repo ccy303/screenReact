@@ -8,7 +8,6 @@ import { Button, Message } from '@kdcloudjs/kdesign'
 import _ from 'lodash'
 import { ViewItemContext } from 'dw/views/ViewItem'
 import './PropertiesContainer.less'
-import JSON from '../../../../../../mock/PropsDataType/DATA_INIT.json'
 
 export const PropertiesItem: FC<PropertiesItemProps> = (props) => {
   const {

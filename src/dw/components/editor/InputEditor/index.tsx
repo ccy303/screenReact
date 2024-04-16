@@ -12,13 +12,17 @@ const InputEditor = (props: PropertiesItemProps) => {
   const [innerValue, setInnerValue] = useState(value)
 
   useEffect(() => {
-    setInnerValue(value)
+    innerValue != value && setInnerValue(value)
   }, [value])
 
   const changeHandle = (e: any) => {
     const v = e.target.value
-    onChange([{ prop: id, value: v, actions }])
+    setInnerValue(v)
   }
+
+  useEffect(() => {
+    onChange([{ prop: id, value: innerValue, actions }])
+  }, [innerValue])
 
   return <Input value={innerValue} onChange={changeHandle} {...rest} />
 }
