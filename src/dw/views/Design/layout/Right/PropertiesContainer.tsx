@@ -15,8 +15,26 @@ export const PropertiesItem: FC<PropertiesItemProps> = (props) => {
     node: { name = '', editor, id, style },
   } = props
 
-  const { globalConfig, initPage } = useMain()
+  const { globalConfig, initPage, getCurrentItem } = useMain()
   const { model } = useContext(ViewItemContext)
+
+  const searchScreen = () => {
+    const tag = globalConfig?.pageControl?.pageConfig?.configtag
+    if (!tag) {
+      return Message.warning('请输入大屏标识')
+    }
+    console.log(`%c大屏标识查询`, 'color:#00ff00', tag)
+    model?.invoke?.('selectconfig', tag)
+  }
+
+  const searchTable = () => {
+    const { pluginname } = getCurrentItem()
+    if (!pluginname) {
+      return Message.warning('请输入插件名称')
+    }
+    console.log(`%ctable插件名称查询`, 'color:#00ff00', pluginname)
+    model?.invoke?.('selectTable', pluginname)
+  }
 
   if (editor?.component) {
     const comp = editor.component
@@ -31,13 +49,8 @@ export const PropertiesItem: FC<PropertiesItemProps> = (props) => {
             <Button
               type="primary"
               onClick={() => {
-                const tag = globalConfig?.pageControl?.pageConfig?.configtag
-                if (!tag) {
-                  initPage({})
-                  return Message.warning('请输入大屏标识')
-                }
-                console.log(`%c大屏标识查询`, 'color:#00ff00', tag)
-                model?.invoke?.('selectconfig', tag)
+                props.addonAfterBtn == 1 && searchScreen()
+                props.addonAfterBtn == 2 && searchTable()
               }}
             >
               查询

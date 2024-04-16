@@ -11,7 +11,7 @@ const CompItem = () => {
   const getItemList = useCallback(() => {
     const map: any = {}
     const ret: ComponentItemProps[] = []
-    itemList.forEach((d) => {
+    itemList?.forEach((d) => {
       const t = {
         ...d,
         title: '',

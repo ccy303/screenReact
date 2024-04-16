@@ -61,10 +61,10 @@ import useMain from '@/dw/store/useMain'
         // 大屏查询
         console.log(`%c大屏查询`, 'color:#00ff00', props.data)
         initPage(props.data.data)
-      } else if (['refresh', 'optionversion'].includes(props.data.data.invokeKey)) {
+      } else if (['refresh', 'optionversion', 'selectTable'].includes(props.data.data.invokeKey)) {
         // 图表刷新/图表版本修改
         console.log(`%c${props.data.data.invokeKey}`, 'color:#00ff00', props.data)
-        
+        // todo
       } else if (props.data.data.invokeKey == 'configversion') {
         // 大屏版本修改
         console.log(`%c大屏版本修改`, 'color:#00ff00', props.data)

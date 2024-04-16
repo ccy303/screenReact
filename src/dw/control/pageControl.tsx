@@ -78,7 +78,7 @@ export const pageGroup: ControlGroupProps[] = [
             visible: true,
             id: 'pageConfig.configtag',
             name: '大屏标识',
-            addonAfterBtn: true,
+            addonAfterBtn: 1,
             editor: {
               component: 'Input',
               dataType: 'string',
@@ -99,7 +99,7 @@ export const pageGroup: ControlGroupProps[] = [
           },
           {
             visible: true,
-            id: 'pageConfig.versiondescribe',
+            id: 'pageConfig.versiondesc',
             name: '版本表述',
             editor: {
               component: 'Input',

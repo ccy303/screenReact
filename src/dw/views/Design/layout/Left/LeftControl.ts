@@ -163,9 +163,34 @@ const textControls: any = {
   ],
 }
 
+const tableControls: any = {
+  group: [
+    {
+      id: 'data',
+      name: '数据',
+      properties: [
+        {
+          defaultOpen: true,
+          id: 'base',
+          name: '属性',
+          nodes: [
+            { visible: true, id: 'pluginname', name: '插件名称', addonAfterBtn: 2, editor: { component: 'Input' } },
+          ],
+        },
+        TITLE_PROP,
+        BACKGROUND_PROP,
+        BORDER_PROP,
+        DESC_PROP,
+        POSITION_PROP,
+      ],
+    },
+  ],
+}
+
 export const ComponentControlMap: any = {
   charts: echartControls,
   text: textControls,
+  table: tableControls,
 }
 
 export const chartList = [
@@ -199,5 +224,12 @@ export const otherComp = [
     desc: '文字',
     name: '文字',
     category: 'text',
+  },
+  {
+    componentType: 'table',
+    icon: require(`assets/img/analysis_component_table.png`),
+    desc: '表格',
+    name: '表格',
+    category: 'table',
   },
 ]

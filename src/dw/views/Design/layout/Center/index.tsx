@@ -21,7 +21,7 @@ const Center: FC<any> = (props) => {
       pageControl: { pageConfig },
     },
   } = useMain()
-  const { width, height, backgroundSize, backgroundColor, url } = pageConfig
+  const { width, height, backgroundSize, backgroundColor, url } = pageConfig || {}
 
   const refCanvas = useRef(null)
 
