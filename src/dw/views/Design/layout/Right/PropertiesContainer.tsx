@@ -1,209 +1,218 @@
-import React, { FC, useContext } from 'react'
-import Collapse from 'dw/components/common/Collapse'
-import useMain, { ChangeItemProps } from 'dw/store/useMain'
-import { ControlNodeProps, PropertiesItemProps, VisibleProp } from 'dw/control/interface'
-import NameTipWrapper from 'dw/components/common/NameTipWrapper'
-import editorMap from 'dw/components/editor'
-import { Button, Message } from '@kdcloudjs/kdesign'
-import _ from 'lodash'
-import { ViewItemContext } from 'dw/views/ViewItem'
-import './PropertiesContainer.less'
+import React, { FC, useContext } from "react";
+import Collapse from "dw/components/common/Collapse";
+import useMain, { ChangeItemProps } from "dw/store/useMain";
+import { ControlNodeProps, PropertiesItemProps, VisibleProp } from "dw/control/interface";
+import NameTipWrapper from "dw/components/common/NameTipWrapper";
+import editorMap from "dw/components/editor";
+import { Button, Message } from "@kdcloudjs/kdesign";
+import _ from "lodash";
+import { ViewItemContext } from "dw/views/ViewItem";
+import "./PropertiesContainer.less";
+import itemJson from "../../../../../../mock/PropsDataType/ITEM_TEST.json";
 
-export const PropertiesItem: FC<PropertiesItemProps> = (props) => {
-  const {
-    prefixCls,
-    node: { name = '', editor, id, style },
-  } = props
+export const PropertiesItem: FC<PropertiesItemProps> = props => {
+    const {
+        prefixCls,
+        node: { name = "", editor, id, style }
+    } = props;
 
-  const { globalConfig, initPage, getCurrentItem } = useMain()
-  const { model } = useContext(ViewItemContext)
+    const { globalConfig, initPage, getCurrentItem } = useMain();
+    const { model } = useContext(ViewItemContext);
 
-  const searchScreen = () => {
-    const tag = globalConfig?.pageControl?.pageConfig?.configtag
-    if (!tag) {
-      return Message.warning('请输入大屏标识')
+    const searchScreen = () => {
+        const tag = globalConfig?.pageControl?.pageConfig?.configtag;
+        if (!tag) {
+            return Message.warning("请输入大屏标识");
+        }
+        console.log(`%c大屏标识查询`, "color:#00ff00", tag);
+        model?.invoke?.("selectconfig", tag);
+    };
+
+    const searchTable = () => {
+        const { pluginname } = getCurrentItem();
+        if (!pluginname) {
+            return Message.warning("请输入插件名称");
+        }
+        console.log(`%ctable插件名称查询`, "color:#00ff00", pluginname);
+        model?.invoke?.("selectTable", pluginname);
+    };
+
+    if (editor?.component) {
+        const comp = editor.component;
+        const Component = editorMap[comp];
+        const _props = {
+            ...props,
+            node: {
+                ...props.node,
+                editor: {
+                    ...props.node.editor,
+                    addonAfter: props.addonAfterBtn ? (
+                        <Button
+                            type='primary'
+                            onClick={() => {
+                                props.addonAfterBtn == 1 && searchScreen();
+                                props.addonAfterBtn == 2 && searchTable();
+                            }}
+                        >
+                            查询
+                        </Button>
+                    ) : null
+                }
+            }
+        };
+
+        return (
+            <div className={`${prefixCls}-item`} key={id} style={style}>
+                {name && <NameTipWrapper className={`${prefixCls}-item-label`} label={name} />}
+                <div className={`${prefixCls}-item-component`}>
+                    <Component {..._props} />
+                </div>
+            </div>
+        );
     }
-    console.log(`%c大屏标识查询`, 'color:#00ff00', tag)
-    model?.invoke?.('selectconfig', tag)
-  }
 
-  const searchTable = () => {
-    const { pluginname } = getCurrentItem()
-    if (!pluginname) {
-      return Message.warning('请输入插件名称')
-    }
-    console.log(`%ctable插件名称查询`, 'color:#00ff00', pluginname)
-    model?.invoke?.('selectTable', pluginname)
-  }
+    return null;
+};
 
-  if (editor?.component) {
-    const comp = editor.component
-    const Component = editorMap[comp]
-    const _props = {
-      ...props,
-      node: {
-        ...props.node,
-        editor: {
-          ...props.node.editor,
-          addonAfter: props.addonAfterBtn ? (
-            <Button
-              type="primary"
-              onClick={() => {
-                props.addonAfterBtn == 1 && searchScreen()
-                props.addonAfterBtn == 2 && searchTable()
-              }}
-            >
-              查询
-            </Button>
-          ) : null,
-        },
-      },
-    }
+export const PropertiesContainer: FC<any> = props => {
+    const {
+        properties,
+        globalConfig: { selectId, selectType, pageControl },
+        group,
+        changeItem,
+        getCurrentItem,
+        itemList,
+        changeItemAll
+    } = useMain();
+
+    const { model } = useContext(ViewItemContext);
+
+    const prefixCls = "dw-design-right-properties-view";
+    const currentItem = getCurrentItem();
+
+    const getVisible = (visible: VisibleProp = true) => {
+        let ret = visible;
+        if (typeof visible === "object") {
+            const { conditionId, mark, type = "array" } = visible;
+            const temp = _.get(currentItem, conditionId);
+            switch (mark) {
+                case "noEmpty":
+                    ret = type === "string" ? !!temp : Array.isArray(temp) && temp.length > 0;
+                    break;
+            }
+        }
+        return ret;
+    };
+
+    const onChange = (arr: ChangeItemProps[]) => {
+        changeItem(arr, selectId);
+    };
 
     return (
-      <div className={`${prefixCls}-item`} key={id} style={style}>
-        {name && <NameTipWrapper className={`${prefixCls}-item-label`} label={name} />}
-        <div className={`${prefixCls}-item-component`}>
-          <Component {..._props} />
-        </div>
-      </div>
-    )
-  }
-
-  return null
-}
-
-export const PropertiesContainer: FC<any> = (props) => {
-  const {
-    properties,
-    globalConfig: { selectId, selectType, pageControl },
-    group,
-    changeItem,
-    getCurrentItem,
-    itemList,
-  } = useMain()
-
-  const { model } = useContext(ViewItemContext)
-
-  const prefixCls = 'dw-design-right-properties-view'
-  const currentItem = getCurrentItem()
-
-  const getVisible = (visible: VisibleProp = true) => {
-    let ret = visible
-    if (typeof visible === 'object') {
-      const { conditionId, mark, type = 'array' } = visible
-      const temp = _.get(currentItem, conditionId)
-      switch (mark) {
-        case 'noEmpty':
-          ret = type === 'string' ? !!temp : Array.isArray(temp) && temp.length > 0
-          break
-      }
-    }
-    return ret
-  }
-
-  const onChange = (arr: ChangeItemProps[]) => {
-    changeItem(arr, selectId)
-  }
-
-  return (
-    <div className={prefixCls}>
-      {Array.isArray(properties) && properties.length > 0
-        ? properties.map((p) => {
-            const { id, name = '', visible = true, show, nodes, defaultOpen } = p
-            const v = getVisible(visible)
-            if (v) {
-              return (
-                <Collapse
-                  title={name}
-                  key={id}
-                  id={id}
-                  rootId={selectId}
-                  defaultOpen={defaultOpen || false}
-                  show={show?.value}
-                  actions={show?.actions}
-                >
-                  <div style={{ padding: 10 }}>
-                    {nodes.map((node: ControlNodeProps) => {
-                      const propertiesItemProps: PropertiesItemProps = {
-                        value: _.get(selectId ? currentItem : pageControl, node.id),
-                        node,
-                        onChange,
-                        selectType,
-                        selectId,
-                        currentItem,
-                        prefixCls,
-                        addonAfterBtn: node.addonAfterBtn,
+        <div className={prefixCls}>
+            {Array.isArray(properties) && properties.length > 0
+                ? properties.map(p => {
+                      const { id, name = "", visible = true, show, nodes, defaultOpen } = p;
+                      const v = getVisible(visible);
+                      if (v) {
+                          return (
+                              <Collapse
+                                  title={name}
+                                  key={id}
+                                  id={id}
+                                  rootId={selectId}
+                                  defaultOpen={defaultOpen || false}
+                                  show={show?.value}
+                                  actions={show?.actions}
+                              >
+                                  <div style={{ padding: 10 }}>
+                                      {nodes.map((node: ControlNodeProps) => {
+                                          const propertiesItemProps: PropertiesItemProps = {
+                                              value: _.get(selectId ? currentItem : pageControl, node.id),
+                                              node,
+                                              onChange,
+                                              selectType,
+                                              selectId,
+                                              currentItem,
+                                              prefixCls,
+                                              addonAfterBtn: node.addonAfterBtn
+                                          };
+                                          const vn = getVisible(node.visible);
+                                          if (vn) {
+                                              return <PropertiesItem key={node.id} {...propertiesItemProps} />;
+                                          }
+                                          return null;
+                                      })}
+                                  </div>
+                              </Collapse>
+                          );
                       }
-                      const vn = getVisible(node.visible)
-                      if (vn) {
-                        return <PropertiesItem key={node.id} {...propertiesItemProps} />
-                      }
-                      return null
-                    })}
-                  </div>
-                </Collapse>
-              )
+                      return null;
+                  })
+                : null}
+
+            {
+                <div className='w-100 flex-center mb-20'>
+                    <div className='action-group'>
+                        <Button
+                            type='primary'
+                            onClick={() => {
+                                const data = { pageConfig: { ...(pageControl.pageConfig as any) }, itemList };
+                                console.log(`%c提交数据`, "color:#00ff00", data);
+                                model?.invoke?.("save", JSON.stringify(data));
+                            }}
+                        >
+                            保存
+                        </Button>
+                    </div>
+                    {group.category == "screenConfig" && (
+                        <Button
+                            type='primary'
+                            onClick={() => {
+                                const data = pageControl.pageConfig;
+                                console.log(`%c大屏配置保存`, "color:#00ff00", data);
+                                model?.invoke?.("saveconfig", JSON.stringify(data));
+                            }}
+                        >
+                            大屏配置保存
+                        </Button>
+                    )}
+                    {group.category == "charts" && (
+                        <>
+                            <Button
+                                type='primary'
+                                onClick={() => {
+                                    let data = getCurrentItem();
+                                    data = { ...data, configparentid: pageControl.pageConfig.id };
+                                    console.log(`%c图表配置保存`, "color:#00ff00", data);
+                                    model?.invoke?.("saveoption", JSON.stringify(data));
+                                }}
+                            >
+                                图表配置保存
+                            </Button>
+                            <Button
+                                style={{ marginLeft: "10px" }}
+                                type='primary'
+                                onClick={() => {
+                                    let data = getCurrentItem();
+                                    data = { ...data, configparentid: pageControl.pageConfig.id };
+                                    console.log(`%c刷新`, "color:#00ff00", data);
+
+                                    changeItemAll(itemJson, data.id);
+
+                                    setTimeout(() => {
+                                        console.log(getCurrentItem());
+                                    }, 1000);
+
+                                    model?.invoke?.("refresh", JSON.stringify(data));
+                                }}
+                            >
+                                刷新
+                            </Button>
+                        </>
+                    )}
+                </div>
             }
-            return null
-          })
-        : null}
-
-      {
-        <div className="w-100 flex-center mb-20">
-          <div className="action-group">
-            <Button
-              type="primary"
-              onClick={() => {
-                const data = { pageConfig: { ...(pageControl.pageConfig as any) }, itemList }
-                console.log(`%c提交数据`, 'color:#00ff00', data)
-                model?.invoke?.('save', JSON.stringify(data))
-              }}
-            >
-              保存
-            </Button>
-          </div>
-          {group.category == 'screenConfig' && (
-            <Button
-              type="primary"
-              onClick={() => {
-                const data = pageControl.pageConfig
-                console.log(`%c大屏配置保存`, 'color:#00ff00', data)
-                model?.invoke?.('saveconfig', JSON.stringify(data))
-              }}
-            >
-              大屏配置保存
-            </Button>
-          )}
-          {group.category == 'charts' && (
-            <>
-              <Button
-                type="primary"
-                onClick={() => {
-                  let data = getCurrentItem()
-                  data = { ...data, configparentid: pageControl.pageConfig.id }
-                  console.log(`%c图表配置保存`, 'color:#00ff00', data)
-                  model?.invoke?.('saveoption', JSON.stringify(data))
-                }}
-              >
-                图表配置保存
-              </Button>
-              <Button
-                style={{ marginLeft: '10px' }}
-                type="primary"
-                onClick={() => {
-                  let data = getCurrentItem()
-                  data = { ...data, configparentid: pageControl.pageConfig.id }
-                  console.log(`%c刷新`, 'color:#00ff00', data)
-                  model?.invoke?.('refresh', JSON.stringify(data))
-                }}
-              >
-                刷新
-              </Button>
-            </>
-          )}
         </div>
-      }
-    </div>
-  )
-}
+    );
+};

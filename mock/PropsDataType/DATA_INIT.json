@@ -152,7 +152,7 @@
                 "borderOpacity": 1
             },
             "type": "bar",
-            "id": "",
+            "id": "1",
             "category": "charts",
             "chartcontrol": {
                 "versiondesc": "1",
@@ -295,7 +295,7 @@
                 "borderOpacity": 1
             },
             "type": "pie",
-            "id": "",
+            "id": "2",
             "category": "charts",
             "chartcontrol": {
                 "versiondesc": "1",
@@ -438,7 +438,7 @@
                 "borderOpacity": 1
             },
             "type": "line",
-            "id": "",
+            "id": "3",
             "category": "charts",
             "chartcontrol": {
                 "versiondesc": "1",
