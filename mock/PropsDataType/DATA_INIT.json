@@ -1,149 +1,451 @@
 {
-  "pageConfig": {
-    "configtag": "2",
-    "ispublish": "1",
-    "themecode": "6",
-    "themename": "5",
-    "version": "3",
-    "versiondescribe": "4",
-    "size": "2",
-    "width": "1024",
-    "height": "768",
-    "number": "PageConfig",
-    "scale": "full",
-    "name": "PageConfig",
-    "url": "",
-    "backgroundSize": "100% 100%",
-    "backgroundColor": "#f2f2f2",
-    "type": "60",
-    "id": "1533407264080191488",
-    "pkid": "1234",
-    "configversion": [
-      { "id": "1900953719554954240", "version": "v1", "versiondescribe": "123123", "isinitial": 1 },
-      { "id": "1900953719554954240", "version": "v2", "versiondescribe": "2123123" },
-      { "id": "1900953719554954240", "version": "v3", "versiondescribe": "312312" }
-    ] 
-  },
-  "itemList": [
-    {
-      "chartcontrol": {
+    "pageConfig": {
+        "size": "6",
+        "versiondescribe": "1",
+        "ispublish": "1",
+        "width": 1024,
+        "height": 768,
+        "scale": "none",
+        "name": "tda_bk",
+        "url": "",
+        "backgroundSize": "autoauto",
+        "themename": "1",
+        "backgroundColor": "#f2f3f5",
+        "pkid": "1929905608488862721",
+        "themecode": "1",
         "version": "1",
-        "versiondesc": "2",
-        "pluginname": "3",
-        "ispublish": "1"
-      },
-      "dataset": {
-        "dataindex": [
-            ["acctusage1", "账户用途1", 1, false],
-            ["acctusage", "账户用途", 1, false],
-            ["acctcount", "分布数量", 2, false],
-            ["qingsort", "排序列", 2, false]
-        ],
-        "rows": [
-            ["账户用途1","账户用途", "分布数量", "排序列"],
-            ["活期1","活期1", 7577, 0],
-            ["结算类","结算类", 1012, 1],
-            ["我是空","我是空", 639, 2],
-            ["余额模型测试","余额模型测试", 49, 3],
-            ["12312","12312", 44, 4],
-            ["TEST0001","TEST0001", 44, 5],
-            ["其他","其他", 78, 6]
-        ]
-      },
-      "content": {
-        "title": {
-          "show": true,
-          "fontWeight": "normal",
-          "fontStyle": "normal",
-          "underline": "none",
-          "fontSize": 14,
-          "fontStyleArray": [],
-          "align": "center",
-          "fontColor": "#2a2a2a",
-          "backColor": "#fff"
-        },
-        "config": {
-          "charts": {
-            "legend": {
-              "show": true,
-              "left": "auto",
-              "right": "auto",
-              "bottom": "auto",
-              "top": "auto",
-              "align": "auto",
-              "orient": "horizontal",
-              "textStyle": {
-                "fontWeight": "normal",
-                "fontStyle": "normal",
-                "fontSize": 12,
-                "color": "#2a2a2a"
-              }
+        "configtag": "tda_bk"
+    },
+    "invokeKey": "selectconfig",
+    "itemList": [
+        {
+            "h": 300,
+            "t": "2024-04-1618:17:56",
+            "pkid": "1929905608488863744",
+            "w": 400,
+            "x": "60",
+            "dataset": {
+                "dataindex": [
+                    ["bankname", "银行类别", 1, false],
+                    ["isdomestic", "是否境内", 1, false],
+                    ["acctnum", "账户数量", 3, false],
+                    ["qingsort", "排序列", 3, false]
+                ],
+                "rows": [
+                    ["银行类别", "是否境内", "账户数量", "排序列"],
+                    ["招商银行", "1", 23774, 0],
+                    ["工商银行", "1", 479, 1],
+                    ["中国银行", "1", 328, 2],
+                    ["农业银行", "1", 256, 3],
+                    ["建设银行", "1", 229, 4],
+                    ["光大银行", "1", 107, 5],
+                    ["民生银行", "1", 103, 6],
+                    ["中信银行", "1", 67, 7],
+                    ["交通银行", "1", 59, 8],
+                    ["虚拟银行", "1", 57, 9],
+                    ["邮储银行", "1", 56, 10],
+                    ["平安银行", "1", 49, 11],
+                    ["浦发银行", "1", 47, 12],
+                    ["兴业银行", "1", 46, 13],
+                    ["华兴银行", "1", 46, 14],
+                    ["其他银行", "1", 171, 15],
+                    ["中国银行", "0", 292, 16],
+                    ["建银香港", "0", 286, 17],
+                    ["农银香港", "0", 285, 18],
+                    ["工银亚洲", "0", 285, 19],
+                    ["荷兰商业", "0", 141, 20],
+                    ["南洋商业", "0", 137, 21],
+                    ["法巴银行", "0", 137, 22],
+                    ["汇丰银行", "0", 76, 23],
+                    ["渣打银行", "0", 72, 24],
+                    ["瑞士银行", "0", 70, 25],
+                    ["星展银行", "0", 69, 26],
+                    ["三菱日联", "0", 68, 27],
+                    ["创兴银行", "0", 68, 28],
+                    ["恒生银行", "0", 68, 29],
+                    ["德意志银行", "0", 67, 30],
+                    ["其他银行", "0", 106, 31],
+                    ["财务公司", "1", 1130, 32],
+                    ["结算中心", "1", 348, 33],
+                    ["第三方账户", "1", 12, 34],
+                    ["其他金融机构", "1", 13, 35],
+                    ["财务公司", "0", 6, 36],
+                    ["第三方账户", "0", 1, 37],
+                    ["其他金融机构", "0", 9, 38]
+                ]
             },
-            "series": [
-              {
-                "label": {
-                  "show": true,
-                  "fontWeight": "normal",
-                  "fontStyle": "normal",
-                  "fontSize": 12,
-                  "color": "#2a2a2a",
-                  "position": "outside"
+            "zindex": 5,
+            "title": "标题",
+            "y": "34",
+            "content": {
+                "config": {
+                    "charts": {
+                        "legend": {
+                            "top": "auto",
+                            "orient": "horizontal",
+                            "left": "auto",
+                            "bottom": "auto",
+                            "show": true,
+                            "right": "auto",
+                            "textStyle": {
+                                "color": "#2a2a2a",
+                                "fontSize": 12,
+                                "fontStyle": "normal",
+                                "fontWeight": "normal"
+                            },
+                            "align": "auto"
+                        },
+                        "series": [
+                            {
+                                "starAngle": 90,
+                                "label": {
+                                    "color": "#2a2a2a",
+                                    "show": true,
+                                    "fontSize": 12,
+                                    "position": "outside",
+                                    "fontStyle": "normal",
+                                    "fontWeight": "normal"
+                                }
+                            }
+                        ]
+                    },
+                    "unit": 1,
+                    "digitalFormat": {
+                        "unit": 1,
+                        "unitarea": 1,
+                        "enableThousands": false,
+                        "dataLabelType": "classificationdatavalue",
+                        "currencySymbols": "￥",
+                        "digitalType": "digital",
+                        "decimalPlace": 2
+                    },
+                    "legendPos": 2,
+                    "label": {
+                        "fontStyleArray": []
+                    },
+                    "showStarAngle": false,
+                    "fontStyleArray": []
                 },
-                "starAngle": 90
-              }
-            ]
-          },
-          "legendPos": 2,
-          "fontStyleArray": [],
-          "label": {
-            "fontStyleArray": []
-          },
-          "digitalFormat": {
-            "dataLabelType": "classificationdatavalue",
-            "digitalType": "digital",
-            "currencySymbols": "¥",
-            "unit": 1,
-            "decimalPlace": 2,
-            "enableThousands": false,
-            "unitarea": 1
-          },
-          "unit": 1,
-          "showStarAngle": false
+                "borderStyle": "dotted",
+                "chartParameters": true,
+                "showBorder": true,
+                "opacity": 1,
+                "showBak": true,
+                "desc": {
+                    "show": false,
+                    "content": ""
+                },
+                "borderColor": "#2a2a2a",
+                "title": {
+                    "fontStyle": "normal",
+                    "align": "center",
+                    "fontWeight": "normal",
+                    "underline": "none",
+                    "fontSize": 14,
+                    "fontColor": "#2a2a2a",
+                    "fontStyleArray": [],
+                    "backColor": "#fff",
+                    "show": true
+                },
+                "bkColor": "#fff",
+                "borderWidth": 0,
+                "borderOpacity": 1
+            },
+            "type": "bar",
+            "id": "",
+            "category": "charts",
+            "chartcontrol": {
+                "versiondesc": "1",
+                "pluginname": "kd.tmc.tda.report.bankacct.qing.data.AcctDisplayByBankQingAnlsPlugin",
+                "ispublish": "1",
+                "version": "1"
+            }
         },
-        "showBak": true,
-        "bkColor": "#fff",
-        "opacity": 1,
-        "showBorder": true,
-        "borderColor": "#2a2a2a",
-        "borderOpacity": 1,
-        "borderWidth": 0,
-        "borderStyle": "dotted",
-        "desc": {
-          "show": false,
-          "content": ""
+        {
+            "h": 300,
+            "t": "2024-04-1618:17:56",
+            "pkid": "1929905608488862720",
+            "w": 400,
+            "x": "562",
+            "dataset": {
+                "dataindex": [
+                    ["bankname", "银行类别", 1, false],
+                    ["isdomestic", "是否境内", 1, false],
+                    ["acctnum", "账户数量", 3, false],
+                    ["qingsort", "排序列", 3, false]
+                ],
+                "rows": [
+                    ["银行类别", "是否境内", "账户数量", "排序列"],
+                    ["招商银行", "1", 23774, 0],
+                    ["工商银行", "1", 479, 1],
+                    ["中国银行", "1", 328, 2],
+                    ["农业银行", "1", 256, 3],
+                    ["建设银行", "1", 229, 4],
+                    ["光大银行", "1", 107, 5],
+                    ["民生银行", "1", 103, 6],
+                    ["中信银行", "1", 67, 7],
+                    ["交通银行", "1", 59, 8],
+                    ["虚拟银行", "1", 57, 9],
+                    ["邮储银行", "1", 56, 10],
+                    ["平安银行", "1", 49, 11],
+                    ["浦发银行", "1", 47, 12],
+                    ["兴业银行", "1", 46, 13],
+                    ["华兴银行", "1", 46, 14],
+                    ["其他银行", "1", 171, 15],
+                    ["中国银行", "0", 292, 16],
+                    ["建银香港", "0", 286, 17],
+                    ["农银香港", "0", 285, 18],
+                    ["工银亚洲", "0", 285, 19],
+                    ["荷兰商业", "0", 141, 20],
+                    ["南洋商业", "0", 137, 21],
+                    ["法巴银行", "0", 137, 22],
+                    ["汇丰银行", "0", 76, 23],
+                    ["渣打银行", "0", 72, 24],
+                    ["瑞士银行", "0", 70, 25],
+                    ["星展银行", "0", 69, 26],
+                    ["三菱日联", "0", 68, 27],
+                    ["创兴银行", "0", 68, 28],
+                    ["恒生银行", "0", 68, 29],
+                    ["德意志银行", "0", 67, 30],
+                    ["其他银行", "0", 106, 31],
+                    ["财务公司", "1", 1130, 32],
+                    ["结算中心", "1", 348, 33],
+                    ["第三方账户", "1", 12, 34],
+                    ["其他金融机构", "1", 13, 35],
+                    ["财务公司", "0", 6, 36],
+                    ["第三方账户", "0", 1, 37],
+                    ["其他金融机构", "0", 9, 38]
+                ]
+            },
+            "zindex": 7,
+            "title": "标题",
+            "y": "128",
+            "content": {
+                "config": {
+                    "charts": {
+                        "legend": {
+                            "top": "auto",
+                            "orient": "horizontal",
+                            "left": "auto",
+                            "bottom": "auto",
+                            "show": true,
+                            "right": "auto",
+                            "textStyle": {
+                                "color": "#2a2a2a",
+                                "fontSize": 12,
+                                "fontStyle": "normal",
+                                "fontWeight": "normal"
+                            },
+                            "align": "auto"
+                        },
+                        "series": [
+                            {
+                                "starAngle": 90,
+                                "label": {
+                                    "color": "#2a2a2a",
+                                    "show": true,
+                                    "fontSize": 12,
+                                    "position": "outside",
+                                    "fontStyle": "normal",
+                                    "fontWeight": "normal"
+                                }
+                            }
+                        ]
+                    },
+                    "unit": 1,
+                    "digitalFormat": {
+                        "unit": 1,
+                        "unitarea": 1,
+                        "enableThousands": false,
+                        "dataLabelType": "classificationdatavalue",
+                        "currencySymbols": "￥",
+                        "digitalType": "digital",
+                        "decimalPlace": 2
+                    },
+                    "legendPos": 2,
+                    "label": {
+                        "fontStyleArray": []
+                    },
+                    "showStarAngle": false,
+                    "fontStyleArray": []
+                },
+                "borderStyle": "dotted",
+                "chartParameters": true,
+                "showBorder": true,
+                "opacity": 1,
+                "showBak": true,
+                "desc": {
+                    "show": false,
+                    "content": ""
+                },
+                "borderColor": "#2a2a2a",
+                "title": {
+                    "fontStyle": "normal",
+                    "align": "center",
+                    "fontWeight": "normal",
+                    "underline": "none",
+                    "fontSize": 14,
+                    "fontColor": "#2a2a2a",
+                    "fontStyleArray": [],
+                    "backColor": "#fff",
+                    "show": true
+                },
+                "bkColor": "#fff",
+                "borderWidth": 0,
+                "borderOpacity": 1
+            },
+            "type": "pie",
+            "id": "",
+            "category": "charts",
+            "chartcontrol": {
+                "versiondesc": "1",
+                "pluginname": "kd.tmc.tda.report.bankacct.qing.data.AcctDisplayByBankQingAnlsPlugin",
+                "ispublish": "1",
+                "version": "1"
+            }
         },
-        "chartParameters": true
-      },
-      "optionversion": [
-        { "id": "1900953719554954240", "version": "v1", "versiondescribe": "123123", "isinitial": 1 },
-        { "id": "1900953719554954240", "version": "v2", "versiondescribe": "2123123" },
-        { "id": "1900953719554954240", "version": "v3", "versiondescribe": "312312" }
-      ],
-      "userXIndex": ["账户用途1"],
-      "userYIndex": ["排序列"],
-      "title": "标题",
-      "x": 10,
-      "y": 10,
-      "h": 300,
-      "w": 400,
-      "zIndex": 1,
-      "name": "饼图1",
-      "t": "2024-04-06 19:47:57",
-      "id": "2523143ce65541e2a5cceb1bc1c4761c",
-      "type": "pie",
-      "category": "charts",
-      "kdId": "",
-      "pkid": "111"
-    }
-  ]
+        {
+            "h": 300,
+            "t": "2024-04-1618:17:56",
+            "pkid": "1929905608488863745",
+            "w": 400,
+            "x": "79",
+            "dataset": {
+                "dataindex": [
+                    ["bankname", "银行类别", 1, false],
+                    ["isdomestic", "是否境内", 1, false],
+                    ["acctnum", "账户数量", 3, false],
+                    ["qingsort", "排序列", 3, false]
+                ],
+                "rows": [
+                    ["银行类别", "是否境内", "账户数量", "排序列"],
+                    ["招商银行", "1", 23774, 0],
+                    ["工商银行", "1", 479, 1],
+                    ["中国银行", "1", 328, 2],
+                    ["农业银行", "1", 256, 3],
+                    ["建设银行", "1", 229, 4],
+                    ["光大银行", "1", 107, 5],
+                    ["民生银行", "1", 103, 6],
+                    ["中信银行", "1", 67, 7],
+                    ["交通银行", "1", 59, 8],
+                    ["虚拟银行", "1", 57, 9],
+                    ["邮储银行", "1", 56, 10],
+                    ["平安银行", "1", 49, 11],
+                    ["浦发银行", "1", 47, 12],
+                    ["兴业银行", "1", 46, 13],
+                    ["华兴银行", "1", 46, 14],
+                    ["其他银行", "1", 171, 15],
+                    ["中国银行", "0", 292, 16],
+                    ["建银香港", "0", 286, 17],
+                    ["农银香港", "0", 285, 18],
+                    ["工银亚洲", "0", 285, 19],
+                    ["荷兰商业", "0", 141, 20],
+                    ["南洋商业", "0", 137, 21],
+                    ["法巴银行", "0", 137, 22],
+                    ["汇丰银行", "0", 76, 23],
+                    ["渣打银行", "0", 72, 24],
+                    ["瑞士银行", "0", 70, 25],
+                    ["星展银行", "0", 69, 26],
+                    ["三菱日联", "0", 68, 27],
+                    ["创兴银行", "0", 68, 28],
+                    ["恒生银行", "0", 68, 29],
+                    ["德意志银行", "0", 67, 30],
+                    ["其他银行", "0", 106, 31],
+                    ["财务公司", "1", 1130, 32],
+                    ["结算中心", "1", 348, 33],
+                    ["第三方账户", "1", 12, 34],
+                    ["其他金融机构", "1", 13, 35],
+                    ["财务公司", "0", 6, 36],
+                    ["第三方账户", "0", 1, 37],
+                    ["其他金融机构", "0", 9, 38]
+                ]
+            },
+            "zindex": 6,
+            "title": "标题",
+            "y": "436",
+            "content": {
+                "config": {
+                    "charts": {
+                        "legend": {
+                            "top": "auto",
+                            "orient": "horizontal",
+                            "left": "auto",
+                            "bottom": "auto",
+                            "show": true,
+                            "right": "auto",
+                            "textStyle": {
+                                "color": "#2a2a2a",
+                                "fontSize": 12,
+                                "fontStyle": "normal",
+                                "fontWeight": "normal"
+                            },
+                            "align": "auto"
+                        },
+                        "series": [
+                            {
+                                "starAngle": 90,
+                                "label": {
+                                    "color": "#2a2a2a",
+                                    "show": true,
+                                    "fontSize": 12,
+                                    "position": "outside",
+                                    "fontStyle": "normal",
+                                    "fontWeight": "normal"
+                                }
+                            }
+                        ]
+                    },
+                    "unit": 1,
+                    "digitalFormat": {
+                        "unit": 1,
+                        "unitarea": 1,
+                        "enableThousands": false,
+                        "dataLabelType": "classificationdatavalue",
+                        "currencySymbols": "￥",
+                        "digitalType": "digital",
+                        "decimalPlace": 2
+                    },
+                    "legendPos": 2,
+                    "label": {
+                        "fontStyleArray": []
+                    },
+                    "showStarAngle": false,
+                    "fontStyleArray": []
+                },
+                "borderStyle": "dotted",
+                "chartParameters": true,
+                "showBorder": true,
+                "opacity": 1,
+                "showBak": true,
+                "desc": {
+                    "show": false,
+                    "content": ""
+                },
+                "borderColor": "#2a2a2a",
+                "title": {
+                    "fontStyle": "normal",
+                    "align": "center",
+                    "fontWeight": "normal",
+                    "underline": "none",
+                    "fontSize": 14,
+                    "fontColor": "#2a2a2a",
+                    "fontStyleArray": [],
+                    "backColor": "#fff",
+                    "show": true
+                },
+                "bkColor": "#fff",
+                "borderWidth": 0,
+                "borderOpacity": 1
+            },
+            "type": "line",
+            "id": "",
+            "category": "charts",
+            "chartcontrol": {
+                "versiondesc": "1",
+                "pluginname": "kd.tmc.tda.report.bankacct.qing.data.AcctDisplayByBankQingAnlsPlugin",
+                "ispublish": "1",
+                "version": "1"
+            }
+        }
+    ]
 }
