@@ -141,5 +141,6 @@
         "version": "1"
     },
     "userXIndex": ["银行类别"],
-    "userYIndex": ["账户数量"]
+    "userYIndex": ["账户数量"],
+    "invokeKey": "optionversion"
 }
