@@ -249,8 +249,8 @@ const ComponentContainer = (props: any) => {
         if (selectId) {
             const c = itemList.filter(d => d.id === selectId)[0];
             const { x, y, w, h } = c;
-            setActiveX([x, x + w]);
-            setActiveY([y, y + h]);
+            setActiveX([Number(x), Number(x) + Number(w)]);
+            setActiveY([Number(y), Number(y) + Number(h)]);
         } else {
             setActiveX([]);
             setActiveY([]);

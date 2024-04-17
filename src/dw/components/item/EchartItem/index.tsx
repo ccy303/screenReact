@@ -67,23 +67,23 @@ const Chart = (item: any) => {
         return {
             ...echartOpt,
             dataset: { source: data },
-            // legend: { ...charts.legend },
             series:
                 item.type == "pie"
                     ? {
                           ...charts.series[0],
                           type: "pie",
-                          areaStyle: charts._areaStyle ? {} : null
+                          areaStyle: charts._areaStyle ? {} : null,
+                          radius: charts._cricle == "Y" ? ["40%", "70%"] : [0, "75%"]
                       }
                     : data?.[0]?.slice(1).map((v, i) => ({
                           ...charts.series[0],
                           type: item.type,
                           areaStyle: charts._areaStyle == "Y" ? {} : null,
                           encode: {
-                              x: ["product"],
-                              y: ["2015"]
+                              x: charts._transverse == "Y" ? [v] : userXIndex || ["product"],
+                              y: charts._transverse == "Y" ? userXIndex || ["product"] : [v],
+                              seriesName: v
                           }
-                          //   encode: charts._transverse == "Y" ? { y: ["product"], x: i + 1 } : { x: 0, y: i + 1 }
                       }))
         };
     }, [userXIndex, userYIndex, charts]);

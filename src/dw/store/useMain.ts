@@ -365,11 +365,23 @@ const useMain = () => {
         setItemList(cloneItl);
     };
 
+    // 删除
+    const delItem = (id: any) => {
+        const cloneItemList = _.cloneDeep(itemList);
+        const currentItem = cloneItemList.filter((f: any) => f.id != id);
+        setItemList(currentItem);
+        if (id == globalConfig.selectId) {
+            setGlobalConfig({ ...globalConfig, selectId: "" });
+            return selectPageGroup();
+        }
+    };
+
     return {
         initPage,
         itemList,
         properties,
         setItemList,
+        delItem,
         addItem,
         globalConfig,
         setGlobalConfig,

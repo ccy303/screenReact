@@ -29,7 +29,7 @@ const echartControls: any = {
                         {
                             visible: true,
                             id: "content.config.charts._areaStyle",
-                            name: "是否面积图",
+                            name: "面积图",
                             editor: {
                                 component: "Radio",
                                 options: [
@@ -42,6 +42,18 @@ const echartControls: any = {
                             visible: true,
                             id: "content.config.charts._transverse",
                             name: "横向图",
+                            editor: {
+                                component: "Radio",
+                                options: [
+                                    { value: "Y", name: "是" },
+                                    { value: "N", name: "否" }
+                                ]
+                            }
+                        },
+                        {
+                            visible: true,
+                            id: "content.config.charts._cricle",
+                            name: "环状图",
                             editor: {
                                 component: "Radio",
                                 options: [

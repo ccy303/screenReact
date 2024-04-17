@@ -78,8 +78,9 @@ export const BASE_PROP: ControlProProps = {
             id: "zIndex",
             name: "显示顺序",
             editor: {
-                component: "Text",
-                dataType: "number"
+                component: "Input",
+                dataType: "number",
+                type: "embed"
             }
         },
         {
@@ -404,6 +405,16 @@ export const POSITION_PROP: ControlProProps = {
     name: i18n.msg("sizeAndPosition"),
     defaultOpen: false,
     nodes: [
+        {
+            visible: true,
+            id: "zIndex",
+            name: "显示顺序",
+            editor: {
+                component: "Stepper",
+                dataType: "number",
+                type: "embed"
+            }
+        },
         {
             visible: true,
             id: "x",

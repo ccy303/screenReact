@@ -11,7 +11,7 @@ export const ComponentItem = (props: any) => {
         e.stopPropagation();
         selectItem(id);
     };
-
+            
     const onDragOver = (e: any) => {
         e.preventDefault();
         e.stopPropagation();
