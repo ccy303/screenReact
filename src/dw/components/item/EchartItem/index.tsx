@@ -89,6 +89,7 @@ const Chart = (item: any) => {
 
     useEffect(() => {
         if (getCurrentItem()?.id == item.id) {
+            console.log(chartOption);
             ref.current?.getEchartsInstance().clear();
             ref.current?.getEchartsInstance().setOption(chartOption);
         }
