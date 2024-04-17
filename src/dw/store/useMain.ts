@@ -238,7 +238,7 @@ const useMain = () => {
         } else {
             arr.forEach(({ prop, value, actions = [] }) => {
                 _.set(currentItem, prop, value);
-                changeByAction(actions, currentProp, currentItem, value);
+                actions.length && changeByAction(actions, currentProp, currentItem, value);
             });
         }
 

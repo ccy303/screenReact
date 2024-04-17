@@ -2,12 +2,14 @@ import React, { useEffect, useMemo, useRef } from "react";
 import ReactECharts from "echarts-for-react";
 import KdCard from "dw/components/common/KdCard";
 import _ from "lodash";
+import useMain from "@/dw/store/useMain";
 
 const Chart = (item: any) => {
     const { content, userXIndex, userYIndex, dataset } = item;
     const { rows } = dataset || {};
     const { config } = content;
     const { charts } = config;
+    const { getCurrentItem } = useMain();
 
     const _rows: any = {};
     for (let i = 0; i < rows?.[0]?.length; i++) {
@@ -27,7 +29,11 @@ const Chart = (item: any) => {
         };
 
         if (["bar", "line"].includes(item.type)) {
-            echartOpt = { ...echartOpt, xAxis: { type: "category" }, yAxis: {} };
+            echartOpt = {
+                ...echartOpt,
+                xAxis: charts._transverse == "Y" ? {} : { type: "category" },
+                yAxis: charts._transverse == "Y" ? { type: "category" } : {}
+            };
         }
 
         let data = [];
@@ -57,12 +63,23 @@ const Chart = (item: any) => {
                 }
             }
         }
-        
+
         return {
             ...echartOpt,
             dataset: { source: data },
             series:
-                item.type == "pie" ? { ...charts.series[0], type: "pie" } : data?.[0]?.slice(1).map(v => ({ ...charts.series[0], type: item.type }))
+                item.type == "pie"
+                    ? {
+                          ...charts.series[0],
+                          type: "pie",
+                          areaStyle: charts._areaStyle ? {} : null
+                      }
+                    : data?.[0]?.slice(1).map((v, i) => ({
+                          ...charts.series[0],
+                          type: item.type,
+                          areaStyle: charts._areaStyle == "Y" ? {} : null,
+                          encode: charts._transverse == "Y" ? { y: 0, x: i + 1 } : { x: 0, y: i + 1 }
+                      }))
         };
     }, [userXIndex, userYIndex, charts]);
 
@@ -70,7 +87,12 @@ const Chart = (item: any) => {
 
     const ref: any = useRef(null);
 
-    console.log(chartOption);
+    useEffect(() => {
+        if (getCurrentItem()?.id == item.id) {
+            ref.current?.getEchartsInstance().clear();
+            ref.current?.getEchartsInstance().setOption(chartOption);
+        }
+    }, [chartOption]);
 
     return (
         <KdCard item={item} showTitle={showTitle}>
