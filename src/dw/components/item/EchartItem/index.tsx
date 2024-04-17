@@ -67,6 +67,7 @@ const Chart = (item: any) => {
         return {
             ...echartOpt,
             dataset: { source: data },
+            // legend: { ...charts.legend },
             series:
                 item.type == "pie"
                     ? {
@@ -78,7 +79,11 @@ const Chart = (item: any) => {
                           ...charts.series[0],
                           type: item.type,
                           areaStyle: charts._areaStyle == "Y" ? {} : null,
-                          encode: charts._transverse == "Y" ? { y: 0, x: i + 1 } : { x: 0, y: i + 1 }
+                          encode: {
+                              x: ["product"],
+                              y: ["2015"]
+                          }
+                          //   encode: charts._transverse == "Y" ? { y: ["product"], x: i + 1 } : { x: 0, y: i + 1 }
                       }))
         };
     }, [userXIndex, userYIndex, charts]);
@@ -91,7 +96,7 @@ const Chart = (item: any) => {
         if (getCurrentItem()?.id == item.id) {
             console.log(chartOption);
             ref.current?.getEchartsInstance().clear();
-            ref.current?.getEchartsInstance().setOption(chartOption);
+            ref.current?.getEchartsInstance().setOption({ ...chartOption });
         }
     }, [chartOption]);
 
