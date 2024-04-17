@@ -30,10 +30,11 @@ export const defaultViewItemContext: ViewItemProps = {
 export const ViewItemContext = React.createContext<ViewItemProps>(defaultViewItemContext);
 
 const BaseView = () => {
-    const { initPage } = useMain();
+    const mainStore = useMain();
 
     useEffect(() => {
-        initPage(JSON);
+        mainStore.initPage(JSON);
+        window.$_REACTMAIN = mainStore;
     }, []);
 
     return (

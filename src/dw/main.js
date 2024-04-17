@@ -48,6 +48,7 @@ import useMain from "@/dw/store/useMain";
             this.root = createRoot(model.dom);
         },
         init: function (props) {
+            console.log("version", 21);
             console.log("-----init", this.model, props);
             this.model.dom.style.height = "100vh";
             this.model.dom.style.width = "100vw";
@@ -55,8 +56,16 @@ import useMain from "@/dw/store/useMain";
             setHtml.call(this, this.model, props);
         },
         update: function (props) {
-            console.log("-----update", this.model, props);
-            const { initPage, changeItemAll } = useMain();
+            console.log("-----update:model", this.model);
+            console.log("-----update:props", props);
+
+            console.log("useMain", window.$_REACTMAIN);
+
+            const { initPage, changeItemAll } = window.$_REACTMAIN || {};
+
+            console.log("initPage", initPage);
+            console.log("changeItemAll", changeItemAll);
+
             if (props.data.invokeKey == "selectconfig") {
                 // 大屏查询
                 console.log(`%c大屏查询`, "color:#00ff00", props.data);
