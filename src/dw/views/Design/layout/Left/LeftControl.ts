@@ -206,6 +206,71 @@ const textControls: any = {
     ]
 };
 
+const borderControls = {
+    group: [
+        {
+            id: "format",
+            name: "格式",
+            properties: [
+                BACKGROUND_PROP,
+                BORDER_PROP,
+                DESC_PROP,
+                {
+                    id: "position",
+                    name: "尺寸和位置",
+                    defaultOpen: true,
+                    nodes: [
+                        {
+                            visible: true,
+                            id: "x",
+                            name: "水平方向",
+                            editor: {
+                                component: "Stepper",
+                                dataType: "number",
+                                defaultValue: 10,
+                                type: "embed"
+                            }
+                        },
+                        {
+                            visible: true,
+                            id: "y",
+                            name: "垂直方向",
+                            editor: {
+                                component: "Stepper",
+                                dataType: "number",
+                                defaultValue: 10,
+                                type: "embed"
+                            }
+                        },
+                        {
+                            visible: true,
+                            id: "h",
+                            name: "高度",
+                            editor: {
+                                component: "Stepper",
+                                dataType: "number",
+                                defaultValue: 120,
+                                type: "embed"
+                            }
+                        },
+                        {
+                            visible: true,
+                            id: "w",
+                            name: "宽度",
+                            editor: {
+                                component: "Stepper",
+                                dataType: "number",
+                                defaultValue: 500,
+                                type: "embed"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+};
+
 const tableControls: any = {
     group: [
         {
@@ -228,10 +293,30 @@ const tableControls: any = {
     ]
 };
 
+const selectControls: any = {
+    group: [
+        {
+            id: "data",
+            name: "数据",
+            properties: [
+                {
+                    defaultOpen: true,
+                    id: "base",
+                    name: "属性",
+                    nodes: [{ visible: true, id: "optionsid", name: "绑定图表", editor: { component: "ChartIdSelect" } }]
+                }
+            ]
+        }
+    ]
+};
+
 export const ComponentControlMap: any = {
     charts: echartControls,
     text: textControls,
-    table: tableControls
+    border: borderControls,
+    table: tableControls,
+    select: selectControls,
+    radio: selectControls
 };
 
 export const chartList = [
@@ -243,6 +328,13 @@ export const chartList = [
         category: "charts"
     },
     {
+        componentType: "pie",
+        icon: require(`assets/img/analysis_pie_chart_doughnut.png`),
+        desc: "环图",
+        name: "环图",
+        category: "charts"
+    },
+    {
         componentType: "bar",
         icon: require(`assets/img/analysis_bar_chart_bar_areata.png`),
         desc: "柱状图",
@@ -250,10 +342,24 @@ export const chartList = [
         category: "charts"
     },
     {
+        componentType: "bar",
+        icon: require(`assets/img/analysis_bar_chart_areata_bar_chart.png`),
+        desc: "横向柱状图",
+        name: "横向柱状图",
+        category: "charts"
+    },
+    {
         componentType: "line",
         icon: require(`assets/img/analysis_line_chart_polyline.png`),
         desc: "折线图",
         name: "折线图",
+        category: "charts"
+    },
+    {
+        componentType: "line",
+        icon: require(`assets/img/analysis_line_chart_stack_square.png`),
+        desc: "面积图",
+        name: "面积图",
         category: "charts"
     }
 ];
@@ -267,10 +373,31 @@ export const otherComp = [
         category: "text"
     },
     {
+        componentType: "border",
+        icon: require(`assets/img/square.png`),
+        desc: "边框",
+        name: "边框",
+        category: "border"
+    },
+    {
         componentType: "table",
         icon: require(`assets/img/analysis_component_table.png`),
         desc: "表格",
         name: "表格",
         category: "table"
+    },
+    {
+        componentType: "select",
+        icon: require(`assets/img/select.png`),
+        desc: "下拉选择",
+        name: "下拉选择",
+        category: "select"
+    },
+    {
+        componentType: "radio",
+        icon: require(`assets/img/radio.png`),
+        desc: "单选",
+        name: "单选",
+        category: "radio"
     }
 ];

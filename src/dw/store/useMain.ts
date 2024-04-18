@@ -127,7 +127,8 @@ const useMain = () => {
             type: c.componentType,
             category,
             kdId: "",
-            pkid: ""
+            pkid: "",
+            originName: c.name
         };
         setGroup({ groups: grp, current: grp[0].id, category });
         setItemList([...itemList, item]);
@@ -250,7 +251,7 @@ const useMain = () => {
         setGroup({ ...group, groups: cloneGrs });
         setProperties(currentProp);
 
-        console.log("changeItem", arr, rootId, currentItem);
+        // console.log("changeItem", currentItem);
     };
 
     const selectItem = (rootId: string) => {
@@ -276,7 +277,7 @@ const useMain = () => {
                     setProperties(pros);
                 }
             });
-            console.log("selectItem", rootId, currentItem, currentProp, cloneItemList);
+            // console.log("selectItem", rootId, currentItem, currentProp, cloneItemList);
             setItemList(cloneItemList);
             setGroup({ groups: currentProp, current: currentProp[0].id, category });
             setGlobalConfig({ ...globalConfig, selectId: currentItem.id });

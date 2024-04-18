@@ -115,81 +115,6 @@ const ComponentContainer = (props: any) => {
         setGuidelines(gl);
     };
 
-    const isAdsorb = (dragItem: ComponentItemProps): TAdsorbResult => {
-        const result: TAdsorbResult = { x: null, y: null, w: null, h: null };
-        updateCoordinateMap(dragItem);
-        const xList: number[] = [];
-        const xCenterList: number[] = [];
-        const yList: number[] = [];
-        const yCenterList: number[] = [];
-
-        // eslint-disable-next-line no-restricted-syntax
-        for (const [k, items] of coordinateMap) {
-            const excludeSelfItems = items.filter(item => item.id !== dragItem.id);
-            const number = +k.split("|")[0];
-
-            if (/\|x\b/.test(k)) {
-                excludeSelfItems.map(() => xList.push(number));
-            } else if (k.includes("xCenter")) {
-                excludeSelfItems.map(() => xCenterList.push(number));
-            } else if (/\|y\b/.test(k)) {
-                excludeSelfItems.map(() => yList.push(number));
-            } else if (k.includes("yCenter")) {
-                excludeSelfItems.map(() => yCenterList.push(number));
-            }
-        }
-
-        xList.sort((a, b) => a - b);
-        xCenterList.sort((a, b) => a - b);
-        yList.sort((a, b) => a - b);
-        yCenterList.sort((a, b) => a - b);
-
-        for (let i = 0; i < xList.length; i++) {
-            const needCompareX = xList[i];
-            if (dragItem.x >= needCompareX && dragItem.x <= needCompareX + threshold) {
-                result.x = needCompareX;
-                break;
-            } else if (dragItem.x + dragItem.w >= needCompareX - threshold && dragItem.x + dragItem.w <= needCompareX) {
-                result.x = needCompareX - dragItem.w;
-                break;
-            }
-        }
-
-        if (result.x === null) {
-            for (let i = 0; i < xCenterList.length; i++) {
-                const needCompareX = xCenterList[i];
-                const midX = getMidCoordinate(dragItem.x, dragItem.x + dragItem.w);
-                if (midX >= needCompareX - threshold && midX <= needCompareX + threshold) {
-                    result.x = needCompareX - dragItem.w / 2;
-                    break;
-                }
-            }
-        }
-
-        for (let i = 0; i < yList.length; i++) {
-            const needCompareY = yList[i];
-            if (dragItem.y >= needCompareY && dragItem.y <= needCompareY + threshold) {
-                result.y = needCompareY;
-                break;
-            } else if (dragItem.y + dragItem.w >= needCompareY - threshold && dragItem.y + dragItem.w <= needCompareY) {
-                result.y = needCompareY - dragItem.h;
-                break;
-            }
-        }
-
-        if (result.y === null) {
-            for (let i = 0; i < yCenterList.length; i++) {
-                const needCompareY = yCenterList[i];
-                const midY = getMidCoordinate(dragItem.y, dragItem.y + dragItem.h);
-                if (midY >= needCompareY - threshold && midY <= needCompareY + threshold) {
-                    result.y = needCompareY - dragItem.h / 2;
-                    break;
-                }
-            }
-        }
-        return result;
-    };
-
     const onDrag = ({ id, w, h }: any, data: any) => {
         const dragItem: any = {
             id,
@@ -199,7 +124,6 @@ const ComponentContainer = (props: any) => {
             h: Number.parseInt(h, 10)
         };
 
-        const adsorb = isAdsorb(dragItem);
         getGuideLine(dragItem);
 
         setActiveX([data.x, data.x + w]);

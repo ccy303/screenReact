@@ -10,6 +10,7 @@ import TextAreaEditor from 'dw/components/editor/TextAreaEditor'
 import TextEditor from 'dw/components/editor/TextEditor'
 import EchartDataSet from 'dw/components/editor/EchartDataSet'
 import VersionSelect from 'dw/components/editor/VersionSelect'
+import ChartIdSelect from 'dw/components/editor/ChartIdSelect'
 
 export type EditorMapProp = {
   Checkbox: any
@@ -39,5 +40,6 @@ const editorMap: EditorMapProp = {
   Text: TextEditor,
   EchartDataSet: EchartDataSet,
   VersionSelect: VersionSelect,
+  ChartIdSelect: ChartIdSelect,
 }
 export default editorMap

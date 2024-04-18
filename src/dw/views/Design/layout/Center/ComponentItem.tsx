@@ -2,6 +2,8 @@ import useMain from "dw/store/useMain";
 import EchartItem from "dw/components/item/EchartItem";
 import Text from "dw/components/item/Text";
 import Table from "dw/components/item/Table";
+import Border from "dw/components/item/Border";
+import Select from "dw/components/item/Select";
 import React from "react";
 
 export const ComponentItem = (props: any) => {
@@ -11,7 +13,7 @@ export const ComponentItem = (props: any) => {
         e.stopPropagation();
         selectItem(id);
     };
-            
+
     const onDragOver = (e: any) => {
         e.preventDefault();
         e.stopPropagation();
@@ -20,7 +22,6 @@ export const ComponentItem = (props: any) => {
     const onDrop = (e: any) => {
         e.preventDefault();
         e.stopPropagation();
-        console.log("ComponentItem onDrop", e?.dataTransfer?.getData("Type"));
     };
 
     return (
@@ -28,6 +29,8 @@ export const ComponentItem = (props: any) => {
             {props.category == "charts" && <EchartItem {...props} />}
             {props.category == "text" && <Text {...props} />}
             {props.category == "table" && <Table {...props} />}
+            {props.category == "border" && <Border {...props} />}
+            {props.category == "select" && <Select {...props} />}
         </div>
     );
 };
