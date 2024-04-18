@@ -937,7 +937,13 @@ export const CHART_BASE_INFO: any = {
     name: "基本信息",
     defaultOpen: true,
     nodes: [
+        
         {
+            visible: true,
+            id: "name",
+            name: "图表名称",
+            editor: { component: "Input", defaultValue: "name" }
+        },{
             visible: true,
             id: "",
             name: "版本筛选",

@@ -7,13 +7,13 @@ import * as constants from 'dw/api/Constants'
 import './pageControl.less'
 
 export const DEFAULT_PAGE_CONFIG = {
-  size: '6',
+  size: '5',
   backgroundColor: '#f2f3f5',
   backgroundSize: 'auto auto',
-  height: 768,
+  height: 900,
   scale: 'none',
   url: '',
-  width: 1024,
+  width: 1600,
   id: null,
   number: null,
   name: null,
