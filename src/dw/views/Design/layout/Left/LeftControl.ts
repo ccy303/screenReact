@@ -222,6 +222,16 @@ const borderControls = {
                     nodes: [
                         {
                             visible: true,
+                            id: "zIndex",
+                            name: "显示顺序",
+                            editor: {
+                                component: "Stepper",
+                                dataType: "number",
+                                type: "embed"
+                            }
+                        },
+                        {
+                            visible: true,
                             id: "x",
                             name: "水平方向",
                             editor: {
