@@ -305,15 +305,20 @@ const tableControls: any = {
 
 const selectControls: any = {
     group: [
+       
         {
             id: "data",
             name: "数据",
             properties: [
+             
                 {
                     defaultOpen: true,
                     id: "base",
                     name: "属性",
-                    nodes: [{ visible: true, id: "optionsid", name: "绑定图表", editor: { component: "ChartIdSelect" } }]
+                    nodes: [
+                        { visible: true, id: "pluginname", name: "插件名称", addonAfterBtn: 3, editor: { component: "Input" } },
+                        { visible: true, id: "optionsid", name: "绑定图表", editor: { component: "ChartIdSelect" } }
+                    ]
                 }
             ]
         }

@@ -37,6 +37,15 @@ export const PropertiesItem: FC<PropertiesItemProps> = props => {
         model?.invoke?.("selectTable", pluginname);
     };
 
+    const searchSelect = () => {
+        const { pluginname } = getCurrentItem();
+        if (!pluginname) {
+            return Message.warning("请输入插件名称");
+        }
+        console.log(`%c下拉列表插件名称查询`, "color:#00ff00", pluginname);
+        model?.invoke?.("searchSelect", pluginname);
+    };
+
     if (editor?.component) {
         const comp = editor.component;
         const Component = editorMap[comp];
@@ -52,6 +61,7 @@ export const PropertiesItem: FC<PropertiesItemProps> = props => {
                             onClick={() => {
                                 props.addonAfterBtn == 1 && searchScreen();
                                 props.addonAfterBtn == 2 && searchTable();
+                                props.addonAfterBtn == 3 && searchSelect();
                             }}
                         >
                             查询
