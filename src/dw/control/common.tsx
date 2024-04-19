@@ -205,7 +205,7 @@ export const TITLE_PROP: ControlProProps = {
                 component: "ColorPicker",
                 dataType: "string",
                 defaultValue: DEFAULT_STYLE.fontColor
-            }
+            },
         },
         {
             visible: true,
@@ -729,7 +729,7 @@ export const DIGITAL_FORMAT_PROP: ControlProProps = {
         {
             visible: true,
             id: "content.config.charts.series[0].label.color",
-            name: i18n.msg("textCompConfig3"),
+            name: "字体颜色",
             editor: {
                 component: "ColorPicker",
                 dataType: "string",
@@ -937,13 +937,13 @@ export const CHART_BASE_INFO: any = {
     name: "基本信息",
     defaultOpen: true,
     nodes: [
-        
         {
             visible: true,
             id: "name",
             name: "图表名称",
             editor: { component: "Input", defaultValue: "name" }
-        },{
+        },
+        {
             visible: true,
             id: "",
             name: "版本筛选",

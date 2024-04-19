@@ -132,24 +132,6 @@
                 "ispublish": "1",
                 "version": "1"
             }
-        },
-        {
-            "zIndex": 3,
-            "name": "下拉选择1",
-            "t": "2024-04-18 23:27:42",
-            "id": "e6ddc9898eb54a2ab133915ee47b7b02",
-            "type": "select",
-            "category": "select",
-            "kdId": "",
-            "pkid": "",
-            "originName": "下拉选择",
-            "optionsid": "1",
-            "x": null,
-            "y": null,
-            "options": [
-                { "children": "金额", "value": "money" },
-                { "children": "账户数量", "value": "accountNum" }
-            ]
         }
     ]
 }

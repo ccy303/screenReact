@@ -307,14 +307,45 @@ const selectControls: any = {
     group: [
         {
             id: "data",
-            name: "数据",
+            name: "属性",
             properties: [
                 {
                     defaultOpen: true,
                     id: "base",
                     name: "属性",
                     nodes: [{ visible: true, id: "optionsid", name: "绑定图表", editor: { component: "ChartIdSelect" } }]
-                }
+                },
+                POSITION_PROP
+            ]
+        }
+    ]
+};
+
+const radioControls: any = {
+    group: [
+        {
+            id: "data",
+            name: "属性",
+            properties: [
+                {
+                    defaultOpen: true,
+                    id: "base",
+                    name: "属性",
+                    nodes: [
+                        { visible: true, id: "optionsid", name: "绑定图表", editor: { component: "ChartIdSelect" } },
+                        {
+                            visible: true,
+                            id: "redioconfig",
+                            name: "单选器配置",
+                            editor: {
+                                component: "RadiosOptions",
+                                defaultValue: [{ key: "key", value: "value" }]
+                            },
+                            style: { height: "auto" }
+                        }
+                    ]
+                },
+                POSITION_PROP
             ]
         }
     ]
@@ -326,7 +357,7 @@ export const ComponentControlMap: any = {
     border: borderControls,
     table: tableControls,
     select: selectControls,
-    radio: selectControls
+    radio: radioControls
 };
 
 export const chartList = [

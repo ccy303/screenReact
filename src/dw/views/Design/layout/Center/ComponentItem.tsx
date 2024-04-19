@@ -4,6 +4,7 @@ import Text from "dw/components/item/Text";
 import Table from "dw/components/item/Table";
 import Border from "dw/components/item/Border";
 import Select from "dw/components/item/Select";
+import Radio from "dw/components/item/Radio";
 import React from "react";
 
 export const ComponentItem = (props: any) => {
@@ -31,6 +32,7 @@ export const ComponentItem = (props: any) => {
             {props.category == "table" && <Table {...props} />}
             {props.category == "border" && <Border {...props} />}
             {props.category == "select" && <Select {...props} />}
+            {props.category == "radio" && <Radio {...props} />}
         </div>
     );
 };

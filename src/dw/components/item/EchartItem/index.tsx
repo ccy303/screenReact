@@ -11,8 +11,6 @@ const Chart = (item: any) => {
     const { charts } = config;
     const { getCurrentItem } = useMain();
 
-    console.log(888, userXIndex, userYIndex);
-
     const _rows: any = {};
     for (let i = 0; i < rows?.[0]?.length; i++) {
         const key = rows[0][i];
@@ -24,7 +22,7 @@ const Chart = (item: any) => {
 
     useEffect(() => {}, [userXIndex, userYIndex]);
 
-    let chartOption = null;
+    let chartOption: any = null;
     {
         let echartOpt = {
             tooltip: {},
@@ -103,8 +101,6 @@ const Chart = (item: any) => {
             ref.current?.getEchartsInstance().setOption({ ...chartOption });
         }
     }, [chartOption]);
-
-    console.log(chartOption);
 
     return (
         <KdCard item={item} showTitle={showTitle}>
