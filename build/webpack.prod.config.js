@@ -10,7 +10,7 @@ const prodConfig = merge(baseConfig, {
   entry: path.resolve(__dirname, '../src/dw/main.js'),
   output: {
     filename: 'index.js',
-    path: path.join(__dirname, `../echartReact`),
+    path: path.join(__dirname, `../echartReactShow`),
   },
   mode: 'production',
   optimization: {

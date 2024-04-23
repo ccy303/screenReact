@@ -22,6 +22,7 @@ let componentNumner = 1;
 export type GlobalConfigProps = {
     selectId: string;
     selectType: string;
+    isShow: boolean;
     pageControl: {
         pageConfig: any;
     };
@@ -342,10 +343,11 @@ const useMain = () => {
     };
 
     const initPage = (data: any) => {
-        const { itemList: it, pageConfig } = data;
+        const { itemList: it, pageConfig, isShow } = data;
         setItemList(it);
         setGlobalConfig({
             ...globalConfig,
+            isShow,
             pageControl: formatData({ pageConfig })
         });
     };

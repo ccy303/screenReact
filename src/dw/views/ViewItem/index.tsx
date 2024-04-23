@@ -33,7 +33,7 @@ const BaseView = () => {
     const mainStore = useMain();
 
     useEffect(() => {
-        mainStore.initPage(JSON);
+        // mainStore.initPage({ ...JSON, isShow: true });
         window.$_REACTMAIN = mainStore;
     }, []);
 

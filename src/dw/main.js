@@ -2,7 +2,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import ViewItem from "./views/ViewItem";
-import useMain from "@/dw/store/useMain";
+import JSON from "../../mock/PropsDataType/DATA_INIT.json";
 
 /**
  * 在setHtml中声明Root类，使用ReactDOM.render将其渲染在model.dom中
@@ -52,7 +52,7 @@ import useMain from "@/dw/store/useMain";
             console.log("-----init", this.model, props);
             this.model.dom.style.height = "100vh";
             this.model.dom.style.width = "100vw";
-            console.log(this.model.dom.style.width, this.model.dom.style.height);
+            this.model.invoke("init", props.configItems);
             setHtml.call(this, this.model, props);
         },
         update: function (props) {
@@ -62,9 +62,6 @@ import useMain from "@/dw/store/useMain";
             console.log("useMain", window.$_REACTMAIN);
 
             const { initPage, changeItemAll } = window.$_REACTMAIN || {};
-
-            console.log("initPage", initPage);
-            console.log("changeItemAll", changeItemAll);
 
             if (props.data.invokeKey == "selectconfig") {
                 // 大屏查询
@@ -78,6 +75,10 @@ import useMain from "@/dw/store/useMain";
                 // 大屏版本修改
                 console.log(`%c大屏版本修改`, "color:#00ff00", props.data);
                 initPage(props.data);
+            } else if (props.data.invokeKey == "init") {
+                console.log(`%c大屏init`, "color:#00ff00", props.data);
+                initPage(props.data);
+                // initPage({ ...JSON, isShow: true });
             }
         },
         destoryed: function () {
@@ -89,5 +90,5 @@ import useMain from "@/dw/store/useMain";
     console.log("MyComponent", MyComponent);
 
     // 注册自定义组件
-    KDApi.register("echartReact", MyComponent);
+    KDApi.register("echartReactShow", MyComponent);
 })(window.KDApi);

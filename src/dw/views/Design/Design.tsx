@@ -1,40 +1,41 @@
-import React, { FC, useEffect, useContext } from 'react'
-import { ViewItemContext } from 'dw/views/ViewItem'
-import useBase from 'dw/store/useBase'
-import Center from 'dw/views/Design/layout/Center'
-import Left from 'dw/views/Design/layout/Left'
-import Right from 'dw/views/Design/layout/Right'
-import useMain from 'dw/store/useMain'
+import React, { FC, useEffect, useContext } from "react";
+import { ViewItemContext } from "dw/views/ViewItem";
+import useBase from "dw/store/useBase";
+import Center from "dw/views/Design/layout/Center";
+import Left from "dw/views/Design/layout/Left";
+import Right from "dw/views/Design/layout/Right";
+import useMain from "dw/store/useMain";
 
-import './index.less'
-// import Preview from 'dw/views/Design/layout/Preview'
+import "./index.less";
+import Preview from "dw/views/Design/layout/Preview";
 
 const Design = () => {
-  const {
-    base: { showRight, showLeft, designMode },
-  } = useBase()
-  const { selectPageGroup } = useMain()
+    const {
+        base: { showRight, showLeft, designMode }
+    } = useBase();
+    const {
+        selectPageGroup,
+        globalConfig: { isShow }
+    } = useMain();
 
-  const { model } = useContext(ViewItemContext)
 
-  useEffect(() => {
-    selectPageGroup(true)
-  }, [])
+    useEffect(() => {
+        selectPageGroup(true);
+    }, []);
 
-  return (
-    <div className="dw-design">
-      {!designMode ? (
-        // <Preview />
-        <></>
-      ) : (
-        <>
-          {showLeft && <Left />}
-          <Center />
-          {showRight && <Right />}
-        </>
-      )}
-    </div>
-  )
-}
+    return (
+        <div className='dw-design'>
+            {isShow ? (
+                <Preview />
+            ) : (
+                <>
+                    {showLeft && <Left />}
+                    <Center />
+                    {showRight && <Right />}
+                </>
+            )}
+        </div>
+    );
+};
 
-export default Design
+export default Design;
