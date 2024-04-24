@@ -77,7 +77,7 @@ import JSON from "../../mock/PropsDataType/DATA_INIT.json";
                 initPage(props.data);
             } else if (props.data.invokeKey == "init") {
                 console.log(`%c大屏init`, "color:#00ff00", props.data);
-                initPage(props.data);
+                initPage({ ...props.data, isShow: true });
                 // initPage({ ...JSON, isShow: true });
             }
         },
