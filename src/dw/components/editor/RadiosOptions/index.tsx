@@ -40,6 +40,7 @@ const TextEditor = (props: any) => {
                                 value={item.key}
                                 placeholder='KEY'
 
+
                                 
                                 onChange={e => {
                                     // setInnerValue(() => {
