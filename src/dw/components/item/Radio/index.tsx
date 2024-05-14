@@ -2,23 +2,29 @@ import { Radio } from "@kdcloudjs/kdesign";
 import React, { useState } from "react";
 import "./index.less";
 import useMain from "@/dw/store/useMain";
+import _ from "lodash";
+import { List } from "echarts";
 
 const SelectEditor = (props: any) => {
-    const { itemList, changeItem } = useMain();
-
-    const target: any = itemList.find(v => v.id == props.optionsid);
+    const { itemList, setItemList, changeItem } = useMain();
 
     const changeHandle = (e: any) => {
-        if (!target) {
+        // console.log(e.target.value);
+        if (!e.target.value) {
             return;
         }
-
-        changeItem([{ prop: "useryindex", value: [e.target.value] }], target.id);
+        const _itemList = _.cloneDeep(itemList);
+        props.content?.map((cont: any) => {
+            cont.value.split(",").map((id: any) => {
+                _itemList.find((item: any) => item.id == id)._isShow = cont.value == e.target.value;
+            });
+        });
+        setItemList(_itemList);
     };
 
     return (
         <div className='warp'>
-            <Radio.Group onChange={changeHandle}>
+            <Radio.Group defaultValue={props.content?.[0]?.value} onChange={changeHandle}>
                 {(props.content || []).map((item: any, idx: any) => {
                     return (
                         <Radio key={idx} value={item.value} radioType='square'>

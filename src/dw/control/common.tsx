@@ -908,7 +908,7 @@ export const CHART_BASE_INFO: any = {
         {
             visible: true,
             id: "name",
-            name: "图表名称",
+            name: "组件名称",
             editor: { component: "Input", defaultValue: "name" }
         },
         {

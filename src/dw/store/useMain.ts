@@ -126,6 +126,7 @@ const useMain = () => {
         const _name = c.name + componentNumner++;
 
         item = {
+            _isShow: true,
             ...item,
             zindex: zIndexNumber++,
             name: _name,
@@ -138,6 +139,7 @@ const useMain = () => {
             pkid: "",
             originname: c.name
         };
+
         setGroup({ groups: grp, current: grp[0].id, category });
         setItemList([...itemList, item]);
         setGlobalConfig({ ...globalConfig, selectId: rootId });
@@ -352,6 +354,26 @@ const useMain = () => {
 
     const initPage = (data: any, callback?: any) => {
         const { itemList: it, pageConfig, isShow, pluginSet } = data;
+        const radios: any = [];
+
+        it.map((item: any) => {
+            item.category == "radio" && radios.push(item);
+            if (zIndexNumber < item.zindex) {
+                zIndexNumber = item.zindex;
+            }
+            item._isShow = true;
+        });
+
+        // 所有radio
+        radios.map((item: any) => {
+            // radio 的选项
+            item.content?.map((cont: any, index: any) => {
+                cont.value.split(",").map((id: any) => {
+                    it.find((item: any) => item.id == id)._isShow = index == 0;
+                });
+            });
+        });
+
         setGlobalConfig({
             ...globalConfig,
             isShow,

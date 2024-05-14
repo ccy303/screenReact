@@ -148,16 +148,17 @@ const borderControls = {
             id: "format",
             name: "格式",
             properties: [
-                TITLE_PROP,
-                BACKGROUND_PROP,
-                BORDER_PROP,
-                DESC_PROP,
-                POSITION_PROP(250, 250),
                 {
-                    id: "ispublish",
-                    name: "是否发布",
+                    id: "baseInfoCtrl",
+                    name: "基本信息",
                     defaultOpen: true,
                     nodes: [
+                        {
+                            visible: true,
+                            id: "name",
+                            name: "组件名称",
+                            editor: { component: "Input", defaultValue: "name" }
+                        },
                         {
                             visible: true,
                             id: "ispublish",
@@ -173,7 +174,12 @@ const borderControls = {
                             }
                         }
                     ]
-                }
+                },
+                TITLE_PROP,
+                BACKGROUND_PROP,
+                BORDER_PROP,
+                DESC_PROP,
+                POSITION_PROP(250, 250)
             ]
         }
     ]
@@ -190,6 +196,12 @@ const tableControls: any = {
                     id: "base",
                     name: "属性",
                     nodes: [
+                        {
+                            visible: true,
+                            id: "name",
+                            name: "组件名称",
+                            editor: { component: "Input", defaultValue: "name" }
+                        },
                         { visible: true, id: "pluginname", name: "插件名称", addonAfterBtn: 2, editor: { component: "Input" } },
                         {
                             visible: true,
@@ -228,6 +240,7 @@ const selectControls: any = {
                     id: "base",
                     name: "属性",
                     nodes: [
+                        { visible: true, id: "name", name: "组件名称", editor: { component: "Input", defaultValue: "name" } },
                         { visible: true, id: "pluginname", name: "插件名称", addonAfterBtn: 3, editor: { component: "Input" } },
                         { visible: true, id: "optionsid", name: "绑定图表", editor: { component: "ChartIdSelect" } },
                         {
@@ -263,15 +276,15 @@ const radioControls: any = {
                     id: "base",
                     name: "属性",
                     nodes: [
+                        { visible: true, id: "name", name: "组件名称", editor: { component: "Input", defaultValue: "name" } },
                         { visible: true, id: "pluginname", name: "插件名称", addonAfterBtn: 3, editor: { component: "Input" } },
-                        { visible: true, id: "optionsid", name: "绑定图表", editor: { component: "ChartIdSelect" } },
                         {
                             visible: true,
                             id: "content",
                             name: "单选器配置",
                             editor: {
                                 component: "RadiosOptions",
-                                defaultValue: [{ key: "key", value: "value" }]
+                                defaultValue: []
                             },
                             style: { height: "auto" }
                         },

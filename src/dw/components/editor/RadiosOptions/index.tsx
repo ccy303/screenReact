@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Input, Icon, Select } from "@kdcloudjs/kdesign";
 import _ from "lodash";
 import "./index.less";
+import useMain from "@/dw/store/useMain";
 
 const TextEditor = (props: any) => {
     const {
@@ -9,6 +10,8 @@ const TextEditor = (props: any) => {
         node: { id },
         onChange
     } = props;
+
+    const { itemList } = useMain();
 
     const [innerValue, setInnerValue] = useState(value);
 
@@ -35,42 +38,45 @@ const TextEditor = (props: any) => {
             {innerValue.map((item: any, idx: any) => {
                 return (
                     <div className='row' key={idx}>
-                        <div>
+                        <div style={{ width: "90%" }}>
                             <Input
                                 value={item.key}
                                 placeholder='KEY'
-
-
-                                
                                 onChange={e => {
-                                    // setInnerValue(() => {
-                                    //     const data = _.cloneDeep(innerValue);
-                                    //     data[idx].key = e.target.value;
-                                    //     dataChage(data);
-                                    //     return data;
-                                    // });
+                                    setInnerValue(() => {
+                                        const data = _.cloneDeep(innerValue);
+                                        data[idx].key = e.target.value;
+                                        dataChage(data);
+                                        return data;
+                                    });
                                 }}
                             />
-                            <Select style={{ width: "100%" }} placeholder='绑定图表'>
-                                <Select.Option>1</Select.Option>
-                                <Select.Option>2</Select.Option>
-                                <Select.Option>3</Select.Option>
+                            <Select
+                                value={item.value ? item.value.split(",") : []}
+                                onChange={(e: any) => {
+                                    setInnerValue(() => {
+                                        const data = _.cloneDeep(innerValue);
+                                        data[idx].value = e.join(",");
+                                        dataChage(data);
+                                        return data;
+                                    });
+                                }}
+                                style={{ width: "100%" }}
+                                mode='multiple'
+                                placeholder='绑定图表'
+                            >
+                                {itemList
+                                    // .filter(v => v.category != "radio")
+                                    .map((chart: any) => {
+                                        return (
+                                            <Select.Option key={`${chart.id}`} value={chart.id}>
+                                                {chart.chartname}
+                                            </Select.Option>
+                                        );
+                                    })}
                             </Select>
-                            {/* <Input
-                            value={item.value}
-                            // onChange={e => {
-                            //     setInnerValue(() => {
-                            //         const data = _.cloneDeep(innerValue);
-                            //         data[idx].value = e.target.value;
-                            //         dataChage(data);
-                            //         return data;
-                            //     });
-                            // }}
-                            placeholder='value'
-                            style={{ marginLeft: "5px" }}
-                        /> */}
                         </div>
-                        <Icon type='delete' style={{ marginLeft: "5px" }} className='del' onClick={() => del(idx)} />
+                        <Icon type='delete' style={{ margin: "10px" }} className='del' onClick={() => del(idx)} />
                     </div>
                 );
             })}

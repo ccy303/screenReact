@@ -182,47 +182,49 @@ const ComponentContainer = (props: any) => {
         <>
             <Ruler length={pageConfig.width} actives={activeX} type='horizontal' />
             <Ruler length={pageConfig.height} actives={activeY} type='vertical' />
-            {itemList.map((it: ComponentItemProps) => {
-                const { x, y, w, h, id, zindex } = it;
-                return (
-                    <Rnd
-                        className={`${prefixClx}-item`}
-                        style={{ background: "#fff", zIndex: zindex }}
-                        key={id}
-                        bounds='parent'
-                        position={{ x, y }}
-                        size={{ width: w, height: h }}
-                        enableResizing={{
-                            bottom: true,
-                            bottomLeft: false,
-                            bottomRight: true,
-                            left: false,
-                            right: true,
-                            top: false,
-                            topLeft: false,
-                            topRight: false
-                        }}
-                        onDrag={(e: any, data: DraggableData) => {
-                            e.stopPropagation();
-                            onDrag({ id, w, h }, data);
-                        }}
-                        onResize={(e: MouseEvent | TouchEvent, dir: any, ref: HTMLElement, delta: ResizableDelta, position: any) => {
-                            e.stopPropagation();
-                            // onResize({ id, w, h }, ref)
-                        }}
-                        onDragStop={(e: any, data: DraggableData) => {
-                            e.stopPropagation();
-                            onDragStop({ id, x, y }, data);
-                        }}
-                        onResizeStop={(e: MouseEvent | TouchEvent, dir: any, ref: HTMLElement, delta: ResizableDelta, position: any) => {
-                            e.stopPropagation();
-                            onResizeStop({ id, w, h }, ref);
-                        }}
-                    >
-                        <ComponentItem {...it} prefixClx={prefixClx} />
-                    </Rnd>
-                );
-            })}
+            {itemList
+                .filter(v => v._isShow)
+                .map((it: ComponentItemProps) => {
+                    const { x, y, w, h, id, zindex } = it;
+                    return (
+                        <Rnd
+                            className={`${prefixClx}-item`}
+                            style={{ background: "#fff", zIndex: zindex }}
+                            key={id}
+                            bounds='parent'
+                            position={{ x, y }}
+                            size={{ width: w, height: h }}
+                            enableResizing={{
+                                bottom: true,
+                                bottomLeft: false,
+                                bottomRight: true,
+                                left: false,
+                                right: true,
+                                top: false,
+                                topLeft: false,
+                                topRight: false
+                            }}
+                            onDrag={(e: any, data: DraggableData) => {
+                                e.stopPropagation();
+                                onDrag({ id, w, h }, data);
+                            }}
+                            onResize={(e: MouseEvent | TouchEvent, dir: any, ref: HTMLElement, delta: ResizableDelta, position: any) => {
+                                e.stopPropagation();
+                                // onResize({ id, w, h }, ref)
+                            }}
+                            onDragStop={(e: any, data: DraggableData) => {
+                                e.stopPropagation();
+                                onDragStop({ id, x, y }, data);
+                            }}
+                            onResizeStop={(e: MouseEvent | TouchEvent, dir: any, ref: HTMLElement, delta: ResizableDelta, position: any) => {
+                                e.stopPropagation();
+                                onResizeStop({ id, w, h }, ref);
+                            }}
+                        >
+                            <ComponentItem {...it} prefixClx={prefixClx} />
+                        </Rnd>
+                    );
+                })}
             {guidelines.map((line, index) => (
                 <div
                     key={index}

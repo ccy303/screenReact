@@ -6,7 +6,14 @@ import { ComponentItemProps } from "dw/control/interface";
 import { prefixClsLeft } from "dw/views/Design/layout/Left/index";
 
 const CompItem = () => {
-    const { itemList, selectItem, delItem } = useMain();
+    const {
+        itemList,
+        selectItem,
+        delItem,
+        globalConfig: { selectId }
+    } = useMain();
+
+    console.log(selectId);
 
     const click = (e: any, id: any) => {
         e.preventDefault();
@@ -17,7 +24,7 @@ const CompItem = () => {
     const del = (e: any, id: any) => {
         e.preventDefault();
         e.stopPropagation();
-        delItem(id)
+        delItem(id);
     };
 
     const getItemList = useCallback(() => {
@@ -45,12 +52,6 @@ const CompItem = () => {
                     </div>
                 ),
                 icon: "",
-                // (
-                //     <div className={`${prefixClsLeft}-comp-item-item`} onClick={click}>
-                //         <Icon type='arrow-right-solid' />
-                //         {d.name}
-                //     </div>
-                // )
                 key: d.id,
                 children: []
             };
@@ -67,7 +68,7 @@ const CompItem = () => {
                     <Icon type='address' />
                     页面
                 </div>
-                <Tree virtual={false} showIcon defaultExpandAll treeData={getItemList() as any} />
+                <Tree virtual={false} showIcon selectedKeys={[selectId]} defaultExpandAll treeData={getItemList() as any} />
             </div>
         </NavCard>
     );

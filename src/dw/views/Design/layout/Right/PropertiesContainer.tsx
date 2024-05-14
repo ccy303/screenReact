@@ -50,27 +50,33 @@ export const PropertiesItem: FC<PropertiesItemProps> = props => {
     if (editor?.component) {
         const comp = editor.component;
         const Component = editorMap[comp];
-        const _props = {
-            ...props,
-            node: {
-                ...props.node,
-                editor: {
-                    ...props.node.editor,
-                    addonAfter: props.addonAfterBtn ? (
-                        <Button
-                            type='primary'
-                            onClick={() => {
-                                props.addonAfterBtn == 1 && searchScreen();
-                                props.addonAfterBtn == 2 && searchTable();
-                                props.addonAfterBtn == 3 && searchSelect();
-                            }}
-                        >
-                            查询
-                        </Button>
-                    ) : null
-                }
-            }
+        let _props = {
+            ...props
         };
+
+        if (props.addonAfterBtn) {
+            _props = {
+                ...props,
+                node: {
+                    ...props.node,
+                    editor: {
+                        ...props.node.editor,
+                        addonAfter: props.addonAfterBtn ? (
+                            <Button
+                                type='primary'
+                                onClick={() => {
+                                    props.addonAfterBtn == 1 && searchScreen();
+                                    props.addonAfterBtn == 2 && searchTable();
+                                    props.addonAfterBtn == 3 && searchSelect();
+                                }}
+                            >
+                                查询
+                            </Button>
+                        ) : null
+                    }
+                }
+            };
+        }
 
         return (
             <div className={`${prefixCls}-item`} key={id} style={style}>
