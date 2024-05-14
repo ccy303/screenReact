@@ -1,0 +1,140 @@
+import React, { FC, useEffect, useContext, useState, useRef } from "react";
+import { Spin } from "@kdcloudjs/kdesign";
+import { RecoilRoot } from "recoil";
+import "dw/style/reset.less";
+import "@kdcloudjs/kdesign/dist/kdesign.css";
+import "dw/style/reset-kdesign.less";
+import { v4 as uuidv4 } from "uuid";
+import JSONData from "../../../../mock/PropsDataType/ITEM_TEST.json";
+// import JSONData from "../../../../mock/PropsDataType/DATA_INIT.json";
+import "./index.less";
+import Design from "dw/views/Design/Design";
+import useMain from "@/dw/store/useMain";
+import _ from "lodash";
+import { observable, observe, toJS } from "mobx";
+
+export const defaultViewItemContext = {
+    model: { test: true },
+    customProps: { isShow: false },
+    invokeKeyObserver: observable({ invokeCallback: null }),
+    loadingObserver: observable({ loading: false })
+};
+
+export const ViewItemContext = React.createContext<any>(defaultViewItemContext);
+
+const BaseView = () => {
+    // 要处理的数据列表
+    const _itemList: any = useRef([]);
+    const {
+        globalConfig: { pluginSet },
+        itemList,
+        setItemList,
+        initPage
+    } = useMain();
+
+    const [loading, setLoading] = useState(false);
+
+    const { model, invokeKeyObserver, loadingObserver } = useContext(ViewItemContext);
+
+    const isForPluginData: any = useRef(false);
+
+    const initInvokeKeyObserve = (key: any, data: any) => {
+        console.log(`invokeKeyObserve-key`, key);
+        console.log(`invokeKeyObserve-data`, data);
+        data = toJS(data);
+        if (key == "selectconfig") {
+            // 大屏查询
+            console.log(`%c大屏查询`, "color:#00ff00", JSON.parse(JSON.stringify(data)));
+            isForPluginData.current = false;
+            initPage({ ...data });
+            loadingObserver.loading = false;
+            _itemList.current = data.itemList;
+        } else if (["refresh", "optionversion", "selectTable"].includes(key)) {
+            // 图表刷新/图表版本修改
+            console.log(`%c${key}`, "color:#00ff00", JSON.parse(JSON.stringify(data)));
+            changeLocalItemList([data]);
+        } else if (key == "configversion") {
+            // 大屏版本修改
+            console.log(`%c大屏版本修改`, "color:#00ff00", JSON.parse(JSON.stringify(data)));
+            isForPluginData.current = false;
+            initPage({ ...data });
+            _itemList.current = data.itemList;
+        } else if (key == "init") {
+            console.log(`%c大屏init`, "color:#00ff00", JSON.parse(JSON.stringify(data)));
+            isForPluginData.current = false;
+            initPage({ ...data });
+            _itemList.current = data.itemList;
+        } else if (key == "selectoption") {
+            console.log(`%c(selectoption)回调返回`, "color:#00ff00", JSON.parse(JSON.stringify(data)));
+            changeLocalItemList(data?.itemList);
+        }
+    };
+
+    const changeLocalItemList = (items: any) => {
+        const cloneItl = _.cloneDeep(_itemList.current);
+        items.map((item: any) => {
+            const currentItem = cloneItl.filter((f: any) => f.id === item.id)[0];
+            _.assign(currentItem, toJS(item));
+        });
+        _itemList.current = cloneItl;
+        setItemList(cloneItl);
+    };
+
+    useEffect(() => {
+        observe(invokeKeyObserver, ({ newValue }: any) => {
+            const { key, data } = newValue;
+            initInvokeKeyObserve(key, data);
+        });
+        observe(loadingObserver, ({ newValue }: any) => {
+            console.log(newValue);
+            setLoading(newValue);
+        });
+        // invokeKeyObserver.invokeCallback = {
+        //     key: "selectconfig",
+        //     data: { ...JSONData }
+        // };
+    }, []);
+
+    useEffect(() => {
+        if (isForPluginData.current) {
+            return;
+        }
+        if (pluginSet && pluginSet.length) {
+            console.info("pluginSet", pluginSet);
+            pluginSet.map((item: any, idx: any) => {
+                setTimeout(() => {
+                    const t = uuidv4();
+                    console.log(`%c触发selectoption/${t}`, "color:#00ff00", item);
+                    model?.invokeAsync?.(`selectoption/${t}`, item);
+                });
+            });
+            isForPluginData.current = true;
+        }
+    }, [pluginSet]);
+
+    return (
+        <div className='dw-view-item'>
+            <Spin type='page' spinning={loading} tip={"数据加载中，请稍等"}>
+                <Design />
+            </Spin>
+        </div>
+    );
+};
+
+const ViewItem: FC<any> = props => {
+    console.log("ViewItem props", props);
+
+    const value = {
+        ...(props || {})
+    };
+
+    return (
+        <RecoilRoot>
+            <ViewItemContext.Provider value={value}>
+                <BaseView />
+            </ViewItemContext.Provider>
+        </RecoilRoot>
+    );
+};
+
+export default ViewItem;

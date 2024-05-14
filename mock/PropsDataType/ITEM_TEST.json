@@ -1,0 +1,1129 @@
+{
+    "pageConfig": {
+        "size": "0",
+        "ispublish": "1",
+        "width": 1920,
+        "height": 990,
+        "versiondesc": "预置版本",
+        "scale": "none",
+        "name": "账户运营",
+        "url": "",
+        "backgroundSize": "autoauto",
+        "themename": "淡雅白",
+        "backgroundColor": "#f2f3f5",
+        "pkid": "1938632125775702023",
+        "themecode": "white",
+        "version": "1",
+        "configtag": "tda_anls_bankacct"
+    },
+    "pluginSet": [
+        {
+            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctByChangeDataPlugin",
+            "ids": ["1938632125775702022"]
+        },
+        {
+            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.AcctDisplayByBankQingAnlsPlugin",
+            "ids": ["1938632125775454214"]
+        },
+        {
+            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctByUsageDataPlugin",
+            "ids": ["1938632125775702021", "1938632125775454212"]
+        },
+        {
+            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.FundConcentrationQingPlugin",
+            "ids": ["1938632125775702019"]
+        },
+        {
+            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.SecCompBankAcctDataPlugin",
+            "ids": ["1938632125775454210"]
+        },
+        {
+            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.DormantDataQingAnlsPlugin",
+            "ids": ["1938632125775454213"]
+        },
+        {
+            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctDistSumaryDataPlugin",
+            "ids": ["1938632125775702016"]
+        },
+        {
+            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctByTypeDataPlugin",
+            "ids": ["1938632125775454209", "1938632125775702018"]
+        },
+        {
+            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankInterfaceOpenRateDataPulgin",
+            "ids": ["1938632125775454211"]
+        }
+    ],
+    "invokeKey": "selectconfig/f4fac583-3ec8-4386-bf8f-cc109d687fc5",
+    "itemList": [
+        {
+            "h": 316,
+            "chartname": "边框18",
+            "originname": "边框",
+            "t": "2024-05-1013:41:26",
+            "pkid": "1938632125775702020",
+            "w": 475,
+            "x": "1434",
+            "zindex": 23,
+            "title": "",
+            "y": "336",
+            "content": {
+                "borderStyle": "dotted",
+                "showBorder": true,
+                "opacity": 1,
+                "backgroundImage": "./kingdee/tmc/images/pc/tda/crad_bg_white_420x316.png",
+                "showBak": true,
+                "desc": {
+                    "show": false,
+                    "content": ""
+                },
+                "borderColor": "#2a2a2a",
+                "bkColor": "#fff",
+                "borderWidth": 0,
+                "borderOpacity": 1
+            },
+            "type": "border",
+            "id": "967a496eb2744e3b895d6bf29de765a6",
+            "category": "border",
+            "chartcontrol": null
+        },
+        {
+            "h": 316,
+            "chartname": "边框6",
+            "originname": "边框",
+            "t": "2024-05-1013:41:26",
+            "pkid": "1938632125775702017",
+            "w": 475,
+            "x": "1435",
+            "zindex": 14,
+            "title": "",
+            "y": "10",
+            "content": {
+                "borderStyle": "dotted",
+                "showBorder": true,
+                "opacity": 1,
+                "backgroundImage": "/kingdee/tmc/images/pc/tda/crad_bg_white_420x316.png",
+                "showBak": true,
+                "desc": {
+                    "show": false,
+                    "content": ""
+                },
+                "borderColor": "#2a2a2a",
+                "bkColor": "#fff",
+                "borderWidth": 0,
+                "borderOpacity": 1
+            },
+            "type": "border",
+            "id": "04ed56b8b6cd49fc9323cdb13e70b993",
+            "category": "border",
+            "chartcontrol": null
+        },
+        {
+            "h": 16,
+            "chartname": "文字4",
+            "originname": "文字",
+            "t": "2024-05-1013:41:26",
+            "pkid": "1939383096872902656",
+            "w": 72,
+            "x": "623",
+            "zindex": 30,
+            "title": "",
+            "y": "82",
+            "content": {
+                "config": {
+                    "color": "#000",
+                    "textAlign": 14,
+                    "fontSize": 12,
+                    "fontStyle": ""
+                },
+                "borderStyle": "dotted",
+                "showBorder": true,
+                "opacity": 1,
+                "showBak": true,
+                "desc": {
+                    "show": false,
+                    "content": ""
+                },
+                "borderColor": "#2a2a2a",
+                "bkColor": "#fff",
+                "borderWidth": 0,
+                "borderOpacity": 1
+            },
+            "type": "text",
+            "id": "741d3dd09bbb4c80bf78ab9e51466f18",
+            "category": "text",
+            "chartcontrol": null
+        },
+        {
+            "h": 283,
+            "chartname": "表格10",
+            "originname": "表格",
+            "t": "2024-05-1013:41:26",
+            "pkid": "1938632125775702018",
+            "w": 237,
+            "x": "1673",
+            "zindex": 26,
+            "title": "标题",
+            "y": "42",
+            "content": {
+                "borderStyle": "dotted",
+                "showBorder": true,
+                "opacity": 0,
+                "showBak": true,
+                "desc": {
+                    "show": false,
+                    "content": ""
+                },
+                "borderColor": "#fff",
+                "title": {
+                    "fontStyle": "normal",
+                    "align": "center",
+                    "fontWeight": "normal",
+                    "underline": "none",
+                    "fontSize": 14,
+                    "fontColor": "#2a2a2a",
+                    "fontStyleArray": [],
+                    "backColor": "#fff",
+                    "show": false
+                },
+                "bkColor": "#fff",
+                "borderWidth": 0,
+                "borderOpacity": 1
+            },
+            "type": "table",
+            "id": "584fd20632ec4450aa3cf99a972a043e",
+            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctByTypeDataPlugin",
+            "category": "table",
+            "chartcontrol": null
+        },
+        {
+            "h": 270,
+            "chartname": "表格22",
+            "originname": "表格",
+            "t": "2024-05-1013:41:26",
+            "pkid": "1938632125775702021",
+            "w": 237,
+            "x": "1674",
+            "zindex": 27,
+            "title": "标题",
+            "y": "380",
+            "content": {
+                "borderStyle": "dotted",
+                "showBorder": true,
+                "opacity": 0,
+                "showBak": true,
+                "desc": {
+                    "show": false,
+                    "content": ""
+                },
+                "borderColor": "#2a2a2a",
+                "title": {
+                    "fontStyle": "normal",
+                    "align": "center",
+                    "fontWeight": "normal",
+                    "underline": "none",
+                    "fontSize": 14,
+                    "fontColor": "#2a2a2a",
+                    "fontStyleArray": [],
+                    "backColor": "#fff",
+                    "show": false
+                },
+                "bkColor": "#fff",
+                "borderWidth": 0,
+                "borderOpacity": 1
+            },
+            "type": "table",
+            "id": "7c9dca2d1003477bb72faf6f6cb165d9",
+            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctByUsageDataPlugin",
+            "category": "table",
+            "chartcontrol": null
+        },
+        {
+            "h": 316,
+            "chartname": "环图2",
+            "originname": "环图",
+            "t": "2024-05-1013:41:26",
+            "pkid": "1938632125775702016",
+            "w": 475,
+            "x": "10",
+            "zindex": 16,
+            "title": "银企账户分布",
+            "y": "10",
+            "content": {
+                "config": {
+                    "charts": {
+                        "legend": {
+                            "top": "auto",
+                            "orient": "horizontal",
+                            "left": "auto",
+                            "bottom": "auto",
+                            "show": true,
+                            "right": "auto",
+                            "textStyle": {
+                                "color": "#2a2a2a",
+                                "fontSize": 12,
+                                "fontStyle": "normal",
+                                "fontWeight": "normal"
+                            },
+                            "align": "auto"
+                        },
+                        "series": [
+                            {
+                                "starAngle": 90,
+                                "label": {
+                                    "color": "#2a2a2a",
+                                    "show": false,
+                                    "fontSize": 12,
+                                    "position": "outside",
+                                    "fontStyle": "normal",
+                                    "fontWeight": "normal"
+                                }
+                            }
+                        ]
+                    },
+                    "unit": 1,
+                    "digitalFormat": {
+                        "unit": 1,
+                        "unitarea": 1,
+                        "enableThousands": false,
+                        "dataLabelType": "classificationdatavalue",
+                        "currencySymbols": "¥",
+                        "digitalType": "digital",
+                        "decimalPlace": 2
+                    },
+                    "legendPos": 2,
+                    "label": {
+                        "fontStyleArray": []
+                    },
+                    "showStarAngle": false,
+                    "fontStyleArray": []
+                },
+                "borderStyle": "dotted",
+                "chartParameters": true,
+                "showBorder": true,
+                "opacity": 1,
+                "backgroundImage": "./kingdee/tmc/images/pc/tda/crad_bg_white_420x316.png",
+                "showBak": true,
+                "desc": {
+                    "show": false,
+                    "content": ""
+                },
+                "borderColor": "#2a2a2a",
+                "title": {
+                    "fontStyle": "normal",
+                    "align": "left",
+                    "fontWeight": "bold",
+                    "underline": "none",
+                    "fontSize": 14,
+                    "fontColor": "#2a2a2a",
+                    "fontStyleArray": ["fontWeight"],
+                    "backColor": "",
+                    "show": true
+                },
+                "bkColor": "#fff",
+                "borderWidth": 0,
+                "borderOpacity": 1
+            },
+            "type": "pie",
+            "id": "fc0a7887e2d34ce5a36fe1b096ca77b6",
+            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctDistSumaryDataPlugin",
+            "category": "charts",
+            "chartcontrol": {
+                "ispublish": "1",
+                "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctDistSumaryDataPlugin",
+                "version": "1"
+            }
+        },
+        {
+            "h": 316,
+            "chartname": "仪表盘16",
+            "originname": "仪表盘",
+            "t": "2024-05-1013:41:26",
+            "pkid": "1938632125775454211",
+            "w": 460,
+            "x": "965",
+            "zindex": 17,
+            "title": "银企开通率",
+            "y": "336",
+            "content": {
+                "config": {
+                    "charts": {
+                        "legend": {
+                            "top": "auto",
+                            "orient": "horizontal",
+                            "left": "auto",
+                            "bottom": "auto",
+                            "show": true,
+                            "right": "auto",
+                            "textStyle": {
+                                "color": "#2a2a2a",
+                                "fontSize": 12,
+                                "fontStyle": "normal",
+                                "fontWeight": "normal"
+                            },
+                            "align": "auto"
+                        },
+                        "series": [
+                            {
+                                "starAngle": 90,
+                                "label": {
+                                    "color": "#2a2a2a",
+                                    "show": true,
+                                    "fontSize": 12,
+                                    "position": "outside",
+                                    "fontStyle": "normal",
+                                    "fontWeight": "normal"
+                                }
+                            }
+                        ]
+                    },
+                    "unit": 1,
+                    "digitalFormat": {
+                        "unit": 1,
+                        "unitarea": 1,
+                        "enableThousands": false,
+                        "dataLabelType": "classificationdatavalue",
+                        "currencySymbols": "¥",
+                        "digitalType": "digital",
+                        "decimalPlace": 2
+                    },
+                    "legendPos": 2,
+                    "label": {
+                        "fontStyleArray": []
+                    },
+                    "showStarAngle": false,
+                    "fontStyleArray": []
+                },
+                "borderStyle": "dotted",
+                "chartParameters": true,
+                "showBorder": true,
+                "opacity": 1,
+                "backgroundImage": "./kingdee/tmc/images/pc/tda/crad_bg_white_420x316.png",
+                "showBak": true,
+                "desc": {
+                    "show": false,
+                    "content": ""
+                },
+                "borderColor": "#2a2a2a",
+                "title": {
+                    "fontStyle": "normal",
+                    "align": "left",
+                    "fontWeight": "bold",
+                    "underline": "none",
+                    "fontSize": 14,
+                    "fontColor": "#2a2a2a",
+                    "fontStyleArray": ["fontWeight"],
+                    "backColor": "",
+                    "show": true
+                },
+                "bkColor": "#fff",
+                "borderWidth": 0,
+                "borderOpacity": 1
+            },
+            "type": "gauge",
+            "id": "cd3fa2d3dc714d6786b170c3a2671763",
+            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankInterfaceOpenRateDataPulgin",
+            "category": "charts",
+            "chartcontrol": {
+                "ispublish": "1",
+                "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankInterfaceOpenRateDataPulgin"
+            }
+        },
+        {
+            "userxindex": ["账户操作类型"],
+            "h": 316,
+            "chartname": "横向柱状图26",
+            "originname": "横向柱状图",
+            "t": "2024-05-1013:41:26",
+            "pkid": "1938632125775702022",
+            "w": 930,
+            "x": "495",
+            "zindex": 29,
+            "title": "账户变动分析",
+            "y": "662",
+            "content": {
+                "config": {
+                    "charts": {
+                        "legend": {
+                            "top": "auto",
+                            "orient": "horizontal",
+                            "left": "auto",
+                            "bottom": "auto",
+                            "show": true,
+                            "right": "auto",
+                            "textStyle": {
+                                "color": "#2a2a2a",
+                                "fontSize": 12,
+                                "fontStyle": "normal",
+                                "fontWeight": "normal"
+                            },
+                            "align": "auto"
+                        },
+                        "series": [
+                            {
+                                "starAngle": 90,
+                                "label": {
+                                    "color": "#2a2a2a",
+                                    "show": true,
+                                    "fontSize": 12,
+                                    "position": "outside",
+                                    "fontStyle": "normal",
+                                    "fontWeight": "normal"
+                                }
+                            }
+                        ]
+                    },
+                    "unit": 1,
+                    "digitalFormat": {
+                        "unit": 1,
+                        "unitarea": 1,
+                        "enableThousands": false,
+                        "dataLabelType": "classificationdatavalue",
+                        "currencySymbols": "¥",
+                        "digitalType": "digital",
+                        "decimalPlace": 2
+                    },
+                    "legendPos": 2,
+                    "label": {
+                        "fontStyleArray": []
+                    },
+                    "showStarAngle": false,
+                    "fontStyleArray": []
+                },
+                "borderStyle": "dotted",
+                "chartParameters": true,
+                "showBorder": true,
+                "opacity": 1,
+                "backgroundImage": "./kingdee/tmc/images/pc/tda/crad_bg_white_930x316.png",
+                "showBak": true,
+                "desc": {
+                    "show": false,
+                    "content": ""
+                },
+                "borderColor": "#2a2a2a",
+                "title": {
+                    "fontStyle": "normal",
+                    "align": "left",
+                    "fontWeight": "bold",
+                    "underline": "none",
+                    "fontSize": 14,
+                    "fontColor": "#2a2a2a",
+                    "fontStyleArray": ["fontWeight"],
+                    "backColor": "",
+                    "show": true
+                },
+                "bkColor": "#fff",
+                "borderWidth": 0,
+                "borderOpacity": 1
+            },
+            "type": "bar",
+            "id": "fe7937a1a6084d21a5a58db90a81572b",
+            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctByChangeDataPlugin",
+            "category": "charts",
+            "chartcontrol": {
+                "ispublish": "1",
+                "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctByChangeDataPlugin"
+            }
+        },
+        {
+            "h": 316,
+            "chartname": "柱状图30",
+            "originname": "柱状图",
+            "t": "2024-05-1013:41:26",
+            "pkid": "1938632125775454214",
+            "w": 475,
+            "x": "1435",
+            "zindex": 19,
+            "title": "境内账户银行分布",
+            "y": "662",
+            "content": {
+                "config": {
+                    "charts": {
+                        "legend": {
+                            "top": "auto",
+                            "orient": "horizontal",
+                            "left": "auto",
+                            "bottom": "auto",
+                            "show": false,
+                            "right": "auto",
+                            "textStyle": {
+                                "color": "#2a2a2a",
+                                "fontSize": 12,
+                                "fontStyle": "normal",
+                                "fontWeight": "normal"
+                            },
+                            "align": "auto"
+                        },
+                        "series": [
+                            {
+                                "starAngle": 90,
+                                "label": {
+                                    "color": "#2a2a2a",
+                                    "show": true,
+                                    "fontSize": 12,
+                                    "position": "outside",
+                                    "fontStyle": "normal",
+                                    "fontWeight": "normal"
+                                }
+                            }
+                        ]
+                    },
+                    "unit": 1,
+                    "digitalFormat": {
+                        "unit": 1,
+                        "unitarea": 1,
+                        "enableThousands": false,
+                        "dataLabelType": "classificationdatavalue",
+                        "currencySymbols": "¥",
+                        "digitalType": "digital",
+                        "decimalPlace": 2
+                    },
+                    "legendPos": 2,
+                    "label": {
+                        "fontStyleArray": []
+                    },
+                    "showStarAngle": false,
+                    "fontStyleArray": []
+                },
+                "borderStyle": "dotted",
+                "chartParameters": true,
+                "showBorder": true,
+                "opacity": 1,
+                "backgroundImage": "./kingdee/tmc/images/pc/tda/crad_bg_white_420x316.png",
+                "showBak": true,
+                "desc": {
+                    "show": false,
+                    "content": ""
+                },
+                "borderColor": "#2a2a2a",
+                "title": {
+                    "fontStyle": "normal",
+                    "align": "left",
+                    "fontWeight": "bold",
+                    "underline": "none",
+                    "fontSize": 14,
+                    "fontColor": "#2a2a2a",
+                    "fontStyleArray": ["fontWeight"],
+                    "backColor": "",
+                    "show": true
+                },
+                "bkColor": "#fff",
+                "borderWidth": 0,
+                "borderOpacity": 1
+            },
+            "type": "bar",
+            "id": "23840eea1fc74fa6849eb45a8e7585e3",
+            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.AcctDisplayByBankQingAnlsPlugin",
+            "category": "charts",
+            "chartcontrol": {
+                "ispublish": "1",
+                "pluginname": "kd.tmc.tda.report.bankacct.qing.data.AcctDisplayByBankQingAnlsPlugin"
+            }
+        },
+        {
+            "h": 316,
+            "chartname": "环图8",
+            "originname": "环图",
+            "t": "2024-05-1013:41:26",
+            "pkid": "1938632125775454209",
+            "w": 237,
+            "x": "1437",
+            "zindex": 20,
+            "title": "账户类型分布",
+            "y": "10",
+            "content": {
+                "config": {
+                    "charts": {
+                        "legend": {
+                            "top": "auto",
+                            "orient": "horizontal",
+                            "left": "auto",
+                            "bottom": "0",
+                            "show": false,
+                            "right": "auto",
+                            "textStyle": {
+                                "color": "#2a2a2a",
+                                "fontSize": 12,
+                                "fontStyle": "normal",
+                                "fontWeight": "normal"
+                            },
+                            "align": "auto"
+                        },
+                        "series": [
+                            {
+                                "starAngle": 90,
+                                "label": {
+                                    "color": "#2a2a2a",
+                                    "show": false,
+                                    "fontSize": 12,
+                                    "position": "outside",
+                                    "fontStyle": "normal",
+                                    "fontWeight": "normal"
+                                }
+                            }
+                        ]
+                    },
+                    "unit": 1,
+                    "digitalFormat": {
+                        "unit": 1,
+                        "unitarea": 1,
+                        "enableThousands": false,
+                        "dataLabelType": "classificationdatavalue",
+                        "currencySymbols": "¥",
+                        "digitalType": "digital",
+                        "decimalPlace": 2
+                    },
+                    "legendPos": 8,
+                    "label": {
+                        "fontStyleArray": []
+                    },
+                    "showStarAngle": false,
+                    "fontStyleArray": []
+                },
+                "borderStyle": "dotted",
+                "chartParameters": true,
+                "showBorder": true,
+                "opacity": 0,
+                "showBak": true,
+                "desc": {
+                    "show": false,
+                    "content": ""
+                },
+                "backgroundColor": "",
+                "borderColor": "#fff",
+                "title": {
+                    "fontStyle": "normal",
+                    "align": "left",
+                    "fontWeight": "bold",
+                    "underline": "none",
+                    "fontSize": 14,
+                    "fontColor": "#2a2a2a",
+                    "fontStyleArray": ["fontWeight"],
+                    "backColor": "#fff",
+                    "show": true
+                },
+                "bkColor": "#fff",
+                "borderWidth": 0,
+                "borderOpacity": 1
+            },
+            "type": "pie",
+            "id": "e3836fc5580a40b0af4637553ada0629",
+            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctByTypeDataPlugin",
+            "category": "charts",
+            "chartcontrol": {
+                "ispublish": "1",
+                "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctByTypeDataPlugin"
+            }
+        },
+        {
+            "h": 316,
+            "chartname": "横向柱状图12",
+            "originname": "横向柱状图",
+            "t": "2024-05-1013:41:26",
+            "pkid": "1938632125775454210",
+            "w": 475,
+            "x": "10",
+            "zindex": 2,
+            "title": "账户单位分布",
+            "y": "336",
+            "content": {
+                "config": {
+                    "charts": {
+                        "legend": {
+                            "top": "auto",
+                            "orient": "horizontal",
+                            "left": "auto",
+                            "bottom": "auto",
+                            "show": true,
+                            "right": "auto",
+                            "textStyle": {
+                                "color": "#2a2a2a",
+                                "fontSize": 12,
+                                "fontStyle": "normal",
+                                "fontWeight": "normal"
+                            },
+                            "align": "auto"
+                        },
+                        "series": [
+                            {
+                                "starAngle": 90,
+                                "label": {
+                                    "color": "#2a2a2a",
+                                    "show": true,
+                                    "fontSize": 12,
+                                    "position": "outside",
+                                    "fontStyle": "normal",
+                                    "fontWeight": "normal"
+                                }
+                            }
+                        ]
+                    },
+                    "unit": 1,
+                    "digitalFormat": {
+                        "unit": 1,
+                        "unitarea": 1,
+                        "enableThousands": false,
+                        "dataLabelType": "classificationdatavalue",
+                        "currencySymbols": "¥",
+                        "digitalType": "digital",
+                        "decimalPlace": 2
+                    },
+                    "legendPos": 2,
+                    "label": {
+                        "fontStyleArray": []
+                    },
+                    "showStarAngle": false,
+                    "fontStyleArray": []
+                },
+                "borderStyle": "dotted",
+                "chartParameters": true,
+                "showBorder": true,
+                "opacity": 1,
+                "backgroundImage": "./kingdee/tmc/images/pc/tda/crad_bg_white_420x316.png",
+                "showBak": true,
+                "desc": {
+                    "show": false,
+                    "content": ""
+                },
+                "borderColor": "#2a2a2a",
+                "title": {
+                    "fontStyle": "normal",
+                    "align": "left",
+                    "fontWeight": "bold",
+                    "underline": "none",
+                    "fontSize": 14,
+                    "fontColor": "#2a2a2a",
+                    "fontStyleArray": ["fontWeight"],
+                    "backColor": "",
+                    "show": true
+                },
+                "bkColor": "#fff",
+                "borderWidth": 0,
+                "borderOpacity": 1
+            },
+            "type": "bar",
+            "id": "5088341198ce4453aa5b0e373d8259c5",
+            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.SecCompBankAcctDataPlugin",
+            "category": "charts",
+            "chartcontrol": {
+                "ispublish": "1",
+                "pluginname": "kd.tmc.tda.report.bankacct.qing.data.SecCompBankAcctDataPlugin"
+            }
+        },
+        {
+            "h": 316,
+            "chartname": "仪表盘14",
+            "originname": "仪表盘",
+            "t": "2024-05-1013:41:26",
+            "pkid": "1938632125775702019",
+            "w": 460,
+            "x": "495",
+            "zindex": 24,
+            "title": "资金集中度",
+            "y": "336",
+            "content": {
+                "config": {
+                    "charts": {
+                        "legend": {
+                            "top": "auto",
+                            "orient": "horizontal",
+                            "left": "auto",
+                            "bottom": "auto",
+                            "show": true,
+                            "right": "auto",
+                            "textStyle": {
+                                "color": "#2a2a2a",
+                                "fontSize": 12,
+                                "fontStyle": "normal",
+                                "fontWeight": "normal"
+                            },
+                            "align": "auto"
+                        },
+                        "series": [
+                            {
+                                "starAngle": 90,
+                                "label": {
+                                    "color": "#2a2a2a",
+                                    "show": true,
+                                    "fontSize": 12,
+                                    "position": "outside",
+                                    "fontStyle": "normal",
+                                    "fontWeight": "normal"
+                                }
+                            }
+                        ]
+                    },
+                    "unit": 1,
+                    "digitalFormat": {
+                        "unit": 1,
+                        "unitarea": 1,
+                        "enableThousands": false,
+                        "dataLabelType": "classificationdatavalue",
+                        "currencySymbols": "¥",
+                        "digitalType": "digital",
+                        "decimalPlace": 2
+                    },
+                    "legendPos": 2,
+                    "label": {
+                        "fontStyleArray": []
+                    },
+                    "showStarAngle": false,
+                    "fontStyleArray": []
+                },
+                "borderStyle": "dotted",
+                "chartParameters": true,
+                "showBorder": true,
+                "opacity": 1,
+                "backgroundImage": "./kingdee/tmc/images/pc/tda/crad_bg_white_420x316.png",
+                "showBak": true,
+                "desc": {
+                    "show": false,
+                    "content": ""
+                },
+                "borderColor": "#2a2a2a",
+                "title": {
+                    "fontStyle": "normal",
+                    "align": "left",
+                    "fontWeight": "bold",
+                    "underline": "none",
+                    "fontSize": 14,
+                    "fontColor": "#2a2a2a",
+                    "fontStyleArray": ["fontWeight"],
+                    "backColor": "",
+                    "show": true
+                },
+                "bkColor": "#fff",
+                "borderWidth": 0,
+                "borderOpacity": 1
+            },
+            "type": "gauge",
+            "id": "3a75e5170c854f9d8da864a179cd3654",
+            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.FundConcentrationQingPlugin",
+            "category": "charts",
+            "chartcontrol": {
+                "ispublish": "1",
+                "pluginname": "kd.tmc.tda.report.bankacct.qing.data.FundConcentrationQingPlugin"
+            }
+        },
+        {
+            "h": 316,
+            "chartname": "环图20",
+            "originname": "环图",
+            "t": "2024-05-1013:41:26",
+            "pkid": "1938632125775454212",
+            "w": 237,
+            "x": "1435",
+            "zindex": 25,
+            "title": "账户用途分布",
+            "y": "336",
+            "content": {
+                "config": {
+                    "charts": {
+                        "legend": {
+                            "top": "auto",
+                            "orient": "horizontal",
+                            "left": "auto",
+                            "bottom": "auto",
+                            "show": false,
+                            "right": "auto",
+                            "textStyle": {
+                                "color": "#2a2a2a",
+                                "fontSize": 12,
+                                "fontStyle": "normal",
+                                "fontWeight": "normal"
+                            },
+                            "align": "auto"
+                        },
+                        "series": [
+                            {
+                                "starAngle": 90,
+                                "label": {
+                                    "color": "#2a2a2a",
+                                    "show": false,
+                                    "fontSize": 12,
+                                    "position": "outside",
+                                    "fontStyle": "normal",
+                                    "fontWeight": "normal"
+                                }
+                            }
+                        ]
+                    },
+                    "unit": 1,
+                    "digitalFormat": {
+                        "unit": 1,
+                        "unitarea": 1,
+                        "enableThousands": false,
+                        "dataLabelType": "classificationdatavalue",
+                        "currencySymbols": "¥",
+                        "digitalType": "digital",
+                        "decimalPlace": 2
+                    },
+                    "legendPos": 2,
+                    "label": {
+                        "fontStyleArray": []
+                    },
+                    "showStarAngle": false,
+                    "fontStyleArray": []
+                },
+                "borderStyle": "dotted",
+                "chartParameters": true,
+                "showBorder": true,
+                "opacity": 0,
+                "showBak": true,
+                "desc": {
+                    "show": false,
+                    "content": ""
+                },
+                "borderColor": "#2a2a2a",
+                "title": {
+                    "fontStyle": "normal",
+                    "align": "left",
+                    "fontWeight": "bold",
+                    "underline": "none",
+                    "fontSize": 14,
+                    "fontColor": "#2a2a2a",
+                    "fontStyleArray": ["fontWeight"],
+                    "backColor": "#fff",
+                    "show": true
+                },
+                "bkColor": "#fff",
+                "borderWidth": 0,
+                "borderOpacity": 1
+            },
+            "type": "pie",
+            "id": "8f9d129950a2428f8ff2ed66f7305aaf",
+            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctByUsageDataPlugin",
+            "category": "charts",
+            "chartcontrol": {
+                "ispublish": "1",
+                "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctByUsageDataPlugin"
+            }
+        },
+        {
+            "h": 316,
+            "chartname": "横向柱状图24",
+            "originname": "横向柱状图",
+            "t": "2024-05-1013:41:26",
+            "pkid": "1938632125775454213",
+            "w": 475,
+            "x": "10",
+            "zindex": 5,
+            "title": "低效账户单位分布",
+            "y": "662",
+            "content": {
+                "config": {
+                    "charts": {
+                        "legend": {
+                            "top": "auto",
+                            "orient": "horizontal",
+                            "left": "auto",
+                            "bottom": "auto",
+                            "show": false,
+                            "right": "auto",
+                            "textStyle": {
+                                "color": "#2a2a2a",
+                                "fontSize": 12,
+                                "fontStyle": "normal",
+                                "fontWeight": "normal"
+                            },
+                            "align": "auto"
+                        },
+                        "series": [
+                            {
+                                "starAngle": 90,
+                                "label": {
+                                    "color": "#2a2a2a",
+                                    "show": true,
+                                    "fontSize": 12,
+                                    "position": "outside",
+                                    "fontStyle": "normal",
+                                    "fontWeight": "normal"
+                                }
+                            }
+                        ]
+                    },
+                    "unit": 1,
+                    "digitalFormat": {
+                        "unit": 1,
+                        "unitarea": 1,
+                        "enableThousands": false,
+                        "dataLabelType": "classificationdatavalue",
+                        "currencySymbols": "¥",
+                        "digitalType": "digital",
+                        "decimalPlace": 2
+                    },
+                    "legendPos": 2,
+                    "label": {
+                        "fontStyleArray": []
+                    },
+                    "showStarAngle": false,
+                    "fontStyleArray": []
+                },
+                "borderStyle": "dotted",
+                "chartParameters": true,
+                "showBorder": true,
+                "opacity": 1,
+                "backgroundImage": "./kingdee/tmc/images/pc/tda/crad_bg_white_420x316.png",
+                "showBak": true,
+                "desc": {
+                    "show": false,
+                    "content": ""
+                },
+                "borderColor": "#2a2a2a",
+                "title": {
+                    "fontStyle": "normal",
+                    "align": "left",
+                    "fontWeight": "bold",
+                    "underline": "none",
+                    "fontSize": 14,
+                    "fontColor": "#2a2a2a",
+                    "fontStyleArray": ["fontWeight"],
+                    "backColor": "",
+                    "show": true
+                },
+                "bkColor": "#fff",
+                "borderWidth": 0,
+                "borderOpacity": 1
+            },
+            "type": "bar",
+            "id": "0eadbf985180498a80672936034faeaa",
+            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.DormantDataQingAnlsPlugin",
+            "category": "charts",
+            "chartcontrol": {
+                "ispublish": "1",
+                "pluginname": "kd.tmc.tda.report.bankacct.qing.data.DormantDataQingAnlsPlugin"
+            }
+        },
+        {
+            "h": 316,
+            "chartname": "边框4",
+            "originname": "边框",
+            "t": "2024-05-1013:41:26",
+            "pkid": "1938632125775454208",
+            "w": 930,
+            "x": "495",
+            "zindex": 28,
+            "title": "",
+            "y": "10",
+            "content": {
+                "borderStyle": "dotted",
+                "showBorder": true,
+                "opacity": 1,
+                "backgroundImage": "./kingdee/tmc/images/pc/tda/crad_bg_white_930x316.png",
+                "showBak": true,
+                "desc": {
+                    "show": false,
+                    "content": ""
+                },
+                "borderColor": "#2a2a2a",
+                "bkColor": "#fff",
+                "borderWidth": 0,
+                "borderOpacity": 1
+            },
+            "type": "border",
+            "id": "9c135aace9234516803f39c4c58b8834",
+            "category": "border",
+            "chartcontrol": null
+        }
+    ]
+}
