@@ -39,6 +39,7 @@ const TextEditor = (props: any) => {
                             <Input
                                 value={item.key}
                                 placeholder='KEY'
+                                
                                 onChange={e => {
                                     // setInnerValue(() => {
                                     //     const data = _.cloneDeep(innerValue);
