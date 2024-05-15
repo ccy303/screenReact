@@ -9,6 +9,7 @@ import {
     TITLE_PROP,
     CHART_BASE_INFO,
     CHART_DARA_SET,
+    QUOTA_PROP,
 
     // 文本
     BASE_PROP
@@ -309,14 +310,35 @@ const radioControls: any = {
         }
     ]
 };
-
+const quotaControls: any = {
+    group: [
+        {
+            id: "data",
+            name: "属性",
+            properties: [
+                CHART_BASE_INFO,
+                BACKGROUND_PROP,
+                BORDER_PROP,
+                DESC_PROP,
+                QUOTA_PROP,
+                POSITION_PROP(150,50)
+            ]
+        },
+        {
+            id: "dataset",
+            name: "数据配置",
+            properties: [CHART_DARA_SET]
+        }
+    ]
+};
 export const ComponentControlMap: any = {
     charts: echartControls,
     text: textControls,
     border: borderControls,
     table: tableControls,
     select: selectControls,
-    radio: radioControls
+    radio: radioControls,
+    quota: quotaControls
 };
 
 export const chartList = [
@@ -406,5 +428,12 @@ export const otherComp = [
         desc: "单选",
         name: "单选",
         category: "radio"
+    },
+    {
+        componentType: "quota",
+        icon: require(`assets/img/quota.png`),
+        desc: "业务指标",
+        name: "业务指标",
+        category: "quota"
     }
 ];

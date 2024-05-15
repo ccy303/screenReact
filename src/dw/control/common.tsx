@@ -974,3 +974,99 @@ export const CHART_DARA_SET: any = {
         }
     ]
 };
+export const QUOTA_PROP: ControlProProps = {
+    id: "content.quota",
+    name: "业务指标内容",
+    defaultOpen: true,
+    nodes: [
+        {
+            visible: false,
+            id: "content.quota.show",
+            editor: { defaultValue: true }
+        },
+        {
+            visible: false,
+            id: "content.quota.fontWeight",
+            editor: { defaultValue: "normal" }
+        },
+        {
+            visible: false,
+            id: "content.quota.fontStyle",
+            editor: { defaultValue: "normal" }
+        },
+        {
+            visible: false,
+            id: "content.quota.underline",
+            editor: { defaultValue: "none" }
+        },
+        {
+            visible: true,
+            id: "content.quota.fontSize",
+            name: "字体大小",
+            editor: {
+                component: "Stepper",
+                dataType: "number",
+                defaultValue: 25
+            }
+        },
+        {
+            visible: true,
+            id: "content.quota.fontStyleArray",
+            name: "样式",
+            editor: {
+                component: "Checkbox",
+                options: [
+                    { value: "fontWeight", name: <Icon type='bold-solid' /> },
+                    { value: "fontStyle", name: <Icon type='oblique-solid' /> },
+                    { value: "textDecoration", name: <Icon type='underline-solid' /> }
+                ],
+                dataType: "array",
+                defaultValue: [],
+                checkboxType: "square"
+            },
+            actions: [
+                {
+                    condition: { value: "fontWeight", mark: "in" },
+                    todo: [{ id: "content.quota.fontWeight", changeValue: "bold" }],
+                    elseTodo: [{ id: "content.quota.fontWeight", changeValue: "normal" }]
+                },
+                {
+                    condition: { value: "fontStyle", mark: "in" },
+                    todo: [{ id: "content.quota.fontStyle", changeValue: "italic" }],
+                    elseTodo: [{ id: "content.quota.fontStyle", changeValue: "normal" }]
+                },
+                {
+                    condition: { value: "textDecoration", mark: "in" },
+                    todo: [{ id: "content.quota.underline", changeValue: "underline" }],
+                    elseTodo: [{ id: "content.quota.underline", changeValue: "none" }]
+                }
+            ]
+        },
+        {
+            visible: true,
+            id: "content.quota.align",
+            name: "样式",
+            editor: {
+                component: "Radio",
+                options: [
+                    { value: "left", name: <Icon type='align-left' /> },
+                    { value: "center", name: <Icon type='align-center' /> },
+                    { value: "right", name: <Icon type='align-right' /> }
+                ],
+                dataType: "string",
+                defaultValue: "center",
+                radioType: "square"
+            }
+        },
+        {
+            visible: true,
+            id: "content.quota.fontColor",
+            name: "字体颜色",
+            editor: {
+                component: "ColorPicker",
+                dataType: "string",
+                defaultValue: DEFAULT_STYLE.fontColor
+            }
+        }
+    ]
+};
