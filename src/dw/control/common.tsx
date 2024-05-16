@@ -1030,6 +1030,16 @@ export const DIGITAL_FORMAT_PROP: ControlProProps = {
                 defaultValue: 1,
                 options: getUpdateArray(unitarea)
             }
+        },
+        {
+            visible: true,
+            id: "content.config.charts.series[0].barWidth",
+            name: i18n.msg("c97"),
+            editor: {
+                component: "Stepper",
+                dataType: "number",
+                defaultValue: 10
+            }
         }
     ]
 };
