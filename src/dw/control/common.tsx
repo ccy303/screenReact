@@ -63,7 +63,7 @@ export const DEFAULT_PIE_LABEL = {
     formatter: '{d}\n\n{b}'
   };
 export const DEFAULT_PIE_ITEMSTYLE = {
-    borderRadius: 5,
+    borderRadius: 0,
     borderColor: '#fff',
     borderWidth: 2
   };
@@ -71,23 +71,23 @@ export const DEFAULT_PIE_ITEMSTYLE = {
 export const DEFAULT_CHARTS_COLOR = [{
     type: 'linear',
     x: 0,
-    y: 0,
-    x2: 0,
-    y2: 1,
+    y: 1,
     colorStops: [{
-        offset: 0, color: '#6CBEFF' // 0% 处的颜色
+        offset: 0, color: '#248AFF' // 0% 处的颜色
     }, {
-        offset: 1, color: '#248AFF' // 100% 处的颜色
+        offset: 0.5, color: '#6CBEFF' // 100% 处的颜色
+    }, {
+        offset: 1, color: '#6CBEFF' // 100% 处的颜色
     }],
     global: false // 缺省为 false
 }, {
     type: 'linear',
     x: 0,
-    y: 0,
-    x2: 0,
-    y2: 1,
+    y: 1,
     colorStops: [{
         offset: 0, color: '#FF9E4C' // 0% 处的颜色
+    }, {
+        offset: 0.5, color: '#FFD66D' // 100% 处的颜色
     }, {
         offset: 1, color: '#FFD66D' // 100% 处的颜色
     }],
@@ -95,35 +95,36 @@ export const DEFAULT_CHARTS_COLOR = [{
 }, {
     type: 'linear',
     x: 0,
-    y: 0,
-    x2: 0,
-    y2: 1,
+    y: 1,
     colorStops: [{
-        offset: 0, color: '#97FEFF' // 0% 处的颜色
+        offset: 0, color: '#84F2D4' // 0% 处的颜色
     }, {
-        offset: 1, color: '#45DAD1' // 100% 处的颜色
+        offset: 0.5, color: '#48D1CC' // 50% 处的颜色
+    }, {
+        offset: 1, color: '#48D1CC' // 100% 处的颜色
     }],
     global: false // 缺省为 false
 }, {
     type: 'linear',
     x: 0,
-    y: 0,
-    x2: 0,
-    y2: 1,
+    y: 1,
+  
     colorStops: [{
         offset: 0, color: '#FFA0AA' // 0% 处的颜色
-    }, {
+    },  {
+        offset: 0.5, color: '#FF5667' // 50% 处的颜色
+    },{
         offset: 1, color: '#FF5667' // 100% 处的颜色
     }],
     global: false // 缺省为 false
 }, {
     type: 'linear',
     x: 0,
-    y: 0,
-    x2: 0,
-    y2: 1,
+    y: 1,
     colorStops: [{
         offset: 0, color: '#7C96FF' // 0% 处的颜色
+    }, {
+        offset: 0.5, color: '#3F64FF' // 50% 处的颜色
     }, {
         offset: 1, color: '#3F64FF' // 100% 处的颜色
     }],
@@ -131,11 +132,11 @@ export const DEFAULT_CHARTS_COLOR = [{
 }, {
     type: 'linear',
     x: 0,
-    y: 0,
-    x2: 0,
-    y2: 1,
+    y: 1,
     colorStops: [{
         offset: 0, color: '#B3FF87' // 0% 处的颜色
+    }, {
+        offset: 0.5, color: '#7CE043' // 50% 处的颜色
     }, {
         offset: 1, color: '#7CE043' // 100% 处的颜色
     }],
