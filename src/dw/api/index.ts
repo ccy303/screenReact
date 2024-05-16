@@ -6,7 +6,6 @@ export const legendPositionDefault = [
   { id: 'content.config.charts.legend.top', changeValue: 'auto' },
   { id: 'content.config.charts.legend.bottom', changeValue: 'auto' },
   { id: 'content.config.charts.legend.align', changeValue: 'auto' },
-  { id: 'content.config.charts.legend.orient', changeValue: 'horizontal' },
 ]
 
 export const legendPosition0 = [
