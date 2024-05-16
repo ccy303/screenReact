@@ -102,6 +102,116 @@ const Chart = (item: any) => {
 
             series = {
                 type: item.type,
+                startAngle: 180,
+                endAngle: 0,
+                center: ['50%', '65%'],
+                radius: '100%',
+                min: 0,
+                max: 1,
+                splitNumber: 5,
+                legendHoverLink: true,
+                axisLine: {
+                    lineStyle: {
+                    width: 10,
+                    color: [
+                        [0.25, '#F57582'],
+                        [0.5, '#FFC53D'],
+                        [0.75, '#40BD6E'],
+                        [1, '#1890FF']
+                    ],
+                    shadowColor: '#40BD6E',
+                    shadowBlur: 20
+                    }
+                },
+                pointer: {
+                    icon: 'triangle',//'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',
+                    length: '60%',
+                    width: 15,
+                    offsetCenter: [0, 0],
+                    itemStyle: {
+                        color: {
+                            type: 'radial',
+                            x: 0.5,
+                            y: 1,
+                            r: 0.8,
+                            colorStops: [{
+                                offset: 0, color: '#89C7FF' // 0% 处的颜色
+                            }, {
+                                offset: 1, color: '#1890FF' // 100% 处的颜色
+                            }]
+                        }
+                    }
+                },
+                anchor: {
+                    show: true,
+                    showAbove: true,
+                    size: 15,
+                    icon: 'circle',
+                    offsetCenter: [0, 0],
+                    itemStyle: {
+                    color: '#1890FF',
+                    shadowColor: '#89C7FF',
+                    shadowBlur: 20
+                    }
+                },
+                axisTick: {
+                    show: true,
+                    length: 10,
+                    splitNumber: 15,
+                    distance: 32,
+                    lineStyle: {
+                    color: '#1890FF',
+                    width: 1
+                    }
+                },
+                splitLine: {
+                    length: 6,
+                    distance: 15,
+                    lineStyle: {
+                    color: '#999999',
+                    width: 1
+                    }
+                },
+                axisLabel: {
+                    color: '#999999',
+                    fontSize: 12,
+                    distance: -50,
+                    //rotate: 0,
+                    formatter: function (value: number) {
+                    if (value === 1) {
+                        return '100';
+                    }else if (value === 0.8) {
+                        return '80';
+                    } else if (value === 0.6) {
+                        return '60';
+                    } else if (value === 0.4) {
+                        return '40';
+                    } else if (value == 0.2) {
+                        return '20';
+                    } else if (value === 0) {
+                        return '0';
+                    }
+                    return '';
+                    }
+                },
+                title: {
+                    offsetCenter: [0, '40%'],
+                    fontSize: 14,
+                    fontWeight: 400,
+                    fontFamily: 'MicrosoftYaHei',
+                },
+                detail: {
+                    fontSize: 32,
+                    fontWeight: 700,
+                    fontFamily: 'KINGDEEKB-Bold',
+                    lineHeight: 45,
+                    offsetCenter: [0, '30%'],
+                    valueAnimation: true,
+                    formatter: function (value: number) {
+                    return Math.round(value * 100) + '%';
+                    },
+                    color: 'inherit'
+                },
                 data: [{ value: percent }]
             };
 
