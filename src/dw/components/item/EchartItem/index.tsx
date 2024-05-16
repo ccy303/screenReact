@@ -98,7 +98,7 @@ const Chart = (item: any) => {
             const total = data.slice(1).reduce((a, b) => Number(a) + Number(b[1]), 0);
 
             // 计算当前数据占total的百分比,并转换为百分比
-            const percent = Math.round((Number(data[selectX || 1][selectY || 1]) / total) * 100);
+            const percent = Math.round((Number(data[selectX || 1][selectY || 1]) / total) * 100) / 100;
 
             series = {
                 type: item.type,
@@ -119,7 +119,7 @@ const Chart = (item: any) => {
                         [0.75, '#40BD6E'],
                         [1, '#1890FF']
                     ],
-                    shadowColor: '#40BD6E',
+                    shadowColor: '#87CEEB',
                     shadowBlur: 20
                     }
                 },
@@ -174,8 +174,8 @@ const Chart = (item: any) => {
                 },
                 axisLabel: {
                     color: '#999999',
-                    fontSize: 12,
-                    distance: -50,
+                    fontSize: 10,
+                    distance: -45,
                     //rotate: 0,
                     formatter: function (value: number) {
                     if (value === 1) {
