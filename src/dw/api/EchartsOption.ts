@@ -427,6 +427,18 @@ export const legendPositionList = [
     value: 9,
   },
 ]
+export const legendOrientList = [
+  {
+    name: i18n.msg('horizontal'),
+    labelId: 'horizontal',
+    value: "horizontal",
+  },
+  {
+    name: i18n.msg('vertical'),
+    labelId: 'vertical',
+    value: "vertical",
+  }
+]
 
 export function getUpdatedlegendPositionList() {
   legendPositionList.forEach((unit) => {

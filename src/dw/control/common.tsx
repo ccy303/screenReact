@@ -18,7 +18,7 @@ import {
 } from "dw/api";
 
 import { BarChartPieDataLabelTypes, BorderStyleList, CurrencySymbols, DigitalTypes, FunnelLabelPosition } from "dw/api/Constants";
-import { legendPositionList, unitarea, units } from "dw/api/EchartsOption";
+import { legendPositionList,legendOrientList, unitarea, units } from "dw/api/EchartsOption";
 
 export const DEFAULT_REQUEST_PROP: RequestProps = {
     legendReName: null,
@@ -708,6 +708,15 @@ export const LEGEND_PROP: ControlProProps = {
                 component: "ColorPicker",
                 dataType: "string",
                 defaultValue: DEFAULT_STYLE.fontColor
+            }
+        },
+        {visible: true,
+            id: "content.config.charts.legend.orient",
+            name: "图例方向",
+            editor: {
+                component: "Select",
+                options:getUpdateArray(legendOrientList),
+                defaultValue: "horizontal",
             }
         },
         {
