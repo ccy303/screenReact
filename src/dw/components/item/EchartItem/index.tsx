@@ -75,7 +75,7 @@ const Chart = (item: any) => {
                 type: item.type,
                 areaStyle: item.originname == "面积图" ? {} : null,
                 radius: item.originname == "环图" ? ["68%", "80%"] : [0, "80%"],
-                label: item.originname == "环图" ? DEFAULT_PIE_LABEL : {},
+                label: item.originname == "环图" ? {...charts.series[0].label,...DEFAULT_PIE_LABEL} : {...charts.series[0].label},
                 itemStyle: item.originname == "环图" ? DEFAULT_PIE_ITEMSTYLE : {}
             };
             return {
