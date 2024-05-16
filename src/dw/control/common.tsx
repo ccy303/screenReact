@@ -101,7 +101,7 @@ export const DEFAULT_CHARTS_COLOR = [{
     colorStops: [{
         offset: 0, color: '#97FEFF' // 0% 处的颜色
     }, {
-        offset: 1, color: '#46E6DC' // 100% 处的颜色
+        offset: 1, color: '#45DAD1' // 100% 处的颜色
     }],
     global: false // 缺省为 false
 }, {
@@ -698,6 +698,16 @@ export const LEGEND_PROP: ControlProProps = {
                 component: "Stepper",
                 dataType: "number",
                 defaultValue: 12
+            }
+        },
+        {
+            visible: true,
+            id: "content.config.charts.legend.top",
+            name: "距离顶部",
+            editor: {
+                component: "Stepper",
+                dataType: "number",
+                defaultValue: -5
             }
         },
         {

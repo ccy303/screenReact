@@ -448,7 +448,7 @@ export function getUpdatedlegendPositionList() {
   })
   return legendPositionList
 }
-export const defaultMapLevelColors = ['#5475f5', '#9feaa5', '#3FA7FF', '#66E0E3', '#FFDC5E', '#9fb5ea']
+export const defaultMapLevelColors = ['#5475f5', '#45DAD1', '#3FA7FF', '#66E0E3', '#FFDC5E', '#9fb5ea']
 
 export const themeFormConf = {
   tabPosition: 'bottom',

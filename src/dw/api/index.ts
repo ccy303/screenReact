@@ -3,7 +3,6 @@ import i18n from 'dw/api/I18n'
 export const legendPositionDefault = [
   { id: 'content.config.charts.legend.left', changeValue: 'auto' },
   { id: 'content.config.charts.legend.right', changeValue: 'auto' },
-  { id: 'content.config.charts.legend.top', changeValue: 'auto' },
   { id: 'content.config.charts.legend.bottom', changeValue: 'auto' },
   { id: 'content.config.charts.legend.align', changeValue: 'auto' },
 ]
@@ -41,7 +40,6 @@ export const legendPosition4 = [
 export const legendPosition5 = [
   ...legendPositionDefault,
   { id: 'content.config.charts.legend.left', changeValue: 'left' },
-  { id: 'content.config.charts.legend.top', changeValue: '35%' },
   { id: 'content.config.charts.legend.align', changeValue: 'left' },
   { id: 'content.config.charts.legend.orient', changeValue: 'vertical' },
 ]
@@ -49,7 +47,6 @@ export const legendPosition5 = [
 export const legendPosition6 = [
   ...legendPositionDefault,
   { id: 'content.config.charts.legend.right', changeValue: 'right' },
-  { id: 'content.config.charts.legend.top', changeValue: '35%' },
   { id: 'content.config.charts.legend.align', changeValue: 'right' },
 ]
 

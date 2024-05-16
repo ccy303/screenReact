@@ -45,10 +45,10 @@ const Chart = (item: any) => {
         if (!userxindex || !useryindex || !userxindex?.length || !useryindex?.length) {
             data = [
                 ["product", "2015", "2016", "2017"],
-                ["Matcha", 43.3, 85.8, 93.7],
-                ["Milk", 83.1, 73.4, 55.1],
-                ["Cheese", 86.4, 65.2, 82.5],
-                ["Walnut", 72.4, 53.9, 39.1]
+                ["Matcha", 120.3, 85.8, 93.7],
+                ["Milk", 70, 73.4, 55.1],
+                ["Cheese", 100, 65.2, 82.5],
+                // ["Walnut", 5, 53.9, 39.1]
             ];
         } else {
             // 初始化X轴
@@ -74,7 +74,7 @@ const Chart = (item: any) => {
                 ...charts.series[0],
                 type: item.type,
                 areaStyle: item.originname == "面积图" ? {} : null,
-                radius: item.originname == "环图" ? ["90%", "70%"] : [0, "75%"],
+                radius: item.originname == "环图" ? ["66%", "80%"] : [0, "80%"],
                 label: item.originname == "环图" ? DEFAULT_PIE_LABEL : {},
                 itemStyle: item.originname == "环图" ? DEFAULT_PIE_ITEMSTYLE : {}
             };
