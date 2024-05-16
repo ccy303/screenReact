@@ -39,8 +39,6 @@ const BaseView = () => {
     const isForPluginData: any = useRef(false);
 
     const initInvokeKeyObserve = (key: any, data: any) => {
-        console.log(`invokeKeyObserve-key`, key);
-        console.log(`invokeKeyObserve-data`, data);
         data = toJS(data);
         if (key == "selectconfig") {
             // 大屏查询
@@ -89,10 +87,10 @@ const BaseView = () => {
             console.log(newValue);
             setLoading(newValue);
         });
-        // invokeKeyObserver.invokeCallback = {
-        //     key: "selectconfig",
-        //     data: { ...JSONData }
-        // };
+        invokeKeyObserver.invokeCallback = {
+            key: "selectconfig",
+            data: { ...JSONData }
+        };
     }, []);
 
     useEffect(() => {

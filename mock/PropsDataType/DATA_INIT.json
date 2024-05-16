@@ -20,7 +20,7 @@
         {
             "h": 300,
             "chartname": "环图12",
-            "originname": "环图",
+            "originname": "柱状图",
             "t": "2024-04-2920:08:01",
             "pkid": "1938632125775702016",
             "w": 475,
@@ -33,12 +33,15 @@
                 ],
                 "rows": [
                     ["分布", "分布名称", "数量"],
-                    ["bi_false", "非银企", 27530],
-                    ["bi_true", "银企", 569],
-                    ["fincom", "财务公司", 1136]
+                    ["a", "非银企", 1],
+                    ["b", "银企", 2],
+                    ["e", "财务公司", 3],
+                    ["d", "财务公司", 4],
+                    ["e", "财务公司", 5],
+                    ["e", "财务公司", 6]
                 ]
             },
-            "zindex": 122,
+            "zindex": 124,
             "title": "银企账户分布",
             "y": 10,
             "content": {
@@ -115,7 +118,7 @@
                 "borderWidth": 0,
                 "borderOpacity": 1
             },
-            "type": "pie",
+            "type": "gauge",
             "id": "fc0a7887e2d34ce5a36fe1b096ca77b6",
             "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctDistSumaryDataPlugin",
             "category": "charts",
@@ -124,7 +127,9 @@
                 "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctDistSumaryDataPlugin",
                 "version": "1"
             },
-            "_isShow": true
+            "_isShow": true,
+            "userxindex": ["分布"],
+            "useryindex": ["数量"]
         },
         {
             "h": 316,
@@ -611,6 +616,26 @@
             "pkid": "",
             "originname": "单选",
             "_isShow": true
+        },
+        {
+            "_isShow": true,
+            "name": "下拉选择1",
+            "ispublish": "1",
+            "zindex": 125,
+            "x": 92,
+            "y": 459,
+            "h": 30,
+            "w": 150,
+            "chartname": "下拉选择1",
+            "t": "2024-05-15 21:52:38",
+            "id": "06ecb2e76dee48a5b2fe650ba1db5a65",
+            "type": "select",
+            "category": "select",
+            "kdId": "",
+            "pkid": "",
+            "originname": "下拉选择",
+            "selectcontrolItem": "分布",
+            "chartctrl": "fc0a7887e2d34ce5a36fe1b096ca77b6,分布"
         }
     ]
 }

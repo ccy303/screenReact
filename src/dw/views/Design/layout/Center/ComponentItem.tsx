@@ -6,6 +6,7 @@ import Border from "dw/components/item/Border";
 import Select from "dw/components/item/Select";
 import Radio from "dw/components/item/Radio";
 import Quota from "dw/components/item/Quota";
+// import Tabs from "dw/components/item/Tabs";
 import React from "react";
 
 export const ComponentMap: any = {
@@ -15,7 +16,8 @@ export const ComponentMap: any = {
     border: Border,
     select: Select,
     radio: Radio,
-    quota: Quota
+    quota: Quota,
+    // tabs: Tabs
 };
 
 export const ComponentItem = (props: any) => {

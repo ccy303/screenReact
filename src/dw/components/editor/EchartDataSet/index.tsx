@@ -36,14 +36,6 @@ export default (props: any) => {
         return xIndex;
     }, [dataset]);
 
-    // const onSelChange = (type: any, e: any) => {
-    //   if (type == 'xIndex') {
-    //     onChange([{ prop: 'userxindex', value: e }])
-    //   } else if (type == 'yIndex') {
-    //     onChange([{ prop: 'useryindex', value: e }])
-    //   }
-    // }
-
     const onDrag = (e: any, item: any) => {
         e.dataTransfer?.setData("dataset", JSON.stringify(item));
     };

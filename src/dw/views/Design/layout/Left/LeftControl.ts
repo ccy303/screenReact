@@ -242,8 +242,7 @@ const selectControls: any = {
                     name: "属性",
                     nodes: [
                         { visible: true, id: "name", name: "组件名称", editor: { component: "Input", defaultValue: "name" } },
-                        { visible: true, id: "pluginname", name: "插件名称", addonAfterBtn: 3, editor: { component: "Input" } },
-                        { visible: true, id: "optionsid", name: "绑定图表", editor: { component: "ChartIdSelect" } },
+                        { visible: true, id: "chartctrl", name: "图表/控制项", editor: { component: "ChartIdSelect" }, style: { height: "80px" } },
                         {
                             visible: true,
                             id: "ispublish",
@@ -310,19 +309,13 @@ const radioControls: any = {
         }
     ]
 };
+
 const quotaControls: any = {
     group: [
         {
             id: "data",
             name: "属性",
-            properties: [
-                CHART_BASE_INFO,
-                BACKGROUND_PROP,
-                BORDER_PROP,
-                DESC_PROP,
-                QUOTA_PROP,
-                POSITION_PROP(150,50)
-            ]
+            properties: [CHART_BASE_INFO, BACKGROUND_PROP, BORDER_PROP, DESC_PROP, QUOTA_PROP, POSITION_PROP(150, 50)]
         },
         {
             id: "dataset",
@@ -331,6 +324,17 @@ const quotaControls: any = {
         }
     ]
 };
+
+// const tabsControls: any = {
+//     group: [
+//         {
+//             id: "dataset",
+//             name: "数据配置",
+//             properties: [CHART_DARA_SET]
+//         }
+//     ]
+// };
+
 export const ComponentControlMap: any = {
     charts: echartControls,
     text: textControls,
@@ -338,7 +342,8 @@ export const ComponentControlMap: any = {
     table: tableControls,
     select: selectControls,
     radio: radioControls,
-    quota: quotaControls
+    quota: quotaControls,
+    // tabs: tabsControls,
 };
 
 export const chartList = [
@@ -435,5 +440,12 @@ export const otherComp = [
         desc: "业务指标",
         name: "业务指标",
         category: "quota"
+    },
+    {
+        componentType: "tabs",
+        icon: require(`assets/img/analysis_tab.png`),
+        desc: "tabs",
+        name: "tabs",
+        category: "tabs"
     }
 ];

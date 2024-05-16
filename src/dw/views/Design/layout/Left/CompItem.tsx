@@ -13,8 +13,6 @@ const CompItem = () => {
         globalConfig: { selectId }
     } = useMain();
 
-    console.log(selectId);
-
     const click = (e: any, id: any) => {
         e.preventDefault();
         e.stopPropagation();
@@ -47,6 +45,7 @@ const CompItem = () => {
                         <div>
                             <Icon type='arrow-right-solid' />
                             {d.chartname}
+                            <>{!d._isShow && "(已隐藏)"}</>
                         </div>
                         <Icon type='delete' onClick={e => del(e, d.id)} />
                     </div>

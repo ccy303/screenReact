@@ -26,23 +26,25 @@ const Preview = () => {
                     backgroundRepeat: "no-repeat"
                 }}
             >
-                {itemList.map((it: any) => {
-                    const { id, x, y, w, h, zindex, category } = it;
-                    const Component = ComponentMap[category];
-                    const style: React.CSSProperties = {
-                        position: "absolute",
-                        zIndex: zindex,
-                        width: Number(w),
-                        height: Number(h),
-                        top: Number(y),
-                        left: Number(x)
-                    };
-                    return (
-                        <div style={style} key={id}>
-                            <Component {...it} />
-                        </div>
-                    );
-                })}
+                {itemList
+                    .filter(v => v._isShow)
+                    .map((it: any) => {
+                        const { id, x, y, w, h, zindex, category } = it;
+                        const Component = ComponentMap[category];
+                        const style: React.CSSProperties = {
+                            position: "absolute",
+                            zIndex: zindex,
+                            width: Number(w),
+                            height: Number(h),
+                            top: Number(y),
+                            left: Number(x)
+                        };
+                        return (
+                            <div style={style} key={id}>
+                                <Component {...it} />
+                            </div>
+                        );
+                    })}
             </div>
         </div>
     );

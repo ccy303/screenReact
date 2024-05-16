@@ -4,6 +4,7 @@ import { Select, Spin } from "@kdcloudjs/kdesign";
 import KdCard from "dw/components/common/KdCard";
 import _ from "lodash";
 import useMain from "@/dw/store/useMain";
+import { v4 as uuidv4 } from "uuid";
 
 const Chart = (item: any) => {
     const { content, userxindex, useryindex, dataset } = item;
@@ -11,17 +12,27 @@ const Chart = (item: any) => {
     const { config } = content;
     const { charts } = config;
 
-    const [selectX, setSelectX] = useState(1);
-    const [selectY, setSelectY] = useState(1);
+    const [echartKey, setEchartKey] = useState(uuidv4());
 
     const { getCurrentItem } = useMain();
+    const chartOptionRef = useRef<any>({});
+
+    const initData = [
+        ["product", "2015", "2016", "2017"],
+        ["Matcha", 43.3, 85.8, 93.7],
+        ["Milk", 83.1, 73.4, 55.1],
+        ["Cheese", 86.4, 65.2, 82.5],
+        ["Walnut", 72.4, 53.9, 39.1]
+    ];
+
+    const dataSet: any = [{ source: item?.dataset?.rows || initData }];
 
     const _rows: any = {};
-    for (let i = 0; i < rows?.[0]?.length; i++) {
-        const key = rows[0][i];
+    for (let i = 0, data = dataSet[0].source; i < data?.[0]?.length; i++) {
+        const key = data[0][i];
         _rows[key] = [];
-        for (let j = 1; j < rows.length; j++) {
-            _rows[key].push(rows[j][i]);
+        for (let j = 1; j < data.length; j++) {
+            _rows[key].push(data[j][i]);
         }
     }
 
@@ -39,34 +50,7 @@ const Chart = (item: any) => {
             };
         }
 
-        let data = [];
-        if (!userxindex || !useryindex || !userxindex?.length || !useryindex?.length) {
-            data = [
-                ["product", "2015", "2016", "2017"],
-                ["Matcha", 43.3, 85.8, 93.7],
-                ["Milk", 83.1, 73.4, 55.1],
-                ["Cheese", 86.4, 65.2, 82.5],
-                ["Walnut", 72.4, 53.9, 39.1]
-            ];
-        } else {
-            // 初始化X轴
-            const [x] = userxindex.slice(-1);
-            const xAsia = [x, ...(_rows[x] || [])];
-            for (let i = 0; i < xAsia.length; i++) {
-                data[i] = [xAsia[i]];
-            }
-
-            // 初始化Y轴
-            for (let i = 0; i < useryindex.length; i++) {
-                const key = useryindex[i];
-                const yAsia = [key, ...(_rows[key] || [])];
-                for (let j = 0; j < yAsia.length; j++) {
-                    data[j].push(yAsia[j]);
-                }
-            }
-        }
-
-        let series = {};
+        let series: any = {};
         if (item.type == "pie") {
             series = {
                 ...charts.series[0],
@@ -74,42 +58,47 @@ const Chart = (item: any) => {
                 areaStyle: item.originname == "面积图" ? {} : null,
                 radius: item.originname == "环图" ? ["40%", "70%"] : [0, "75%"]
             };
-            return {
-                ...echartOpt,
-                dataset: { source: data },
-                series
-            };
+
+            if (item._echartFilterValue && item._echartFilterValue?.length) {
+                dataSet.push({
+                    transform: {
+                        type: "filter",
+                        config: {
+                            and: item._echartFilterValue.map((v: any) => {
+                                return { dimension: item._echartFilterKey, "!=": v };
+                            })
+                        }
+                    }
+                });
+                series.datasetIndex = 1;
+            }
         } else if (item.type == "gauge") {
-            // 初始化Y下拉
-            const y: any = data[0].slice(1).map((v, i) => {
-                return { label: v, value: i + 1 };
-            });
+            const y = useryindex?.[0] || "2015";
+            const x = userxindex?.[0] || "product";
 
-            // 初始化X下拉
-            const x: any = data.slice(1).map((v, i) => {
-                return { label: v[0], value: i + 1 };
-            });
+            const total = _.sum(_rows[y]);
 
-            // 计算数据
-            const total = data.slice(1).reduce((a, b) => Number(a) + Number(b[1]), 0);
+            let val = _rows[y][0];
 
-            // 计算当前数据占total的百分比,并转换为百分比
-            const percent = Math.round((Number(data[selectX || 1][selectY || 1]) / total) * 100);
+            if (item._echartFilterValue?.length) {
+                val = 0;
+                const indexs: any = [];
+
+                _rows[x].map((x: any, i: any) => {
+                    item._echartFilterValue?.includes(x) && indexs.push(i);
+                });
+
+                indexs.map((index: any) => {
+                    val += _rows[y][index] || 0;
+                });
+            }
 
             series = {
                 type: item.type,
-                data: [{ value: percent }]
-            };
-
-            return {
-                ...echartOpt,
-                dataset: { source: data },
-                series,
-                selectX: x,
-                selectY: y
+                data: [{ value: (_.divide(val, total) * 100).toFixed(2) }]
             };
         } else {
-            series = (useryindex || data?.[0]?.slice(1)).map((v: any, i: any) => ({
+            series = (useryindex || dataSet?.[0]?.source?.[0].slice(1)).map((v: any, i: any) => ({
                 ...charts.series[0],
                 type: item.type,
                 areaStyle: item.originname == "面积图" ? {} : null,
@@ -119,13 +108,36 @@ const Chart = (item: any) => {
                     seriesName: v
                 }
             }));
-            return {
-                ...echartOpt,
-                dataset: { source: data },
-                series
-            };
+            if (item._echartFilterValue && item._echartFilterValue?.length) {
+                series = series.map((_series: any, index: any) => {
+                    dataSet.push({
+                        transform: {
+                            type: "filter",
+                            config: {
+                                and: item._echartFilterValue.map((v: any) => {
+                                    return { dimension: item._echartFilterKey, "!=": v };
+                                })
+                            }
+                        }
+                    });
+                    _series.datasetIndex = index + 1;
+                    return _series;
+                });
+            }
         }
-    }, [userxindex, useryindex, charts]);
+
+        const output = { ...echartOpt, dataset: dataSet, series };
+
+        if (!_.isEqual(chartOptionRef.current.option, output)) {
+            setEchartKey(uuidv4());
+        }
+
+        chartOptionRef.current = {
+            option: output
+        };
+
+        return output;
+    }, [userxindex, useryindex, charts, item._echartFilterValue, item._echartFilterKey]);
 
     const showTitle = useMemo(() => item && item.content && item.content.title && item.content.title.show, [item]);
 
@@ -152,7 +164,7 @@ const Chart = (item: any) => {
                 <Spin type='page' spinning={showLoading} style={{ width: "100%", height: "100%", justifyContent: "center" }}></Spin>
             ) : (
                 <div style={{ width: "100%", height: "100%" }}>
-                    {item.type == "container" && (
+                    {/* {item.type == "container" && (
                         <div style={{ display: "flex", alignItems: "center", justifyContent: "end" }}>
                             <div style={{ margin: " 0 10px 0 10px" }}>口径:</div>
                             <Select
@@ -160,11 +172,7 @@ const Chart = (item: any) => {
                                 style={{ width: "100px" }}
                                 value={selectOptionsX.select}
                                 onChange={(e: any) => {
-                                    setSelectOptionsX({
-                                        ...selectOptionsX,
-                                        select: e
-                                    });
-                                    console.log(e);
+                                 
                                 }}
                             >
                                 {selectOptionsX.data?.map((v: any) => {
@@ -197,13 +205,8 @@ const Chart = (item: any) => {
                                 })}
                             </Select>
                         </div>
-                    )}
-                    <ReactECharts
-                        key={chartOption.dataset.source?.[0]?.join(",")}
-                        style={{ width: "100%", height: "100%" }}
-                        option={{ ...chartOption }}
-                        ref={ref}
-                    />
+                    )} */}
+                    <ReactECharts key={echartKey} style={{ width: "100%", height: "100%" }} option={{ ...chartOption }} ref={ref} />
                 </div>
             )}
         </KdCard>
