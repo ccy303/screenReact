@@ -440,6 +440,18 @@ export const legendOrientList = [
   }
 ]
 
+export const legendRectList = [
+  {
+    name: i18n.msg('rect'),
+    labelId: 'rect',
+    value: "rect",
+  },
+  {
+    name: i18n.msg('circle'),
+    labelId: 'circle',
+    value: "circle",
+  }
+]
 export function getUpdatedlegendPositionList() {
   legendPositionList.forEach((unit) => {
     if (unit.labelId) {

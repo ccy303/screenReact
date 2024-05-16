@@ -338,6 +338,8 @@
   "xaisInner":"轴内侧",
   "vertical":"垂直",
   "horizontal":"水平",
+  "rect":"正方形",
+  "circle":"圆形",
   "setDefaultValue":"请设置默认值",
   "aimValueCantOverBorder":"区间值不能超过边界值",
   "maxValueCantLowerThanMin":"最大值不能小于最小值",

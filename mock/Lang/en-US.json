@@ -319,7 +319,8 @@
   "xaisInner":"Inner shaft",
   "vertical":"vertical",
   "horizontal":"horizontal",
-
+  "rect":"rect",
+  "circle":"circle",
   "openStyle":"openStyle",
   "newTab":"newTab",
   "newWindows":"newWindows",

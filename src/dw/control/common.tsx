@@ -18,7 +18,7 @@ import {
 } from "dw/api";
 
 import { BarChartPieDataLabelTypes, BorderStyleList, CurrencySymbols, DigitalTypes, FunnelLabelPosition } from "dw/api/Constants";
-import { legendPositionList,legendOrientList, unitarea, units } from "dw/api/EchartsOption";
+import { legendPositionList,legendOrientList,legendRectList, unitarea, units } from "dw/api/EchartsOption";
 
 export const DEFAULT_REQUEST_PROP: RequestProps = {
     legendReName: null,
@@ -711,6 +711,24 @@ export const LEGEND_PROP: ControlProProps = {
                 defaultValue: -5
             }
         },
+        {visible: true,
+            id: "content.config.charts.legend.itemWidth",
+            name: "图例宽",
+            editor: {
+                component: "Stepper",
+                dataType: "number",
+                defaultValue: 15
+            }
+        },
+        {visible: true,
+            id: "content.config.charts.legend.itemHeight",
+            name: "图例高",
+            editor: {
+                component: "Stepper",
+                dataType: "number",
+                defaultValue: 15
+            }
+        },
         {
             visible: true,
             id: "content.config.charts.legend.textStyle.color",
@@ -730,6 +748,16 @@ export const LEGEND_PROP: ControlProProps = {
                 defaultValue: "horizontal",
             }
         },
+        {visible: true,
+            id: "content.config.charts.legend.icon",
+            name: "图例形状",
+            editor: {
+                component: "Select",
+                options:getUpdateArray(legendRectList),
+                defaultValue: "rect",
+            }
+        },
+        
         {
             visible: true,
             id: "content.config.fontStyleArray",
