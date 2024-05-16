@@ -318,8 +318,9 @@
   "center":"align center",
   "xaisInner":"Inner shaft",
   "vertical":"vertical",
-  "horizon":"horizon",
-
+  "horizontal":"horizontal",
+  "rect":"rect",
+  "circle":"circle",
   "openStyle":"openStyle",
   "newTab":"newTab",
   "newWindows":"newWindows",

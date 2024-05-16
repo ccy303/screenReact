@@ -427,7 +427,31 @@ export const legendPositionList = [
     value: 9,
   },
 ]
+export const legendOrientList = [
+  {
+    name: i18n.msg('horizontal'),
+    labelId: 'horizontal',
+    value: "horizontal",
+  },
+  {
+    name: i18n.msg('vertical'),
+    labelId: 'vertical',
+    value: "vertical",
+  }
+]
 
+export const legendRectList = [
+  {
+    name: i18n.msg('rect'),
+    labelId: 'rect',
+    value: "rect",
+  },
+  {
+    name: i18n.msg('circle'),
+    labelId: 'circle',
+    value: "circle",
+  }
+]
 export function getUpdatedlegendPositionList() {
   legendPositionList.forEach((unit) => {
     if (unit.labelId) {
@@ -436,7 +460,7 @@ export function getUpdatedlegendPositionList() {
   })
   return legendPositionList
 }
-export const defaultMapLevelColors = ['#5475f5', '#9feaa5', '#3FA7FF', '#66E0E3', '#FFDC5E', '#9fb5ea']
+export const defaultMapLevelColors = ['#5475f5', '#45DAD1', '#3FA7FF', '#66E0E3', '#FFDC5E', '#9fb5ea']
 
 export const themeFormConf = {
   tabPosition: 'bottom',

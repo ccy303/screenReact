@@ -5,6 +5,125 @@ import KdCard from "dw/components/common/KdCard";
 import _ from "lodash";
 import useMain from "@/dw/store/useMain";
 import { v4 as uuidv4 } from "uuid";
+import { DEFAULT_CHARTS_COLOR, DEFAULT_PIE_ITEMSTYLE, DEFAULT_PIE_LABEL } from "dw/control/common";
+
+const gaugeStyle = {
+    startAngle: 180,
+    endAngle: 0,
+    center: ["50%", "65%"],
+    radius: "100%",
+    min: 0,
+    max: 1,
+    splitNumber: 5,
+    legendHoverLink: true,
+    axisLine: {
+        lineStyle: {
+            width: 10,
+            color: [
+                [0.25, "#F57582"],
+                [0.5, "#FFC53D"],
+                [0.75, "#40BD6E"],
+                [1, "#1890FF"]
+            ],
+            shadowColor: "#87CEEB",
+            shadowBlur: 20
+        }
+    },
+    pointer: {
+        icon: "triangle", //'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',
+        length: "60%",
+        width: 15,
+        offsetCenter: [0, 0],
+        itemStyle: {
+            color: {
+                type: "radial",
+                x: 0.5,
+                y: 1,
+                r: 0.8,
+                colorStops: [
+                    {
+                        offset: 0,
+                        color: "#89C7FF" // 0% 处的颜色
+                    },
+                    {
+                        offset: 1,
+                        color: "#1890FF" // 100% 处的颜色
+                    }
+                ]
+            }
+        }
+    },
+    anchor: {
+        show: true,
+        showAbove: true,
+        size: 15,
+        icon: "circle",
+        offsetCenter: [0, 0],
+        itemStyle: {
+            color: "#1890FF",
+            shadowColor: "#89C7FF",
+            shadowBlur: 20
+        }
+    },
+    axisTick: {
+        show: true,
+        length: 10,
+        splitNumber: 15,
+        distance: 32,
+        lineStyle: {
+            color: "#1890FF",
+            width: 1
+        }
+    },
+    splitLine: {
+        length: 6,
+        distance: 15,
+        lineStyle: {
+            color: "#999999",
+            width: 1
+        }
+    },
+    axisLabel: {
+        color: "#999999",
+        fontSize: 10,
+        distance: -45,
+        //rotate: 0,
+        formatter: function (value: number) {
+            if (value === 1) {
+                return "100";
+            } else if (value === 0.8) {
+                return "80";
+            } else if (value === 0.6) {
+                return "60";
+            } else if (value === 0.4) {
+                return "40";
+            } else if (value == 0.2) {
+                return "20";
+            } else if (value === 0) {
+                return "0";
+            }
+            return "";
+        }
+    },
+    title: {
+        offsetCenter: [0, "40%"],
+        fontSize: 14,
+        fontWeight: 400,
+        fontFamily: "MicrosoftYaHei"
+    },
+    detail: {
+        fontSize: 32,
+        fontWeight: 700,
+        fontFamily: "KINGDEEKB-Bold",
+        lineHeight: 45,
+        offsetCenter: [0, "30%"],
+        valueAnimation: true,
+        formatter: function (value: number) {
+            return Math.round(value * 100) + "%";
+        },
+        color: "inherit"
+    }
+};
 
 const Chart = (item: any) => {
     const { content, userxindex, useryindex, dataset } = item;
@@ -38,6 +157,7 @@ const Chart = (item: any) => {
 
     let chartOption: any = useMemo(() => {
         let echartOpt = {
+            color: DEFAULT_CHARTS_COLOR,
             tooltip: {},
             ...charts
         };
@@ -45,8 +165,8 @@ const Chart = (item: any) => {
         if (["bar", "line"].includes(item.type)) {
             echartOpt = {
                 ...echartOpt,
-                xAxis: item.originname == "横向柱状图" ? {} : { type: "category" },
-                yAxis: item.originname == "横向柱状图" ? { type: "category" } : {}
+                xAxis: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? {} : { type: "category" },
+                yAxis: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? { type: "category" } : {}
             };
         }
 
@@ -56,9 +176,10 @@ const Chart = (item: any) => {
                 ...charts.series[0],
                 type: item.type,
                 areaStyle: item.originname == "面积图" ? {} : null,
-                radius: item.originname == "环图" ? ["40%", "70%"] : [0, "75%"]
+                radius: item.originname == "环图" ? ["68%", "80%"] : [0, "80%"],
+                label: item.originname == "环图" ? { ...charts.series[0].label, ...DEFAULT_PIE_LABEL } : { ...charts.series[0].label },
+                itemStyle: item.originname == "环图" ? DEFAULT_PIE_ITEMSTYLE : {}
             };
-
             if (item._echartFilterValue && item._echartFilterValue?.length) {
                 dataSet.push({
                     transform: {
@@ -95,16 +216,17 @@ const Chart = (item: any) => {
 
             series = {
                 type: item.type,
-                data: [{ value: (_.divide(val, total) * 100).toFixed(2) }]
+                data: [{ value: (_.divide(val, total) * 100).toFixed(2) / 100 }]
             };
         } else {
             series = (useryindex || dataSet?.[0]?.source?.[0].slice(1)).map((v: any, i: any) => ({
                 ...charts.series[0],
                 type: item.type,
+                stack: item.originname == "堆积条形图" || item.originname == "堆积柱形图" ? "stack" : "",
                 areaStyle: item.originname == "面积图" ? {} : null,
                 encode: {
-                    x: item.originname == "横向柱状图" ? [v] : userxindex || ["product"],
-                    y: item.originname == "横向柱状图" ? userxindex || ["product"] : [v],
+                    x: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? [v] : userxindex || ["product"],
+                    y: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? userxindex || ["product"] : [v],
                     seriesName: v
                 }
             }));
@@ -131,6 +253,8 @@ const Chart = (item: any) => {
         if (!_.isEqual(chartOptionRef.current.option, output)) {
             setEchartKey(uuidv4());
         }
+
+        item.type == "gauge" && _.assign(output.series, gaugeStyle);
 
         chartOptionRef.current = {
             option: output
