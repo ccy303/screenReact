@@ -4,6 +4,7 @@ import { Select, Spin } from "@kdcloudjs/kdesign";
 import KdCard from "dw/components/common/KdCard";
 import _ from "lodash";
 import useMain from "@/dw/store/useMain";
+import { DEFAULT_CHARTS_COLOR,DEFAULT_PIE_ITEMSTYLE,DEFAULT_PIE_LABEL } from "dw/control/common";
 
 const Chart = (item: any) => {
     const { content, userxindex, useryindex, dataset } = item;
@@ -27,6 +28,7 @@ const Chart = (item: any) => {
 
     let chartOption: any = useMemo(() => {
         let echartOpt = {
+            color:DEFAULT_CHARTS_COLOR,
             tooltip: {},
             ...charts
         };
@@ -34,8 +36,8 @@ const Chart = (item: any) => {
         if (["bar", "line"].includes(item.type)) {
             echartOpt = {
                 ...echartOpt,
-                xAxis: item.originname == "横向柱状图" ? {} : { type: "category" },
-                yAxis: item.originname == "横向柱状图" ? { type: "category" } : {}
+                xAxis: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? {} : { type: "category" },
+                yAxis: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? { type: "category" } : {}
             };
         }
 
@@ -72,7 +74,9 @@ const Chart = (item: any) => {
                 ...charts.series[0],
                 type: item.type,
                 areaStyle: item.originname == "面积图" ? {} : null,
-                radius: item.originname == "环图" ? ["40%", "70%"] : [0, "75%"]
+                radius: item.originname == "环图" ? ["90%", "70%"] : [0, "75%"],
+                label: item.originname == "环图" ? DEFAULT_PIE_LABEL : {},
+                itemStyle: item.originname == "环图" ? DEFAULT_PIE_ITEMSTYLE : {}
             };
             return {
                 ...echartOpt,
@@ -112,10 +116,11 @@ const Chart = (item: any) => {
             series = (useryindex || data?.[0]?.slice(1)).map((v: any, i: any) => ({
                 ...charts.series[0],
                 type: item.type,
+                stack: item.originname == "堆积条形图" || item.originname == "堆积柱形图" ? 'stack' : '',
                 areaStyle: item.originname == "面积图" ? {} : null,
                 encode: {
-                    x: item.originname == "横向柱状图" ? [v] : userxindex || ["product"],
-                    y: item.originname == "横向柱状图" ? userxindex || ["product"] : [v],
+                    x: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? [v] : userxindex || ["product"],
+                    y: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? userxindex || ["product"] : [v],
                     seriesName: v
                 }
             }));

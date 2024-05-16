@@ -390,6 +390,20 @@ export const chartList = [
         desc: "面积图",
         name: "面积图",
         category: "charts"
+    },
+    {
+        componentType: "bar",
+        icon: require(`assets/img/stacked_horizontal_bar.png`),
+        desc: "堆积条形图",
+        name: "堆积条形图",
+        category: "charts"
+    },
+    {
+        componentType: "bar",
+        icon: require(`assets/img/stacked_vertical_bar.png`),
+        desc: "堆积柱形图",
+        name: "堆积柱形图",
+        category: "charts"
     }
 ];
 
