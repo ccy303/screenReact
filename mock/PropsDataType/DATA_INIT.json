@@ -32,13 +32,13 @@
                     ["count", "数量", 2, false]
                 ],
                 "rows": [
-                    ["分布", "分布名称", "数量"],
-                    ["a", "非银企", 1],
-                    ["b", "银企", 2],
-                    ["e", "财务公司", 3],
-                    ["d", "财务公司", 4],
-                    ["e", "财务公司", 5],
-                    ["e", "财务公司", 6]
+                    ["分布", "分布名称", "数量", "数字"],
+                    ["a", "非银企", 1, "22"],
+                    ["b", "银企", 2, "23"],
+                    ["e", "财务公司1", 3, "24"],
+                    ["d", "财务公司2", 4, "24"],
+                    ["g", "财务公司3", 5, "25"],
+                    ["r", "财务公司4", 6, "26"]
                 ]
             },
             "zindex": 124,
@@ -53,14 +53,13 @@
                             "left": "auto",
                             "bottom": "auto",
                             "show": true,
-                            "right": "right",
+                            "right": "auto",
                             "textStyle": {
                                 "color": "#2a2a2a",
                                 "fontSize": 12,
                                 "fontStyle": "normal",
                                 "fontWeight": "normal"
-                            },
-                            "align": "right"
+                            }
                         },
                         "series": [
                             {
@@ -118,7 +117,7 @@
                 "borderWidth": 0,
                 "borderOpacity": 1
             },
-            "type": "gauge",
+            "type": "pie",
             "id": "fc0a7887e2d34ce5a36fe1b096ca77b6",
             "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctDistSumaryDataPlugin",
             "category": "charts",
@@ -128,8 +127,8 @@
                 "version": "1"
             },
             "_isShow": true,
-            "userxindex": ["分布"],
-            "useryindex": ["数量"]
+            "userxindex": ["分布名称"],
+            "useryindex": ["数字"]
         },
         {
             "h": 316,
@@ -634,8 +633,8 @@
             "kdId": "",
             "pkid": "",
             "originname": "下拉选择",
-            "selectcontrolItem": "分布",
-            "chartctrl": "fc0a7887e2d34ce5a36fe1b096ca77b6,分布"
+            "selectcontrolItem": "分布名称",
+            "chartctrl": "fc0a7887e2d34ce5a36fe1b096ca77b6,分布名称"
         }
     ]
 }

@@ -11,9 +11,9 @@ const SelectEditor = (props: any) => {
 
     const target: any = itemList.find(v => v.id == props.chartctrl?.split(",")?.[0]);
 
-    const index = target.dataset.dataindex.findIndex((v: any) => v[1] == props.chartctrl?.split(",")?.[1]);
+    const index = target?.dataset?.dataindex?.findIndex?.((v: any) => v[1] == props.chartctrl?.split(",")?.[1]) || -1;
 
-    const options = target.dataset.rows.slice(1).map((v: any) => v[index]);
+    const options = target?.dataset?.rows?.slice?.(1)?.map((v: any) => v[index]);
 
     const changeHandle = (v: any) => {
         const _list = _.cloneDeep(itemList);

@@ -18,7 +18,7 @@ import {
 } from "dw/api";
 
 import { BarChartPieDataLabelTypes, BorderStyleList, CurrencySymbols, DigitalTypes, FunnelLabelPosition } from "dw/api/Constants";
-import { legendPositionList,legendOrientList,legendRectList, unitarea, units } from "dw/api/EchartsOption";
+import { legendPositionList, legendOrientList, legendRectList, unitarea, units } from "dw/api/EchartsOption";
 
 export const DEFAULT_REQUEST_PROP: RequestProps = {
     legendReName: null,
@@ -57,92 +57,141 @@ export const DEFAULT_DATASET = {
 };
 
 export const DEFAULT_PIE_LABEL = {
-    position: 'center',
+    position: "center",
     formatter: function (seriesValue: any) {
-        console.log("formatter",seriesValue);
-        return seriesValue.data[1]+'\n\n'+seriesValue.data[0];
-        }
-  };
+        console.log("formatter", seriesValue);
+        return seriesValue.data[1] + "\n\n" + seriesValue.data[0];
+    }
+};
 export const DEFAULT_PIE_ITEMSTYLE = {
     borderRadius: 0,
-    borderColor: '#fff',
+    borderColor: "#fff",
     borderWidth: 2
-  };
+};
 
-export const DEFAULT_CHARTS_COLOR = [{
-    type: 'linear',
-    x: 0,
-    y: 1,
-    colorStops: [{
-        offset: 0, color: '#248AFF' // 0% 处的颜色
-    }, {
-        offset: 0.5, color: '#6CBEFF' // 100% 处的颜色
-    }, {
-        offset: 1, color: '#6CBEFF' // 100% 处的颜色
-    }],
-    global: false // 缺省为 false
-}, {
-    type: 'linear',
-    x: 0,
-    y: 1,
-    colorStops: [{
-        offset: 0, color: '#FF9E4C' // 0% 处的颜色
-    }, {
-        offset: 0.5, color: '#FFD66D' // 100% 处的颜色
-    }, {
-        offset: 1, color: '#FFD66D' // 100% 处的颜色
-    }],
-    global: false // 缺省为 false
-}, {
-    type: 'linear',
-    x: 0,
-    y: 1,
-    colorStops: [{
-        offset: 0, color: '#84F2D4' // 0% 处的颜色
-    }, {
-        offset: 0.5, color: '#48D1CC' // 50% 处的颜色
-    }, {
-        offset: 1, color: '#48D1CC' // 100% 处的颜色
-    }],
-    global: false // 缺省为 false
-}, {
-    type: 'linear',
-    x: 0,
-    y: 1,
-  
-    colorStops: [{
-        offset: 0, color: '#FFA0AA' // 0% 处的颜色
-    },  {
-        offset: 0.5, color: '#FF5667' // 50% 处的颜色
-    },{
-        offset: 1, color: '#FF5667' // 100% 处的颜色
-    }],
-    global: false // 缺省为 false
-}, {
-    type: 'linear',
-    x: 0,
-    y: 1,
-    colorStops: [{
-        offset: 0, color: '#7C96FF' // 0% 处的颜色
-    }, {
-        offset: 0.5, color: '#3F64FF' // 50% 处的颜色
-    }, {
-        offset: 1, color: '#3F64FF' // 100% 处的颜色
-    }],
-    global: false // 缺省为 false
-}, {
-    type: 'linear',
-    x: 0,
-    y: 1,
-    colorStops: [{
-        offset: 0, color: '#B3FF87' // 0% 处的颜色
-    }, {
-        offset: 0.5, color: '#7CE043' // 50% 处的颜色
-    }, {
-        offset: 1, color: '#7CE043' // 100% 处的颜色
-    }],
-    global: false // 缺省为 false
-}];
+export const DEFAULT_CHARTS_COLOR = [
+    {
+        type: "linear",
+        x: 0,
+        y: 1,
+        colorStops: [
+            {
+                offset: 0,
+                color: "#248AFF" // 0% 处的颜色
+            },
+            {
+                offset: 0.5,
+                color: "#6CBEFF" // 100% 处的颜色
+            },
+            {
+                offset: 1,
+                color: "#6CBEFF" // 100% 处的颜色
+            }
+        ],
+        global: false // 缺省为 false
+    },
+    {
+        type: "linear",
+        x: 0,
+        y: 1,
+        colorStops: [
+            {
+                offset: 0,
+                color: "#FF9E4C" // 0% 处的颜色
+            },
+            {
+                offset: 0.5,
+                color: "#FFD66D" // 100% 处的颜色
+            },
+            {
+                offset: 1,
+                color: "#FFD66D" // 100% 处的颜色
+            }
+        ],
+        global: false // 缺省为 false
+    },
+    {
+        type: "linear",
+        x: 0,
+        y: 1,
+        colorStops: [
+            {
+                offset: 0,
+                color: "#84F2D4" // 0% 处的颜色
+            },
+            {
+                offset: 0.5,
+                color: "#48D1CC" // 50% 处的颜色
+            },
+            {
+                offset: 1,
+                color: "#48D1CC" // 100% 处的颜色
+            }
+        ],
+        global: false // 缺省为 false
+    },
+    {
+        type: "linear",
+        x: 0,
+        y: 1,
+
+        colorStops: [
+            {
+                offset: 0,
+                color: "#FFA0AA" // 0% 处的颜色
+            },
+            {
+                offset: 0.5,
+                color: "#FF5667" // 50% 处的颜色
+            },
+            {
+                offset: 1,
+                color: "#FF5667" // 100% 处的颜色
+            }
+        ],
+        global: false // 缺省为 false
+    },
+    {
+        type: "linear",
+        x: 0,
+        y: 1,
+        colorStops: [
+            {
+                offset: 0,
+                color: "#7C96FF" // 0% 处的颜色
+            },
+            {
+                offset: 0.5,
+                color: "#3F64FF" // 50% 处的颜色
+            },
+            {
+                offset: 1,
+                color: "#3F64FF" // 100% 处的颜色
+            }
+        ],
+        global: false // 缺省为 false
+    },
+    {
+        type: "linear",
+        x: 0,
+        y: 1,
+        colorStops: [
+            {
+                offset: 0,
+                color: "#B3FF87" // 0% 处的颜色
+            },
+            {
+                offset: 0.5,
+                color: "#7CE043" // 50% 处的颜色
+            },
+            {
+                offset: 1,
+                color: "#7CE043" // 100% 处的颜色
+            }
+        ],
+        global: false // 缺省为 false
+    }
+];
 
 export const DEFAULT_STYLE = {
     fontColor: "#2a2a2a",
@@ -594,50 +643,50 @@ export const LEGEND_PROP: ControlProProps = {
         ]
     },
     nodes: [
+        { visible: false, id: "content.config.charts.legend.show", editor: { defaultValue: true } },
+        { visible: false, id: "content.config.charts.legend.left", editor: { defaultValue: "auto" } },
+        { visible: false, id: "content.config.charts.legend.right", editor: { defaultValue: "auto" } },
+        { visible: false, id: "content.config.charts.legend.bottom", editor: { defaultValue: "auto" } },
+        { visible: false, id: "content.config.charts.legend.top", editor: { defaultValue: "auto" } },
+        { visible: false, id: "content.config.charts.legend.align", editor: { defaultValue: "auto" } },
+        { visible: false, id: "content.config.charts.legend.orient", editor: { defaultValue: "horizontal" } },
+        { visible: false, id: "content.config.charts.legend.textStyle.fontWeight", editor: { defaultValue: "normal" } },
+        { visible: false, id: "content.config.charts.legend.textStyle.fontStyle", editor: { defaultValue: "normal" } },
         {
-            visible: false,
-            id: "content.config.charts.legend.show",
-            editor: { defaultValue: true }
+            visible: true,
+            id: "content.config.charts.legend.textStyle.fontSize",
+            name: "字体大小",
+            editor: { component: "Stepper", dataType: "number", defaultValue: 12 }
         },
         {
-            visible: false,
-            id: "content.config.charts.legend.left",
-            editor: { defaultValue: "auto" }
-        },
-        {
-            visible: false,
-            id: "content.config.charts.legend.right",
-            editor: { defaultValue: "auto" }
-        },
-        {
-            visible: false,
-            id: "content.config.charts.legend.bottom",
-            editor: { defaultValue: "auto" }
-        },
-        {
-            visible: false,
+            visible: true,
             id: "content.config.charts.legend.top",
-            editor: { defaultValue: "auto" }
+            name: "距离顶部",
+            editor: { component: "Stepper", dataType: "number", defaultValue: -5 }
         },
         {
-            visible: false,
-            id: "content.config.charts.legend.align",
-            editor: { defaultValue: "auto" }
+            visible: true,
+            id: "content.config.charts.legend.itemWidth",
+            name: "图例宽",
+            editor: { component: "Stepper", dataType: "number", defaultValue: 15 }
         },
         {
-            visible: false,
+            visible: true,
+            id: "content.config.charts.legend.itemHeight",
+            name: "图例高",
+            editor: { component: "Stepper", dataType: "number", defaultValue: 15 }
+        },
+        {
+            visible: true,
+            id: "content.config.charts.legend.textStyle.color",
+            name: "字体颜色",
+            editor: { component: "ColorPicker", dataType: "string", defaultValue: DEFAULT_STYLE.fontColor }
+        },
+        {
+            visible: true,
             id: "content.config.charts.legend.orient",
-            editor: { defaultValue: "horizontal" }
-        },
-        {
-            visible: false,
-            id: "content.config.charts.legend.textStyle.fontWeight",
-            editor: { defaultValue: "normal" }
-        },
-        {
-            visible: false,
-            id: "content.config.charts.legend.textStyle.fontStyle",
-            editor: { defaultValue: "normal" }
+            name: "图例方向",
+            editor: { component: "Select", options: getUpdateArray(legendOrientList), defaultValue: "horizontal" }
         },
         {
             visible: true,
@@ -694,71 +743,10 @@ export const LEGEND_PROP: ControlProProps = {
         },
         {
             visible: true,
-            id: "content.config.charts.legend.textStyle.fontSize",
-            name: "字体大小",
-            editor: {
-                component: "Stepper",
-                dataType: "number",
-                defaultValue: 12
-            }
-        },
-        {
-            visible: true,
-            id: "content.config.charts.legend.top",
-            name: "距离顶部",
-            editor: {
-                component: "Stepper",
-                dataType: "number",
-                defaultValue: -5
-            }
-        },
-        {visible: true,
-            id: "content.config.charts.legend.itemWidth",
-            name: "图例宽",
-            editor: {
-                component: "Stepper",
-                dataType: "number",
-                defaultValue: 15
-            }
-        },
-        {visible: true,
-            id: "content.config.charts.legend.itemHeight",
-            name: "图例高",
-            editor: {
-                component: "Stepper",
-                dataType: "number",
-                defaultValue: 15
-            }
-        },
-        {
-            visible: true,
-            id: "content.config.charts.legend.textStyle.color",
-            name: "字体颜色",
-            editor: {
-                component: "ColorPicker",
-                dataType: "string",
-                defaultValue: DEFAULT_STYLE.fontColor
-            }
-        },
-        {visible: true,
-            id: "content.config.charts.legend.orient",
-            name: "图例方向",
-            editor: {
-                component: "Select",
-                options:getUpdateArray(legendOrientList),
-                defaultValue: "horizontal",
-            }
-        },
-        {visible: true,
             id: "content.config.charts.legend.icon",
             name: "图例形状",
-            editor: {
-                component: "Select",
-                options:getUpdateArray(legendRectList),
-                defaultValue: "rect",
-            }
+            editor: { component: "Select", options: getUpdateArray(legendRectList), defaultValue: "rect" }
         },
-        
         {
             visible: true,
             id: "content.config.fontStyleArray",
@@ -1119,6 +1107,7 @@ export const CHART_DARA_SET: any = {
         }
     ]
 };
+
 export const QUOTA_PROP: ControlProProps = {
     id: "content.quota",
     name: "业务指标内容",

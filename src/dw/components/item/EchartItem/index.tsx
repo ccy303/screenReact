@@ -1,11 +1,12 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import ReactECharts from "echarts-for-react";
-import { Select, Spin } from "@kdcloudjs/kdesign";
+import { Filter, Spin } from "@kdcloudjs/kdesign";
 import KdCard from "dw/components/common/KdCard";
 import _ from "lodash";
 import useMain from "@/dw/store/useMain";
 import { v4 as uuidv4 } from "uuid";
 import { DEFAULT_CHARTS_COLOR, DEFAULT_PIE_ITEMSTYLE, DEFAULT_PIE_LABEL } from "dw/control/common";
+import { format } from "echarts";
 
 const gaugeStyle = {
     startAngle: 180,
@@ -127,7 +128,6 @@ const gaugeStyle = {
 
 const Chart = (item: any) => {
     const { content, userxindex, useryindex, dataset } = item;
-    const { rows } = dataset || {};
     const { config } = content;
     const { charts } = config;
 
@@ -172,27 +172,72 @@ const Chart = (item: any) => {
 
         let series: any = {};
         if (item.type == "pie") {
+            const x = _rows[userxindex[0] || "product"];
+            const y = _rows[useryindex[0] || "2015"];
+
+            let _data = null;
+
+            if (item._echartFilterValue && item._echartFilterValue?.length) {
+                _data = x
+                    ?.filter((v: any) => {
+                        return !item._echartFilterValue?.includes(v);
+                    })
+                    .map((v: any, i: any) => {
+                        return { name: v, value: y[i] };
+                    });
+            } else {
+                _data = x?.map((v: any, i: any) => {
+                    return { name: v, value: y[i] };
+                });
+            }
+
             series = {
                 ...charts.series[0],
                 type: item.type,
                 areaStyle: item.originname == "面积图" ? {} : null,
                 radius: item.originname == "环图" ? ["68%", "80%"] : [0, "80%"],
                 label: item.originname == "环图" ? { ...charts.series[0].label, ...DEFAULT_PIE_LABEL } : { ...charts.series[0].label },
-                itemStyle: item.originname == "环图" ? DEFAULT_PIE_ITEMSTYLE : {}
+                itemStyle: item.originname == "环图" ? DEFAULT_PIE_ITEMSTYLE : {},
+                data: _data
             };
-            if (item._echartFilterValue && item._echartFilterValue?.length) {
-                dataSet.push({
-                    transform: {
-                        type: "filter",
-                        config: {
-                            and: item._echartFilterValue.map((v: any) => {
-                                return { dimension: item._echartFilterKey, "!=": v };
-                            })
+
+            const output = {
+                ...echartOpt,
+                legend: {
+                    ...echartOpt.legend,
+                    formatter: function (name: any) {
+                        console.log(name);
+                        // 添加
+                        let total = 0;
+                        let target;
+                        for (let i = 0; i < _data.length; i++) {
+                            total += _data[i].value;
+                            if (_data[i].name === name) {
+                                target = _data[i].value;
+                            }
+                        }
+                        const arr = ["{a|" + name + "}", target];
+                        return arr.join("  ");
+                    },
+                    textStyle: {
+                        // 添加
+                        rich: {
+                            a: { width: 80 }
                         }
                     }
-                });
-                series.datasetIndex = 1;
+                },
+                series
+            };
+
+            if (!_.isEqual(chartOptionRef.current.option, output)) {
+                setEchartKey(uuidv4());
             }
+
+            chartOptionRef.current = {
+                option: output
+            };
+
+            return output;
         } else if (item.type == "gauge") {
             const y = useryindex?.[0] || "2015";
             const x = userxindex?.[0] || "product";
@@ -288,48 +333,6 @@ const Chart = (item: any) => {
                 <Spin type='page' spinning={showLoading} style={{ width: "100%", height: "100%", justifyContent: "center" }}></Spin>
             ) : (
                 <div style={{ width: "100%", height: "100%" }}>
-                    {/* {item.type == "container" && (
-                        <div style={{ display: "flex", alignItems: "center", justifyContent: "end" }}>
-                            <div style={{ margin: " 0 10px 0 10px" }}>口径:</div>
-                            <Select
-                                placeholder='请输选择'
-                                style={{ width: "100px" }}
-                                value={selectOptionsX.select}
-                                onChange={(e: any) => {
-                                 
-                                }}
-                            >
-                                {selectOptionsX.data?.map((v: any) => {
-                                    return (
-                                        <Select.Option key={v.value} value={v.value}>
-                                            {v.label}
-                                        </Select.Option>
-                                    );
-                                })}
-                            </Select>
-                            <div style={{ margin: " 0 10px 0 10px" }}>维度:</div>
-                            <Select
-                                placeholder='请输选择'
-                                style={{ width: "100px" }}
-                                value={selectOptionsY.select}
-                                onChange={(e: any) => {
-                                    setSelectOptionsY({
-                                        ...selectOptionsY,
-                                        select: e
-                                    });
-                                    console.log(e);
-                                }}
-                            >
-                                {selectOptionsY.data?.map((v: any) => {
-                                    return (
-                                        <Select.Option key={v.value} value={v.value}>
-                                            {v.label}
-                                        </Select.Option>
-                                    );
-                                })}
-                            </Select>
-                        </div>
-                    )} */}
                     <ReactECharts key={echartKey} style={{ width: "100%", height: "100%" }} option={{ ...chartOption }} ref={ref} />
                 </div>
             )}
