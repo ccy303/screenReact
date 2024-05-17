@@ -6,7 +6,6 @@ import _ from "lodash";
 import useMain from "@/dw/store/useMain";
 import { v4 as uuidv4 } from "uuid";
 import { DEFAULT_CHARTS_COLOR, DEFAULT_PIE_ITEMSTYLE, DEFAULT_PIE_LABEL } from "dw/control/common";
-import { format } from "echarts";
 
 const gaugeStyle = {
     startAngle: 180,
@@ -133,8 +132,9 @@ const Chart = (item: any) => {
 
     const [echartKey, setEchartKey] = useState(uuidv4());
 
-    const { getCurrentItem } = useMain();
     const chartOptionRef = useRef<any>({});
+    const activeEchartIndex = useRef(0);
+    const timer = useRef<any>(null);
 
     const initData = [
         ["product", "2015", "2016", "2017"],
@@ -201,31 +201,51 @@ const Chart = (item: any) => {
                 data: _data
             };
 
+            const legend =
+                item.content.config.legendStyle == "customMade"
+                    ? _data.map((v: any, i: any) => {
+                          let position = {};
+                          const width = 100;
+                          if (echartOpt.legend.orient == "horizontal") {
+                              position = {
+                                  [item.content.config.legendPos]:
+                                      item.content.config.legendPos == "left" ? (width + 30 + 30) * i : (width + 30 + 30) * (_data.length - 1 - i)
+                              };
+                          } else if (echartOpt.legend.orient == "vertical") {
+                              position = {
+                                  top: 30 * i,
+                                  [item.content.config.legendPos]: 0
+                              };
+                          }
+                          return {
+                              ...echartOpt.legend,
+                              ...position,
+                              width,
+                              data: [{ name: v.name }],
+                              formatter: function (name: any) {
+                                  // 添加
+                                  let target;
+                                  for (let i = 0; i < _data.length; i++) {
+                                      if (_data[i].name === name) {
+                                          target = _data[i].value;
+                                      }
+                                  }
+                                  const arr = ["{a|" + name + "}", target];
+                                  return arr.join("  ");
+                              },
+                              textStyle: {
+                                  padding: 5,
+                                  // 添加
+                                  rich: {
+                                      a: { width: 80 }
+                                  }
+                              }
+                          };
+                      })
+                    : { ...echartOpt };
+
             const output = {
                 ...echartOpt,
-                legend: {
-                    ...echartOpt.legend,
-                    formatter: function (name: any) {
-                        console.log(name);
-                        // 添加
-                        let total = 0;
-                        let target;
-                        for (let i = 0; i < _data.length; i++) {
-                            total += _data[i].value;
-                            if (_data[i].name === name) {
-                                target = _data[i].value;
-                            }
-                        }
-                        const arr = ["{a|" + name + "}", target];
-                        return arr.join("  ");
-                    },
-                    textStyle: {
-                        // 添加
-                        rich: {
-                            a: { width: 80 }
-                        }
-                    }
-                },
                 series
             };
 
@@ -237,7 +257,7 @@ const Chart = (item: any) => {
                 option: output
             };
 
-            return output;
+            return { ...output, legend };
         } else if (item.type == "gauge") {
             const y = useryindex?.[0] || "2015";
             const x = userxindex?.[0] || "product";
@@ -312,13 +332,6 @@ const Chart = (item: any) => {
 
     const ref: any = useRef(null);
 
-    useEffect(() => {
-        if (getCurrentItem()?.id == item.id) {
-            ref.current?.getEchartsInstance().clear();
-            ref.current?.getEchartsInstance().setOption({ ...chartOption });
-        }
-    }, [chartOption]);
-
     const showLoading = useMemo(() => {
         if (item.pluginname && !item.dataset) {
             return true;
@@ -326,6 +339,51 @@ const Chart = (item: any) => {
             return false;
         }
     }, [item]);
+
+    useEffect(() => {
+        const echart = ref.current.getEchartsInstance();
+        const data = chartOption.series?.data;
+        const legendStyle = item.content.config.legendStyle == "customMade";
+        const legend = chartOption.legend;
+
+        if (item.type == "pie" && echart && data && legendStyle) {
+            clearInterval(timer.current);
+            timer.current = setInterval(() => {
+                echart.dispatchAction({
+                    type: "highlight",
+                    dataIndex: activeEchartIndex.current
+                });
+
+                echart.dispatchAction({
+                    type: "downplay",
+                    dataIndex: activeEchartIndex.current == 0 ? data.length - 1 : activeEchartIndex.current - 1
+                });
+
+                const _legend = legend.map((leg: any, idx: any) => {
+                    if (idx == activeEchartIndex.current) {
+                        return {
+                            ...leg,
+                            shadowColor: "rgba(0, 0, 0, 0.2)",
+                            shadowBlur: 5,
+                            borderWidth: 1,
+                            borderRadius: 5,
+                            backgroundColor: "#fff"
+                        };
+                    } else {
+                        return leg;
+                    }
+                });
+
+                echart.setOption({ legend: [..._legend] }, { replaceMerge: "legend" });
+
+                if (activeEchartIndex.current == data.length - 1) {
+                    activeEchartIndex.current = 0;
+                } else {
+                    activeEchartIndex.current += 1;
+                }
+            }, 3000);
+        }
+    }, [chartOption]);
 
     return (
         <KdCard item={item} showTitle={showTitle}>

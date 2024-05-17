@@ -694,52 +694,27 @@ export const LEGEND_PROP: ControlProProps = {
             name: "图例位置",
             editor: {
                 component: "Select",
-                options: getUpdateArray(legendPositionList),
-                dataType: "number",
-                defaultValue: 0
-            },
-            actions: [
-                {
-                    condition: { value: 0 },
-                    todo: _.cloneDeep(legendPosition0)
-                },
-                {
-                    condition: { value: 1 },
-                    todo: _.cloneDeep(legendPosition1)
-                },
-                {
-                    condition: { value: 2 },
-                    todo: _.cloneDeep(legendPosition2)
-                },
-                {
-                    condition: { value: 3 },
-                    todo: _.cloneDeep(legendPosition3)
-                },
-                {
-                    condition: { value: 4 },
-                    todo: _.cloneDeep(legendPosition4)
-                },
-                {
-                    condition: { value: 5 },
-                    todo: _.cloneDeep(legendPosition5)
-                },
-                {
-                    condition: { value: 6 },
-                    todo: _.cloneDeep(legendPosition6)
-                },
-                {
-                    condition: { value: 7 },
-                    todo: _.cloneDeep(legendPosition7)
-                },
-                {
-                    condition: { value: 8 },
-                    todo: _.cloneDeep(legendPosition8)
-                },
-                {
-                    condition: { value: 9 },
-                    todo: _.cloneDeep(legendPosition9)
-                }
-            ]
+                options: [
+                    { name: "左", value: "left" },
+                    { name: "右", value: "right" }
+                ],
+                dataType: "string",
+                defaultValue: "left"
+            }
+        },
+        {
+            visible: true,
+            id: "content.config.legendStyle",
+            name: "图例样式",
+            editor: {
+                component: "Select",
+                options: [
+                    { name: "默认图例", value: "mornal" },
+                    { name: "定制图例", value: "customMade" }
+                ],
+                dataType: "string",
+                defaultValue: "mornal"
+            }
         },
         {
             visible: true,

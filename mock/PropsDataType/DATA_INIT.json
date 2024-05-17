@@ -85,7 +85,8 @@
                         "digitalType": "digital",
                         "decimalPlace": 2
                     },
-                    "legendPos": 4,
+                    "legendPos": "left",
+                    "legendStyle": "customMade",
                     "label": {
                         "fontStyleArray": []
                     },
