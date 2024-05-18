@@ -172,8 +172,8 @@ const Chart = (item: any) => {
 
         let series: any = {};
         if (item.type == "pie") {
-            const x = _rows[userxindex[0] || "product"];
-            const y = _rows[useryindex[0] || "2015"];
+            const x = _rows[userxindex?.[0] || "product"];
+            const y = _rows[useryindex?.[0] || "2015"];
 
             let _data = null;
 
@@ -242,7 +242,7 @@ const Chart = (item: any) => {
                               }
                           };
                       })
-                    : { ...echartOpt };
+                    : { ...echartOpt.legend, ...{ [item.content.config.legendPos]: item.content.config.legendPos } };
 
             const output = {
                 ...echartOpt,
@@ -341,47 +341,64 @@ const Chart = (item: any) => {
     }, [item]);
 
     useEffect(() => {
+        return () => {
+            clearInterval(timer.current);
+        };
+    }, []);
+
+    useEffect(() => {
         const echart = ref.current.getEchartsInstance();
         const data = chartOption.series?.data;
         const legendStyle = item.content.config.legendStyle == "customMade";
         const legend = chartOption.legend;
 
-        if (item.type == "pie" && echart && data && legendStyle) {
-            clearInterval(timer.current);
-            timer.current = setInterval(() => {
-                echart.dispatchAction({
-                    type: "highlight",
-                    dataIndex: activeEchartIndex.current
-                });
+        clearInterval(timer.current);
 
-                echart.dispatchAction({
-                    type: "downplay",
-                    dataIndex: activeEchartIndex.current == 0 ? data.length - 1 : activeEchartIndex.current - 1
-                });
+        if (item.type == "pie" && echart && data) {
+            if (legendStyle) {
+                timer.current = setInterval(() => {
+                    echart.dispatchAction({
+                        type: "highlight",
+                        dataIndex: activeEchartIndex.current
+                    });
 
-                const _legend = legend.map((leg: any, idx: any) => {
-                    if (idx == activeEchartIndex.current) {
-                        return {
-                            ...leg,
-                            shadowColor: "rgba(0, 0, 0, 0.2)",
-                            shadowBlur: 5,
-                            borderWidth: 1,
-                            borderRadius: 5,
-                            backgroundColor: "#fff"
-                        };
+                    echart.dispatchAction({
+                        type: "downplay",
+                        dataIndex: activeEchartIndex.current == 0 ? data.length - 1 : activeEchartIndex.current - 1
+                    });
+
+                    const _legend = legend.map((leg: any, idx: any) => {
+                        if (idx == activeEchartIndex.current) {
+                            return {
+                                ...leg,
+                                shadowColor: "rgba(0, 0, 0, 0.2)",
+                                shadowBlur: 5,
+                                borderWidth: 1,
+                                borderRadius: 5,
+                                backgroundColor: "#fff"
+                            };
+                        } else {
+                            return leg;
+                        }
+                    });
+
+                    echart.setOption({ legend: [..._legend] }, { replaceMerge: "legend" });
+
+                    if (activeEchartIndex.current == data.length - 1) {
+                        activeEchartIndex.current = 0;
                     } else {
-                        return leg;
+                        activeEchartIndex.current += 1;
                     }
+                }, 3000);
+            } else {
+                echart.setOption({ legend: legend }, { replaceMerge: "legend" });
+                data.forEach((d: any, idx: any) => {
+                    echart.dispatchAction({
+                        type: "downplay",
+                        dataIndex: idx
+                    });
                 });
-
-                echart.setOption({ legend: [..._legend] }, { replaceMerge: "legend" });
-
-                if (activeEchartIndex.current == data.length - 1) {
-                    activeEchartIndex.current = 0;
-                } else {
-                    activeEchartIndex.current += 1;
-                }
-            }, 3000);
+            }
         }
     }, [chartOption]);
 

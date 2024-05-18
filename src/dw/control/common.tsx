@@ -59,7 +59,6 @@ export const DEFAULT_DATASET = {
 export const DEFAULT_PIE_LABEL = {
     position: "center",
     formatter: function (seriesValue: any) {
-        console.log("formatter", seriesValue);
         return seriesValue.data[1] + "\n\n" + seriesValue.data[0];
     }
 };
