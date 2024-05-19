@@ -1,0 +1,176 @@
+{
+    "pageConfig": {
+        "size": "5",
+        "backgroundColor": "#f2f3f5",
+        "backgroundSize": "auto auto",
+        "height": 900,
+        "scale": "none",
+        "url": "",
+        "width": 1600,
+        "id": null,
+        "number": null,
+        "name": null,
+        "configtag": "666666",
+        "version": null,
+        "versiondescribe": null,
+        "themename": null,
+        "themecode": null,
+        "ispublish": "1",
+        "pkid": ""
+    },
+    "itemList": [
+        {
+            "_isShow": true,
+            "name": "tabs1",
+            "chartcontrol": {
+                "ispublish": "1"
+            },
+            "content": {
+                "showBorder": true,
+                "borderColor": "#2a2a2a",
+                "borderOpacity": 1,
+                "borderWidth": 0,
+                "borderStyle": "dotted"
+            },
+            "zindex": 2,
+            "x": 10,
+            "y": 10,
+            "h": 50,
+            "w": 150,
+            "bindscreens": [
+                {
+                    "name": "Tab",
+                    "value": "666666"
+                },
+                {
+                    "name": "Tab2",
+                    "value": "tda_anls_bankacct"
+                }
+            ],
+            "chartname": "tabs1",
+            "t": "2024-05-19 01:37:19",
+            "id": "e6f6e066794b4fe39825fb78b05ca901",
+            "type": "tabs",
+            "category": "tabs",
+            "kdId": "",
+            "pkid": "",
+            "originname": "tabs"
+        },
+        {
+            "_isShow": true,
+            "name": "饼图1",
+            "chartcontrol": {
+                "ispublish": "1"
+            },
+            "content": {
+                "title": {
+                    "show": true,
+                    "fontWeight": "normal",
+                    "fontStyle": "normal",
+                    "underline": "none",
+                    "fontSize": 14,
+                    "fontStyleArray": [],
+                    "align": "center",
+                    "fontColor": "#2a2a2a",
+                    "backColor": "#fff"
+                },
+                "config": {
+                    "charts": {
+                        "legend": {
+                            "show": true,
+                            "left": "auto",
+                            "right": "auto",
+                            "bottom": "auto",
+                            "top": -5,
+                            "align": "auto",
+                            "orient": "horizontal",
+                            "textStyle": {
+                                "fontWeight": "normal",
+                                "fontStyle": "normal",
+                                "fontSize": 12,
+                                "color": "#2a2a2a"
+                            },
+                            "itemWidth": 15,
+                            "itemHeight": 15,
+                            "icon": "rect"
+                        },
+                        "series": [
+                            {
+                                "label": {
+                                    "show": true,
+                                    "fontWeight": "normal",
+                                    "fontStyle": "normal",
+                                    "fontSize": 12,
+                                    "color": "#2a2a2a",
+                                    "position": "outside"
+                                },
+                                "barWidth": 10,
+                                "starAngle": 90
+                            }
+                        ]
+                    },
+                    "legendPos": "left",
+                    "legendStyle": "mornal",
+                    "fontStyleArray": [],
+                    "label": {
+                        "fontStyleArray": []
+                    },
+                    "digitalFormat": {
+                        "dataLabelType": "classificationdatavalue",
+                        "digitalType": "digital",
+                        "currencySymbols": "¥",
+                        "unit": 1,
+                        "decimalPlace": 2,
+                        "enableThousands": false,
+                        "unitarea": 1
+                    },
+                    "unit": 1,
+                    "showStarAngle": false
+                },
+                "showBak": true,
+                "backgroundColor": "#fff",
+                "opacity": 1,
+                "showBorder": true,
+                "borderColor": "#2a2a2a",
+                "borderOpacity": 1,
+                "borderWidth": 0,
+                "borderStyle": "dotted",
+                "desc": {
+                    "show": false,
+                    "content": ""
+                },
+                "chartParameters": true
+            },
+            "dataset": {
+                "dataindex": [
+                    ["distribute", "分布", 1, false],
+                    ["distribute_name", "分布名称", 1, false],
+                    ["count", "数量", 2, false]
+                ],
+                "rows": [
+                    ["分布", "分布名称", "数量", "数字"],
+                    ["a", "非银企", 1, "22"],
+                    ["b", "银企", 2, "23"],
+                    ["e", "财务公司1", 3, "24"],
+                    ["d", "财务公司2", 4, "24"],
+                    ["g", "财务公司3", 5, "25"],
+                    ["r", "财务公司4", 6, "26"]
+                ]
+            },
+            "title": "标题",
+            "zindex": 2,
+            "x": 14,
+            "y": 394,
+            "h": 300,
+            "w": 400,
+            "pkid": "",
+            "chartname": "饼图1",
+            "t": "2024-05-19 16:46:10",
+            "id": "0126b04f62ad4cf591c5123850b41dd3",
+            "type": "pie",
+            "category": "charts",
+            "kdId": "",
+            "originname": "饼图"
+        }
+    ]
+}

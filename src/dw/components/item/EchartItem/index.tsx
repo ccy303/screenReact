@@ -183,11 +183,11 @@ const Chart = (item: any) => {
                         return !item._echartFilterValue?.includes(v);
                     })
                     .map((v: any, i: any) => {
-                        return { name: v, value: y[i] };
+                        return { name: v, value: y?.[i] };
                     });
             } else {
                 _data = x?.map((v: any, i: any) => {
-                    return { name: v, value: y[i] };
+                    return { name: v, value: y?.[i] };
                 });
             }
 
