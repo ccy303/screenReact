@@ -16,44 +16,6 @@
         "version": "1",
         "configtag": "tda_anls_bankacct"
     },
-    "pluginSet": [
-        {
-            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctByChangeDataPlugin",
-            "ids": ["1938632125775702022"]
-        },
-        {
-            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.AcctDisplayByBankQingAnlsPlugin",
-            "ids": ["1938632125775454214"]
-        },
-        {
-            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctByUsageDataPlugin",
-            "ids": ["1938632125775702021", "1938632125775454212"]
-        },
-        {
-            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.FundConcentrationQingPlugin",
-            "ids": ["1938632125775702019"]
-        },
-        {
-            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.SecCompBankAcctDataPlugin",
-            "ids": ["1938632125775454210"]
-        },
-        {
-            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.DormantDataQingAnlsPlugin",
-            "ids": ["1938632125775454213"]
-        },
-        {
-            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctDistSumaryDataPlugin",
-            "ids": ["1938632125775702016"]
-        },
-        {
-            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctByTypeDataPlugin",
-            "ids": ["1938632125775454209", "1938632125775702018"]
-        },
-        {
-            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankInterfaceOpenRateDataPulgin",
-            "ids": ["1938632125775454211"]
-        }
-    ],
     "invokeKey": "selectconfig/f4fac583-3ec8-4386-bf8f-cc109d687fc5",
     "itemList": [
         {

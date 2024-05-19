@@ -12,6 +12,7 @@ import EchartDataSet from "dw/components/editor/EchartDataSet";
 import VersionSelect from "dw/components/editor/VersionSelect";
 import ChartIdSelect from "dw/components/editor/ChartIdSelect";
 import RadiosOptions from "dw/components/editor/RadiosOptions";
+import Bindscreens from "dw/components/editor/Bindscreens";
 
 export type EditorMapProp = {
     Checkbox: any;
@@ -43,6 +44,7 @@ const editorMap: EditorMapProp = {
     EchartDataSet: EchartDataSet,
     VersionSelect: VersionSelect,
     ChartIdSelect: ChartIdSelect,
-    RadiosOptions: RadiosOptions
+    RadiosOptions: RadiosOptions,
+    Bindscreens: Bindscreens
 };
 export default editorMap;

@@ -57,15 +57,15 @@ const KdCard: FC<KdCardProps> = ({ item, children, showTitle }) => {
             : null;
     };
 
-    const rgb: any = hexToRgb(item.content.backgroundColor) || {};
+    const rgb: any = hexToRgb(item.content?.backgroundColor) || {};
 
     const style = {
-        borderWidth: item.content.showBorder ? item.content.borderWidth : 0,
-        borderStyle: item.content.borderStyle,
-        borderColor: item.content.borderColor,
+        borderWidth: item.content?.showBorder ? item.content?.borderWidth : 0,
+        borderStyle: item.content?.borderStyle,
+        borderColor: item.content?.borderColor,
         backgroundColor: `rgba(${rgb.r},${rgb.g},${rgb.b},${item.content?.opacity})`,
         boxShadow: item.content.showBorder ? "0 2px 12px 0 rgba(0,0,0,.1)" : "none",
-        backgroundImage: `url(${item.content.backgroundImage})`,
+        backgroundImage: `url(${item.content?.backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center"
     };

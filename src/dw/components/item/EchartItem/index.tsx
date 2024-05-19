@@ -347,7 +347,10 @@ const Chart = (item: any) => {
     }, []);
 
     useEffect(() => {
-        const echart = ref.current.getEchartsInstance();
+        const echart = ref.current?.getEchartsInstance();
+        if (!echart) {
+            return;
+        }
         const data = chartOption.series?.data;
         const legendStyle = item.content.config.legendStyle == "customMade";
         const legend = chartOption.legend;

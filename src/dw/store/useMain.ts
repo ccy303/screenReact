@@ -63,7 +63,7 @@ export type DatasetProps = TreeNodeProps & {
     parentid: string;
 };
 
-const globalConfigState = atom<GlobalConfigProps>({
+const globalConfigState = atom<any>({
     key: "global",
     default: {
         selectId: "",
@@ -74,12 +74,12 @@ const globalConfigState = atom<GlobalConfigProps>({
     }
 });
 
-const itemListState = atom<ComponentItemProps[]>({
+const itemListState = atom<any>({
     key: "itemList",
     default: []
 });
 
-const groupState = atom<GroupProps>({
+const groupState = atom<any>({
     key: "group",
     default: {
         groups: [],
@@ -87,7 +87,7 @@ const groupState = atom<GroupProps>({
     }
 });
 
-const propertiesState = atom<PropertiesProps>({
+const propertiesState = atom<any>({
     key: "properties",
     default: []
 });
@@ -95,10 +95,10 @@ const propertiesState = atom<PropertiesProps>({
 export let globalItemList: any = [];
 
 const useMain = () => {
-    const [globalConfig, setGlobalConfig] = useRecoilState<GlobalConfigProps>(globalConfigState);
-    const [itemList, setItemList] = useRecoilState<ComponentItemProps[]>(itemListState);
-    const [group, setGroup] = useRecoilState<GroupProps>(groupState);
-    const [properties, setProperties] = useRecoilState<PropertiesProps>(propertiesState);
+    const [globalConfig, setGlobalConfig] = useRecoilState<any>(globalConfigState);
+    const [itemList, setItemList] = useRecoilState<any>(itemListState);
+    const [group, setGroup] = useRecoilState<any>(groupState);
+    const [properties, setProperties] = useRecoilState<any>(propertiesState);
 
     const addItem = (c: any, sources: any = {}) => {
         const { category } = c;
@@ -356,6 +356,8 @@ const useMain = () => {
         const { itemList: it, pageConfig, isShow, pluginSet } = data;
         const radios: any = [];
 
+        console.log(data);
+
         it.map((item: any) => {
             item.category == "radio" && radios.push(item);
             if (zIndexNumber < item.zindex) {
@@ -380,8 +382,9 @@ const useMain = () => {
             pluginSet,
             pageControl: formatData({ pageConfig })
         });
+
         setItemList(it);
-        callback?.(it);
+        selectPageGroup();
     };
 
     // 设置echart 数据
@@ -421,7 +424,15 @@ const useMain = () => {
         }
     };
 
+    // 大屏切换
+    const init = () => {
+        setGlobalConfig({ selectId: "", selectType: "", pageControl: { pageConfig: DEFAULT_PAGE_CONFIG } });
+        setGroup({ groups: [], current: "data" });
+        setProperties([]);
+        selectPageGroup();
+    };
     return {
+        init,
         initPage,
         itemList,
         properties,

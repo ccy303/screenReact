@@ -325,15 +325,33 @@ const quotaControls: any = {
     ]
 };
 
-// const tabsControls: any = {
-//     group: [
-//         {
-//             id: "dataset",
-//             name: "数据配置",
-//             properties: [CHART_DARA_SET]
-//         }
-//     ]
-// };
+const tabsControls: any = {
+    group: [
+        {
+            id: "data",
+            name: "属性",
+            properties: [
+                CHART_BASE_INFO,
+                BORDER_PROP,
+                POSITION_PROP(150, 50),
+                {
+                    defaultOpen: true,
+                    id: "base",
+                    name: "大屏绑定",
+                    nodes: [
+                        {
+                            visible: true,
+                            id: "bindscreens",
+                            name: "大屏标识",
+                            editor: { component: "Bindscreens" },
+                            style: { height: "auto" }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+};
 
 export const ComponentControlMap: any = {
     charts: echartControls,
@@ -343,7 +361,7 @@ export const ComponentControlMap: any = {
     select: selectControls,
     radio: radioControls,
     quota: quotaControls,
-    // tabs: tabsControls,
+    tabs: tabsControls
 };
 
 export const chartList = [

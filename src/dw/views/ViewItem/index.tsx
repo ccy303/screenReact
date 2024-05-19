@@ -26,7 +26,7 @@ const BaseView = () => {
     // 要处理的数据列表
     const _itemList: any = useRef([]);
     const {
-        globalConfig: { pluginSet },
+        globalConfig: { pluginSet, pageControl },
         itemList,
         setItemList,
         initPage
@@ -65,6 +65,25 @@ const BaseView = () => {
         } else if (key == "selectoption") {
             console.log(`%c(selectoption)回调返回`, "color:#00ff00", JSON.parse(JSON.stringify(data)));
             changeLocalItemList(data?.itemList);
+        } else if (key == "screenchange") {
+            console.log(`%c(screenchange)回调返回`, "color:#00ff00", JSON.parse(JSON.stringify(data)));
+            const { itemList } = data;
+            let zindex = 0;
+            itemList.map((item: any) => item.zindex > zindex && (zindex = item.zindex));
+            const _itemList = itemList.map((item: any) => {
+                const _item = _.cloneDeep(item);
+                delete _item._isShow;
+                _item.zindex > zindex && (zindex = _item.zindex);
+                return _item;
+            });
+            const targetTab = JSON.parse(localStorage.getItem("targetTab") || "");
+            const _data = {
+                ...data,
+                itemList: [..._itemList, { ...targetTab, zindex: zindex + 1 }]
+            };
+            setTimeout(() => {
+                initPage(_data);
+            });
         }
     };
 
@@ -84,13 +103,12 @@ const BaseView = () => {
             initInvokeKeyObserve(key, data);
         });
         observe(loadingObserver, ({ newValue }: any) => {
-            console.log(newValue);
             setLoading(newValue);
         });
-        // invokeKeyObserver.invokeCallback = {
-        //     key: "selectconfig",
-        //     data: { ...JSONData }
-        // };
+        invokeKeyObserver.invokeCallback = {
+            key: "selectconfig",
+            data: { ...JSONData }
+        };
     }, []);
 
     useEffect(() => {
