@@ -1012,7 +1012,7 @@ export const CHART_BASE_INFO: any = {
     nodes: [
         {
             visible: true,
-            id: "chartname",
+            id: "name",
             name: "组件名称",
             editor: { component: "Input", defaultValue: "name" }
         },
