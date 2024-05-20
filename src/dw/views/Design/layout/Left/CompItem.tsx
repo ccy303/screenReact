@@ -54,7 +54,7 @@ const CompItem = () => {
                     >
                         <div>
                             <Icon type='arrow-right-solid' />
-                            {d.chartname}
+                            {d.name}
                             <>{!d._isShow && "(已隐藏)"}</>
                         </div>
                         <Icon type='delete' onClick={e => del(e, d.id)} />
