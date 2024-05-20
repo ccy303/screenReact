@@ -106,10 +106,10 @@ const BaseView = () => {
         observe(loadingObserver, ({ newValue }: any) => {
             setLoading(newValue);
         });
-        invokeKeyObserver.invokeCallback = {
-            key: "selectconfig",
-            data: { ...JSONData }
-        };
+        // invokeKeyObserver.invokeCallback = {
+        //     key: "selectconfig",
+        //     data: { ...JSONData }
+        // };
     }, []);
 
     useEffect(() => {

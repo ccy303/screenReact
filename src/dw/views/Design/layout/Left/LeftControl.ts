@@ -333,7 +333,7 @@ const tabsControls: any = {
             properties: [
                 CHART_BASE_INFO,
                 BORDER_PROP,
-                POSITION_PROP(150, 50),
+                POSITION_PROP(200, 100),
                 {
                     defaultOpen: true,
                     id: "base",
