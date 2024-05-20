@@ -31,8 +31,8 @@ const gaugeStyle = {
     },
     pointer: {
         icon: "triangle", //'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',
-        length: "60%",
-        width: 15,
+        length: "65%",
+        width: 10,
         offsetCenter: [0, 0],
         itemStyle: {
             color: {
@@ -56,7 +56,7 @@ const gaugeStyle = {
     anchor: {
         show: true,
         showAbove: true,
-        size: 15,
+        size: 10,
         icon: "circle",
         offsetCenter: [0, 0],
         itemStyle: {
@@ -68,10 +68,10 @@ const gaugeStyle = {
     axisTick: {
         show: true,
         length: 10,
-        splitNumber: 15,
-        distance: 32,
+        splitNumber: 20,
+        distance: 30,
         lineStyle: {
-            color: "#1890FF",
+            color: "#89C7FF",
             width: 1
         }
     },
