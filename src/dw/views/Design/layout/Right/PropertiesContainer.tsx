@@ -7,6 +7,7 @@ import editorMap from "dw/components/editor";
 import { Button, Message } from "@kdcloudjs/kdesign";
 import _ from "lodash";
 import { ViewItemContext } from "dw/views/ViewItem";
+import { toJS } from "mobx";
 import "./PropertiesContainer.less";
 // import itemJson from "../../../../../../mock/PropsDataType/ITEM_TEST.json";
 
@@ -98,11 +99,10 @@ export const PropertiesContainer: FC<any> = props => {
         group,
         changeItem,
         getCurrentItem,
-        initPage,
         itemList
     } = useMain();
 
-    const { model } = useContext(ViewItemContext);
+    const { model, deleteObserver } = useContext(ViewItemContext);
 
     const prefixCls = "dw-design-right-properties-view";
     const currentItem = getCurrentItem();
@@ -174,9 +174,13 @@ export const PropertiesContainer: FC<any> = props => {
                         <Button
                             type='primary'
                             onClick={() => {
-                                const data = { pageConfig: { ...(pageControl.pageConfig as any) }, itemList };
+                                const data = {
+                                    pageConfig: { ...(pageControl.pageConfig as any) },
+                                    itemList,
+                                    deleteList: toJS(deleteObserver.deletes)
+                                };
                                 console.log(`%c提交数据`, "color:#00ff00", data);
-                                model?.invoke?.("save", JSON.stringify(data));
+                                model?.invoke?.("save", JSON.stringify({ ...data }));
                             }}
                         >
                             保存

@@ -310,7 +310,6 @@ const useMain = () => {
                 pageItem = _.cloneDeep(globalConfig.pageControl);
             }
             const pageProp: ControlGroupProps[] = _.cloneDeep(pageGroup);
-
             pageProp.forEach((g, i) => {
                 const { properties: pros } = g;
                 pros.forEach(p => {

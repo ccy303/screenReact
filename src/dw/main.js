@@ -20,6 +20,9 @@ import JSON from "../../mock/PropsDataType/DATA_INIT.json";
     const loadingObserver = observable({
         loading: false
     });
+    const deleteObserver = observable({
+        deletes: []
+    });
     const setHtml = function (model, primaryProps) {
         KDApi.loadFile("./index.css", model, () => {
             console.log("loadFileSuccess");
@@ -39,7 +42,13 @@ import JSON from "../../mock/PropsDataType/DATA_INIT.json";
                 render() {
                     const { customProps, model } = this.state;
                     return (
-                        <ViewItem model={model} customProps={customProps} invokeKeyObserver={invokeKeyObserver} loadingObserver={loadingObserver} />
+                        <ViewItem
+                            model={model}
+                            customProps={customProps}
+                            invokeKeyObserver={invokeKeyObserver}
+                            loadingObserver={loadingObserver}
+                            deleteObserver={deleteObserver}
+                        />
                     );
                 }
             }

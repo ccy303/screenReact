@@ -1,10 +1,11 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { Icon, Tree } from "@kdcloudjs/kdesign";
 import NavCard from "dw/components/common/NavCard";
 import useMain from "dw/store/useMain";
 import { ComponentItemProps } from "dw/control/interface";
 import { prefixClsLeft } from "dw/views/Design/layout/Left/index";
-
+import { ViewItemContext } from "../../../ViewItem/index";
+import _ from "lodash";
 const CompItem = () => {
     const {
         itemList,
@@ -12,6 +13,8 @@ const CompItem = () => {
         delItem,
         globalConfig: { selectId }
     } = useMain();
+
+    const { deleteObserver } = useContext(ViewItemContext);
 
     const click = (e: any, id: any) => {
         e.preventDefault();
@@ -22,13 +25,20 @@ const CompItem = () => {
     const del = (e: any, id: any) => {
         e.preventDefault();
         e.stopPropagation();
+        const _itemList = _.cloneDeep(itemList);
+        const target = _itemList.find((item: any) => {
+            return item.id === id;
+        });
+        if (target.kdId) {
+            deleteObserver.deletes.push(target.kdId);
+        }
         delItem(id);
     };
 
     const getItemList = useCallback(() => {
         const map: any = {};
         const ret: ComponentItemProps[] = [];
-        itemList?.forEach(d => {
+        itemList?.forEach((d: any) => {
             const t = {
                 ...d,
                 title: (

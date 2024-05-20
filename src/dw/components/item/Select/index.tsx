@@ -1,5 +1,5 @@
 import { Select } from "@kdcloudjs/kdesign";
-import React, { useState } from "react";
+import React, { useMemo, useState, use } from "react";
 import "./index.less";
 import useMain from "@/dw/store/useMain";
 import _ from "lodash";
@@ -7,7 +7,7 @@ import _ from "lodash";
 const SelectEditor = (props: any) => {
     const [dataValue, setValue] = useState([]);
 
-    const { itemList, changeItem, setItemList } = useMain();
+    const { itemList, setItemList } = useMain();
 
     const target: any = itemList.find(v => v.id == props.chartctrl?.split(",")?.[0]);
 
@@ -27,15 +27,24 @@ const SelectEditor = (props: any) => {
     };
 
     return (
-        <Select value={dataValue} className='warp' onChange={changeHandle} placeholder='请选择' mode='multiple'>
-            {(Array.from(new Set(options)) || []).map((v: any) => {
-                return (
-                    <Select.Option key={v} value={v}>
-                        {v}
-                    </Select.Option>
-                );
-            })}
-        </Select>
+        <div className='warp'>
+            <Select
+                value={dataValue}
+                style={{ width: "100%", height: "100%" }}
+                onChange={changeHandle}
+                placeholder='请选择'
+                showSearch={false}
+                mode='multiple'
+            >
+                {(Array.from(new Set(options)) || []).map((v: any, idx: any) => {
+                    return (
+                        <Select.Option key={idx} value={v}>
+                            {v}
+                        </Select.Option>
+                    );
+                })}
+            </Select>
+        </div>
     );
 };
 

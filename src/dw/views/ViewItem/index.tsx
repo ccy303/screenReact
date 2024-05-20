@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useContext, useState, useRef } from "react";
+import React, { FC, useEffect, useContext, useState, useRef, useCallback } from "react";
 import { Spin } from "@kdcloudjs/kdesign";
 import { RecoilRoot } from "recoil";
 import "dw/style/reset.less";
@@ -18,7 +18,8 @@ export const defaultViewItemContext = {
     model: { test: true },
     customProps: { isShow: false },
     invokeKeyObserver: observable({ invokeCallback: null }),
-    loadingObserver: observable({ loading: false })
+    loadingObserver: observable({ loading: false }),
+    deleteObserver: observable({ deletes: [] })
 };
 
 export const ViewItemContext = React.createContext<any>(defaultViewItemContext);
@@ -35,17 +36,19 @@ const BaseView = () => {
 
     const [loading, setLoading] = useState(false);
 
-    const { model, invokeKeyObserver, loadingObserver } = useContext(ViewItemContext);
+    const { model, invokeKeyObserver, loadingObserver, deleteObserver } = useContext(ViewItemContext);
 
     const isForPluginData: any = useRef(false);
+    const observeRef: any = useRef(null);
 
-    const initInvokeKeyObserve = (key: any, data: any) => {
+    const initInvokeKeyObserve = useCallback((key: any, data: any) => {
         data = toJS(data);
         if (key == "selectconfig") {
             // 大屏查询
             console.log(`%c大屏查询`, "color:#00ff00", JSON.parse(JSON.stringify(data)));
             isForPluginData.current = false;
             initPage({ ...data });
+            deleteObserver.deletes = [];
             loadingObserver.loading = false;
             _itemList.current = data.itemList;
         } else if (["refresh", "optionversion", "selectTable"].includes(key)) {
@@ -57,11 +60,13 @@ const BaseView = () => {
             console.log(`%c大屏版本修改`, "color:#00ff00", JSON.parse(JSON.stringify(data)));
             isForPluginData.current = false;
             initPage({ ...data });
+            deleteObserver.deletes = [];
             _itemList.current = data.itemList;
         } else if (key == "init") {
             console.log(`%c大屏init`, "color:#00ff00", JSON.parse(JSON.stringify(data)));
             isForPluginData.current = false;
             initPage({ ...data });
+            deleteObserver.deletes = [];
             _itemList.current = data.itemList;
         } else if (key == "selectoption") {
             console.log(`%c(selectoption)回调返回`, "color:#00ff00", JSON.parse(JSON.stringify(data)));
@@ -83,10 +88,11 @@ const BaseView = () => {
                 itemList: [..._itemList, { ...targetTab, zindex: zindex + 1 }]
             };
             setTimeout(() => {
+                deleteObserver.deletes = [];
                 initPage(_data);
             });
         }
-    };
+    }, []);
 
     const changeLocalItemList = (items: any) => {
         const cloneItl = _.cloneDeep(_itemList.current);
@@ -99,17 +105,19 @@ const BaseView = () => {
     };
 
     useEffect(() => {
-        observe(invokeKeyObserver, ({ newValue }: any) => {
+        observeRef.current?.();
+        observeRef.current = observe(invokeKeyObserver, ({ newValue }: any) => {
             const { key, data } = newValue;
             initInvokeKeyObserve(key, data);
         });
+
         observe(loadingObserver, ({ newValue }: any) => {
             setLoading(newValue);
         });
-        // invokeKeyObserver.invokeCallback = {
-        //     key: "selectconfig",
-        //     data: { ...JSONData }
-        // };
+        invokeKeyObserver.invokeCallback = {
+            key: "selectconfig",
+            data: { ...JSONData }
+        };
     }, []);
 
     useEffect(() => {
