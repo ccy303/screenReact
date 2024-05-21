@@ -6,6 +6,7 @@ import _ from "lodash";
 import useMain from "@/dw/store/useMain";
 import { v4 as uuidv4 } from "uuid";
 import { DEFAULT_CHARTS_COLOR, DEFAULT_PIE_ITEMSTYLE, DEFAULT_PIE_LABEL } from "dw/control/common";
+import Right from "@/dw/views/Design/layout/Right";
 
 const gaugeStyle = {
     startAngle: 180,
@@ -219,8 +220,9 @@ const Chart = (item: any) => {
                               };
                           } else if (echartOpt.legend.orient == "vertical") {
                               position = {
-                                  top: 30 * i,
-                                  [item.content.config.legendPos]: 0
+                                  top: i ? 30 * (i + 1) : 30 ,
+                                  [item.content.config.legendPos]: 0,
+                               
                               };
                           }
                           return {
