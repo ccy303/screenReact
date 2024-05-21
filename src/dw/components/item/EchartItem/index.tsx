@@ -176,7 +176,7 @@ const Chart = (item: any) => {
             const y = _rows[useryindex?.[0] || "2015"];
 
             let _data = null;
-
+            let _center = ['50%','50%'];
             if (item._echartFilterValue && item._echartFilterValue?.length) {
                 _data = x
                     ?.filter((v: any) => {
@@ -190,6 +190,11 @@ const Chart = (item: any) => {
                     return { name: v, value: y?.[i] };
                 });
             }
+            if(item.content.config.charts.legend.orient == "vertical" && item.content.config.legendPos == "right"){
+                _center = ['30%','50%'];
+            } else if(item.content.config.charts.legend.orient == "vertical" && item.content.config.legendPos == "left"){
+                _center = ['60%','50%'];
+            }
 
             series = {
                 ...charts.series[0],
@@ -198,6 +203,7 @@ const Chart = (item: any) => {
                 radius: item.originname == "环图" ? ["68%", "80%"] : [0, "80%"],
                 label: item.originname == "环图" ? { ...charts.series[0].label, ...DEFAULT_PIE_LABEL } : { ...charts.series[0].label },
                 itemStyle: item.originname == "环图" ? DEFAULT_PIE_ITEMSTYLE : {},
+                center:_center,
                 data: _data
             };
 
