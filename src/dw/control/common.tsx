@@ -58,6 +58,7 @@ export const DEFAULT_DATASET = {
 
 export const DEFAULT_PIE_LABEL = {
     position: "center",
+    show: false,
     formatter: "{c} \n\n {b}"
 };
 export const DEFAULT_PIE_ITEMSTYLE = {

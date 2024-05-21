@@ -1,9 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState,useContext } from "react";
 import ReactECharts from "echarts-for-react";
 import { Filter, Spin } from "@kdcloudjs/kdesign";
 import KdCard from "dw/components/common/KdCard";
 import _ from "lodash";
 import useMain from "@/dw/store/useMain";
+import { ViewItemContext } from "dw/views/ViewItem";
 import { v4 as uuidv4 } from "uuid";
 import { DEFAULT_CHARTS_COLOR, DEFAULT_PIE_ITEMSTYLE, DEFAULT_PIE_LABEL } from "dw/control/common";
 import Right from "@/dw/views/Design/layout/Right";
@@ -127,6 +128,8 @@ const gaugeStyle = {
 };
 
 const Chart = (item: any) => {
+    const { getCurrentItem } = useMain();
+    const { model } = useContext(ViewItemContext);
     const { content, userxindex, useryindex, dataset } = item;
     const { config } = content;
     const { charts } = config;
@@ -203,6 +206,11 @@ const Chart = (item: any) => {
                 areaStyle: item.originname == "面积图" ? {} : null,
                 radius: item.originname == "环图" ? ["68%", "80%"] : [0, "80%"],
                 label: item.originname == "环图" ? { ...charts.series[0].label, ...DEFAULT_PIE_LABEL } : { ...charts.series[0].label },
+                emphasis: {
+                    label: {
+                      show: true
+                    }
+                  },
                 itemStyle: item.originname == "环图" ? DEFAULT_PIE_ITEMSTYLE : {},
                 center:_center,
                 data: _data
@@ -412,14 +420,24 @@ const Chart = (item: any) => {
             }
         }
     }, [chartOption]);
+    const onChartClick = (params: any) => {
+        // 在这里处理点击事件，可以获取点击的图形的数据
+        const currentItem = getCurrentItem();
+        const {dataIndex} = params;
+        const {pluginname} = currentItem;
+        const {dataset} = currentItem;
 
+        const clickData = {pluginname:pluginname,dataindex:dataset.dataindex,row:dataset.rows[dataIndex+1]};
+        console.log("Clicked",  clickData);
+        model?.invoke?.("clickcharts", JSON.stringify(clickData));
+      };
     return (
         <KdCard item={item} showTitle={showTitle}>
             {showLoading ? (
                 <Spin type='page' spinning={showLoading} style={{ width: "100%", height: "100%", justifyContent: "center" }}></Spin>
             ) : (
                 <div style={{ width: "100%", height: "100%" }}>
-                    <ReactECharts key={echartKey} style={{ width: "100%", height: "100%" }} option={{ ...chartOption }} ref={ref} />
+                    <ReactECharts key={echartKey} style={{ width: "100%", height: "100%" }} option={{ ...chartOption }} ref={ref} onEvents={{ click: onChartClick }} /> 
                 </div>
             )}
         </KdCard>
