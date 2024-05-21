@@ -18,12 +18,6 @@ export default (item: any) => {
 
     const chartOption = useMemo(() => {
         return {
-            // visualMap: {
-            //     left: "left",
-            //     inRange: {
-            //         color: ["#add8e6", "#87cefa", "#00bfff", "#1e90ff", "#0000ff"]
-            //     }
-            // },
             geo: [
                 {
                     map: "china",
@@ -35,13 +29,12 @@ export default (item: any) => {
                     z: 5,
                     itemStyle: {
                         areaColor: "#d9e8ff",
-                        borderColor: "#fff",
-                        borderWidth: 1.5,
+                        borderColor: "#aaa",
+                        borderWidth: 1,
                         shadowColor: "#0f4c74",
                         shadowOffsetX: 0,
-                        shadowOffsetY: 2,
-                        shadowBlur: 5
-                    }
+                        shadowOffsetY: 0,
+                        }
                 },
                 {
                     map: "china",
@@ -53,12 +46,11 @@ export default (item: any) => {
                     z: 4,
                     itemStyle: {
                         areaColor: "#004b75",
-                        borderColor: "#195175",
-                        borderWidth: 1.5,
+                        borderWidth: 0,
                         shadowColor: "#0f4c74",
                         shadowOffsetX: 0,
                         shadowOffsetY: 2,
-                        shadowBlur: 5
+                        shadowBlur: 2
                     }
                 }
             ]

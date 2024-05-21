@@ -457,13 +457,6 @@ export const otherComp = [
         category: "text"
     },
     {
-        componentType: "text",
-        icon: require(`assets/img/analysis_text.png`),
-        desc: "文字",
-        name: "文字",
-        category: "text"
-    },
-    {
         componentType: "border",
         icon: require(`assets/img/square.png`),
         desc: "边框",

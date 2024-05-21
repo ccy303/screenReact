@@ -270,7 +270,7 @@ const useMain = () => {
             const cloneItemList = _.cloneDeep(itemList);
             const currentItem = cloneItemList.filter((f: any) => f.id === rootId)[0];
             const category = currentItem.category;
-            _.set(currentItem, "zindex", zIndexNumber++);
+            // _.set(currentItem, "zindex", zIndexNumber++);
             // @ts-ignore
             const currentProp: ControlGroupProps[] = _.cloneDeep(ComponentControlMap[category]).group;
 

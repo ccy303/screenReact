@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState, useContext } from "react";
+import React, { useEffect, useMemo, useRef, useState, useContext, useCallback } from "react";
 import ReactECharts from "echarts-for-react";
 import { Filter, Spin } from "@kdcloudjs/kdesign";
 import KdCard from "dw/components/common/KdCard";
@@ -128,7 +128,6 @@ const gaugeStyle = {
 };
 
 const Chart = (item: any) => {
-    const { getCurrentItem } = useMain();
     const { model } = useContext(ViewItemContext);
     const { content, userxindex, useryindex, dataset } = item;
     const { config } = content;
@@ -334,11 +333,11 @@ const Chart = (item: any) => {
             setEchartKey(uuidv4());
         }
 
-        item.type == "gauge" && _.assign(output.series, gaugeStyle);
-
         chartOptionRef.current = {
-            option: output
+            option: _.cloneDeep(output)
         };
+
+        item.type == "gauge" && _.assign(output.series, gaugeStyle);
 
         return output;
     }, [userxindex, useryindex, charts, item._echartFilterValue, item._echartFilterKey]);
@@ -419,16 +418,16 @@ const Chart = (item: any) => {
             }
         }
     }, [chartOption]);
-    const onChartClick = (params: any) => {
+
+    const onChartClick = useCallback((params: any) => {
         // 在这里处理点击事件，可以获取点击的图形的数据
-        const currentItem = getCurrentItem();
         const { dataIndex } = params;
-        const { pluginname } = currentItem;
-        const { dataset } = currentItem;
+        const { pluginname, dataset } = item;
         const clickData = { pluginname: pluginname, dataindex: dataset.dataindex, row: dataset.rows[dataIndex + 1] };
-        console.log("Clicked", clickData);
+        console.log(clickData);
         model?.invoke?.("clickcharts", JSON.stringify(clickData));
-    };
+    }, []);
+
     return (
         <KdCard item={item} showTitle={showTitle}>
             {showLoading ? (
