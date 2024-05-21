@@ -8,7 +8,6 @@ const Quota = (item: ComponentItemProps) => {
     const { content, userxindex, useryindex, dataset } = item;
     const { rows } = dataset || {};
     const {quota} = content;
-    console.log("quota", item);
     const style = {
         width: "100%",
         height: "100%",
@@ -31,10 +30,7 @@ const Quota = (item: ComponentItemProps) => {
         }
     }
 
-    console.log("_rows", _rows);
-
-    let value = useryindex? _rows[useryindex].reduce((total : number, num: number) => total + num, 0) : 0;
-    console.log("value", value);    
+    let value = useryindex? _rows[useryindex]?.reduce((total : number, num: number) => total + num, 0) : 0;
     return (
         <KdCard item={item} showTitle={showTitle}>
             {useryindex ? <div style={style}>{value}</div> : <div style={style}>业务指标</div>}
