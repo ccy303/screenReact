@@ -162,7 +162,7 @@ const borderControls = {
                         },
                         {
                             visible: true,
-                            id: "ispublish",
+                            id: "chartcontrol.ispublish",
                             name: "是否发布",
                             editor: {
                                 component: "Select",
