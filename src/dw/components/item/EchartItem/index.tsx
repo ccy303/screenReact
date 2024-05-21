@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState,useContext } from "react";
+import React, { useEffect, useMemo, useRef, useState, useContext } from "react";
 import ReactECharts from "echarts-for-react";
 import { Filter, Spin } from "@kdcloudjs/kdesign";
 import KdCard from "dw/components/common/KdCard";
@@ -180,7 +180,7 @@ const Chart = (item: any) => {
             const y = _rows[useryindex?.[0] || "2015"];
 
             let _data = null;
-            let _center = ['50%','50%'];
+            let _center = ["50%", "50%"];
             if (item._echartFilterValue && item._echartFilterValue?.length) {
                 _data = x
                     ?.filter((v: any) => {
@@ -194,10 +194,10 @@ const Chart = (item: any) => {
                     return { name: v, value: y?.[i] };
                 });
             }
-            if(item.content.config.charts.legend.orient == "vertical" && item.content.config.legendPos == "right"){
-                _center = ['30%','50%'];
-            } else if(item.content.config.charts.legend.orient == "vertical" && item.content.config.legendPos == "left"){
-                _center = ['60%','50%'];
+            if (item.content.config.charts.legend.orient == "vertical" && item.content.config.legendPos == "right") {
+                _center = ["30%", "50%"];
+            } else if (item.content.config.charts.legend.orient == "vertical" && item.content.config.legendPos == "left") {
+                _center = ["60%", "50%"];
             }
 
             series = {
@@ -208,17 +208,17 @@ const Chart = (item: any) => {
                 label: item.originname == "环图" ? { ...charts.series[0].label, ...DEFAULT_PIE_LABEL } : { ...charts.series[0].label },
                 emphasis: {
                     label: {
-                      show: true
+                        show: true
                     }
-                  },
+                },
                 itemStyle: item.originname == "环图" ? DEFAULT_PIE_ITEMSTYLE : {},
-                center:_center,
+                center: _center,
                 data: _data
             };
 
             const legend =
                 item.content.config.legendStyle == "customMade"
-                    ? _data.map((v: any, i: any) => {
+                    ? _data?.map((v: any, i: any) => {
                           let position = {};
                           const width = 100;
                           if (echartOpt.legend.orient == "horizontal") {
@@ -228,9 +228,8 @@ const Chart = (item: any) => {
                               };
                           } else if (echartOpt.legend.orient == "vertical") {
                               position = {
-                                  top: i ? 30 * (i + 1) : 30 ,
-                                  [item.content.config.legendPos]: 0,
-                               
+                                  top: i ? 30 * (i + 1) : 30,
+                                  [item.content.config.legendPos]: 0
                               };
                           }
                           return {
@@ -423,21 +422,26 @@ const Chart = (item: any) => {
     const onChartClick = (params: any) => {
         // 在这里处理点击事件，可以获取点击的图形的数据
         const currentItem = getCurrentItem();
-        const {dataIndex} = params;
-        const {pluginname} = currentItem;
-        const {dataset} = currentItem;
-
-        const clickData = {pluginname:pluginname,dataindex:dataset.dataindex,row:dataset.rows[dataIndex+1]};
-        console.log("Clicked",  clickData);
+        const { dataIndex } = params;
+        const { pluginname } = currentItem;
+        const { dataset } = currentItem;
+        const clickData = { pluginname: pluginname, dataindex: dataset.dataindex, row: dataset.rows[dataIndex + 1] };
+        console.log("Clicked", clickData);
         model?.invoke?.("clickcharts", JSON.stringify(clickData));
-      };
+    };
     return (
         <KdCard item={item} showTitle={showTitle}>
             {showLoading ? (
                 <Spin type='page' spinning={showLoading} style={{ width: "100%", height: "100%", justifyContent: "center" }}></Spin>
             ) : (
                 <div style={{ width: "100%", height: "100%" }}>
-                    <ReactECharts key={echartKey} style={{ width: "100%", height: "100%" }} option={{ ...chartOption }} ref={ref} onEvents={{ click: onChartClick }} /> 
+                    <ReactECharts
+                        key={echartKey}
+                        style={{ width: "100%", height: "100%" }}
+                        option={{ ...chartOption }}
+                        ref={ref}
+                        onEvents={{ click: onChartClick }}
+                    />
                 </div>
             )}
         </KdCard>
