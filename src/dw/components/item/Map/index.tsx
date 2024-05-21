@@ -18,23 +18,47 @@ export default (item: any) => {
 
     const chartOption = useMemo(() => {
         return {
-            visualMap: {
-                left: "left",
-                inRange: {
-                    color: ["#add8e6", "#87cefa", "#00bfff", "#1e90ff", "#0000ff"]
-                }
-            },
-            series: [
+            // visualMap: {
+            //     left: "left",
+            //     inRange: {
+            //         color: ["#add8e6", "#87cefa", "#00bfff", "#1e90ff", "#0000ff"]
+            //     }
+            // },
+            geo: [
                 {
-                    left: 10,
-                    right: 10,
-                    bottom: 10,
-                    top: 10,
-                    type: "map",
                     map: "china",
-                    label: { show: true },
+                    aspectScale: 0.85,
+                    zoom: 1.2,
+                    top: "9%",
+                    left: "11%",
+                    roam: false,
+                    z: 5,
                     itemStyle: {
-                        areaColor: "#add8e6"
+                        areaColor: "#d9e8ff",
+                        borderColor: "#fff",
+                        borderWidth: 1.5,
+                        shadowColor: "#0f4c74",
+                        shadowOffsetX: 0,
+                        shadowOffsetY: 2,
+                        shadowBlur: 5
+                    }
+                },
+                {
+                    map: "china",
+                    aspectScale: 0.85,
+                    zoom: 1.2,
+                    top: "9.5%",
+                    left: "11%",
+                    roam: false,
+                    z: 4,
+                    itemStyle: {
+                        areaColor: "#004b75",
+                        borderColor: "#195175",
+                        borderWidth: 1.5,
+                        shadowColor: "#0f4c74",
+                        shadowOffsetX: 0,
+                        shadowOffsetY: 2,
+                        shadowBlur: 5
                     }
                 }
             ]
