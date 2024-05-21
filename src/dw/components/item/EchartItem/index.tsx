@@ -202,7 +202,7 @@ const Chart = (item: any) => {
 
             const legend =
                 item.content.config.legendStyle == "customMade"
-                    ? _data.map((v: any, i: any) => {
+                    ? _data?.map((v: any, i: any) => {
                           let position = {};
                           const width = 100;
                           if (echartOpt.legend.orient == "horizontal") {
@@ -212,7 +212,8 @@ const Chart = (item: any) => {
                               };
                           } else if (echartOpt.legend.orient == "vertical") {
                               position = {
-                                  top: 30 * i,
+                                  //   top: 30 * i,
+                                  top: i ? 30 * i + 30 : 30,
                                   [item.content.config.legendPos]: 0
                               };
                           }
