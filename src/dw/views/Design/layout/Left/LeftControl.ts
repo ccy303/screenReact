@@ -60,7 +60,7 @@ const textControls: any = {
                         },
                         {
                             visible: true,
-                            id: "ispublish",
+                            id: "chartcontrol.ispublish",
                             name: "是否发布",
                             editor: {
                                 component: "Select",
@@ -206,7 +206,7 @@ const tableControls: any = {
                         { visible: true, id: "pluginname", name: "插件名称", addonAfterBtn: 2, editor: { component: "Input" } },
                         {
                             visible: true,
-                            id: "ispublish",
+                            id: "chartcontrol.ispublish",
                             name: "是否发布",
                             editor: {
                                 component: "Select",
@@ -245,7 +245,7 @@ const selectControls: any = {
                         { visible: true, id: "chartctrl", name: "图表/控制项", editor: { component: "ChartIdSelect" }, style: { height: "80px" } },
                         {
                             visible: true,
-                            id: "ispublish",
+                            id: "chartcontrol.ispublish",
                             name: "是否发布",
                             editor: {
                                 component: "Select",
@@ -290,7 +290,7 @@ const radioControls: any = {
                         },
                         {
                             visible: true,
-                            id: "ispublish",
+                            id: "chartcontrol.ispublish",
                             name: "是否发布",
                             editor: {
                                 component: "Select",
