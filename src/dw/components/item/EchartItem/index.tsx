@@ -3,7 +3,6 @@ import ReactECharts from "echarts-for-react";
 import { Filter, Spin } from "@kdcloudjs/kdesign";
 import KdCard from "dw/components/common/KdCard";
 import _ from "lodash";
-import useMain from "@/dw/store/useMain";
 import { v4 as uuidv4 } from "uuid";
 import { DEFAULT_CHARTS_COLOR, DEFAULT_PIE_ITEMSTYLE, DEFAULT_PIE_LABEL } from "dw/control/common";
 

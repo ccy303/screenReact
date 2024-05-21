@@ -353,6 +353,16 @@ const tabsControls: any = {
     ]
 };
 
+const mapControls: any = {
+    group: [
+        {
+            id: "data",
+            name: "属性",
+            properties: [CHART_BASE_INFO, BORDER_PROP, POSITION_PROP()]
+        }
+    ]
+};
+
 export const ComponentControlMap: any = {
     charts: echartControls,
     text: textControls,
@@ -361,7 +371,8 @@ export const ComponentControlMap: any = {
     select: selectControls,
     radio: radioControls,
     quota: quotaControls,
-    tabs: tabsControls
+    tabs: tabsControls,
+    map: mapControls
 };
 
 export const chartList = [
@@ -427,10 +438,24 @@ export const chartList = [
         desc: "堆积柱形图",
         name: "堆积柱形图",
         category: "charts"
+    },
+    {
+        componentType: "map",
+        icon: require(`assets/img/analysis_chart_chinamap.png`),
+        desc: "地图",
+        name: "地图",
+        category: "map"
     }
 ];
 
 export const otherComp = [
+    {
+        componentType: "text",
+        icon: require(`assets/img/analysis_text.png`),
+        desc: "文字",
+        name: "文字",
+        category: "text"
+    },
     {
         componentType: "text",
         icon: require(`assets/img/analysis_text.png`),
