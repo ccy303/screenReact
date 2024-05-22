@@ -1177,3 +1177,33 @@ export const QUOTA_PROP: ControlProProps = {
         }
     ]
 };
+
+export const CUSTOM_STYLE_PROP: ControlProProps = {
+  id: "content.customStyle",
+  name: "自定义样式",
+  defaultOpen: false,
+  show: {
+    value: true,
+    actions: [
+      {
+        condition: { value: true },
+        todo: [{ id: "content.customStyle.show", changeValue: true }],
+        elseTodo: [{ id: "content.customStyle.show", changeValue: false }]
+      }
+    ]
+  },
+  nodes: [
+    {
+      visible: false,
+      id: "content.customStyle.show",
+      editor: { defaultValue: true }
+    },
+    {
+      visible: true,
+      id: "content.customStyle.style",
+      name: "自定义样式",
+      editor: { component: "Input" }
+    }
+  ]
+};
+

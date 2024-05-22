@@ -430,11 +430,18 @@ export default React.memo(
 
         const onChartClick = useCallback((params: any) => {
             // 在这里处理点击事件，可以获取点击的图形的数据
-            const { dataIndex } = params;
+          console.log("clickChart",params);
+          const { dataIndex } = params;
             const { pluginname, dataset } = item;
-            const clickData = { pluginname: pluginname, dataindex: dataset.dataindex, row: dataset.rows[dataIndex + 1] };
+            if (dataIndex && pluginname && dataset && dataset.dataindex && dataset.rows && dataset.rows[dataIndex + 1]) {
+            const clickData = {
+              pluginname: pluginname,
+              dataindex: dataset.dataindex,
+              row: dataset.rows[dataIndex + 1]
+            };
             console.log(clickData);
             model?.invoke?.("clickcharts", JSON.stringify(clickData));
+          }
         }, []);
 
         return (
