@@ -29,8 +29,8 @@ const CompItem = () => {
         const target = _itemList.find((item: any) => {
             return item.id === id;
         });
-        if (target.kdId) {
-            deleteObserver.deletes.push(target.kdId);
+        if (target.id) {
+            deleteObserver.deletes.push(target.id);
         }
         delItem(id);
     };
