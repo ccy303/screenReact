@@ -1036,6 +1036,45 @@
                 "borderWidth": 0,
                 "borderOpacity": 1
             },
+            "dataset": {
+                "dataindex": [
+                    ["org", "账户类型", 1, false],
+                    ["domestic", "境内账户", 3, false],
+                    ["overseas", "境外账户", 3, false],
+                    ["bankcate_1", "结算中心", 3, false],
+                    ["bankcate_3", "财务公司", 3, false],
+                    ["bankcate_4", "第三方账户", 3, false],
+                    ["bankcate_999", "其他金融机构", 3, false],
+                    ["accts", "账户总数", 3, false],
+                    ["domesticcolumn", "境内银行账户列", 1, false],
+                    ["overseascolumn", "境外银行账户列", 1, false],
+                    ["fincomcolumn", "财务公司列", 1, false],
+                    ["settlecolumn", "结算中心列", 1, false],
+                    ["trdacctcolumn", "第三方账户列", 1, false],
+                    ["othacctcolumn", "其他金融机构列", 1, false],
+                    ["acctscolumn", "账户总数列", 1, false]
+                ],
+                "rows": [
+                    [
+                        "账户类型",
+                        "境内账户",
+                        "境外账户",
+                        "结算中心",
+                        "财务公司",
+                        "第三方账户",
+                        "其他金融机构",
+                        "账户总数",
+                        "境内银行账户列",
+                        "境外银行账户列",
+                        "财务公司列",
+                        "结算中心列",
+                        "第三方账户列",
+                        "其他金融机构列",
+                        "账户总数列"
+                    ],
+                    ["0", 1, 0, 2, 0, 0, 0, 3, "境内账户", "境外账户", "财务公司", "结算中心", "第三方账户", "其他金融机构", "账户总数"]
+                ]
+            },
             "type": "gauge",
             "id": "8a7fa996522548b782daa32f57f1044b",
             "category": "charts",
