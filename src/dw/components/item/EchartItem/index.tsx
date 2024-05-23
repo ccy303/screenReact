@@ -324,7 +324,7 @@ export default React.memo(
                     val = 0;
                     const indexs: any = [];
 
-                    _rows[x].map((x: any, i: any) => {
+                    _rows?[x]?.map((x: any, i: any) => {
                         item._echartFilterValue?.includes(x) && indexs.push(i);
                     });
 
