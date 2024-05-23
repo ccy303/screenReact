@@ -693,11 +693,13 @@ export const LEGEND_PROP: ControlProProps = {
             editor: {
                 component: "Select",
                 options: [
+                    { name: "靠上居中", value: "center" },
                     { name: "左", value: "left" },
-                    { name: "右", value: "right" }
+                    { name: "右", value: "right" },
+                    { name: "下", value: "bottom" }
                 ],
                 dataType: "string",
-                defaultValue: "left"
+                defaultValue: "center"
             }
         },
         {

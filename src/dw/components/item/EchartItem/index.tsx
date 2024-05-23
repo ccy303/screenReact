@@ -199,6 +199,8 @@ export default React.memo(
                     _center = ["30%", "50%"];
                 } else if (item.content.config.charts.legend.orient == "vertical" && item.content.config.legendPos == "left") {
                     _center = ["60%", "50%"];
+                } else if ( item.content.config.legendPos == "bottom") {
+                    _center = ["50%", "42%"];
                 }
 
                 series = {
@@ -217,49 +219,80 @@ export default React.memo(
                     data: _data
                 };
 
-                const legend =
-                    item.content.config.legendStyle == "customMade"
-                        ? _data?.map((v: any, i: any) => {
-                              let position = {};
-                              const width = 100;
-                              if (echartOpt.legend.orient == "horizontal") {
-                                  position = {
-                                      [item.content.config.legendPos]:
-                                          item.content.config.legendPos == "left" ? (width + 30 + 30) * i : (width + 30 + 30) * (_data.length - 1 - i)
-                                  };
-                              } else if (echartOpt.legend.orient == "vertical") {
-                                  position = {
-                                      top: i ? 30 * (i + 1) : 30,
-                                      [item.content.config.legendPos]: 0
-                                  };
-                              }
-                              return {
-                                  ...echartOpt.legend,
-                                  ...position,
-                                  width,
-                                  data: [{ name: v.name }],
-                                  formatter: function (name: any) {
-                                      // 添加
-                                      let target;
-                                      for (let i = 0; i < _data.length; i++) {
-                                          if (_data[i].name === name) {
-                                              target = _data[i].value;
-                                          }
-                                      }
-                                      const arr = ["{a|" + name + "}", target];
-                                      return arr.join("  ");
-                                  },
-                                  textStyle: {
-                                      padding: 5,
-                                      // 添加
-                                      rich: {
-                                          a: { width: 80 }
-                                      }
-                                  }
-                              };
-                          })
-                        : { ...echartOpt.legend, ...{ [item.content.config.legendPos]: item.content.config.legendPos } };
-
+                const legend = (()=>{
+                    let res = { ...echartOpt.legend, ...{ [item.content.config.legendPos]: item.content.config.legendPos } }
+                    if(item.content.config.legendStyle == "customMade"){
+                        res =  _data?.map((v: any, i: any) => {
+                            let position = {};
+                            const width = 100;
+                            if (echartOpt.legend.orient == "horizontal") {
+                                position = {
+                                    [item.content.config.legendPos]:
+                                        item.content.config.legendPos == "left" ? (width + 30 + 30) * i : (width + 30 + 30) * (_data.length - 1 - i)
+                                };
+                            } else if (echartOpt.legend.orient == "vertical") {
+                                position = {
+                                    top: i ? 30 * (i + 1) : 30,
+                                    [item.content.config.legendPos]: 5
+                                };
+                            }
+                            return {
+                                ...echartOpt.legend,
+                                ...position,
+                                width,
+                                data: [{ name: v.name }],
+                                formatter: function (name: any) {
+                                    // 添加
+                                    let target;
+                                    for (let i = 0; i < _data.length; i++) {
+                                        if (_data[i].name === name) {
+                                            target = _data[i].value;
+                                        }
+                                    }
+                                    const arr = ["{a|" + name + "}", target];
+                                    return arr.join("  ");
+                                },
+                                textStyle: {
+                                    padding: 5,
+                                    // 添加
+                                    rich: {
+                                        a: { width: 90 }
+                                    }
+                                }
+                            };
+                        })
+                    } else {
+                        delete res.right
+                        delete res.left
+                        delete res.bottom
+                        console.log(222222222222,res);
+                        if(item.content.config.legendPos == 'center'){
+                            res = {
+                                ...res,
+                                right:'auto',
+                            }
+                        }else if(item.content.config.legendPos == 'left'){
+                            res = {
+                                ...res,
+                                left:'5%',
+                            }
+                        }else if(item.content.config.legendPos == 'right'){
+                            res = {
+                                ...res,
+                                right:'5%',
+                            }
+                        }else if(item.content.config.legendPos == 'bottom'){
+                            delete res.top
+                            res = {
+                                ...res,
+                                bottom:'1%',
+                            }
+                        }
+                    }
+                    console.log(1111111111111,res);
+                    
+                    return res
+                })()
                 const output = {
                     ...echartOpt,
                     series
