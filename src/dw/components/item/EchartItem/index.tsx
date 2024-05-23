@@ -8,6 +8,7 @@ import { ViewItemContext } from "dw/views/ViewItem";
 import { v4 as uuidv4 } from "uuid";
 import { DEFAULT_CHARTS_COLOR, DEFAULT_PIE_ITEMSTYLE, DEFAULT_PIE_LABEL } from "dw/control/common";
 import Right from "@/dw/views/Design/layout/Right";
+import Left from "@/dw/views/Design/layout/Left";
 
 const gaugeStyle = {
     startAngle: 180,
@@ -200,7 +201,9 @@ export default React.memo(
                 } else if (item.content.config.charts.legend.orient == "vertical" && item.content.config.legendPos == "left") {
                     _center = ["60%", "50%"];
                 } else if ( item.content.config.legendPos == "bottom") {
-                    _center = ["50%", "42%"];
+                    _center = ["50%", "35%"];
+                }else if ( item.content.config.charts.legend.orient == "vertical" && item.content.config.legendPos == "top") {
+                    _center = ["50%", "66%"];
                 }
 
                 series = {
@@ -226,15 +229,69 @@ export default React.memo(
                             let position = {};
                             const width = 100;
                             if (echartOpt.legend.orient == "horizontal") {
-                                position = {
-                                    [item.content.config.legendPos]:
-                                        item.content.config.legendPos == "left" ? (width + 30 + 30) * i : (width + 30 + 30) * (_data.length - 1 - i)
-                                };
+                        
+                                if(item.content.config.legendPos == "left"){
+                                    position = {
+                                        left: (width + 30 + 30) * i,
+                                        right: 'auto'
+                                    }
+                                }
+                                if(item.content.config.legendPos == "right"){
+                                    position = {
+                                        right:  (width + 30 + 30) * (_data.length - 1 - i),
+                                        left: 'auto'
+                                    }
+                                }
+                                if(item.content.config.legendPos == "top"){
+                                    position = {
+                                        top:item.content.config.charts.legend.top,
+                                        left:item.content.config.legendPos == "top" && i  ? (width + 60 ) * i : 30,
+                                        right: 'auto'
+                                    };
+                                }
+                                if(item.content.config.legendPos == "bottom"){
+                                    position = {
+                                        bottom:item.content.config.charts.legend.top,
+                                        left:item.content.config.legendPos == "bottom" && i  ? (width + 60 ) * i : 30,
+                                        right: 'auto',
+                                        top: 'auto'
+                                    };
+                                }
+                             
                             } else if (echartOpt.legend.orient == "vertical") {
-                                position = {
-                                    top: i ? 30 * (i + 1) : 30,
-                                    [item.content.config.legendPos]: 5
-                                };
+                                delete res.top
+                                delete res.right
+                                delete res.left
+                                delete res.bottom
+                               
+                                if(item.content.config.legendPos == "left"){
+                                    res = {
+                                        ...res,
+                                        right:'auto',
+                                    }
+                                    position = {
+                                        top: i ? 30 * (i + 1) : 30,
+                                        [item.content.config.legendPos]: 5
+                                    };
+                                }else if(item.content.config.legendPos == "right" ){
+                                   
+                                    position = {
+                                        top: i ? 30 * (i + 1) : 30,
+                                        left:'66%',
+                                    };
+                                }else if(item.content.config.legendPos == "top" ){
+                                    position = {
+                                        top: i ? (30 * (i + 1)) + item.content.config.charts.legend.top : 30 + item.content.config.charts.legend.top,
+                                        Left:'center',
+                                    };
+                                }else if(item.content.config.legendPos == "bottom"){
+                                    position = {
+                                        top:'auto',
+                                        bottom: i ? 30 * (i + 1) + item.content.config.charts.legend.bottom : 30 + item.content.config.charts.legend.bottom,
+                                        Left:'center',
+                                    };
+                                }
+                                console.log(4555555555555555,position);
                             }
                             return {
                                 ...echartOpt.legend,
@@ -265,16 +322,16 @@ export default React.memo(
                         delete res.right
                         delete res.left
                         delete res.bottom
-                        console.log(222222222222,res);
-                        if(item.content.config.legendPos == 'center'){
+                        if(item.content.config.legendPos == 'top'){
                             res = {
                                 ...res,
+                                top:item.content.config.charts.legend.top,
                                 right:'auto',
                             }
                         }else if(item.content.config.legendPos == 'left'){
                             res = {
                                 ...res,
-                                left:'5%',
+                                left:item.content.config.charts.legend.left,
                             }
                         }else if(item.content.config.legendPos == 'right'){
                             res = {
@@ -285,7 +342,7 @@ export default React.memo(
                             delete res.top
                             res = {
                                 ...res,
-                                bottom:'1%',
+                                bottom:item.content.config.charts.legend.bottom,
                             }
                         }
                     }
@@ -293,6 +350,7 @@ export default React.memo(
                     
                     return res
                 })()
+
                 const output = {
                     ...echartOpt,
                     series

@@ -664,6 +664,18 @@ export const LEGEND_PROP: ControlProProps = {
         },
         {
             visible: true,
+            id: "content.config.charts.legend.bottom",
+            name: "距离底部",
+            editor: { component: "Stepper", dataType: "number", defaultValue: 5 }
+        },
+        {
+            visible: true,
+            id: "content.config.charts.legend.left",
+            name: "距离左边",
+            editor: { component: "Stepper", dataType: "number", defaultValue: 10 }
+        },
+        {
+            visible: true,
             id: "content.config.charts.legend.itemWidth",
             name: "图例宽",
             editor: { component: "Stepper", dataType: "number", defaultValue: 15 }
@@ -693,13 +705,13 @@ export const LEGEND_PROP: ControlProProps = {
             editor: {
                 component: "Select",
                 options: [
-                    { name: "靠上居中", value: "center" },
+                    { name: "上", value: "top" },
                     { name: "左", value: "left" },
                     { name: "右", value: "right" },
                     { name: "下", value: "bottom" }
                 ],
                 dataType: "string",
-                defaultValue: "center"
+                defaultValue: "top"
             }
         },
         {
