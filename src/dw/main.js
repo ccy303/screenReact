@@ -64,7 +64,7 @@ import JSON from "../../mock/PropsDataType/DATA_INIT.json";
             this.root = createRoot(model.dom);
         },
         init: function (props) {
-            console.log("version", 54);
+            console.log("version", 55);
             console.log("-----init", this.model, props);
             this.model.dom.style.height = "100vh";
             this.model.dom.style.width = "100vw";
