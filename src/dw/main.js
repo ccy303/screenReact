@@ -36,9 +36,9 @@ import JSON from "../../mock/PropsDataType/DATA_INIT.json";
                         model: props.model
                     };
                 }
-                componentDidMount() { }
-                shouldComponentUpdate() { }
-                componentWillUnmount() { }
+                componentDidMount() {}
+                shouldComponentUpdate() {}
+                componentWillUnmount() {}
                 render() {
                     const { customProps, model } = this.state;
                     return (
@@ -64,7 +64,7 @@ import JSON from "../../mock/PropsDataType/DATA_INIT.json";
             this.root = createRoot(model.dom);
         },
         init: function (props) {
-            console.log("version", 57);
+            console.log("version", 56);
             console.log("-----init", this.model, props);
             this.model.dom.style.height = "100%";
             this.model.dom.style.width = "100%";
