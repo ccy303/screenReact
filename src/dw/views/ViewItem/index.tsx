@@ -16,7 +16,7 @@ import { observable, observe, toJS } from "mobx";
 
 export const defaultViewItemContext = {
     model: { test: true },
-    customProps: { isShow: false },
+    customProps: { isShow: true },
     invokeKeyObserver: observable({ invokeCallback: null }),
     loadingObserver: observable({ loading: false }),
     deleteObserver: observable({ deletes: [] })

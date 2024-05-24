@@ -160,7 +160,6 @@ export default React.memo(
         }
 
         let chartOption: any = useMemo(() => {
-            console.log("AAAAAAAAAAAAAAAAAAAAaaaaaaaaaaaaaaaaaaaa");
             let echartOpt = {
                 color: DEFAULT_CHARTS_COLOR,
                 tooltip: {},
@@ -281,11 +280,6 @@ export default React.memo(
                 const total = _.sum(_rows?.[y]);
 
                 let val = _rows?.[y]?.[0];
-
-                console.log(1111111111, x, y);
-                console.log(val, total);
-                console.log(12345, val / total);
-                console.log();
 
                 if (item._echartFilterValue?.length) {
                     val = 0;
