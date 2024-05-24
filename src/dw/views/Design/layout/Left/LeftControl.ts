@@ -12,7 +12,7 @@ import {
     QUOTA_PROP,
 
     // 文本
-    BASE_PROP
+    BASE_PROP, CUSTOM_STYLE_PROP
 } from "dw/control/common";
 
 const echartControls: any = {
@@ -180,6 +180,7 @@ const borderControls = {
                 BACKGROUND_PROP,
                 BORDER_PROP,
                 DESC_PROP,
+                CUSTOM_STYLE_PROP,
                 POSITION_PROP(250, 250)
             ]
         }
