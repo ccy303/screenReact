@@ -71,9 +71,6 @@ import JSON from "../../mock/PropsDataType/DATA_INIT.json";
             this.model.dom.parentNode.style.height = "100%";
             this.model.dom.parentNode.style.width = "100%";
 
-            this.model.dom.parentNode.height = height = "100vh";
-            this.model.dom.parentNode.width = width = "100vw";
-
             const flag = props.configItems?.find(({ key }) => key == "category") || {};
             if (flag.value != "design") {
                 this.model.invokeAsync("init", props.configItems);
