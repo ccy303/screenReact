@@ -664,6 +664,18 @@ export const LEGEND_PROP: ControlProProps = {
         },
         {
             visible: true,
+            id: "content.config.charts.legend.bottom",
+            name: "距离底部",
+            editor: { component: "Stepper", dataType: "number", defaultValue: 5 }
+        },
+        {
+            visible: true,
+            id: "content.config.charts.legend.left",
+            name: "距离左边",
+            editor: { component: "Stepper", dataType: "number", defaultValue: 10 }
+        },
+        {
+            visible: true,
             id: "content.config.charts.legend.itemWidth",
             name: "图例宽",
             editor: { component: "Stepper", dataType: "number", defaultValue: 15 }
@@ -693,11 +705,13 @@ export const LEGEND_PROP: ControlProProps = {
             editor: {
                 component: "Select",
                 options: [
+                    { name: "上", value: "top" },
                     { name: "左", value: "left" },
-                    { name: "右", value: "right" }
+                    { name: "右", value: "right" },
+                    { name: "下", value: "bottom" }
                 ],
                 dataType: "string",
-                defaultValue: "left"
+                defaultValue: "top"
             }
         },
         {
@@ -1177,3 +1191,33 @@ export const QUOTA_PROP: ControlProProps = {
         }
     ]
 };
+
+export const CUSTOM_STYLE_PROP: ControlProProps = {
+  id: "content.customStyle",
+  name: "自定义样式",
+  defaultOpen: false,
+  show: {
+    value: true,
+    actions: [
+      {
+        condition: { value: true },
+        todo: [{ id: "content.customStyle.show", changeValue: true }],
+        elseTodo: [{ id: "content.customStyle.show", changeValue: false }]
+      }
+    ]
+  },
+  nodes: [
+    {
+      visible: false,
+      id: "content.customStyle.show",
+      editor: { defaultValue: true }
+    },
+    {
+      visible: true,
+      id: "content.customStyle.style",
+      name: "自定义样式",
+      editor: { component: "Input" }
+    }
+  ]
+};
+
