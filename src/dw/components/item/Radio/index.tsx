@@ -27,9 +27,9 @@ const SelectEditor = (props: any) => {
             <Radio.Group defaultValue={props.content?.[0]?.value} onChange={changeHandle}>
                 {(props.content || []).map((item: any, idx: any) => {
                     return (
-                        <Radio key={idx} value={item.value} radioType='square'>
+                        <Radio.Button key={idx} value={item.value}>
                             {item.key}
-                        </Radio>
+                        </Radio.Button>
                     );
                 })}
             </Radio.Group>

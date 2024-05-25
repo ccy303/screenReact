@@ -260,7 +260,7 @@ const selectControls: any = {
                         }
                     ]
                 },
-                POSITION_PROP(150, 30)
+                POSITION_PROP(100, 30)
             ]
         }
     ]
@@ -305,7 +305,7 @@ const radioControls: any = {
                         }
                     ]
                 },
-                POSITION_PROP(150, 30)
+                POSITION_PROP(100, 30)
             ]
         }
     ]
