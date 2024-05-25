@@ -34,7 +34,8 @@ const SelectEditor = (props: any) => {
                 onChange={changeHandle}
                 placeholder='请选择'
                 showSearch={false}
-                mode='multiple'
+                mode='single'
+                borderType="bordered"
             >
                 {(Array.from(new Set(options)) || []).map((v: any, idx: any) => {
                     return (
