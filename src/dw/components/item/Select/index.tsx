@@ -35,7 +35,10 @@ const SelectEditor = (props: any) => {
                 placeholder='请选择'
                 showSearch={false}
                 mode='single'
-                borderType="bordered"
+                borderType='bordered'
+                getPopupContainer={(triggerNode: any) => {
+                    return triggerNode.parentElement;
+                }}
             >
                 {(Array.from(new Set(options)) || []).map((v: any, idx: any) => {
                     return (

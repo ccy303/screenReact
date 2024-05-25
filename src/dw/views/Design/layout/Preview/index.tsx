@@ -16,8 +16,6 @@ const Preview = () => {
     const { width, height, backgroundSize, backgroundColor, url } = pageConfig;
 
     const [scale, setScale] = useState(1);
-    const [_width, setWidth] = useState(width);
-    const [_height, setHeight] = useState(height);
 
     useEffect(() => {
         const ro = new ResizeObserver((entries, observer) => {
@@ -26,9 +24,6 @@ const Preview = () => {
                 const { width: orignWidth } = contentRect;
                 const scale = orignWidth / width;
                 setScale(scale);
-
-                // setWidth(width * scale);
-                // setHeight(height * scale);
             }
         });
         ro.observe(model.dom || document.querySelector(".dw-view-item"));
