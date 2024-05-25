@@ -1090,7 +1090,7 @@ export const CHART_DARA_SET: any = {
             name: "",
             type: "chartConfig",
             editor: { component: "EchartDataSet" },
-            style: { height: "430px", alignItems: "flex-start" }
+            style: { height: "500px", alignItems: "flex-start" }
         }
     ]
 };

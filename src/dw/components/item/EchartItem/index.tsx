@@ -131,7 +131,7 @@ const gaugeStyle = {
 export default React.memo(
     (item: any) => {
         const { model } = useContext(ViewItemContext);
-        const { content, userxindex, useryindex, dataset } = item;
+        const { content, userxindex, useryindex, dataset,datafilter } = item;
         const { config } = content;
         const { charts } = config;
 
@@ -149,8 +149,22 @@ export default React.memo(
             ["Walnut", 72.4, 53.9, 39.1]
         ];
 
-        const dataSet: any = [{ source: item?.dataset?.rows || initData }];
-
+      const defaultDataSet = item?.dataset?.rows || initData;
+      const firstRow = defaultDataSet[0];
+      const filterDataSet = datafilter? defaultDataSet.filter((row: any,index:number) => {
+        if(index == 0){
+          return true;
+        }else{
+          for (let i = 0; i < datafilter.length; i++) {
+            const { key, selectkey } = datafilter[i];
+            if (!selectkey.includes(row[firstRow.indexOf(key)])) {
+              return false;
+            }
+          }
+          return true;
+        }
+      }) : defaultDataSet;
+      const dataSet: any = [{ source: filterDataSet }];
         const _rows: any = {};
         for (let i = 0, data = dataSet[0].source; i < data?.[0]?.length; i++) {
             const key = data[0][i];
@@ -228,7 +242,7 @@ export default React.memo(
                             let position = {};
                             const width = 100;
                             if (echartOpt.legend.orient == "horizontal") {
-                        
+
                                 if(item.content.config.legendPos == "left"){
                                     position = {
                                         left: (width + 30 + 30) * i,
@@ -256,13 +270,13 @@ export default React.memo(
                                         top: 'auto'
                                     };
                                 }
-                             
+
                             } else if (echartOpt.legend.orient == "vertical") {
                                 delete res.top
                                 delete res.right
                                 delete res.left
                                 delete res.bottom
-                               
+
                                 if(item.content.config.legendPos == "left"){
                                     res = {
                                         ...res,
@@ -273,7 +287,7 @@ export default React.memo(
                                         [item.content.config.legendPos]: 5
                                     };
                                 }else if(item.content.config.legendPos == "right" ){
-                                   
+
                                     position = {
                                         top: i ? 30 * (i + 1) : 30,
                                         left:'66%',
@@ -346,7 +360,7 @@ export default React.memo(
                         }
                     }
                     console.log(1111111111111,res);
-                    
+
                     return res
                 })()
 

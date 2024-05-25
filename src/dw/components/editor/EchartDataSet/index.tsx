@@ -5,11 +5,22 @@ import "./index.less";
 import _ from "lodash";
 export default (props: any) => {
     const { onChange } = props;
+    const { Option } = Select
 
     const { getCurrentItem } = useMain();
 
-    const { dataset, userxindex, useryindex } = getCurrentItem();
-
+    const { dataset, userxindex, useryindex,datafilter } = getCurrentItem();
+  const dataSetRows: any = { source: dataset?.rows };
+  const _rows: any = {};
+  for (let i = 0, data = dataSetRows.source; i < data?.[0]?.length; i++) {
+    const key = data[0][i];
+    _rows[key] = [];
+    for (let j = 1; j < data.length; j++) {
+      _rows[key].push(data[j][i]);
+    }
+  }
+  console.log("rows",_rows);
+    console.log("dataset", dataset);
     const xIndex = useMemo(() => {
         const { dataindex } = dataset || {};
         if (!dataindex) return [];
@@ -40,6 +51,27 @@ export default (props: any) => {
         e.dataTransfer?.setData("dataset", JSON.stringify(item));
     };
 
+    const onFilterDrop = (e: any, type: any) => {
+      e.preventDefault();
+      const data = JSON.parse(e.dataTransfer?.getData("dataset"));
+      const filterArray = { key: data.value, value: _.uniq(_rows[data.value]) ,selectkey: []};
+      if(datafilter?.length > 0){
+        return;
+      }
+      if (type == "filter") {
+        onChange([{ prop: "datafilter", value: _.uniqBy([...(datafilter || []), filterArray],'key') }]);
+      }
+    };
+    const filterDel = (type: any, item: any) => {
+        if (type == "filter") {
+          onChange([{ prop: "datafilter", value: _.uniqBy(datafilter.filter((v: any) => v.key != item),'key') }]);
+        }
+    };
+    const handleFilterChange = (e : any , key: any) => {
+      const newfilter = datafilter.filter((v: any) => v.key == key)?.[0];
+      newfilter.selectkey = e;
+      onChange([{ prop: "datafilter", value: _.uniqBy([...(datafilter || []), newfilter],'key') }]);
+    };
     const onDrop = (e: any, type: any) => {
         e.preventDefault();
         const data = JSON.parse(e.dataTransfer?.getData("dataset"));
@@ -107,6 +139,30 @@ export default (props: any) => {
                                     <div key={i} className='list-item space-between' onClick={() => del("y", v)}>
                                         {v}(数字)
                                         <Icon type='delete' className='del-icon'></Icon>
+                                    </div>
+                                );
+                            })}
+                    </div>
+                </div>
+            </div>
+          <div>
+                <div style={{ marginTop: "10px" }}>筛选器</div>
+                <div className='data-set-dargabled'>
+                    <div className='list' onDragOver={allowDrop} onDrop={e => onFilterDrop(e, "filter")}>
+                        {datafilter &&
+                          datafilter.map((v: any, i: any) => {
+                                return (
+                                    <div key={i} className='list-item space-between'>
+                                        {v.key}: <Select  mode="multiple" value={v.selectkey} size="small"  maxTagCount={1} style={{ width: 160}}  optionFilterProp="children" onChange={e => handleFilterChange(e,v.key)}>
+                                      {v.value.map((item) => {
+                                        return (
+                                          <Option value={item} key={item}>
+                                            {item.toString()}
+                                          </Option>
+                                        )
+                                      })}
+                                    </Select>
+                                        <Icon type='delete' className='del-icon'  onClick={() => filterDel("filter", v.key)}></Icon>
                                     </div>
                                 );
                             })}
