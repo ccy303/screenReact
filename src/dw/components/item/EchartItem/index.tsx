@@ -134,6 +134,7 @@ export default React.memo(
         const { content, userxindex, useryindex, dataset,datafilter } = item;
         const { config } = content;
         const { charts } = config;
+        const { topnum } = charts;
 
         const [echartKey, setEchartKey] = useState(uuidv4());
 
@@ -185,7 +186,18 @@ export default React.memo(
                 echartOpt = {
                     ...echartOpt,
                     xAxis: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? {} : { type: "category" },
-                    yAxis: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? { type: "category" } : {}
+                    yAxis: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? { type: "category" } : {},
+                  dataZoom: topnum && topnum > 0?[
+                    {
+                      type: 'slider',
+                      show:false,
+                      startValue:0,
+                      endValue:topnum-1,
+                      xAxisIndex:0,
+                      yAxisIndex:0,
+                      filterMode:"none"
+                    }
+                  ]:[]
                 };
             }
 
@@ -232,7 +244,7 @@ export default React.memo(
                     },
                     itemStyle: item.originname == "环图" ? DEFAULT_PIE_ITEMSTYLE : {},
                     center: _center,
-                    data: _data
+                    data: topnum?_data.slice(0, topnum):_data
                 };
 
                 const legend = (()=>{

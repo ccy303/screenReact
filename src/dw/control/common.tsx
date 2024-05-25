@@ -1015,6 +1015,16 @@ export const DIGITAL_FORMAT_PROP: ControlProProps = {
                 dataType: "number",
                 defaultValue: 10
             }
+        },
+        {
+            visible: true,
+            id: "content.config.charts.topnum",
+            name: i18n.msg("c98"),
+            editor: {
+                component: "Stepper",
+                dataType: "number",
+                defaultValue: 10
+            }
         }
     ]
 };
