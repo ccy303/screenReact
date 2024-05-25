@@ -1,11 +1,14 @@
 import { Select } from "@kdcloudjs/kdesign";
-import React, { useMemo, useState, use } from "react";
+import React, { useMemo, useState, useContext } from "react";
 import "./index.less";
 import useMain from "@/dw/store/useMain";
+import { ViewItemContext } from "dw/views/ViewItem";
 import _ from "lodash";
 
 const SelectEditor = (props: any) => {
     const [dataValue, setValue] = useState([]);
+
+    const { customProps } = useContext(ViewItemContext);
 
     const { itemList, setItemList } = useMain();
 
@@ -27,7 +30,7 @@ const SelectEditor = (props: any) => {
     };
 
     return (
-        <div className='warp'>
+        <div className='select-warp'>
             <Select
                 value={dataValue}
                 style={{ width: "100%", height: "100%" }}
@@ -36,8 +39,12 @@ const SelectEditor = (props: any) => {
                 showSearch={false}
                 mode='single'
                 borderType='bordered'
-                getPopupContainer={(triggerNode: any) => {
-                    return triggerNode.parentElement;
+                getPopupContainer={(triggerNode: any): any => {
+                    if (customProps.isShow) {
+                        return triggerNode.parentNode;
+                    } else {
+                        return document.querySelector("#react-drag-root");
+                    }
                 }}
             >
                 {(Array.from(new Set(options)) || []).map((v: any, idx: any) => {
