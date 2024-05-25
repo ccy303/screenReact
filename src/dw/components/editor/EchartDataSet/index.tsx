@@ -19,8 +19,6 @@ export default (props: any) => {
       _rows[key].push(data[j][i]);
     }
   }
-  console.log("rows",_rows);
-    console.log("dataset", dataset);
     const xIndex = useMemo(() => {
         const { dataindex } = dataset || {};
         if (!dataindex) return [];
