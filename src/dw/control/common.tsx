@@ -1023,7 +1023,7 @@ export const DIGITAL_FORMAT_PROP: ControlProProps = {
             editor: {
                 component: "Stepper",
                 dataType: "number",
-                defaultValue: 10
+                defaultValue: 0
             }
         }
     ]
