@@ -244,7 +244,7 @@ export default React.memo(
                     },
                     itemStyle: item.originname == "环图" ? DEFAULT_PIE_ITEMSTYLE : {},
                     center: _center,
-                    data: topnum?_data.slice(0, topnum):_data
+                    data: topnum?_data?.slice(0, topnum):_data
                 };
 
                 const legend = (()=>{
