@@ -13,20 +13,15 @@ import JSON from "../../mock/PropsDataType/DATA_INIT.json";
  * 在destoryed里，使用ReactDOM.unmountComponentAtNode卸载Root
  * 注意loadFile中index.css的引入路径，因为webpack打包后将其放在了css文件夹里，所以路径是./css/index.css
  */
+
+const init = () => {};
+
 (function (KDApi) {
     const setHtml = function (model, primaryProps) {
         KDApi.loadFile("./index.css", model, () => {
             console.log("loadFileSuccess");
             console.log("model", model);
-            const invokeKeyObserver = observable({
-                invokeCallback: null
-            });
-            const loadingObserver = observable({
-                loading: false
-            });
-            const deleteObserver = observable({
-                deletes: []
-            });
+            const that = this;
             class Root extends React.Component {
                 constructor(props) {
                     super(props);
@@ -35,18 +30,15 @@ import JSON from "../../mock/PropsDataType/DATA_INIT.json";
                         model: props.model
                     };
                 }
-                componentDidMount() {}
-                shouldComponentUpdate() {}
-                componentWillUnmount() {}
                 render() {
                     const { customProps, model } = this.state;
                     return (
                         <ViewItem
                             model={model}
                             customProps={customProps}
-                            invokeKeyObserver={invokeKeyObserver}
-                            loadingObserver={loadingObserver}
-                            deleteObserver={deleteObserver}
+                            invokeKeyObserver={that._invokeKeyObserver}
+                            loadingObserver={that._loadingObserver}
+                            deleteObserver={that._deleteObserver}
                         />
                     );
                 }
@@ -58,12 +50,16 @@ import JSON from "../../mock/PropsDataType/DATA_INIT.json";
         this._setModel(model);
     }
     MyComponent.prototype = {
+        _invokeKeyObserver: observable({ invokeCallback: null }),
+        _loadingObserver: observable({ loading: false }),
+        _deleteObserver: observable({ deletes: [] }),
         _setModel: function (model) {
+            console.info("setHtml");
             this.model = model;
             this.root = createRoot(model.dom);
         },
         init: function (props) {
-            console.log("version", 57);
+            console.log("version", 59);
             console.log("-----init", this.model, props);
             this.model.dom.style.height = "100%";
             this.model.dom.style.width = "100%";
@@ -79,7 +75,7 @@ import JSON from "../../mock/PropsDataType/DATA_INIT.json";
         update: function (props) {
             console.log("-----update:props", props);
             const key = props.data?.invokeKey?.split("/")?.[0];
-            invokeKeyObserver.invokeCallback = {
+            this._invokeKeyObserver.invokeCallback = {
                 key,
                 data: props.data
             };
@@ -89,9 +85,8 @@ import JSON from "../../mock/PropsDataType/DATA_INIT.json";
             this.root.unmount();
         }
     };
-
+    
     console.log("MyComponent", MyComponent);
-
     // 注册自定义组件
     KDApi.register("echartReact", MyComponent);
 })(window.KDApi);

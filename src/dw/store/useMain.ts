@@ -355,8 +355,6 @@ const useMain = () => {
         const { itemList: it, pageConfig, isShow, pluginSet } = data;
         const radios: any = [];
 
-        console.log(data);
-
         it.map((item: any) => {
             item.category == "radio" && radios.push(item);
             if (zIndexNumber < item.zindex) {

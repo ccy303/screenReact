@@ -26,10 +26,6 @@ export const PropertiesItem: FC<PropertiesItemProps> = props => {
             return Message.warning("请输入大屏标识");
         }
         console.log(`%c大屏标识查询`, "color:#00ff00", tag);
-        invokeKeyObserver.invokeCallback = {
-            key: "selectconfig",
-            data: { ...itemJson }
-        };
         loadingObserver.loading = true;
         model?.invoke?.("selectconfig", tag);
     };

@@ -40,10 +40,10 @@ const SelectEditor = (props: any) => {
                 mode='single'
                 borderType='bordered'
                 getPopupContainer={(triggerNode: any): any => {
-                    if (customProps.isShow) {
-                        return triggerNode.parentNode;
+                    if (customProps?.isShow) {
+                        return triggerNode?.parentNode;
                     } else {
-                        return document.querySelector("#react-drag-root");
+                        return document.querySelector(".dw-view-item");
                     }
                 }}
             >

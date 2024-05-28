@@ -13,6 +13,7 @@ const prodConfig = merge(baseConfig, {
     path: path.join(__dirname, `../echartReact`),
   },
   mode: 'production',
+  devtool: 'source-map',
   optimization: {
     minimize: true,
     minimizer: [

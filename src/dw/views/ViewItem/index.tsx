@@ -34,7 +34,6 @@ const BaseView = () => {
     const observeRef: any = useRef(null);
 
     const initInvokeKeyObserve = useCallback((key: any, data: any) => {
-        console.log(model.test);
         data = toJS(data);
         if (key == "selectconfig") {
             // 大屏查询
@@ -99,6 +98,7 @@ const BaseView = () => {
 
     useEffect(() => {
         observeRef.current?.();
+        console.log(invokeKeyObserver);
         observeRef.current = observe(invokeKeyObserver, ({ newValue }: any) => {
             const { key, data } = newValue;
             initInvokeKeyObserve(key, data);
@@ -107,10 +107,10 @@ const BaseView = () => {
         observe(loadingObserver, ({ newValue }: any) => {
             setLoading(newValue);
         });
-        invokeKeyObserver.invokeCallback = {
-            key: "selectconfig",
-            data: { ...JSONData }
-        };
+        // invokeKeyObserver.invokeCallback = {
+        //     key: "selectconfig",
+        //     data: { ...JSONData }
+        // };
         return () => observeRef.current?.();
     }, []);
 
@@ -132,6 +132,7 @@ const BaseView = () => {
     }, [pluginSet]);
 
     return (
+        // <>1</>
         <div className='dw-view-item'>
             <Spin type='page' spinning={loading} tip={"数据加载中，请稍等"}>
                 <Design />
