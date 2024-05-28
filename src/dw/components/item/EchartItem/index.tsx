@@ -198,7 +198,7 @@ export default React.memo(
                       endValue:topnum-1,
                       xAxisIndex:0,
                       yAxisIndex:0,
-                      filterMode:"none"
+                      filterMode:"filter"
                     }
                   ]:[]
                 };
