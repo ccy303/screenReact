@@ -435,7 +435,7 @@ export default React.memo(
                             transform: {
                                 type: "filter",
                                 config: {
-                                    and: item._echartFilterValue.map((v: any) => {
+                                    and: item._echartFilterValue?.map((v: any) => {
                                         return { dimension: item._echartFilterKey, "!=": v };
                                     })
                                 }
