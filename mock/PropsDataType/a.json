@@ -1,176 +1,157 @@
 {
     "pageConfig": {
         "size": "5",
-        "backgroundColor": "#f2f3f5",
-        "backgroundSize": "auto auto",
+        "ispublish": "1",
+        "width": 1600,
         "height": 900,
         "scale": "none",
+        "name": "2",
         "url": "",
-        "width": 1600,
-        "id": null,
-        "number": null,
-        "name": null,
-        "configtag": "666666",
-        "version": null,
-        "versiondescribe": null,
-        "themename": null,
-        "themecode": null,
-        "ispublish": "1",
-        "pkid": ""
+        "backgroundSize": "autoauto",
+        "backgroundColor": "#f2f3f5",
+        "pkid": "1954454440824339456",
+        "configtag": "2"
     },
     "itemList": [
         {
-            "_isShow": true,
-            "name": "tabs1",
-            "chartcontrol": {
-                "ispublish": "1"
-            },
+            "useryindex": ["账户数量"],
+            "userxindex": ["银行类别"],
+            "h": 300,
+            "chartname": "仪表盘3",
+            "name": "仪表盘3",
+            "originname": "仪表盘",
+            "t": "2024-05-2517:25:59",
+            "pkid": "1956506009052996608",
+            "w": 400,
+            "x": 111,
+            "zindex": 799,
+            "title": "标题",
+            "y": 192,
             "content": {
-                "showBorder": true,
-                "borderColor": "#2a2a2a",
-                "borderOpacity": 1,
-                "borderWidth": 0,
-                "borderStyle": "dotted"
-            },
-            "zindex": 2,
-            "x": 10,
-            "y": 10,
-            "h": 50,
-            "w": 150,
-            "bindscreens": [
-                {
-                    "name": "Tab",
-                    "value": "666666"
-                },
-                {
-                    "name": "Tab2",
-                    "value": "tda_anls_bankacct"
-                }
-            ],
-            "chartname": "tabs1",
-            "t": "2024-05-19 01:37:19",
-            "id": "e6f6e066794b4fe39825fb78b05ca901",
-            "type": "tabs",
-            "category": "tabs",
-            "kdId": "asda",
-            "pkid": "",
-            "originname": "tabs"
-        },
-        {
-            "_isShow": true,
-            "name": "饼图1",
-            "chartcontrol": {
-                "ispublish": "1"
-            },
-            "content": {
-                "title": {
-                    "show": true,
-                    "fontWeight": "normal",
-                    "fontStyle": "normal",
-                    "underline": "none",
-                    "fontSize": 14,
-                    "fontStyleArray": [],
-                    "align": "center",
-                    "fontColor": "#2a2a2a",
-                    "backColor": "#fff"
-                },
                 "config": {
                     "charts": {
                         "legend": {
-                            "show": true,
-                            "left": "auto",
-                            "right": "auto",
-                            "bottom": "auto",
-                            "top": -5,
-                            "align": "auto",
-                            "orient": "horizontal",
                             "textStyle": {
-                                "fontWeight": "normal",
-                                "fontStyle": "normal",
+                                "color": "#2a2a2a",
                                 "fontSize": 12,
-                                "color": "#2a2a2a"
+                                "fontStyle": "normal",
+                                "fontWeight": "normal"
                             },
+                            "orient": "horizontal",
+                            "align": "auto",
+                            "left": "auto",
+                            "bottom": "auto",
                             "itemWidth": 15,
+                            "top": -5,
+                            "icon": "rect",
                             "itemHeight": 15,
-                            "icon": "rect"
+                            "right": "auto",
+                            "show": true
                         },
                         "series": [
                             {
-                                "label": {
-                                    "show": true,
-                                    "fontWeight": "normal",
-                                    "fontStyle": "normal",
-                                    "fontSize": 12,
-                                    "color": "#2a2a2a",
-                                    "position": "outside"
-                                },
                                 "barWidth": 10,
-                                "starAngle": 90
+                                "starAngle": 90,
+                                "label": {
+                                    "color": "#2a2a2a",
+                                    "show": true,
+                                    "fontSize": 12,
+                                    "position": "outside",
+                                    "fontStyle": "normal",
+                                    "fontWeight": "normal"
+                                }
                             }
                         ]
                     },
-                    "legendPos": "left",
+                    "unit": 1,
+                    "digitalFormat": {
+                        "unit": 1,
+                        "unitarea": 1,
+                        "enableThousands": false,
+                        "dataLabelType": "classificationdatavalue",
+                        "currencySymbols": "¥",
+                        "digitalType": "digital",
+                        "decimalPlace": 2
+                    },
+                    "legendPos": "center",
                     "legendStyle": "mornal",
-                    "fontStyleArray": [],
                     "label": {
                         "fontStyleArray": []
                     },
-                    "digitalFormat": {
-                        "dataLabelType": "classificationdatavalue",
-                        "digitalType": "digital",
-                        "currencySymbols": "¥",
-                        "unit": 1,
-                        "decimalPlace": 2,
-                        "enableThousands": false,
-                        "unitarea": 1
-                    },
-                    "unit": 1,
-                    "showStarAngle": false
+                    "showStarAngle": false,
+                    "fontStyleArray": []
                 },
-                "showBak": true,
-                "backgroundColor": "#fff",
-                "opacity": 1,
-                "showBorder": true,
-                "borderColor": "#2a2a2a",
-                "borderOpacity": 1,
-                "borderWidth": 0,
                 "borderStyle": "dotted",
+                "chartParameters": true,
+                "showBorder": true,
+                "opacity": 1,
+                "showBak": true,
                 "desc": {
                     "show": false,
                     "content": ""
                 },
-                "chartParameters": true
+                "backgroundColor": "#fff",
+                "borderColor": "#2a2a2a",
+                "title": {
+                    "fontStyle": "normal",
+                    "align": "center",
+                    "fontWeight": "normal",
+                    "underline": "none",
+                    "fontSize": 14,
+                    "fontColor": "#2a2a2a",
+                    "fontStyleArray": [],
+                    "backColor": "#fff",
+                    "show": true
+                },
+                "borderWidth": 0,
+                "borderOpacity": 1
             },
+            "type": "gauge",
+            "id": "7c76bf31812b458fb26901672064b525",
+            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.AcctDisplayByBankQingAnlsPlugin",
+            "category": "charts",
+            "chartcontrol": {
+                "versiondesc": "1",
+                "pluginname": "kd.tmc.tda.report.bankacct.qing.data.AcctDisplayByBankQingAnlsPlugin",
+                "ispublish": "1",
+                "version": "1"
+            },
+            "_isShow": true,
             "dataset": {
                 "dataindex": [
-                    ["distribute", "分布", 1, false],
-                    ["distribute_name", "分布名称", 1, false],
-                    ["count", "数量", 2, false]
+                    ["bankname", "银行类别", 1, false],
+                    ["isdomestic", "是否境内", 1, false],
+                    ["acctnum", "账户数量", 3, false],
+                    ["qingsort", "排序列", 3, false]
                 ],
                 "rows": [
-                    ["分布", "分布名称", "数量", "数字"],
-                    ["a", "非银企", 1, "22"],
-                    ["b", "银企", 2, "23"],
-                    ["e", "财务公司1", 3, "24"],
-                    ["d", "财务公司2", 4, "24"],
-                    ["g", "财务公司3", 5, "25"],
-                    ["r", "财务公司4", 6, "26"]
+                    ["银行类别", "是否境内", "账户数量", "排序列"],
+                    ["工商银行", "1", 1, 0],
+                    ["结算中心", "1", 2, 1]
                 ]
+            }
+        },
+        {
+            "h": 30,
+            "chartctrl": "7c76bf31812b458fb26901672064b525,银行类别",
+            "chartname": "下拉选择2",
+            "name": "下拉选择2",
+            "originname": "下拉选择",
+            "t": "2024-05-2517:25:59",
+            "pkid": "1958145711443178496",
+            "w": 100,
+            "x": 407,
+            "zindex": 801,
+            "title": "",
+            "y": 199,
+            "type": "select",
+            "id": "5a7c21f386a74c618614f198dd0f86bc",
+            "category": "select",
+            "chartcontrol": {
+                "ispublish": "1"
             },
-            "title": "标题",
-            "zindex": 2,
-            "x": 14,
-            "y": 394,
-            "h": 300,
-            "w": 400,
-            "pkid": "",
-            "chartname": "饼图1",
-            "t": "2024-05-19 16:46:10",
-            "id": "0126b04f62ad4cf591c5123850b41dd3",
-            "type": "pie",
-            "category": "charts",
-            "kdId": "33333333",
-            "originname": "饼图"
+            "_isShow": true
         }
-    ]
+    ],
+    "deleteList": []
 }

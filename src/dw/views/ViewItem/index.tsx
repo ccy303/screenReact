@@ -6,23 +6,15 @@ import "@kdcloudjs/kdesign/dist/kdesign.css";
 import "dw/style/reset-kdesign.less";
 import { v4 as uuidv4 } from "uuid";
 // import JSONData from "../../../../mock/PropsDataType/ITEM_TEST.json";
-// import JSONData from "../../../../mock/PropsDataType/a.json";
-import JSONData from "../../../../mock/PropsDataType/DATA_INIT.json";
+import JSONData from "../../../../mock/PropsDataType/a.json";
+// import JSONData from "../../../../mock/PropsDataType/DATA_INIT.json";
 import "./index.less";
 import Design from "dw/views/Design/Design";
 import useMain from "@/dw/store/useMain";
 import _ from "lodash";
-import { observable, observe, toJS } from "mobx";
+import { observe, toJS } from "mobx";
 
-export const defaultViewItemContext = {
-    model: { test: true },
-    customProps: { isShow: false },
-    invokeKeyObserver: observable({ invokeCallback: null }),
-    loadingObserver: observable({ loading: false }),
-    deleteObserver: observable({ deletes: [] })
-};
-
-export const ViewItemContext = React.createContext<any>(defaultViewItemContext);
+export const ViewItemContext = React.createContext<any>({});
 
 const BaseView = () => {
     // 要处理的数据列表
@@ -42,6 +34,7 @@ const BaseView = () => {
     const observeRef: any = useRef(null);
 
     const initInvokeKeyObserve = useCallback((key: any, data: any) => {
+        console.log(model.test);
         data = toJS(data);
         if (key == "selectconfig") {
             // 大屏查询
@@ -114,10 +107,11 @@ const BaseView = () => {
         observe(loadingObserver, ({ newValue }: any) => {
             setLoading(newValue);
         });
-        // invokeKeyObserver.invokeCallback = {
-        //     key: "selectconfig",
-        //     data: { ...JSONData }
-        // };
+        invokeKeyObserver.invokeCallback = {
+            key: "selectconfig",
+            data: { ...JSONData }
+        };
+        return () => observeRef.current?.();
     }, []);
 
     useEffect(() => {

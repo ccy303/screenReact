@@ -9,7 +9,7 @@ import _ from "lodash";
 import { ViewItemContext } from "dw/views/ViewItem";
 import { toJS } from "mobx";
 import "./PropertiesContainer.less";
-// import itemJson from "../../../../../../mock/PropsDataType/ITEM_TEST.json";
+import itemJson from "../../../../../../mock/PropsDataType/ITEM_TEST.json";
 
 export const PropertiesItem: FC<PropertiesItemProps> = props => {
     const {
@@ -18,7 +18,7 @@ export const PropertiesItem: FC<PropertiesItemProps> = props => {
     } = props;
 
     const { globalConfig, getCurrentItem } = useMain();
-    const { model, loadingObserver } = useContext(ViewItemContext);
+    const { model, loadingObserver, invokeKeyObserver } = useContext(ViewItemContext);
 
     const searchScreen = () => {
         const tag = globalConfig?.pageControl?.pageConfig?.configtag;
@@ -26,6 +26,10 @@ export const PropertiesItem: FC<PropertiesItemProps> = props => {
             return Message.warning("请输入大屏标识");
         }
         console.log(`%c大屏标识查询`, "color:#00ff00", tag);
+        invokeKeyObserver.invokeCallback = {
+            key: "selectconfig",
+            data: { ...itemJson }
+        };
         loadingObserver.loading = true;
         model?.invoke?.("selectconfig", tag);
     };

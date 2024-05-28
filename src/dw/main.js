@@ -14,20 +14,19 @@ import JSON from "../../mock/PropsDataType/DATA_INIT.json";
  * 注意loadFile中index.css的引入路径，因为webpack打包后将其放在了css文件夹里，所以路径是./css/index.css
  */
 (function (KDApi) {
-    const invokeKeyObserver = observable({
-        invokeCallback: null
-    });
-    const loadingObserver = observable({
-        loading: false
-    });
-    const deleteObserver = observable({
-        deletes: []
-    });
     const setHtml = function (model, primaryProps) {
         KDApi.loadFile("./index.css", model, () => {
             console.log("loadFileSuccess");
             console.log("model", model);
-
+            const invokeKeyObserver = observable({
+                invokeCallback: null
+            });
+            const loadingObserver = observable({
+                loading: false
+            });
+            const deleteObserver = observable({
+                deletes: []
+            });
             class Root extends React.Component {
                 constructor(props) {
                     super(props);
@@ -64,7 +63,7 @@ import JSON from "../../mock/PropsDataType/DATA_INIT.json";
             this.root = createRoot(model.dom);
         },
         init: function (props) {
-            console.log("version", 56);
+            console.log("version", 57);
             console.log("-----init", this.model, props);
             this.model.dom.style.height = "100%";
             this.model.dom.style.width = "100%";

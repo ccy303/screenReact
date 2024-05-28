@@ -1,12 +1,36 @@
-import React from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import App from './App'
+import React from "react";
+import { createRoot } from "react-dom/client";
+import ViewItem from "dw/views/ViewItem/index";
+import { observable } from "mobx";
 
-const root = createRoot(document.getElementById('react-drag-root') as any)
+(function () {
+    const root = createRoot(document.getElementById("react-drag-root") as any);
 
-root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-)
+    const Component = () => {
+        const invokeKeyObserver = observable({
+            invokeCallback: null
+        });
+        const loadingObserver = observable({
+            loading: false
+        });
+        const deleteObserver = observable({
+            deletes: []
+        });
+        return (
+            <ViewItem
+                model={{ test: 1 }}
+                customProps={{ isShow: false }}
+                invokeKeyObserver={invokeKeyObserver}
+                loadingObserver={loadingObserver}
+                deleteObserver={deleteObserver}
+            />
+        );
+    };
+
+    root.render(
+        <div>
+            <Component />
+            {/* <Component /> */}
+        </div>
+    );
+})();
