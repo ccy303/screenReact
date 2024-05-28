@@ -183,12 +183,15 @@ export default React.memo(
             };
 
             if (["bar", "line"].includes(item.type)) {
-                echartOpt = {
+              let xOrYAxisIndex = {};
+              xOrYAxisIndex = item.originname == "横向柱状图" || item.originname == "堆积条形图" ? { yAxisIndex: 0 } : { xAxisIndex: 0 };
+              echartOpt = {
                     ...echartOpt,
                     xAxis: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? {} : { type: "category" },
                     yAxis: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? { type: "category" } : {},
                   dataZoom: topnum && topnum > 0?[
                     {
+                      ...xOrYAxisIndex,
                       type: 'slider',
                       show:false,
                       startValue:0,
