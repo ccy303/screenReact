@@ -4,63 +4,32 @@ import ViewItem from "dw/views/ViewItem/index";
 import { observable } from "mobx";
 
 (function () {
-    const root = createRoot(document.getElementById("react-drag-root") as any);
+    class Root extends React.Component<any> {
+        constructor(props: any) {
+            super(props);
+            this.state = {
+                customProps: props.customProps,
+                model: props.model,
+                [`${props.model.key}Observable`]: observable({
+                    invoke: {},
+                    loading: false,
+                    deletes: []
+                })
+            };
+        }
+        componentDidMount() {}
+        render() {
+            const { customProps, model } = this.state as any;
+            const observableTag = this.state[`${String(model.key)}Observable`];
+            return <ViewItem model={model} customProps={customProps} observableTag={observableTag} />;
+        }
+    }
 
-    const Component = () => {
-        const invokeKeyObserver = observable({
-            invokeCallback: null
-        });
-        const loadingObserver = observable({
-            loading: false
-        });
-        const deleteObserver = observable({
-            deletes: []
-        });
-        return (
-            <ViewItem
-                model={{ test: 1 }}
-                customProps={{ isShow: false }}
-                invokeKeyObserver={invokeKeyObserver}
-                loadingObserver={loadingObserver}
-                deleteObserver={deleteObserver}
-            />
-        );
-    };
+    const root = createRoot(document.getElementById("react-drag-root") as any);
 
     root.render(
         <div>
-            <Component />
+            <Root customProps={{ isShow: false }} model={{ key: "test" }} />
         </div>
     );
 })();
-
-// (function () {
-//     const root = createRoot(document.getElementById("react-drag-root1") as any);
-
-//     const Component = () => {
-//         const invokeKeyObserver = observable({
-//             invokeCallback: null
-//         });
-//         const loadingObserver = observable({
-//             loading: false
-//         });
-//         const deleteObserver = observable({
-//             deletes: []
-//         });
-//         return (
-//             <ViewItem
-//                 model={{ test: 1 }}
-//                 customProps={{ isShow: false }}
-//                 invokeKeyObserver={invokeKeyObserver}
-//                 loadingObserver={loadingObserver}
-//                 deleteObserver={deleteObserver}
-//             />
-//         );
-//     };
-
-//     root.render(
-//         <div>
-//             <Component />
-//         </div>
-//     );
-// })();

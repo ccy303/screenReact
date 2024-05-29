@@ -131,7 +131,7 @@ const gaugeStyle = {
 export default React.memo(
     (item: any) => {
         const { model } = useContext(ViewItemContext);
-        const { content, userxindex, useryindex, dataset,datafilter } = item;
+        const { content, userxindex, useryindex, dataset, datafilter } = item;
         const { config } = content;
         const { charts } = config;
         const { topnum } = charts;
@@ -150,22 +150,24 @@ export default React.memo(
             ["Walnut", 72.4, 53.9, 39.1]
         ];
 
-      const defaultDataSet = item?.dataset?.rows || initData;
-      const firstRow = defaultDataSet[0];
-      const filterDataSet = datafilter? defaultDataSet.filter((row: any,index:number) => {
-        if(index == 0){
-          return true;
-        }else{
-          for (let i = 0; i < datafilter.length; i++) {
-            const { key, selectkey } = datafilter[i];
-            if (!selectkey.includes(row[firstRow.indexOf(key)])) {
-              return false;
-            }
-          }
-          return true;
-        }
-      }) : defaultDataSet;
-      const dataSet: any = [{ source: filterDataSet }];
+        const defaultDataSet = item?.dataset?.rows || initData;
+        const firstRow = defaultDataSet[0];
+        const filterDataSet = datafilter
+            ? defaultDataSet.filter((row: any, index: number) => {
+                  if (index == 0) {
+                      return true;
+                  } else {
+                      for (let i = 0; i < datafilter.length; i++) {
+                          const { key, selectkey } = datafilter[i];
+                          if (!selectkey.includes(row[firstRow.indexOf(key)])) {
+                              return false;
+                          }
+                      }
+                      return true;
+                  }
+              })
+            : defaultDataSet;
+        const dataSet: any = [{ source: filterDataSet }];
         const _rows: any = {};
         for (let i = 0, data = dataSet[0].source; i < data?.[0]?.length; i++) {
             const key = data[0][i];
@@ -183,22 +185,25 @@ export default React.memo(
             };
 
             if (["bar", "line"].includes(item.type)) {
-              let xOrYAxisIndex = {};
-              xOrYAxisIndex = item.originname == "横向柱状图" || item.originname == "堆积条形图" ? { yAxisIndex: 0 } : { xAxisIndex: 0 };
-              echartOpt = {
+                let xOrYAxisIndex = {};
+                xOrYAxisIndex = item.originname == "横向柱状图" || item.originname == "堆积条形图" ? { yAxisIndex: 0 } : { xAxisIndex: 0 };
+                echartOpt = {
                     ...echartOpt,
                     xAxis: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? {} : { type: "category" },
                     yAxis: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? { type: "category" } : {},
-                  dataZoom: topnum && topnum > 0?[
-                    {
-                      ...xOrYAxisIndex,
-                      type: 'slider',
-                      show:false,
-                      startValue:0,
-                      endValue:topnum-1,
-                      filterMode:"filter"
-                    }
-                  ]:[]
+                    dataZoom:
+                        topnum && topnum > 0
+                            ? [
+                                  {
+                                      ...xOrYAxisIndex,
+                                      type: "slider",
+                                      show: false,
+                                      startValue: 0,
+                                      endValue: topnum - 1,
+                                      filterMode: "filter"
+                                  }
+                              ]
+                            : []
                 };
             }
 
@@ -226,9 +231,9 @@ export default React.memo(
                     _center = ["30%", "50%"];
                 } else if (item.content.config.charts.legend.orient == "vertical" && item.content.config.legendPos == "left") {
                     _center = ["60%", "50%"];
-                } else if ( item.content.config.legendPos == "bottom") {
+                } else if (item.content.config.legendPos == "bottom") {
                     _center = ["50%", "35%"];
-                }else if ( item.content.config.charts.legend.orient == "vertical" && item.content.config.legendPos == "top") {
+                } else if (item.content.config.charts.legend.orient == "vertical" && item.content.config.legendPos == "top") {
                     _center = ["50%", "66%"];
                 }
 
@@ -245,79 +250,78 @@ export default React.memo(
                     },
                     itemStyle: item.originname == "环图" ? DEFAULT_PIE_ITEMSTYLE : {},
                     center: _center,
-                    data: topnum && topnum > 0?_data?.slice(0, topnum):_data
+                    data: topnum && topnum > 0 ? _data?.slice(0, topnum) : _data
                 };
 
-                const legend = (()=>{
-                    let res = { ...echartOpt.legend, ...{ [item.content.config.legendPos]: item.content.config.legendPos } }
-                    if(item.content.config.legendStyle == "customMade"){
-                        res =  _data?.map((v: any, i: any) => {
+                const legend = (() => {
+                    let res = { ...echartOpt.legend, ...{ [item.content.config.legendPos]: item.content.config.legendPos } };
+                    if (item.content.config.legendStyle == "customMade") {
+                        res = _data?.map((v: any, i: any) => {
                             let position = {};
                             const width = 100;
                             if (echartOpt.legend.orient == "horizontal") {
-
-                                if(item.content.config.legendPos == "left"){
+                                if (item.content.config.legendPos == "left") {
                                     position = {
                                         left: (width + 30 + 30) * i,
-                                        right: 'auto'
-                                    }
-                                }
-                                if(item.content.config.legendPos == "right"){
-                                    position = {
-                                        right:  (width + 30 + 30) * (_data.length - 1 - i),
-                                        left: 'auto'
-                                    }
-                                }
-                                if(item.content.config.legendPos == "top"){
-                                    position = {
-                                        top:item.content.config.charts.legend.top,
-                                        left:item.content.config.legendPos == "top" && i  ? (width + 60 ) * i : 30,
-                                        right: 'auto'
+                                        right: "auto"
                                     };
                                 }
-                                if(item.content.config.legendPos == "bottom"){
+                                if (item.content.config.legendPos == "right") {
                                     position = {
-                                        bottom:item.content.config.charts.legend.top,
-                                        left:item.content.config.legendPos == "bottom" && i  ? (width + 60 ) * i : 30,
-                                        right: 'auto',
-                                        top: 'auto'
+                                        right: (width + 30 + 30) * (_data.length - 1 - i),
+                                        left: "auto"
                                     };
                                 }
-
+                                if (item.content.config.legendPos == "top") {
+                                    position = {
+                                        top: item.content.config.charts.legend.top,
+                                        left: item.content.config.legendPos == "top" && i ? (width + 60) * i : 30,
+                                        right: "auto"
+                                    };
+                                }
+                                if (item.content.config.legendPos == "bottom") {
+                                    position = {
+                                        bottom: item.content.config.charts.legend.top,
+                                        left: item.content.config.legendPos == "bottom" && i ? (width + 60) * i : 30,
+                                        right: "auto",
+                                        top: "auto"
+                                    };
+                                }
                             } else if (echartOpt.legend.orient == "vertical") {
-                                delete res.top
-                                delete res.right
-                                delete res.left
-                                delete res.bottom
+                                delete res.top;
+                                delete res.right;
+                                delete res.left;
+                                delete res.bottom;
 
-                                if(item.content.config.legendPos == "left"){
+                                if (item.content.config.legendPos == "left") {
                                     res = {
                                         ...res,
-                                        right:'auto',
-                                    }
+                                        right: "auto"
+                                    };
                                     position = {
                                         top: i ? 30 * (i + 1) : 30,
                                         [item.content.config.legendPos]: 5
                                     };
-                                }else if(item.content.config.legendPos == "right" ){
-
+                                } else if (item.content.config.legendPos == "right") {
                                     position = {
                                         top: i ? 30 * (i + 1) : 30,
-                                        left:'66%',
+                                        left: "66%"
                                     };
-                                }else if(item.content.config.legendPos == "top" ){
+                                } else if (item.content.config.legendPos == "top") {
                                     position = {
-                                        top: i ? (30 * (i + 1)) + item.content.config.charts.legend.top : 30 + item.content.config.charts.legend.top,
-                                        Left:'center',
+                                        top: i ? 30 * (i + 1) + item.content.config.charts.legend.top : 30 + item.content.config.charts.legend.top,
+                                        Left: "center"
                                     };
-                                }else if(item.content.config.legendPos == "bottom"){
+                                } else if (item.content.config.legendPos == "bottom") {
                                     position = {
-                                        top:'auto',
-                                        bottom: i ? 30 * (i + 1) + item.content.config.charts.legend.bottom : 30 + item.content.config.charts.legend.bottom,
-                                        Left:'center',
+                                        top: "auto",
+                                        bottom: i
+                                            ? 30 * (i + 1) + item.content.config.charts.legend.bottom
+                                            : 30 + item.content.config.charts.legend.bottom,
+                                        Left: "center"
                                     };
                                 }
-                                console.log(4555555555555555,position);
+                                console.log(4555555555555555, position);
                             }
                             return {
                                 ...echartOpt.legend,
@@ -343,39 +347,39 @@ export default React.memo(
                                     }
                                 }
                             };
-                        })
+                        });
                     } else {
-                        delete res.right
-                        delete res.left
-                        delete res.bottom
-                        if(item.content.config.legendPos == 'top'){
+                        delete res.right;
+                        delete res.left;
+                        delete res.bottom;
+                        if (item.content.config.legendPos == "top") {
                             res = {
                                 ...res,
-                                top:item.content.config.charts.legend.top,
-                                right:'auto',
-                            }
-                        }else if(item.content.config.legendPos == 'left'){
+                                top: item.content.config.charts.legend.top,
+                                right: "auto"
+                            };
+                        } else if (item.content.config.legendPos == "left") {
                             res = {
                                 ...res,
-                                left:item.content.config.charts.legend.left,
-                            }
-                        }else if(item.content.config.legendPos == 'right'){
+                                left: item.content.config.charts.legend.left
+                            };
+                        } else if (item.content.config.legendPos == "right") {
                             res = {
                                 ...res,
-                                right:'5%',
-                            }
-                        }else if(item.content.config.legendPos == 'bottom'){
-                            delete res.top
+                                right: "5%"
+                            };
+                        } else if (item.content.config.legendPos == "bottom") {
+                            delete res.top;
                             res = {
                                 ...res,
-                                bottom:item.content.config.charts.legend.bottom,
-                            }
+                                bottom: item.content.config.charts.legend.bottom
+                            };
                         }
                     }
-                    console.log(1111111111111,res);
+                    console.log(1111111111111, res);
 
-                    return res
-                })()
+                    return res;
+                })();
 
                 const output = {
                     ...echartOpt,
@@ -542,18 +546,18 @@ export default React.memo(
 
         const onChartClick = useCallback((params: any) => {
             // 在这里处理点击事件，可以获取点击的图形的数据
-          console.log("clickChart",params);
-          const { dataIndex } = params;
+            console.log("clickChart", params);
+            const { dataIndex } = params;
             const { pluginname, dataset } = item;
             if (dataIndex && pluginname && dataset && dataset.dataindex && dataset.rows && dataset.rows[dataIndex + 1]) {
-            const clickData = {
-              pluginname: pluginname,
-              dataindex: dataset.dataindex,
-              row: dataset.rows[dataIndex + 1]
-            };
-            console.log(clickData);
-            model?.invoke?.("clickcharts", JSON.stringify(clickData));
-          }
+                const clickData = {
+                    pluginname: pluginname,
+                    dataindex: dataset.dataindex,
+                    row: dataset.rows[dataIndex + 1]
+                };
+                console.log(clickData);
+                model?.invoke?.("clickcharts", JSON.stringify(clickData));
+            }
         }, []);
 
         return (

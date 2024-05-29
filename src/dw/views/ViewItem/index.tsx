@@ -28,7 +28,7 @@ const BaseView = () => {
 
     const [loading, setLoading] = useState(false);
 
-    const { model, invokeKeyObserver, loadingObserver, deleteObserver } = useContext(ViewItemContext);
+    const { model, observableTag } = useContext(ViewItemContext);
 
     const isForPluginData: any = useRef(false);
     const observeRef: any = useRef(null);
@@ -40,8 +40,8 @@ const BaseView = () => {
             console.log(`%c大屏查询`, "color:#00ff00", JSON.parse(JSON.stringify(data)));
             isForPluginData.current = false;
             initPage({ ...data });
-            deleteObserver.deletes = [];
-            loadingObserver.loading = false;
+            observableTag.deletes = [];
+            observableTag.loading = false;
             _itemList.current = data.itemList;
         } else if (["refresh", "optionversion", "selectTable"].includes(key)) {
             // 图表刷新/图表版本修改
@@ -52,13 +52,13 @@ const BaseView = () => {
             console.log(`%c大屏版本修改`, "color:#00ff00", JSON.parse(JSON.stringify(data)));
             isForPluginData.current = false;
             initPage({ ...data });
-            deleteObserver.deletes = [];
+            observableTag.deletes = [];
             _itemList.current = data.itemList;
         } else if (key == "init") {
             console.log(`%c大屏init`, "color:#00ff00", JSON.parse(JSON.stringify(data)));
             isForPluginData.current = false;
             initPage({ ...data });
-            deleteObserver.deletes = [];
+            observableTag.deletes = [];
             _itemList.current = data.itemList;
         } else if (key == "selectoption") {
             console.log(`%c(selectoption)回调返回`, "color:#00ff00", JSON.parse(JSON.stringify(data)));
@@ -80,7 +80,7 @@ const BaseView = () => {
                 itemList: [..._itemList, { ...targetTab, zindex: zindex + 1 }]
             };
             setTimeout(() => {
-                deleteObserver.deletes = [];
+                observableTag.deletes = [];
                 initPage(_data);
             });
         }
@@ -98,16 +98,14 @@ const BaseView = () => {
 
     useEffect(() => {
         observeRef.current?.();
-        console.log(invokeKeyObserver);
-        observeRef.current = observe(invokeKeyObserver, ({ newValue }: any) => {
+        observeRef.current = observe(observableTag, "invoke", ({ newValue }: any) => {
             const { key, data } = newValue;
             initInvokeKeyObserve(key, data);
         });
-
-        observe(loadingObserver, ({ newValue }: any) => {
+        observe(observableTag, "loading", ({ newValue }: any) => {
             setLoading(newValue);
         });
-        // invokeKeyObserver.invokeCallback = {
+        // observableTag.invoke = {
         //     key: "selectconfig",
         //     data: { ...JSONData }
         // };
@@ -143,7 +141,6 @@ const BaseView = () => {
 
 const ViewItem: FC<any> = props => {
     console.log("ViewItem props", props);
-
     const value = {
         ...(props || {})
     };

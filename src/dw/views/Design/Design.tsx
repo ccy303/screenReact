@@ -23,7 +23,7 @@ const Design = () => {
 
     return (
         <div className='dw-design'>
-            {customProps.isShow ? (
+            {customProps?.isShow ? (
                 <Preview />
             ) : (
                 <>

@@ -18,7 +18,7 @@ export const PropertiesItem: FC<PropertiesItemProps> = props => {
     } = props;
 
     const { globalConfig, getCurrentItem } = useMain();
-    const { model, loadingObserver, invokeKeyObserver } = useContext(ViewItemContext);
+    const { model, observableTag } = useContext(ViewItemContext);
 
     const searchScreen = () => {
         const tag = globalConfig?.pageControl?.pageConfig?.configtag;
@@ -26,7 +26,7 @@ export const PropertiesItem: FC<PropertiesItemProps> = props => {
             return Message.warning("请输入大屏标识");
         }
         console.log(`%c大屏标识查询`, "color:#00ff00", tag);
-        loadingObserver.loading = true;
+        observableTag.loading = true;
         model?.invoke?.("selectconfig", tag);
     };
 
@@ -102,7 +102,7 @@ export const PropertiesContainer: FC<any> = props => {
         itemList
     } = useMain();
 
-    const { model, deleteObserver } = useContext(ViewItemContext);
+    const { model, observableTag } = useContext(ViewItemContext);
 
     const prefixCls = "dw-design-right-properties-view";
     const currentItem = getCurrentItem();
@@ -177,7 +177,7 @@ export const PropertiesContainer: FC<any> = props => {
                                 const data = {
                                     pageConfig: { ...(pageControl.pageConfig as any) },
                                     itemList,
-                                    deleteList: toJS(deleteObserver.deletes)
+                                    deleteList: toJS(observableTag.deletes)
                                 };
                                 console.log(`%c提交数据`, "color:#00ff00", data);
                                 model?.invoke?.("save", JSON.stringify({ ...data }));

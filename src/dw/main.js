@@ -32,15 +32,7 @@ const init = () => {};
                 }
                 render() {
                     const { customProps, model } = this.state;
-                    return (
-                        <ViewItem
-                            model={model}
-                            customProps={customProps}
-                            invokeKeyObserver={that._invokeKeyObserver}
-                            loadingObserver={that._loadingObserver}
-                            deleteObserver={that._deleteObserver}
-                        />
-                    );
+                    return <ViewItem observableTag={that[`${model.key}Observable`]} model={model} customProps={customProps} />;
                 }
             }
             this.root.render(<Root model={model} customProps={primaryProps} />);
@@ -50,16 +42,13 @@ const init = () => {};
         this._setModel(model);
     }
     MyComponent.prototype = {
-        _invokeKeyObserver: observable({ invokeCallback: null }),
-        _loadingObserver: observable({ loading: false }),
-        _deleteObserver: observable({ deletes: [] }),
         _setModel: function (model) {
             console.info("setHtml");
             this.model = model;
             this.root = createRoot(model.dom);
         },
         init: function (props) {
-            console.log("version", 59);
+            console.log("version", 60);
             console.log("-----init", this.model, props);
             this.model.dom.style.height = "100%";
             this.model.dom.style.width = "100%";
@@ -70,12 +59,17 @@ const init = () => {};
             if (flag.value != "design") {
                 this.model.invokeAsync("init", props.configItems);
             }
+            this[`${this.model.key}Observable`] = observable({
+                invoke: {},
+                loading: false,
+                deletes: []
+            });
             setHtml.call(this, this.model, { isShow: flag.value != "design" });
         },
         update: function (props) {
             console.log("-----update:props", props);
             const key = props.data?.invokeKey?.split("/")?.[0];
-            this._invokeKeyObserver.invokeCallback = {
+            this[`${this.model.key}Observable`].invoke = {
                 key,
                 data: props.data
             };
@@ -85,7 +79,7 @@ const init = () => {};
             this.root.unmount();
         }
     };
-    
+
     console.log("MyComponent", MyComponent);
     // 注册自定义组件
     KDApi.register("echartReact", MyComponent);

@@ -14,7 +14,7 @@ const CompItem = () => {
         globalConfig: { selectId }
     } = useMain();
 
-    const { deleteObserver } = useContext(ViewItemContext);
+    const { observableTag } = useContext(ViewItemContext);
 
     const click = (e: any, id: any) => {
         e.preventDefault();
@@ -30,7 +30,7 @@ const CompItem = () => {
             return item.id === id;
         });
         if (target.id) {
-            deleteObserver.deletes.push(target.id);
+            observableTag.deletes.push(target.id);
         }
         delItem(id);
     };
