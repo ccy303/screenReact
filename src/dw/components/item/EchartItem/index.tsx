@@ -28,7 +28,7 @@ const gaugeStyle = {
                 [0.75, "#40BD6E"],
                 [1, "#1890FF"]
             ],
-            shadowColor: "#87CEEB",
+            shadowColor: "#A3C6FF",
             shadowBlur: 20
         }
     },
