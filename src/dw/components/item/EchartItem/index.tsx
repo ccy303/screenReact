@@ -203,7 +203,13 @@ export default React.memo(
                                       filterMode: "filter"
                                   }
                               ]
-                            : []
+                            : [],
+                  grid: {
+                    top: '10%', // 上边距
+                    left: 10, // 左边距
+                    bottom: 10, // 下边距
+                    containLabel: true // 自动计算标签大小
+                  }
                 };
             }
 
