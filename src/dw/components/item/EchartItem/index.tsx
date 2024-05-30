@@ -122,7 +122,7 @@ const gaugeStyle = {
         offsetCenter: [0, "30%"],
         valueAnimation: true,
         formatter: function (value: number) {
-            return Math.round(value * 100) + "%";
+            return (value * 10000 /100).toFixed(2) + "%";//精度问题 例如 0.11255 * 100 = 11.254999999999999
         },
         color: "inherit"
     }
