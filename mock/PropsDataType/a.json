@@ -12,146 +12,153 @@
         "pkid": "1954454440824339456",
         "configtag": "2"
     },
-    "itemList": [
+    "itemList":[
         {
-            "useryindex": ["账户数量"],
-            "userxindex": ["银行类别"],
-            "h": 300,
-            "chartname": "仪表盘3",
-            "name": "仪表盘3",
-            "originname": "仪表盘",
-            "t": "2024-05-2517:25:59",
-            "pkid": "1956506009052996608",
-            "w": 400,
-            "x": 111,
-            "zindex": 799,
-            "title": "标题",
-            "y": 192,
-            "content": {
-                "config": {
-                    "charts": {
-                        "legend": {
-                            "textStyle": {
-                                "color": "#2a2a2a",
-                                "fontSize": 12,
-                                "fontStyle": "normal",
-                                "fontWeight": "normal"
-                            },
-                            "orient": "horizontal",
-                            "align": "auto",
-                            "left": "auto",
-                            "bottom": "auto",
-                            "itemWidth": 15,
-                            "top": -5,
-                            "icon": "rect",
-                            "itemHeight": 15,
-                            "right": "auto",
-                            "show": true
-                        },
-                        "series": [
-                            {
-                                "barWidth": 10,
-                                "starAngle": 90,
-                                "label": {
-                                    "color": "#2a2a2a",
-                                    "show": true,
-                                    "fontSize": 12,
-                                    "position": "outside",
-                                    "fontStyle": "normal",
-                                    "fontWeight": "normal"
-                                }
-                            }
-                        ]
-                    },
-                    "unit": 1,
-                    "digitalFormat": {
-                        "unit": 1,
-                        "unitarea": 1,
-                        "enableThousands": false,
-                        "dataLabelType": "classificationdatavalue",
-                        "currencySymbols": "¥",
-                        "digitalType": "digital",
-                        "decimalPlace": 2
-                    },
-                    "legendPos": "center",
-                    "legendStyle": "mornal",
-                    "label": {
-                        "fontStyleArray": []
-                    },
-                    "showStarAngle": false,
-                    "fontStyleArray": []
-                },
-                "borderStyle": "dotted",
-                "chartParameters": true,
-                "showBorder": true,
-                "opacity": 1,
-                "showBak": true,
-                "desc": {
-                    "show": false,
-                    "content": ""
-                },
-                "backgroundColor": "#fff",
-                "borderColor": "#2a2a2a",
-                "title": {
-                    "fontStyle": "normal",
-                    "align": "center",
-                    "fontWeight": "normal",
-                    "underline": "none",
-                    "fontSize": 14,
-                    "fontColor": "#2a2a2a",
-                    "fontStyleArray": [],
-                    "backColor": "#fff",
-                    "show": true
-                },
-                "borderWidth": 0,
-                "borderOpacity": 1
-            },
-            "type": "gauge",
-            "id": "7c76bf31812b458fb26901672064b525",
-            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.AcctDisplayByBankQingAnlsPlugin",
-            "category": "charts",
-            "chartcontrol": {
-                "versiondesc": "1",
-                "pluginname": "kd.tmc.tda.report.bankacct.qing.data.AcctDisplayByBankQingAnlsPlugin",
-                "ispublish": "1",
-                "version": "1"
-            },
-            "_isShow": true,
-            "dataset": {
-                "dataindex": [
-                    ["bankname", "银行类别", 1, false],
-                    ["isdomestic", "是否境内", 1, false],
-                    ["acctnum", "账户数量", 3, false],
-                    ["qingsort", "排序列", 3, false]
-                ],
-                "rows": [
-                    ["银行类别", "是否境内", "账户数量", "排序列"],
-                    ["工商银行", "1", 1, 0],
-                    ["结算中心", "1", 2, 1]
-                ]
-            }
+        "useryindex":[
+        "账户数量"
+        ],
+        "userxindex":[
+        "银行类别"
+        ],
+        "h":300,
+        "chartname":"环图2",
+        "name":"环图2",
+        "originname":"环图",
+        "t":"2024-05-2919:02:31",
+        "pkid":"1961070845015537664",
+        "w":400,
+        "x":"663",
+        "dataset":{
+        "dataindex":[
+        [
+        "bankname",
+        "银行类别",
+        1,
+        false
+        ],
+        [
+        "dq",
+        "地区",
+        1,
+        false
+        ],
+        [
+        "acctnum",
+        "账户数量",
+        3,
+        false
+        ],
+        [
+        "bz",
+        "币种",
+        1,
+        false
+        ]
+        ],
+        "rows":[
+            ["银行类别", "地区", "账户数量", "币种"],
+            ["工商银行", "0", 1, "人民币"],
+            ["结算中心", "1", 2, "人民币"],
+            ["建设银行", "2", 8, "人民币"],
+            ["工商银行", "3", 2, "美元"],
+            ["结算中心", "4", 3, "法郎"],
+            ["工商银行", "5", 9, "欧元"]
+        ]
         },
+        "zindex":804,
+        "title":"标题",
+        "y":"170",
+        "content":{
+        "config":{
+        "charts":{
+        "topnum":0,
+        "legend":{
+        "textStyle":{
+        "color":"#2a2a2a",
+        "fontSize":12,
+        "fontStyle":"normal",
+        "fontWeight":"normal"
+        },
+        "orient":"horizontal",
+        "align":"auto",
+        "left":10,
+        "bottom":5,
+        "itemWidth":15,
+        "top":-5,
+        "icon":"rect",
+        "itemHeight":15,
+        "right":"auto",
+        "show":true
+        },
+        "series":[
         {
-            "h": 30,
-            "chartctrl": "7c76bf31812b458fb26901672064b525,银行类别",
-            "chartname": "下拉选择2",
-            "name": "下拉选择2",
-            "originname": "下拉选择",
-            "t": "2024-05-2517:25:59",
-            "pkid": "1958145711443178496",
-            "w": 100,
-            "x": 407,
-            "zindex": 801,
-            "title": "",
-            "y": 199,
-            "type": "select",
-            "id": "5a7c21f386a74c618614f198dd0f86bc",
-            "category": "select",
-            "chartcontrol": {
-                "ispublish": "1"
-            },
-            "_isShow": true
+        "barWidth":10,
+        "starAngle":90,
+        "label":{
+        "color":"#2a2a2a",
+        "show":true,
+        "fontSize":12,
+        "position":"outside",
+        "fontStyle":"normal",
+        "fontWeight":"normal"
         }
-    ],
+        }
+        ]
+        },
+        "unit":1,
+        "digitalFormat":{
+        "unit":1,
+        "unitarea":1,
+        "enableThousands":false,
+        "dataLabelType":"classificationdatavalue",
+        "currencySymbols":"¥",
+        "digitalType":"digital",
+        "decimalPlace":2
+        },
+        "legendPos":"top",
+        "legendStyle":"mornal",
+        "label":{
+        "fontStyleArray":[]
+        },
+        "showStarAngle":false,
+        "fontStyleArray":[]
+        },
+        "borderStyle":"dotted",
+        "chartParameters":true,
+        "showBorder":true,
+        "opacity":1,
+        "showBak":true,
+        "desc":{
+        "show":false,
+        "content":""
+        },
+        "backgroundColor":"#fff",
+        "borderColor":"#2a2a2a",
+        "title":{
+        "fontStyle":"normal",
+        "align":"center",
+        "fontWeight":"normal",
+        "underline":"none",
+        "fontSize":14,
+        "fontColor":"#2a2a2a",
+        "fontStyleArray":[],
+        "backColor":"#fff",
+        "show":true
+        },
+        "borderWidth":0,
+        "borderOpacity":1
+        },
+        "type":"pie",
+        "id":"5061ee8f6cd7444892ed15fcea09e776",
+        "pluginname":"kd.tmc.tda.report.bankacct.qing.data.AcctDisplayByBankQingAnlsPlugin",
+        "category":"charts",
+        "chartcontrol":{
+        "versiondesc":"1",
+        "pluginname":"kd.tmc.tda.report.bankacct.qing.data.AcctDisplayByBankQingAnlsPlugin",
+        "ispublish":"1",
+        "version":"1"
+        }
+        }
+        ],
     "deleteList": []
 }
