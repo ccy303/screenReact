@@ -152,16 +152,25 @@ export default React.memo(
 
         const defaultDataSet = item?.dataset?.rows || initData;
         const firstRow = defaultDataSet[0];
-        const filterDataSet = datafilter
+        const filterDataSet = datafilter && datafilter.length || item._echartFilter
             ? defaultDataSet.filter((row: any, index: number) => {
                   if (index == 0) {
                       return true;
                   } else {
-                      for (let i = 0; i < datafilter.length; i++) {
+                      if(datafilter && datafilter.length) {
+                        for (let i = 0; i < datafilter.length; i++) {
                           const { key, selectkey } = datafilter[i];
                           if (!selectkey.includes(row[firstRow.indexOf(key)])) {
-                              return false;
+                            return false;
                           }
+                        }
+                      }
+                      if(item._echartFilter) {
+                        for (let selectFilterKey in item._echartFilter) {
+                          if (item._echartFilter[selectFilterKey] != row[firstRow.indexOf(selectFilterKey)]) {
+                            return false;
+                          }
+                        }
                       }
                       return true;
                   }
