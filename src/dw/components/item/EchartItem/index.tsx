@@ -122,7 +122,7 @@ const gaugeStyle = {
         offsetCenter: [0, "30%"],
         valueAnimation: true,
         formatter: function (value: number) {
-            return (value * 10000 /100).toFixed(2) + "%";//精度问题 例如 0.11255 * 100 = 11.254999999999999
+            return ((value * 10000) / 100).toFixed(2) + "%"; //精度问题 例如 0.11255 * 100 = 11.254999999999999
         },
         color: "inherit"
     }
@@ -152,30 +152,31 @@ export default React.memo(
 
         const defaultDataSet = item?.dataset?.rows || initData;
         const firstRow = defaultDataSet[0];
-        const filterDataSet = datafilter && datafilter.length || item._echartFilter
-            ? defaultDataSet.filter((row: any, index: number) => {
-                  if (index == 0) {
-                      return true;
-                  } else {
-                      if(datafilter && datafilter.length) {
-                        for (let i = 0; i < datafilter.length; i++) {
-                          const { key, selectkey } = datafilter[i];
-                          if (!selectkey.includes(row[firstRow.indexOf(key)])) {
-                            return false;
+        const filterDataSet =
+            (datafilter && datafilter.length) || item._echartFilter
+                ? defaultDataSet.filter((row: any, index: number) => {
+                      if (index == 0) {
+                          return true;
+                      } else {
+                          if (datafilter && datafilter.length) {
+                              for (let i = 0; i < datafilter.length; i++) {
+                                  const { key, selectkey } = datafilter[i];
+                                  if (!selectkey.includes(row[firstRow.indexOf(key)])) {
+                                      return false;
+                                  }
+                              }
                           }
-                        }
-                      }
-                      if(item._echartFilter) {
-                        for (let selectFilterKey in item._echartFilter) {
-                          if (item._echartFilter[selectFilterKey] != row[firstRow.indexOf(selectFilterKey)]) {
-                            return false;
+                          if (item._echartFilter) {
+                              for (let selectFilterKey in item._echartFilter) {
+                                  if (item._echartFilter[selectFilterKey] != row[firstRow.indexOf(selectFilterKey)]) {
+                                      return false;
+                                  }
+                              }
                           }
-                        }
+                          return true;
                       }
-                      return true;
-                  }
-              })
-            : defaultDataSet;
+                  })
+                : defaultDataSet;
         const dataSet: any = [{ source: filterDataSet }];
         const _rows: any = {};
         for (let i = 0, data = dataSet[0].source; i < data?.[0]?.length; i++) {
@@ -213,12 +214,12 @@ export default React.memo(
                                   }
                               ]
                             : [],
-                  grid: {
-                    top: '10%', // 上边距
-                    left: 10, // 左边距
-                    bottom: 10, // 下边距
-                    containLabel: true // 自动计算标签大小
-                  }
+                    grid: {
+                        top: "10%", // 上边距
+                        left: 10, // 左边距
+                        bottom: 10, // 下边距
+                        containLabel: true // 自动计算标签大小
+                    }
                 };
             }
 
@@ -226,19 +227,15 @@ export default React.memo(
             if (item.type == "pie") {
                 const xshow = _rows[userxindex?.[0] || "product"];
                 const y = _rows[useryindex?.[0] || "2015"];
-                console.log("_rows!!!!!!!!!",_rows);
-          
-                
+                console.log("_rows!!!!!!!!!", _rows);
 
                 let _data = null;
                 let _center = ["50%", "50%"];
                 if (item._echartFilterValue && item._echartFilterValue?.length) {
-                    const x = _rows[item._echartFilterKey]; 
-                    _data = x
-                        ?.map((v: any, i: any) => {
-                            return { name: xshow?.[i], value: y?.[i] };
-                        });
-                        console.log("_data99999999999",_data);       
+                    const x = _rows[item._echartFilterKey];
+                    _data = x?.map((v: any, i: any) => {
+                        return { name: xshow?.[i], value: y?.[i] };
+                    });
                 } else {
                     _data = xshow?.map((v: any, i: any) => {
                         return { name: v, value: y?.[i] };
@@ -338,7 +335,6 @@ export default React.memo(
                                         Left: "center"
                                     };
                                 }
-                                console.log(4555555555555555, position);
                             }
                             return {
                                 ...echartOpt.legend,
@@ -393,7 +389,6 @@ export default React.memo(
                             };
                         }
                     }
-                    console.log(1111111111111, res);
 
                     return res;
                 })();
@@ -452,7 +447,6 @@ export default React.memo(
                     }
                 }));
                 if (item._echartFilterValue && item._echartFilterValue?.length) {
-                    
                     series = series.map((_series: any, index: any) => {
                         dataSet.push({
                             transform: {
@@ -504,6 +498,48 @@ export default React.memo(
             };
         }, []);
 
+        const setLegendStyle = (echart: any, legend: any, index?: any) => {
+            const _index = index === undefined ? activeEchartIndex.current : index;
+            const _legend = legend.map((leg: any, idx: any) => {
+                if (idx === _index) {
+                    return {
+                        ...leg,
+                        shadowColor: "rgba(0, 0, 0, 0.1)",
+                        shadowBlur: 5,
+                        borderWidth: 0.3,
+                        borderRadius: 5,
+                        backgroundColor: "#fff"
+                    };
+                } else {
+                    return leg;
+                }
+            });
+            echart.setOption({ legend: [..._legend] }, { replaceMerge: "legend" });
+        };
+
+        const initScroll = (echart: any, legend: any, data: any) => {
+            clearInterval(timer.current);
+            timer.current = setInterval(() => {
+                echart.dispatchAction({
+                    type: "highlight",
+                    dataIndex: activeEchartIndex.current
+                });
+
+                echart.dispatchAction({
+                    type: "downplay",
+                    dataIndex: activeEchartIndex.current == 0 ? data.length - 1 : activeEchartIndex.current - 1
+                });
+
+                setLegendStyle(echart, legend);
+
+                if (activeEchartIndex.current == data.length - 1) {
+                    activeEchartIndex.current = 0;
+                } else {
+                    activeEchartIndex.current += 1;
+                }
+            }, 3000);
+        };
+
         useEffect(() => {
             const echart = ref.current?.getEchartsInstance();
             if (!echart) {
@@ -515,78 +551,67 @@ export default React.memo(
 
             clearInterval(timer.current);
 
-            if (item.type == "pie" && echart && data) { 
-                
+            if (item.type == "pie" && echart && data) {
                 if (legendStyle) {
-                    timer.current = setInterval(() => {
-                        echart.dispatchAction({
-                            type: "highlight",
-                            dataIndex: activeEchartIndex.current
-                        });
-                      
-                        echart.dispatchAction({
-                            type: "downplay",
-                            dataIndex: activeEchartIndex.current == 0 ? data.length - 1 : activeEchartIndex.current - 1
-                        });
+                    let hoverIndex = 0;
 
-                        const _legend = legend.map((leg: any, idx: any) => {
-                            if (idx == activeEchartIndex.current) {
-                                return {
-                                    ...leg,
-                                    shadowColor: "rgba(0, 0, 0, 0.1)",
-                                    shadowBlur: 5,
-                                    borderWidth: 0.3,
-                                    borderRadius: 5,
-                                    backgroundColor: "#fff"
-                                };
-                            } else {
-                                return leg;
-                            }
-                        });
+                    initScroll(echart, legend, data);
 
-                        echart.setOption({ legend: [..._legend] }, { replaceMerge: "legend" });
-
-                        if (activeEchartIndex.current == data.length - 1) {
-                            activeEchartIndex.current = 0;
-                        } else {
-                            activeEchartIndex.current += 1;
+                    echart.on("highlight", (e: any) => {
+                        if (e.name) {
+                            const index = legend?.findIndex((v: any) => v.data?.[0]?.name == e.name);
+                            hoverIndex = index;
+                            echart.dispatchAction({ type: "downplay" });
+                            echart.dispatchAction({ type: "highlight", dataIndex: index });
+                            setLegendStyle(echart, legend, index);
+                            clearInterval(timer.current);
                         }
-                    }, 3000);
-                }  else {
+                    });
+
+                    echart.on("downplay", (e: any) => {
+                        if (e.name) {
+                            initScroll(echart, legend, data);
+                        }
+                    });
+                } else {
                     echart.dispatchAction({
-                        type: 'highlight',
+                        type: "highlight",
                         seriesIndex: 0, // 图表中的第一个系列
-                        dataIndex: 0, // 要高亮的数据项的索引
+                        dataIndex: 0 // 要高亮的数据项的索引
                     });
-                
                 }
-                  // 图例选中/取消选中事件
-                  echart.on('legendselectchanged', (e: any) => {
-                    var isSelected = e.selected[e.name];
-                    if (!isSelected) {
-                         // 如果图例被取消选中，则重新选中
-                         echart.dispatchAction({
-                            type: 'legendSelect',
-                            name: e.name
-                        });
-                      data.forEach((d: any, idx: any) => {
-                        if(d.name == e.name ){
-                            echart.dispatchAction({
-                                type: "highlight",
-                                dataIndex: idx
-                            });
-                        }else {
-                            echart.dispatchAction({
-                                type: "downplay",
-                                dataIndex: idx
-                            });
-                        }
-                    });
-                     
-                    }
-                    // 阻止默认行为，防止图例被置灰
-                     return false;
-                });
+
+                // echart.on("mouseover", (e: any) => {
+                //     console.log(e);
+                // });
+
+                // 图例选中/取消选中事件
+                // echart.on("legendselectchanged", (e: any) => {
+                //     console.log(111111111, e);
+                //     var isSelected = e.selected[e.name];
+                //     if (!isSelected) {
+                //         // 如果图例被取消选中，则重新选中
+                //         echart.dispatchAction({
+                //             type: "legendSelect",
+                //             name: e.name
+                //         });
+                //         data.forEach((d: any, idx: any) => {
+                //             if (d.name == e.name) {
+                //                 echart.dispatchAction({
+                //                     type: "highlight",
+                //                     dataIndex: idx
+                //                 });
+                //             } else {
+                //                 echart.dispatchAction({
+                //                     type: "downplay",
+                //                     dataIndex: idx
+                //                 });
+                //             }
+                //         });
+                //     }
+                //     // 阻止默认行为，防止图例被置灰
+                //     return false;
+                // });
             }
         }, [chartOption]);
 
