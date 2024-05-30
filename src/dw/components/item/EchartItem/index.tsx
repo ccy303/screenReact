@@ -543,19 +543,40 @@ export default React.memo(
                             activeEchartIndex.current += 1;
                         }
                     }, 3000);
-                } else {
-                    echart.setOption({ legend: legend }, { replaceMerge: "legend" });
-                    data.forEach((d: any, idx: any) => {
-                        echart.dispatchAction({
-                            type: "downplay",
-                            dataIndex: idx
-                        });
+                }  else {
+                    echart.dispatchAction({
+                        type: 'highlight',
+                        seriesIndex: 0, // 图表中的第一个系列
+                        dataIndex: 0, // 要高亮的数据项的索引
                     });
+                
                 }
                   // 图例选中/取消选中事件
-                  echart.current?.on('legendselectchanged', (e: any) => {
-                    console.log("我是点击事件");
-                    
+                  echart.on('legendselectchanged', (e: any) => {
+                    var isSelected = e.selected[e.name];
+                    if (!isSelected) {
+                         // 如果图例被取消选中，则重新选中
+                         echart.dispatchAction({
+                            type: 'legendSelect',
+                            name: e.name
+                        });
+                      data.forEach((d: any, idx: any) => {
+                        if(d.name == e.name ){
+                            echart.dispatchAction({
+                                type: "highlight",
+                                dataIndex: idx
+                            });
+                        }else {
+                            echart.dispatchAction({
+                                type: "downplay",
+                                dataIndex: idx
+                            });
+                        }
+                    });
+                     
+                    }
+                    // 阻止默认行为，防止图例被置灰
+                     return false;
                 });
             }
         }, [chartOption]);
