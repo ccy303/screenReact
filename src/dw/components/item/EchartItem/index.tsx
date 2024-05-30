@@ -553,26 +553,56 @@ export default React.memo(
 
             if (item.type == "pie" && echart && data) {
                 if (legendStyle) {
-                    let hoverIndex = 0;
-
                     initScroll(echart, legend, data);
+                    // 鼠标滑过事件
+                    (() => {
+                        echart.on("highlight", (e: any) => {
+                            if (e.name) {
+                                const index = legend?.findIndex((v: any) => v.data?.[0]?.name == e.name);
+                                hoverIndex = index;
+                                echart.dispatchAction({ type: "downplay" });
+                                echart.dispatchAction({ type: "highlight", dataIndex: index });
+                                setLegendStyle(echart, legend, index);
+                                clearInterval(timer.current);
+                            }
+                        });
 
-                    echart.on("highlight", (e: any) => {
-                        if (e.name) {
-                            const index = legend?.findIndex((v: any) => v.data?.[0]?.name == e.name);
-                            hoverIndex = index;
-                            echart.dispatchAction({ type: "downplay" });
-                            echart.dispatchAction({ type: "highlight", dataIndex: index });
-                            setLegendStyle(echart, legend, index);
-                            clearInterval(timer.current);
-                        }
-                    });
+                        echart.on("downplay", (e: any) => {
+                            if (e.name) {
+                                initScroll(echart, legend, data);
+                            }
+                        });
+                    })();
 
-                    echart.on("downplay", (e: any) => {
-                        if (e.name) {
-                            initScroll(echart, legend, data);
-                        }
-                    });
+                    // legend选中
+                    // (() => {
+                    //     echart.on("legendselectchanged", (e: any) => {
+                    //         console.log(111111111, e);
+                    //         var isSelected = e.selected[e.name];
+                    //         if (!isSelected) {
+                    //             // 如果图例被取消选中，则重新选中
+                    //             echart.dispatchAction({
+                    //                 type: "legendSelect",
+                    //                 name: e.name
+                    //             });
+                    //             data.forEach((d: any, idx: any) => {
+                    //                 if (d.name == e.name) {
+                    //                     echart.dispatchAction({
+                    //                         type: "highlight",
+                    //                         dataIndex: idx
+                    //                     });
+                    //                 } else {
+                    //                     echart.dispatchAction({
+                    //                         type: "downplay",
+                    //                         dataIndex: idx
+                    //                     });
+                    //                 }
+                    //             });
+                    //         }
+                    //         // 阻止默认行为，防止图例被置灰
+                    //         return false;
+                    //     });
+                    // })();
                 } else {
                     echart.dispatchAction({
                         type: "highlight",
@@ -580,38 +610,6 @@ export default React.memo(
                         dataIndex: 0 // 要高亮的数据项的索引
                     });
                 }
-
-                // echart.on("mouseover", (e: any) => {
-                //     console.log(e);
-                // });
-
-                // 图例选中/取消选中事件
-                // echart.on("legendselectchanged", (e: any) => {
-                //     console.log(111111111, e);
-                //     var isSelected = e.selected[e.name];
-                //     if (!isSelected) {
-                //         // 如果图例被取消选中，则重新选中
-                //         echart.dispatchAction({
-                //             type: "legendSelect",
-                //             name: e.name
-                //         });
-                //         data.forEach((d: any, idx: any) => {
-                //             if (d.name == e.name) {
-                //                 echart.dispatchAction({
-                //                     type: "highlight",
-                //                     dataIndex: idx
-                //                 });
-                //             } else {
-                //                 echart.dispatchAction({
-                //                     type: "downplay",
-                //                     dataIndex: idx
-                //                 });
-                //             }
-                //         });
-                //     }
-                //     // 阻止默认行为，防止图例被置灰
-                //     return false;
-                // });
             }
         }, [chartOption]);
 
