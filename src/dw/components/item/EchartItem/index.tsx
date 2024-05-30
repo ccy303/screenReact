@@ -433,7 +433,7 @@ export default React.memo(
                     });
                 }
 
-                const value = val / total;
+                const value = total;
 
                 series = {
                     type: item.type,
