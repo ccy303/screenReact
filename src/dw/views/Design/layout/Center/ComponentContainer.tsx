@@ -189,7 +189,7 @@ const ComponentContainer = (props: any) => {
                     return (
                         <Rnd
                             className={`${prefixClx}-item`}
-                            style={{ background: "#fff", zIndex: zindex }}
+                            style={{ zIndex: zindex }}
                             key={id}
                             bounds='parent'
                             position={{ x, y }}

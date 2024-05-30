@@ -203,27 +203,35 @@ export default React.memo(
                                       filterMode: "filter"
                                   }
                               ]
-                            : []
+                            : [],
+                  grid: {
+                    top: '10%', // 上边距
+                    left: 10, // 左边距
+                    bottom: 10, // 下边距
+                    containLabel: true // 自动计算标签大小
+                  }
                 };
             }
 
             let series: any = {};
             if (item.type == "pie") {
-                const x = _rows[userxindex?.[0] || "product"];
+                const xshow = _rows[userxindex?.[0] || "product"];
                 const y = _rows[useryindex?.[0] || "2015"];
+                console.log("_rows!!!!!!!!!",_rows);
+          
+                
 
                 let _data = null;
                 let _center = ["50%", "50%"];
                 if (item._echartFilterValue && item._echartFilterValue?.length) {
+                    const x = _rows[item._echartFilterKey]; 
                     _data = x
-                        ?.filter((v: any) => {
-                            return !item._echartFilterValue?.includes(v);
-                        })
-                        .map((v: any, i: any) => {
-                            return { name: v, value: y?.[i] };
+                        ?.map((v: any, i: any) => {
+                            return { name: xshow?.[i], value: y?.[i] };
                         });
+                        console.log("_data99999999999",_data);       
                 } else {
-                    _data = x?.map((v: any, i: any) => {
+                    _data = xshow?.map((v: any, i: any) => {
                         return { name: v, value: y?.[i] };
                     });
                 }
@@ -435,15 +443,17 @@ export default React.memo(
                     }
                 }));
                 if (item._echartFilterValue && item._echartFilterValue?.length) {
+                    
                     series = series.map((_series: any, index: any) => {
                         dataSet.push({
                             transform: {
                                 type: "filter",
                                 config: {
                                     and: item._echartFilterValue?.map((v: any) => {
-                                        return { dimension: item._echartFilterKey, "!=": v };
+                                        return { dimension: item._echartFilterKey, "=": v };
                                     })
-                                }
+                                },
+                                print: true
                             }
                         });
                         _series.datasetIndex = index + 1;
@@ -496,14 +506,15 @@ export default React.memo(
 
             clearInterval(timer.current);
 
-            if (item.type == "pie" && echart && data) {
+            if (item.type == "pie" && echart && data) { 
+                
                 if (legendStyle) {
                     timer.current = setInterval(() => {
                         echart.dispatchAction({
                             type: "highlight",
                             dataIndex: activeEchartIndex.current
                         });
-
+                      
                         echart.dispatchAction({
                             type: "downplay",
                             dataIndex: activeEchartIndex.current == 0 ? data.length - 1 : activeEchartIndex.current - 1
@@ -513,9 +524,9 @@ export default React.memo(
                             if (idx == activeEchartIndex.current) {
                                 return {
                                     ...leg,
-                                    shadowColor: "rgba(0, 0, 0, 0.2)",
+                                    shadowColor: "rgba(0, 0, 0, 0.1)",
                                     shadowBlur: 5,
-                                    borderWidth: 1,
+                                    borderWidth: 0.3,
                                     borderRadius: 5,
                                     backgroundColor: "#fff"
                                 };
@@ -532,15 +543,41 @@ export default React.memo(
                             activeEchartIndex.current += 1;
                         }
                     }, 3000);
-                } else {
-                    echart.setOption({ legend: legend }, { replaceMerge: "legend" });
-                    data.forEach((d: any, idx: any) => {
-                        echart.dispatchAction({
-                            type: "downplay",
-                            dataIndex: idx
-                        });
+                }  else {
+                    echart.dispatchAction({
+                        type: 'highlight',
+                        seriesIndex: 0, // 图表中的第一个系列
+                        dataIndex: 0, // 要高亮的数据项的索引
                     });
+                
                 }
+                  // 图例选中/取消选中事件
+                  echart.on('legendselectchanged', (e: any) => {
+                    var isSelected = e.selected[e.name];
+                    if (!isSelected) {
+                         // 如果图例被取消选中，则重新选中
+                         echart.dispatchAction({
+                            type: 'legendSelect',
+                            name: e.name
+                        });
+                      data.forEach((d: any, idx: any) => {
+                        if(d.name == e.name ){
+                            echart.dispatchAction({
+                                type: "highlight",
+                                dataIndex: idx
+                            });
+                        }else {
+                            echart.dispatchAction({
+                                type: "downplay",
+                                dataIndex: idx
+                            });
+                        }
+                    });
+                     
+                    }
+                    // 阻止默认行为，防止图例被置灰
+                     return false;
+                });
             }
         }, [chartOption]);
 
