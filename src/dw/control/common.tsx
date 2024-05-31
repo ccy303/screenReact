@@ -69,7 +69,7 @@ export const DEFAULT_PIE_LABEL = {
         padding: [0, 0, 0, 0]
         },
         title: {
-        color: '#000',
+        color: '#696969',
         fontSize: '14px',
         fontWeight: '300',
         padding: [5, 0, 0, 0]
