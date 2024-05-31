@@ -9,7 +9,7 @@ export default (props: any) => {
 
     const { getCurrentItem } = useMain();
 
-    const { dataset, userxindex, useryindex,datafilter } = getCurrentItem();
+    const { dataset, userxindex, useryindex,userseries,datafilter } = getCurrentItem();
   const dataSetRows: any = { source: dataset?.rows };
   const _rows: any = {};
   for (let i = 0, data = dataSetRows.source; i < data?.[0]?.length; i++) {
@@ -65,6 +65,21 @@ export default (props: any) => {
           onChange([{ prop: "datafilter", value: _.uniqBy(datafilter.filter((v: any) => v.key != item),'key') }]);
         }
     };
+    const onSeriesDrop = (e: any, type: any) => {
+      if(userseries?.length > 0 || useryindex?.length > 1){
+        return;
+      }
+      e.preventDefault();
+      const data = JSON.parse(e.dataTransfer?.getData("dataset"));
+      if (type == "series" && data.type == "x") {
+        onChange([{ prop: "userseries", value: _.uniq([...(userseries || []), data.value]) }]);
+      }
+    };
+    const seriesDel = (type: any, item: any) => {
+        if (type == "series") {
+          onChange([{ prop: "userseries", value: _.uniq(userseries.filter((v: any) => v != item)) }]);
+        }
+    };
     const handleFilterChange = (e : any , key: any) => {
       const newfilter = datafilter.filter((v: any) => v.key == key)?.[0];
       newfilter.selectkey = e;
@@ -75,6 +90,9 @@ export default (props: any) => {
         const data = JSON.parse(e.dataTransfer?.getData("dataset"));
         if (type != data.type) {
             return;
+        }
+        if(userseries?.length > 0 && useryindex?.length > 0 && type == "y"){
+          return;
         }
         if (type == "x") {
             onChange([{ prop: "userxindex", value: _.uniq([...(userxindex || []), data.value]) }]);
@@ -144,6 +162,22 @@ export default (props: any) => {
                 </div>
             </div>
           <div>
+                <div style={{ marginTop: "10px" }}>系列</div>
+                <div className='data-set-dargabled'>
+                    <div className='list' onDragOver={allowDrop} onDrop={e => onSeriesDrop(e, "series")}>
+                        {userseries &&
+                          userseries.map((v: any, i: any) => {
+                                return (
+                                    <div key={i} className='list-item space-between' onClick={() => seriesDel("series", v)}>
+                                        {v}(文字)
+                                        <Icon type='delete' className='del-icon'></Icon>
+                                    </div>
+                                );
+                            })}
+                    </div>
+                </div>
+            </div>
+          <div>
                 <div style={{ marginTop: "10px" }}>筛选器</div>
                 <div className='data-set-dargabled'>
                     <div className='list' onDragOver={allowDrop} onDrop={e => onFilterDrop(e, "filter")}>
@@ -151,7 +185,7 @@ export default (props: any) => {
                           datafilter.map((v: any, i: any) => {
                                 return (
                                     <div key={i} className='list-item space-between'>
-                                        {v.key}: <Select  mode="multiple" value={v.selectkey} size="small"  maxTagCount={1} style={{ width: 160}}  optionFilterProp="children" onChange={e => handleFilterChange(e,v.key)}>
+                                        {v.key}: <div className='drop-select-warp'><Select  mode="multiple" value={v.selectkey} size="small"  maxTagCount={1}   style={{ width: "100%", height: "100%" }} optionFilterProp="children" onChange={e => handleFilterChange(e,v.key)}>
                                       {v.value.map((item) => {
                                         return (
                                           <Option value={item} key={item}>
@@ -159,7 +193,7 @@ export default (props: any) => {
                                           </Option>
                                         )
                                       })}
-                                    </Select>
+                                    </Select></div>
                                         <Icon type='delete' className='del-icon'  onClick={() => filterDel("filter", v.key)}></Icon>
                                     </div>
                                 );
