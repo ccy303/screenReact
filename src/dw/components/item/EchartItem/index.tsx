@@ -258,6 +258,8 @@ export default React.memo(
                     _center = ["50%", "35%"];
                 } else if (item.content.config.charts.legend.orient == "vertical" && item.content.config.legendPos == "top") {
                     _center = ["50%", "66%"];
+                } else if (item.content.config.charts.legend.orient == "horizontal" && item.content.config.legendPos == "top") {
+                    _center = ["50%", "57.5%"];
                 }
 
                 series = {
