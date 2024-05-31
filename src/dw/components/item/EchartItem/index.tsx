@@ -6,7 +6,7 @@ import _ from "lodash";
 import useMain from "@/dw/store/useMain";
 import { ViewItemContext } from "dw/views/ViewItem";
 import { v4 as uuidv4 } from "uuid";
-import { DEFAULT_CHARTS_COLOR, DEFAULT_PIE_ITEMSTYLE, DEFAULT_PIE_LABEL } from "dw/control/common";
+import { DEFAULT_CHARTS_COLOR, DEFAULT_PIE_ITEMSTYLE, DEFAULT_PIE_LABEL, DEFAULT_PIE_LABEL_RICH } from "dw/control/common";
 import Right from "@/dw/views/Design/layout/Right";
 import Left from "@/dw/views/Design/layout/Left";
 
@@ -256,7 +256,7 @@ export default React.memo(
                     type: item.type,
                     areaStyle: item.originname == "面积图" ? {} : null,
                     radius: item.originname == "环图" ? ["68%", "80%"] : [0, "80%"],
-                    label: item.originname == "环图" ? { ...charts.series[0].label, ...DEFAULT_PIE_LABEL } : { ...charts.series[0].label },
+                    label: item.originname == "环图" ? { ...charts.series[0].label, ...DEFAULT_PIE_LABEL, ...DEFAULT_PIE_LABEL_RICH } : { ...charts.series[0].label },
                     emphasis: {
                         label: {
                             show: true
@@ -350,13 +350,13 @@ export default React.memo(
                                         }
                                     }
                                     const arr = ["{a|" + name + "}", target];
-                                    return arr.join("  ");
+                                    return arr.join("   ");
                                 },
                                 textStyle: {
                                     padding: 5,
                                     // 添加
                                     rich: {
-                                        a: { width: 90 }
+                                        a: { width: 100 }
                                     }
                                 }
                             };
@@ -505,10 +505,10 @@ export default React.memo(
                     return {
                         ...leg,
                         align: "left",
-                        shadowColor: "rgba(0, 0, 0, 0.1)",
+                        shadowColor: "rgba(0, 0, 0, 0.17)",
                         shadowBlur: 5,
-                        borderWidth: 0.3,
-                        borderRadius: 5,
+                        borderWidth: 0.4,
+                        borderRadius: 0.2,
                         backgroundColor: "#fff"
                     };
                 } else {
@@ -518,9 +518,15 @@ export default React.memo(
             echart.setOption({ legend: [..._legend] }, { replaceMerge: "legend" });
         };
 
-        const initScroll = (echart: any, legend: any, data: any) => {
+        const initScroll = (echart: any, legend: any, data: any, index: any) => {
+            
             clearInterval(timer.current);
             timer.current = setInterval(() => {
+                echart.dispatchAction({
+                    type: "downplay",
+                    dataIndex: index
+                });
+
                 echart.dispatchAction({
                     type: "highlight",
                     dataIndex: activeEchartIndex.current
@@ -554,7 +560,7 @@ export default React.memo(
 
             if (item.type == "pie" && echart && data) {
                 if (legendStyle) {
-                    initScroll(echart, legend, data);
+                    initScroll(echart, legend, data, 0);
                     // 鼠标滑过事件
                     (() => {
                         echart.on("highlight", (e: any) => {
@@ -567,10 +573,31 @@ export default React.memo(
                                 clearInterval(timer.current);
                             }
                         });
+                        echart.on("mouseover", (e: any) => {
+                            if (e.name) {
+                                const index = legend?.findIndex((v: any) => v.data?.[0]?.name == e.name);
+                                // hoverIndex = index;
+                                echart.dispatchAction({ type: "downplay" });
+                                echart.dispatchAction({ type: "highlight", dataIndex: index });
+                                setLegendStyle(echart, legend, index);
+                                clearInterval(timer.current);
+                            }
+                        });
 
                         echart.on("downplay", (e: any) => {
                             if (e.name) {
-                                initScroll(echart, legend, data);
+                                const index = legend?.findIndex((v: any) => v.data?.[0]?.name == e.name);
+                                echart.dispatchAction({ type: "highlight", dataIndex: index });
+                                initScroll(echart, legend, data, index);
+                              
+                            }
+                        });
+                        echart.on("mouseout", (e: any) => {
+                            if (e.name) {
+                                const index = legend?.findIndex((v: any) => v.data?.[0]?.name == e.name);
+                                echart.dispatchAction({ type: "highlight", dataIndex: index });
+                                initScroll(echart, legend, data, index);
+                              
                             }
                         });
                     })();
@@ -583,12 +610,13 @@ export default React.memo(
             
                     // 鼠标滑过事件
                     (() => {
+                        let downplayIndex = 0;
                         echart.on("highlight", (e: any) => {
                             if (e.name) { 
                                 const index = data.findIndex((item: any) => item.name === e.name);
                                 echart.dispatchAction({
                                     type: "downplay",
-                                    dataIndex: 0 // 要高亮的数据项的索引
+                                    dataIndex: downplayIndex // 取消高亮
                                 });
                                 echart.dispatchAction({
                                     type: "highlight",
@@ -596,7 +624,42 @@ export default React.memo(
                                 });
                             }
                         });
+                        // 鼠标滑过环形图事件
+                        echart.on("mouseover", (e: any) => {
+                            if (e.name) { 
+                                const index = data.findIndex((item: any) => item.name === e.name);
+                                echart.dispatchAction({
+                                    type: "downplay",
+                                    dataIndex: downplayIndex // 取消高亮
+                                });
+                                echart.dispatchAction({
+                                    type: "highlight",
+                                    dataIndex: index // 要高亮的数据项的索引
+                                });
+                            }
+                         });
+
+                        echart.on("downplay", (e: any) => {
+                            if (e.name) {
+                                const index = data.findIndex((item: any) => item.name === e.name);
+                                downplayIndex = index;
+                                echart.dispatchAction({ type: "downplay", dataIndex: index });
+                                echart.dispatchAction({ type: "highlight", dataIndex: index });
+                              
+                            }
+                        });
+                        echart.on("mouseout", (e: any) => {
+                            if (e.name) {
+                                const index = data.findIndex((item: any) => item.name === e.name);
+                                downplayIndex = index;
+                                echart.dispatchAction({ type: "downplay", dataIndex: index });
+                                echart.dispatchAction({ type: "highlight", dataIndex: index });
+                              
+                            }
+                        });
+
                     })();
+
                 }
             }
         }, [chartOption]);
