@@ -18,124 +18,105 @@
     },
     "itemList": [
         {
-            "useryindex": ["分布数量"],
-            "userxindex": ["账户类型"],
-            "h": 316,
-            "chartname": "账户类型分布",
-            "name": "账户类型分布",
-            "originname": "环图",
-            "t": "2024-05-2121:16:36",
-            "pkid": "1952417732989767680",
-            "w": 475,
-            "x": 35,
-            "zindex": 677,
-            "title": "账户类型分布",
-            "y": 10,
+            "_isShow": true,
+            "name": "堆积条形图1",
+            "chartcontrol": {
+                "ispublish": "1"
+            },
             "content": {
+                "title": {
+                    "show": true,
+                    "fontWeight": "normal",
+                    "fontStyle": "normal",
+                    "underline": "none",
+                    "fontSize": 14,
+                    "fontStyleArray": [],
+                    "align": "center",
+                    "fontColor": "#2a2a2a",
+                    "backColor": "#fff"
+                },
                 "config": {
                     "charts": {
                         "legend": {
-                            "textStyle": {
-                                "color": "#2a2a2a",
-                                "fontSize": 12,
-                                "fontStyle": "normal",
-                                "fontWeight": "normal"
-                            },
+                            "show": true,
+                            "left": 0,
+                            "right": "auto",
+                            "bottom": 0,
+                            "top": 0,
+                            "align": "auto",
                             "orient": "vertical",
-                            "align": "right",
-                            "left": "auto",
-                            "bottom": "auto",
+                            "textStyle": {
+                                "fontWeight": "normal",
+                                "fontStyle": "normal",
+                                "fontSize": 12,
+                                "color": "#2a2a2a"
+                            },
                             "itemWidth": 15,
-                            "top": -5,
-                            "icon": "rect",
                             "itemHeight": 15,
-                            "right": "right",
-                            "show": true
+                            "icon": "rect"
                         },
                         "series": [
                             {
-                                "barWidth": 10,
-                                "starAngle": 90,
                                 "label": {
-                                    "color": "#2a2a2a",
                                     "show": true,
-                                    "fontSize": 20,
-                                    "position": "outside",
+                                    "fontWeight": "normal",
                                     "fontStyle": "normal",
-                                    "fontWeight": "normal"
-                                }
+                                    "fontSize": 12,
+                                    "color": "#2a2a2a",
+                                    "position": "outside"
+                                },
+                                "barWidth": 10,
+                                "starAngle": 90
                             }
-                        ]
+                        ],
+                        "topnum": 0
                     },
-                    "unit": 1,
-                    "digitalFormat": {
-                        "unit": 1,
-                        "unitarea": 1,
-                        "enableThousands": false,
-                        "dataLabelType": "classificationdatavalue",
-                        "currencySymbols": "¥",
-                        "digitalType": "digital",
-                        "decimalPlace": 2
-                    },
-                    "legendPos": "right",
+                    "legendPos": "bottom",
+                    "legendStyle": "mornal",
+                    "fontStyleArray": [],
                     "label": {
                         "fontStyleArray": []
                     },
-                    "showStarAngle": false,
-                    "fontStyleArray": [],
-                    "legendStyle": "customMade"
+                    "digitalFormat": {
+                        "dataLabelType": "classificationdatavalue",
+                        "digitalType": "digital",
+                        "currencySymbols": "¥",
+                        "unit": 1,
+                        "decimalPlace": 2,
+                        "enableThousands": false,
+                        "unitarea": 1
+                    },
+                    "unit": 1,
+                    "showStarAngle": false
                 },
-                "borderStyle": "dotted",
-                "chartParameters": true,
-                "showBorder": true,
-                "opacity": 1,
-                "backgroundImage": "./kingdee/tmc/images/pc/tda/bg/white_crad_bg_420x316.png",
                 "showBak": true,
+                "backgroundColor": "#fff",
+                "opacity": 1,
+                "showBorder": true,
+                "borderColor": "#2a2a2a",
+                "borderOpacity": 1,
+                "borderWidth": 0,
+                "borderStyle": "dotted",
                 "desc": {
                     "show": false,
                     "content": ""
                 },
-                "backgroundColor": "#fff",
-                "borderColor": "#2a2a2a",
-                "title": {
-                    "fontStyle": "normal",
-                    "align": "left",
-                    "fontWeight": "bold",
-                    "underline": "none",
-                    "fontSize": 14,
-                    "fontColor": "#2a2a2a",
-                    "fontStyleArray": ["fontWeight"],
-                    "backColor": "",
-                    "show": true
-                },
-                "borderWidth": 0,
-                "borderOpacity": 1
+                "chartParameters": true
             },
-            "type": "pie",
-            "id": "0c34472caa54474ebb04f620b350135f",
-            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctByTypeDataPlugin",
+            "title": "标题",
+            "zindex": 677,
+            "x": 73,
+            "y": 338,
+            "h": 300,
+            "w": 400,
+            "pkid": "",
+            "chartname": "堆积条形图1",
+            "t": "2024-05-31 22:58:59",
+            "id": "74476cea90ca4c8c86d1aac8cb169c45",
+            "type": "bar",
             "category": "charts",
-            "chartcontrol": {
-                "pluginname": "kd.tmc.tda.report.bankacct.qing.data.BankAcctByTypeDataPlugin",
-                "ispublish": "1"
-            },
-            "_isShow": true,
-            "dataset": {
-                "dataindex": [
-                    ["accttype", "账户类型", 1, false],
-                    ["acctcount", "分布数量", 2, false],
-                    ["qingsort", "排序列", 2, false]
-                ],
-                "rows": [
-                    ["账户类型", "分布数量", "排序列"],
-                    ["一般存款账户", 3, 0],
-                    ["临时存款账户", 4, 1],
-                    ["资本项目外汇账户", 5, 2],
-                    ["专用存款账户", 6, 3],
-                    ["经常项目外汇账户", 7, 4],
-                    ["基本存款账户", 8, 5]
-                ]
-            }
+            "kdId": "",
+            "originname": "堆积条形图"
         }
     ],
     "deleteList": []

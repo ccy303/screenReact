@@ -131,7 +131,7 @@ const gaugeStyle = {
 export default React.memo(
     (item: any) => {
         const { model } = useContext(ViewItemContext);
-        const { content, userxindex, useryindex, dataset, datafilter,userseries } = item;
+        const { content, userxindex, useryindex, dataset, datafilter, userseries } = item;
         const { config } = content;
         const { charts } = config;
         const { topnum } = charts;
@@ -241,15 +241,16 @@ export default React.memo(
                         return { name: v, value: y?.[i] };
                     });
                     _data = _data?.reduce((accumulator, currentItem) => {
-                    const existingItem = accumulator.find(item => item.name === currentItem.name);
-                    if (existingItem) {
-                      existingItem.value += currentItem.value;
-                    } else {
-                      accumulator.push(currentItem);
-                    }
-                    return accumulator;
-                  }, []);
+                        const existingItem = accumulator.find(item => item.name === currentItem.name);
+                        if (existingItem) {
+                            existingItem.value += currentItem.value;
+                        } else {
+                            accumulator.push(currentItem);
+                        }
+                        return accumulator;
+                    }, []);
                 }
+
                 if (item.content.config.charts.legend.orient == "vertical" && item.content.config.legendPos == "right") {
                     _center = ["30%", "50%"];
                 } else if (item.content.config.charts.legend.orient == "vertical" && item.content.config.legendPos == "left") {
@@ -268,11 +269,7 @@ export default React.memo(
                     areaStyle: item.originname == "面积图" ? {} : null,
                     radius: item.originname == "环图" ? ["68%", "80%"] : [0, "80%"],
                     label: item.originname == "环图" ? { ...charts.series[0].label, ...DEFAULT_PIE_LABEL } : { ...charts.series[0].label },
-                    emphasis: {
-                        label: {
-                            show: true
-                        }
-                    },
+                    emphasis: { label: { show: true } },
                     itemStyle: item.originname == "环图" ? DEFAULT_PIE_ITEMSTYLE : {},
                     center: _center,
                     data: topnum && topnum > 0 ? _data?.slice(0, topnum) : _data
@@ -317,7 +314,6 @@ export default React.memo(
                                 delete res.right;
                                 delete res.left;
                                 delete res.bottom;
-
                                 if (item.content.config.legendPos == "left") {
                                     res = {
                                         ...res,
@@ -366,9 +362,7 @@ export default React.memo(
                                 textStyle: {
                                     padding: 5,
                                     // 添加
-                                    rich: {
-                                        a: { width: 100 }
-                                    }
+                                    rich: { a: { width: 100 } }
                                 }
                             };
                         });
@@ -377,27 +371,14 @@ export default React.memo(
                         delete res.left;
                         delete res.bottom;
                         if (item.content.config.legendPos == "top") {
-                            res = {
-                                ...res,
-                                top: item.content.config.charts.legend.top,
-                                right: "auto"
-                            };
+                            res = { ...res, top: item.content.config.charts.legend.top, right: "auto" };
                         } else if (item.content.config.legendPos == "left") {
-                            res = {
-                                ...res,
-                                left: item.content.config.charts.legend.left
-                            };
+                            res = { ...res, left: item.content.config.charts.legend.left };
                         } else if (item.content.config.legendPos == "right") {
-                            res = {
-                                ...res,
-                                right: "5%"
-                            };
+                            res = { ...res, right: "5%" };
                         } else if (item.content.config.legendPos == "bottom") {
                             delete res.top;
-                            res = {
-                                ...res,
-                                bottom: item.content.config.charts.legend.bottom
-                            };
+                            res = { ...res, bottom: item.content.config.charts.legend.bottom };
                         }
                     }
 
@@ -446,74 +427,78 @@ export default React.memo(
                     data: [{ value: isNaN(value) ? 0 : value }]
                 };
             } else {
-              if((item.type == "bar" || item.type == "line") && userseries?.length >0 ){
-                const firstRow = dataSet?.[0]?.source?.[0];
-                const userseriesIndex = firstRow.indexOf(userseries[0]);
-                const extractedColumn = dataSet?.[0]?.source?.slice(1).map(temprow => temprow[userseriesIndex]).filter((tempvalue, tempindex, tempself) => {
-                  return tempself.indexOf(tempvalue) === tempindex;
-                });
-                const result = dataSet?.[0]?.source?.slice(1).reduce((acc, current) => {
-                  if(!current){
-                    return acc;
-                  }
-                  const groupName = current[userseriesIndex];
-                  // 检查累加器中是否已经存在该分组
-                  if (!acc[groupName]) {
-                    // 如果不存在，创建一个新的分组
-                    acc[groupName] = [];
-                  }
-                  // 将当前项添加到对应的分组中
-                  acc[groupName].push(current);
-                  // 返回更新后的累加器
-                  return acc;
-                },{});
+                if ((item.type == "bar" || item.type == "line") && userseries?.length > 0) {
+                    const firstRow = dataSet?.[0]?.source?.[0];
+                    const userseriesIndex = firstRow.indexOf(userseries[0]);
+                    const extractedColumn = dataSet?.[0]?.source
+                        ?.slice(1)
+                        .map(temprow => temprow[userseriesIndex])
+                        .filter((tempvalue, tempindex, tempself) => {
+                            return tempself.indexOf(tempvalue) === tempindex;
+                        });
+                    const result = dataSet?.[0]?.source?.slice(1).reduce((acc, current) => {
+                        if (!current) {
+                            return acc;
+                        }
+                        const groupName = current[userseriesIndex];
+                        // 检查累加器中是否已经存在该分组
+                        if (!acc[groupName]) {
+                            // 如果不存在，创建一个新的分组
+                            acc[groupName] = [];
+                        }
+                        // 将当前项添加到对应的分组中
+                        acc[groupName].push(current);
+                        // 返回更新后的累加器
+                        return acc;
+                    }, {});
 
-                series = (extractedColumn || dataSet?.[0]?.source?.[0].slice(1)).map((v: any, i: any) => ({
-                  ...charts.series[0],
-                  type: item.type,
-                  name: v,
-                  stack: item.originname == "堆积条形图" || item.originname == "堆积柱形图" ? "stack" : "",
-                  areaStyle: item.originname == "面积图" ? {} : null,
-                  dimensions: firstRow,
-                  data: result[v] || [],
-                  encode: {
-                    x: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? useryindex : userxindex || ["product"],
-                    y: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? userxindex || ["product"] : useryindex
-                  }
-                }));
-              }else {
-              series = (useryindex || dataSet?.[0]?.source?.[0].slice(1)).map((v: any, i: any) => ({
-                ...charts.series[0],
-                type: item.type,
-                stack: item.originname == "堆积条形图" || item.originname == "堆积柱形图" ? "stack" : "",
-                areaStyle: item.originname == "面积图" ? {} : null,
-                encode: {
-                  x: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? [v] : userxindex || ["product"],
-                  y: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? userxindex || ["product"] : [v],
-                  seriesName: v
-                }
-              }));
-              if (item._echartFilterValue && item._echartFilterValue?.length) {
-                series = series.map((_series: any, index: any) => {
-                  dataSet.push({
-                    transform: {
-                      type: "filter",
-                      config: {
-                        and: item._echartFilterValue?.map((v: any) => {
-                          return { dimension: item._echartFilterKey, "=": v };
-                        })
-                      },
-                      print: true
+                    series = (extractedColumn || dataSet?.[0]?.source?.[0].slice(1)).map((v: any, i: any) => ({
+                        ...charts.series[0],
+                        type: item.type,
+                        name: v,
+                        stack: item.originname == "堆积条形图" || item.originname == "堆积柱形图" ? "stack" : "",
+                        areaStyle: item.originname == "面积图" ? {} : null,
+                        dimensions: firstRow,
+                        data: result[v] || [],
+                        encode: {
+                            x: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? useryindex : userxindex || ["product"],
+                            y: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? userxindex || ["product"] : useryindex
+                        }
+                    }));
+                } else {
+                    series = (useryindex || dataSet?.[0]?.source?.[0].slice(1)).map((v: any, i: any) => ({
+                        ...charts.series[0],
+                        type: item.type,
+                        stack: item.originname == "堆积条形图" || item.originname == "堆积柱形图" ? "stack" : "",
+                        areaStyle: item.originname == "面积图" ? {} : null,
+                        encode: {
+                            x: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? [v] : userxindex || ["product"],
+                            y: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? userxindex || ["product"] : [v],
+                            seriesName: v
+                        }
+                    }));
+
+                    if (item._echartFilterValue && item._echartFilterValue?.length) {
+                        series = series.map((_series: any, index: any) => {
+                            dataSet.push({
+                                transform: {
+                                    type: "filter",
+                                    config: {
+                                        and: item._echartFilterValue?.map((v: any) => {
+                                            return { dimension: item._echartFilterKey, "=": v };
+                                        })
+                                    },
+                                    print: true
+                                }
+                            });
+                            _series.datasetIndex = index + 1;
+                            return _series;
+                        });
                     }
-                  });
-                  _series.datasetIndex = index + 1;
-                  return _series;
-                });
-              }
-            }
+                }
             }
 
-            const output = { ...echartOpt, dataset: dataSet, series };
+            let output = { ...echartOpt, dataset: dataSet, series };
 
             if (!_.isEqual(chartOptionRef.current.option, output)) {
                 setEchartKey(uuidv4());
@@ -524,6 +509,26 @@ export default React.memo(
             };
 
             item.type == "gauge" && _.assign(output.series, gaugeStyle);
+
+            if (item.type == "bar") {
+                let res = { ...echartOpt.legend };
+                delete res.right;
+                delete res.left;
+                delete res.bottom;
+                delete res.top;
+
+                if (item.content.config.legendPos == "top") {
+                    res = { ...res, top: 0 };
+                } else if (item.content.config.legendPos == "left") {
+                    res = { ...res, left: 0 };
+                } else if (item.content.config.legendPos == "right") {
+                    res = { ...res, right: "5%" };
+                } else if (item.content.config.legendPos == "bottom") {
+                    res = { ...res, bottom: 0 };
+                }
+
+                output = { ...output, legend: res };
+            }
 
             return output;
         }, [userxindex, useryindex, charts, item._echartFilterValue, item._echartFilterKey]);
@@ -567,7 +572,6 @@ export default React.memo(
         };
 
         const initScroll = (echart: any, legend: any, data: any, index: any) => {
-            
             clearInterval(timer.current);
             timer.current = setInterval(() => {
                 echart.dispatchAction({
@@ -605,109 +609,92 @@ export default React.memo(
             const legend = chartOption.legend;
 
             clearInterval(timer.current);
+            echart.off("highlight");
+            echart.off("mouseover");
+            echart.off("downplay");
+            echart.off("mouseout");
 
             if (item.type == "pie" && echart && data) {
                 if (legendStyle) {
                     initScroll(echart, legend, data, 0);
+
                     // 鼠标滑过事件
                     (() => {
-                        echart.on("highlight", (e: any) => {
-                            if (e.name) {
-                                const index = legend?.findIndex((v: any) => v.data?.[0]?.name == e.name);
-                                // hoverIndex = index;
+                        const hoverFn = (name: any) => {
+                            if (name) {
+                                const index = legend?.findIndex((v: any) => v.data?.[0]?.name == name);
                                 echart.dispatchAction({ type: "downplay" });
                                 echart.dispatchAction({ type: "highlight", dataIndex: index });
                                 setLegendStyle(echart, legend, index);
                                 clearInterval(timer.current);
                             }
-                        });
-                        echart.on("mouseover", (e: any) => {
-                            if (e.name) {
-                                const index = legend?.findIndex((v: any) => v.data?.[0]?.name == e.name);
-                                // hoverIndex = index;
-                                echart.dispatchAction({ type: "downplay" });
-                                echart.dispatchAction({ type: "highlight", dataIndex: index });
-                                setLegendStyle(echart, legend, index);
-                                clearInterval(timer.current);
-                            }
-                        });
-
-                        echart.on("downplay", (e: any) => {
-                            if (e.name) {
-                                const index = legend?.findIndex((v: any) => v.data?.[0]?.name == e.name);
+                        };
+                        const outHoverFn = (name: any) => {
+                            if (name) {
+                                const index = legend?.findIndex((v: any) => v.data?.[0]?.name == name);
                                 echart.dispatchAction({ type: "highlight", dataIndex: index });
                                 initScroll(echart, legend, data, index);
-                              
                             }
-                        });
-                        echart.on("mouseout", (e: any) => {
-                            if (e.name) {
-                                const index = legend?.findIndex((v: any) => v.data?.[0]?.name == e.name);
-                                echart.dispatchAction({ type: "highlight", dataIndex: index });
-                                initScroll(echart, legend, data, index);
-                              
-                            }
-                        });
+                        };
+                        echart.on("highlight", (e: any) => hoverFn(e.name));
+                        echart.on("mouseover", (e: any) => hoverFn(e.name));
+                        echart.on("downplay", (e: any) => outHoverFn(e.name));
+                        echart.on("mouseout", (e: any) => outHoverFn(e.name));
                     })();
-
                 } else {
                     echart.dispatchAction({
                         type: "highlight",
                         dataIndex: 0 // 要高亮的数据项的索引
                     });
-            
-                    // 鼠标滑过事件
-                    (() => {
-                        let downplayIndex = 0;
-                        echart.on("highlight", (e: any) => {
-                            if (e.name) { 
-                                const index = data.findIndex((item: any) => item.name === e.name);
-                                echart.dispatchAction({
-                                    type: "downplay",
-                                    dataIndex: downplayIndex // 取消高亮
-                                });
-                                echart.dispatchAction({
-                                    type: "highlight",
-                                    dataIndex: index // 要高亮的数据项的索引
-                                });
-                            }
-                        });
-                        // 鼠标滑过环形图事件
-                        echart.on("mouseover", (e: any) => {
-                            if (e.name) { 
-                                const index = data.findIndex((item: any) => item.name === e.name);
-                                echart.dispatchAction({
-                                    type: "downplay",
-                                    dataIndex: downplayIndex // 取消高亮
-                                });
-                                echart.dispatchAction({
-                                    type: "highlight",
-                                    dataIndex: index // 要高亮的数据项的索引
-                                });
-                            }
-                         });
 
-                        echart.on("downplay", (e: any) => {
-                            if (e.name) {
-                                const index = data.findIndex((item: any) => item.name === e.name);
-                                downplayIndex = index;
-                                echart.dispatchAction({ type: "downplay", dataIndex: index });
-                                echart.dispatchAction({ type: "highlight", dataIndex: index });
-                              
-                            }
-                        });
-                        echart.on("mouseout", (e: any) => {
-                            if (e.name) {
-                                const index = data.findIndex((item: any) => item.name === e.name);
-                                downplayIndex = index;
-                                echart.dispatchAction({ type: "downplay", dataIndex: index });
-                                echart.dispatchAction({ type: "highlight", dataIndex: index });
-                              
-                            }
-                        });
+                    // // 鼠标滑过事件
+                    // (() => {
+                    //     let downplayIndex = 0;
+                    //     echart.on("highlight", (e: any) => {
+                    //         if (e.name) {
+                    //             const index = data.findIndex((item: any) => item.name === e.name);
+                    //             echart.dispatchAction({
+                    //                 type: "downplay",
+                    //                 dataIndex: downplayIndex // 取消高亮
+                    //             });
+                    //             echart.dispatchAction({
+                    //                 type: "highlight",
+                    //                 dataIndex: index // 要高亮的数据项的索引
+                    //             });
+                    //         }
+                    //     });
+                    //     // 鼠标滑过环形图事件
+                    //     echart.on("mouseover", (e: any) => {
+                    //         if (e.name) {
+                    //             const index = data.findIndex((item: any) => item.name === e.name);
+                    //             echart.dispatchAction({
+                    //                 type: "downplay",
+                    //                 dataIndex: downplayIndex // 取消高亮
+                    //             });
+                    //             echart.dispatchAction({
+                    //                 type: "highlight",
+                    //                 dataIndex: index // 要高亮的数据项的索引
+                    //             });
+                    //         }
+                    //     });
 
-                    })();
-
+                    //     echart.on("downplay", (e: any) => {
+                    //         if (e.name) {
+                    //             const index = data.findIndex((item: any) => item.name === e.name);
+                    //             downplayIndex = index;
+                    //             echart.dispatchAction({ type: "downplay", dataIndex: index });
+                    //             echart.dispatchAction({ type: "highlight", dataIndex: index });
+                    //         }
+                    //     });
+                    //     echart.on("mouseout", (e: any) => {
+                    //         if (e.name) {
+                    //             const index = data.findIndex((item: any) => item.name === e.name);
+                    //             downplayIndex = index;
+                    //             echart.dispatchAction({ type: "downplay", dataIndex: index });
+                    //             echart.dispatchAction({ type: "highlight", dataIndex: index });
+                    //         }
+                    //     });
+                    // })();
                 }
             }
         }, [chartOption]);
