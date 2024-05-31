@@ -318,7 +318,7 @@ export default React.memo(
                                     };
                                 } else if (item.content.config.legendPos == "right") {
                                     position = {
-                                        top: i ? 30 * (i + 1) : 30,
+                                        top: i ? 30 * (i + 1) + item.content.config.charts.legend.top : 30 + item.content.config.charts.legend.top,
                                         left: "60%"
                                     };
                                 } else if (item.content.config.legendPos == "top") {
