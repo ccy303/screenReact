@@ -222,7 +222,7 @@ export const label = {
 export const legend = {
   show: true,
   orient: 'horizontal',
-  align: 'auto',
+  align: 'left',
   textStyle: {
     color: '#000000',
   },
@@ -234,7 +234,7 @@ export const legendWithPie = {
   textStyle: {
     color: '#000000',
   },
-  align: 'right',
+  align: 'left',
   right: 'right',
 }
 
@@ -315,7 +315,7 @@ const top = {
     align: 'auto',
   },
   align2right: {
-    align: 'right',
+    align: 'left',
     right: 'left',
   },
 }
@@ -328,7 +328,7 @@ const corner = {
   },
   rightTop: {
     right: 'right',
-    align: 'right',
+    align: 'left',
     orient: 'vertical',
   },
   leftBottom: {
@@ -347,7 +347,7 @@ const center = {
   align2right: {
     top: '35%',
     right: 'right',
-    align: 'right',
+    align: 'left',
   },
 }
 
@@ -357,7 +357,7 @@ const bottom = {
   },
   align2right: {
     bottom: '0',
-    align: 'right',
+    align: 'left',
     right: 'left',
   },
 }

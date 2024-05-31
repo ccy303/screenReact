@@ -319,7 +319,7 @@ export default React.memo(
                                 } else if (item.content.config.legendPos == "right") {
                                     position = {
                                         top: i ? 30 * (i + 1) : 30,
-                                        left: "66%"
+                                        left: "60%"
                                     };
                                 } else if (item.content.config.legendPos == "top") {
                                     position = {
@@ -504,6 +504,7 @@ export default React.memo(
                 if (idx === _index) {
                     return {
                         ...leg,
+                        align: "left",
                         shadowColor: "rgba(0, 0, 0, 0.1)",
                         shadowBlur: 5,
                         borderWidth: 0.3,
@@ -559,7 +560,7 @@ export default React.memo(
                         echart.on("highlight", (e: any) => {
                             if (e.name) {
                                 const index = legend?.findIndex((v: any) => v.data?.[0]?.name == e.name);
-                                hoverIndex = index;
+                                // hoverIndex = index;
                                 echart.dispatchAction({ type: "downplay" });
                                 echart.dispatchAction({ type: "highlight", dataIndex: index });
                                 setLegendStyle(echart, legend, index);
@@ -574,41 +575,28 @@ export default React.memo(
                         });
                     })();
 
-                    // legend选中
-                    // (() => {
-                    //     echart.on("legendselectchanged", (e: any) => {
-                    //         console.log(111111111, e);
-                    //         var isSelected = e.selected[e.name];
-                    //         if (!isSelected) {
-                    //             // 如果图例被取消选中，则重新选中
-                    //             echart.dispatchAction({
-                    //                 type: "legendSelect",
-                    //                 name: e.name
-                    //             });
-                    //             data.forEach((d: any, idx: any) => {
-                    //                 if (d.name == e.name) {
-                    //                     echart.dispatchAction({
-                    //                         type: "highlight",
-                    //                         dataIndex: idx
-                    //                     });
-                    //                 } else {
-                    //                     echart.dispatchAction({
-                    //                         type: "downplay",
-                    //                         dataIndex: idx
-                    //                     });
-                    //                 }
-                    //             });
-                    //         }
-                    //         // 阻止默认行为，防止图例被置灰
-                    //         return false;
-                    //     });
-                    // })();
                 } else {
                     echart.dispatchAction({
                         type: "highlight",
-                        seriesIndex: 0, // 图表中的第一个系列
                         dataIndex: 0 // 要高亮的数据项的索引
                     });
+            
+                    // 鼠标滑过事件
+                    (() => {
+                        echart.on("highlight", (e: any) => {
+                            if (e.name) { 
+                                const index = data.findIndex((item: any) => item.name === e.name);
+                                echart.dispatchAction({
+                                    type: "downplay",
+                                    dataIndex: 0 // 要高亮的数据项的索引
+                                });
+                                echart.dispatchAction({
+                                    type: "highlight",
+                                    dataIndex: index // 要高亮的数据项的索引
+                                });
+                            }
+                        });
+                    })();
                 }
             }
         }, [chartOption]);
