@@ -131,7 +131,7 @@ const gaugeStyle = {
 export default React.memo(
     (item: any) => {
         const { model } = useContext(ViewItemContext);
-        const { content, userxindex, useryindex, dataset, datafilter } = item;
+        const { content, userxindex, useryindex, dataset, datafilter,userseries } = item;
         const { config } = content;
         const { charts } = config;
         const { topnum } = charts;
@@ -240,6 +240,15 @@ export default React.memo(
                     _data = xshow?.map((v: any, i: any) => {
                         return { name: v, value: y?.[i] };
                     });
+                    _data = _data.reduce((accumulator, currentItem) => {
+                    const existingItem = accumulator.find(item => item.name === currentItem.name);
+                    if (existingItem) {
+                      existingItem.value += currentItem.value;
+                    } else {
+                      accumulator.push(currentItem);
+                    }
+                    return accumulator;
+                  }, []);
                 }
                 if (item.content.config.charts.legend.orient == "vertical" && item.content.config.legendPos == "right") {
                     _center = ["30%", "50%"];
@@ -435,34 +444,71 @@ export default React.memo(
                     data: [{ value: isNaN(value) ? 0 : value }]
                 };
             } else {
-                series = (useryindex || dataSet?.[0]?.source?.[0].slice(1)).map((v: any, i: any) => ({
-                    ...charts.series[0],
-                    type: item.type,
-                    stack: item.originname == "堆积条形图" || item.originname == "堆积柱形图" ? "stack" : "",
-                    areaStyle: item.originname == "面积图" ? {} : null,
-                    encode: {
-                        x: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? [v] : userxindex || ["product"],
-                        y: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? userxindex || ["product"] : [v],
-                        seriesName: v
-                    }
+              if((item.type == "bar" || item.type == "line") && userseries?.length >0 ){
+                const firstRow = dataSet?.[0]?.source?.[0];
+                const userseriesIndex = firstRow.indexOf(userseries[0]);
+                const extractedColumn = dataSet?.[0]?.source?.slice(1).map(temprow => temprow[userseriesIndex]).filter((tempvalue, tempindex, tempself) => {
+                  return tempself.indexOf(tempvalue) === tempindex;
+                });
+                const result = dataSet?.[0]?.source?.slice(1).reduce((acc, current) => {
+                  if(!current){
+                    return acc;
+                  }
+                  const groupName = current[userseriesIndex];
+                  // 检查累加器中是否已经存在该分组
+                  if (!acc[groupName]) {
+                    // 如果不存在，创建一个新的分组
+                    acc[groupName] = [];
+                  }
+                  // 将当前项添加到对应的分组中
+                  acc[groupName].push(current);
+                  // 返回更新后的累加器
+                  return acc;
+                },{});
+
+                series = (extractedColumn || dataSet?.[0]?.source?.[0].slice(1)).map((v: any, i: any) => ({
+                  ...charts.series[0],
+                  type: item.type,
+                  name: v,
+                  stack: item.originname == "堆积条形图" || item.originname == "堆积柱形图" ? "stack" : "",
+                  areaStyle: item.originname == "面积图" ? {} : null,
+                  dimensions: firstRow,
+                  data: result[v] || [],
+                  encode: {
+                    x: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? useryindex : userxindex || ["product"],
+                    y: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? userxindex || ["product"] : useryindex
+                  }
                 }));
-                if (item._echartFilterValue && item._echartFilterValue?.length) {
-                    series = series.map((_series: any, index: any) => {
-                        dataSet.push({
-                            transform: {
-                                type: "filter",
-                                config: {
-                                    and: item._echartFilterValue?.map((v: any) => {
-                                        return { dimension: item._echartFilterKey, "=": v };
-                                    })
-                                },
-                                print: true
-                            }
-                        });
-                        _series.datasetIndex = index + 1;
-                        return _series;
-                    });
+              }else {
+              series = (useryindex || dataSet?.[0]?.source?.[0].slice(1)).map((v: any, i: any) => ({
+                ...charts.series[0],
+                type: item.type,
+                stack: item.originname == "堆积条形图" || item.originname == "堆积柱形图" ? "stack" : "",
+                areaStyle: item.originname == "面积图" ? {} : null,
+                encode: {
+                  x: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? [v] : userxindex || ["product"],
+                  y: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? userxindex || ["product"] : [v],
+                  seriesName: v
                 }
+              }));
+              if (item._echartFilterValue && item._echartFilterValue?.length) {
+                series = series.map((_series: any, index: any) => {
+                  dataSet.push({
+                    transform: {
+                      type: "filter",
+                      config: {
+                        and: item._echartFilterValue?.map((v: any) => {
+                          return { dimension: item._echartFilterKey, "=": v };
+                        })
+                      },
+                      print: true
+                    }
+                  });
+                  _series.datasetIndex = index + 1;
+                  return _series;
+                });
+              }
+            }
             }
 
             const output = { ...echartOpt, dataset: dataSet, series };
