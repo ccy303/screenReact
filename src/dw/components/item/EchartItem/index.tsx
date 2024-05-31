@@ -6,7 +6,7 @@ import _ from "lodash";
 import useMain from "@/dw/store/useMain";
 import { ViewItemContext } from "dw/views/ViewItem";
 import { v4 as uuidv4 } from "uuid";
-import { DEFAULT_CHARTS_COLOR, DEFAULT_PIE_ITEMSTYLE, DEFAULT_PIE_LABEL, DEFAULT_PIE_LABEL_RICH } from "dw/control/common";
+import { DEFAULT_CHARTS_COLOR, DEFAULT_PIE_ITEMSTYLE, DEFAULT_PIE_LABEL } from "dw/control/common";
 import Right from "@/dw/views/Design/layout/Right";
 import Left from "@/dw/views/Design/layout/Left";
 
@@ -144,7 +144,7 @@ export default React.memo(
 
         const initData = [
             ["product", "2015", "2016", "2017"],
-            ["Matcha", 43.3, 85.8, 93.7],
+            ["Matcha", 300, 85.8, 93.7],
             ["Milk", 83.1, 73.4, 55.1],
             ["Cheese", 86.4, 65.2, 82.5],
             ["Walnut", 72.4, 53.9, 39.1]
@@ -256,7 +256,7 @@ export default React.memo(
                     type: item.type,
                     areaStyle: item.originname == "面积图" ? {} : null,
                     radius: item.originname == "环图" ? ["68%", "80%"] : [0, "80%"],
-                    label: item.originname == "环图" ? { ...charts.series[0].label, ...DEFAULT_PIE_LABEL, ...DEFAULT_PIE_LABEL_RICH } : { ...charts.series[0].label },
+                    label: item.originname == "环图" ? { ...charts.series[0].label, ...DEFAULT_PIE_LABEL } : { ...charts.series[0].label },
                     emphasis: {
                         label: {
                             show: true

@@ -59,7 +59,22 @@ export const DEFAULT_DATASET = {
 export const DEFAULT_PIE_LABEL = {
     position: "center",
     show: false,
-    formatter: "{c} \n\n {b}"
+    formatter: '{num|{c}}\n{title|{b}}',
+    rich: {
+        num: {
+        color: '#000',
+        fontFamily: 'DIN',
+        fontSize: '30px',
+        fontWeight: '550',
+        padding: [0, 0, 0, 0]
+        },
+        title: {
+        color: '#000',
+        fontSize: '14px',
+        fontWeight: '300',
+        padding: [5, 0, 0, 0]
+        }
+    }
 };
 export const DEFAULT_PIE_ITEMSTYLE = {
     borderRadius: 0,
@@ -1100,7 +1115,7 @@ export const CHART_DARA_SET: any = {
             name: "",
             type: "chartConfig",
             editor: { component: "EchartDataSet" },
-            style: { height: "650px", alignItems: "flex-start" }
+            style: { height: "500px", alignItems: "flex-start" }
         }
     ]
 };
