@@ -49,12 +49,27 @@ const SelectEditor = (props: any) => {
             setValue(v);
         });
     };
+    if(dataValue?.length === 0 && options?.length > 0) {
+      const _list = _.cloneDeep(itemList);
+      const _target: any = _list.find((v: any) => v.id == props.chartctrl?.split(",")?.[0]);
+      const echartFilter = _target?._echartFilter||{};
+
+      if( props.chartctrl?.split(",")?.[1] && options?.[0]) {
+        echartFilter[ props.chartctrl?.split(",")?.[1]] = options?.[0]
+        _target._echartFilter = echartFilter;
+        setTimeout(() => {
+          setItemList(_list);
+          setValue(options?.[0]); 
+        });
+      }
+     
+    }
 
     return (
-        <div className='select-warp'>
+        <div className='select-warp' style={{ backgroundColor: "#FFFFFF"}}>
             <Select
                 value={dataValue}
-                style={{ width: "100%", height: "100%" }}
+                style={{ width: "100%", height: "100%"}}
                 onChange={changeHandle}
                 placeholder='请选择'
                 showSearch={false}
