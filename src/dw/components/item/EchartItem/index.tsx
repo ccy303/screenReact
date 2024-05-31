@@ -240,7 +240,7 @@ export default React.memo(
                     _data = xshow?.map((v: any, i: any) => {
                         return { name: v, value: y?.[i] };
                     });
-                    _data = _data.reduce((accumulator, currentItem) => {
+                    _data = _data?.reduce((accumulator, currentItem) => {
                     const existingItem = accumulator.find(item => item.name === currentItem.name);
                     if (existingItem) {
                       existingItem.value += currentItem.value;
