@@ -13,9 +13,7 @@ const SelectEditor = (props: any) => {
     const { itemList, setItemList } = useMain();
 
     const target: any = itemList.find(v => v.id == props.chartctrl?.split(",")?.[0]);
-
     const index = target?.dataset?.dataindex?.findIndex?.((v: any) => v[1] == props.chartctrl?.split(",")?.[1]);
-
   const defaultDataSet = target?.dataset?.rows 
   const datafilter = target?.datafilter
   const firstRow = defaultDataSet?.[0];
@@ -49,20 +47,18 @@ const SelectEditor = (props: any) => {
             setValue(v);
         });
     };
-    if(dataValue?.length === 0 && options?.length > 0) {
+
+
+  if(dataValue?.length === 0 && options?.length > 0 || options?.length > 0 && !options?.includes(dataValue) || !target?._echartFilter) {
       const _list = _.cloneDeep(itemList);
       const _target: any = _list.find((v: any) => v.id == props.chartctrl?.split(",")?.[0]);
       const echartFilter = _target?._echartFilter||{};
-
       if( props.chartctrl?.split(",")?.[1] && options?.[0]) {
         echartFilter[ props.chartctrl?.split(",")?.[1]] = options?.[0]
         _target._echartFilter = echartFilter;
-        setTimeout(() => {
-          setItemList(_list);
-          setValue(options?.[0]); 
-        });
+        setItemList(_list);
+        setValue(options?.[0]);
       }
-     
     }
 
     return (
