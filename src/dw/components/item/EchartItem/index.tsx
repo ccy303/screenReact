@@ -370,16 +370,31 @@ export default React.memo(
                         delete res.right;
                         delete res.left;
                         delete res.bottom;
+                        delete res.top;
                         if (item.content.config.legendPos == "top") {
-                            res = { ...res, top: item.content.config.charts.legend.top, right: "auto" };
+                            delete res.bottom;
+                            delete res.right;
+                            res = { ...res, left: "center", top: item.content.config.charts.legend.top };
                         } else if (item.content.config.legendPos == "left") {
+                            delete res.right;
                             res = { ...res, left: item.content.config.charts.legend.left };
                         } else if (item.content.config.legendPos == "right") {
-                            res = { ...res, right: "5%" };
+                            delete res.left;
+                            res = { ...res, right: 5 };
                         } else if (item.content.config.legendPos == "bottom") {
                             delete res.top;
-                            res = { ...res, bottom: item.content.config.charts.legend.bottom };
+                            delete res.right;
+                            res = { ...res, left: "center", bottom: item.content.config.charts.legend.bottom };
+                        } else if (item.content.config.legendPos == "topCenter") {
+                            delete res.bottom;
+                            delete res.right;
+                            res = { ...res, left: "center", top: 0  };
+                        } else if (item.content.config.legendPos == "bottomCenter") {
+                            delete res.top;
+                            delete res.right;
+                            res = { ...res, left: "center", bottom: item.content.config.charts.legend.bottom };
                         }
+        
                     }
 
                     return res;
@@ -510,7 +525,7 @@ export default React.memo(
 
             item.type == "gauge" && _.assign(output.series, gaugeStyle);
 
-            if (item.type == "bar") {
+            if (item.type == "bar" || item.type == "line") {
                 let res = { ...echartOpt.legend };
                 delete res.right;
                 delete res.left;
@@ -518,13 +533,25 @@ export default React.memo(
                 delete res.top;
 
                 if (item.content.config.legendPos == "top") {
-                    res = { ...res, top: 0 };
+                    delete res.bottom;
+                    res = { ...res, top: item.content.config.charts.legend.top };
                 } else if (item.content.config.legendPos == "left") {
-                    res = { ...res, left: 0 };
+                    delete res.right;
+                    res = { ...res, left: item.content.config.charts.legend.left };
                 } else if (item.content.config.legendPos == "right") {
-                    res = { ...res, right: "5%" };
+                    delete res.left;
+                    res = { ...res, right: 5 };
                 } else if (item.content.config.legendPos == "bottom") {
-                    res = { ...res, bottom: 0 };
+                    delete res.top;
+                    res = { ...res, bottom: item.content.config.charts.legend.bottom };
+                } else if (item.content.config.legendPos == "topCenter") {
+                    delete res.bottom;
+                    delete res.right;
+                    res = { ...res, left: "center", top: 0  };
+                } else if (item.content.config.legendPos == "bottomCenter") {
+                    delete res.top;
+                    delete res.right;
+                    res = { ...res, left: "center", bottom: item.content.config.charts.legend.bottom };
                 }
 
                 output = { ...output, legend: res };

@@ -723,7 +723,9 @@ export const LEGEND_PROP: ControlProProps = {
                     { name: "上", value: "top" },
                     { name: "左", value: "left" },
                     { name: "右", value: "right" },
-                    { name: "下", value: "bottom" }
+                    { name: "下", value: "bottom" },
+                    { name: "上居中", value: "topCenter" },
+                    { name: "下居中", value: "bottomCenter" },
                 ],
                 dataType: "string",
                 defaultValue: "top"
