@@ -29,7 +29,7 @@ import { observable } from "mobx";
 
     root.render(
         <div>
-            <Root customProps={{ isShow: false }} model={{ key: "test" }} />
+            <Root customProps={{ isShow: 0 }} model={{ key: "test" }} />
         </div>
     );
 })();

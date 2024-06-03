@@ -109,6 +109,7 @@ const BaseView = () => {
             key: "selectconfig",
             data: { ...JSONData }
         };
+
         return () => observeRef.current?.();
     }, []);
 
