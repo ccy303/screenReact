@@ -356,7 +356,7 @@ export default React.memo(
                                 } else if (item.content.config.legendPos == "right") {
                                     position = {
                                         top: i ? 30 * (i + 1) + item.content.config.charts.legend.top : 30 + item.content.config.charts.legend.top,
-                                        left: item.content.config.charts.legend.right
+                                        left: '55%'
                                     };
                                 } else if (item.content.config.legendPos == "top") {
                                     position = {
@@ -383,7 +383,7 @@ export default React.memo(
                                     let target;
                                     for (let i = 0; i < _data.length; i++) {
                                         if (_data[i].name === name) {
-                                            target = _data[i].value;
+                                            target = formatNumberWithEllipsis(_data[i].value);
                                         }
                                     }
                                     const arr = ["{a|" + name + "}", target];
@@ -666,7 +666,18 @@ export default React.memo(
             });
             echart.setOption({ legend: [..._legend] }, { replaceMerge: "legend" });
         };
-
+        function formatNumberWithEllipsis(number : any ) {
+            // 将数字转换为字符串
+            const numberString = String(number);
+            
+            // 如果数字字符串长度超过8位，则截取前8位并加上三个点
+            if (numberString.length > 12) {
+              return numberString.slice(0, 12) + '...';
+            }
+            
+            // 如果没有超过8位，则直接返回原数字字符串
+            return numberString;
+          }
         const initScroll = (echart: any, legend: any, data: any, index: any) => {
             clearInterval(timer.current);
             timer.current = setInterval(() => {
