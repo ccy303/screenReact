@@ -14,8 +14,9 @@ const SelectEditor = (props: any) => {
 
     const target: any = itemList.find(v => v.id == props.chartctrl?.split(",")?.[0]);
     const index = target?.dataset?.dataindex?.findIndex?.((v: any) => v[1] == props.chartctrl?.split(",")?.[1]);
-  const defaultDataSet = target?.dataset?.rows 
-  const datafilter = target?.datafilter
+  const defaultDataSet = target?.dataset?.rows; 
+  const datafilter = target?.datafilter;
+  const sortfield = target?.sortfield;
   const firstRow = defaultDataSet?.[0];
   const filterDataSet = datafilter
     ? defaultDataSet.filter((row: any, index: number) => {
@@ -32,7 +33,45 @@ const SelectEditor = (props: any) => {
       }
     })
     : defaultDataSet;
-    const options = filterDataSet?.slice?.(1)?.map((v: any) => v[index]);
+    let options = filterDataSet?.slice?.(1)?.map((v: any) => v[index]);
+  if(options?.length > 1 && sortfield?.length > 0 &&  sortfield.filter((v: any) => v.key == props.chartctrl?.split(",")?.[1])?.length > 0 ){
+    const userSelectSortKey = sortfield.filter((v: any) => v.key == props.chartctrl?.split(",")?.[1])?.[0]?.sortkey;
+    const userSelectSortType = sortfield.filter((v: any) => v.key == props.chartctrl?.split(",")?.[1])?.[0]?.sorttype;
+    const userSelectSortIndex = firstRow.indexOf(userSelectSortKey);
+    if(userSelectSortKey && userSelectSortType && userSelectSortIndex >= 0){
+      let optionsBeforeSort =  filterDataSet?.slice?.(1).reduce((acc, current) => {
+          let findindex = acc.findIndex(item => item[index] == current[index]);
+          if (findindex === -1) {
+            acc.push(current);
+          }
+          return acc;
+        }, []).map(temprow => [temprow[index], temprow[userSelectSortIndex]]);
+
+      const optionsAfterSort = optionsBeforeSort.sort((a: any, b: any) => {
+        if(typeof a[1] === "string" || typeof b[1] === "string"){
+          if (userSelectSortType == "asc") {
+            return a[1].localeCompare(b[1]);
+          } else {
+            return b[1].localeCompare(a[1]);
+          }
+        }else if(typeof a[1] === "number" || typeof b[1] === "number"){
+          if (userSelectSortType == "asc") {
+            return a[1] - b[1];
+          } else {
+            return b[1] - a[1];
+          }
+        }else{
+          return 0;
+        }
+      });
+
+      if(optionsAfterSort?.length > 0){
+        options = optionsAfterSort.map(temprow => temprow[0]);
+      }
+
+    }
+  }
+    
     const changeHandle = (v: any) => {
         const _list = _.cloneDeep(itemList);
         const _target: any = _list.find((v: any) => v.id == props.chartctrl?.split(",")?.[0]);
