@@ -207,7 +207,7 @@ export const DEFAULT_CHARTS_COLOR = [
 ];
 
 export const DEFAULT_STYLE = {
-    fontColor: "#2a2a2a",
+    fontColor: "#212121",
     background: "#fff"
 };
 
