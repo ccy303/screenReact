@@ -131,7 +131,7 @@ const gaugeStyle = {
 export default React.memo(
     (item: any) => {
         const { model } = useContext(ViewItemContext);
-        const { content, userxindex, useryindex, dataset, datafilter, userseries } = item;
+        const { content, userxindex, useryindex, dataset, datafilter, userseries,sortfield } = item;
         const { config } = content;
         const { charts } = config;
         const { topnum } = charts;
@@ -177,7 +177,39 @@ export default React.memo(
                       }
                   })
                 : defaultDataSet;
-        const dataSet: any = [{ source: filterDataSet }];
+        let sortDataSet ;
+        if(userxindex && sortfield?.length > 0 && filterDataSet?.length > 1 && sortfield.filter((v: any) => v.key == userxindex?.[0])?.length > 0 ){
+            const sortkey = sortfield[0].sortkey;
+            const sorttype = sortfield[0].sorttype;
+            const sortIndex = firstRow.indexOf(sortkey);
+            if(sortkey && sorttype && sortIndex >= 0){
+              const afterSortDataSet = filterDataSet.slice(1).sort((a: any, b: any) => {
+                if(typeof a[sortIndex] === "string" || typeof b[sortIndex] === "string"){
+                    if (sorttype == "asc") {
+                        return a[sortIndex].localeCompare(b[sortIndex]);
+                    } else {
+                      return b[sortIndex].localeCompare(a[sortIndex]);
+                    }
+                }else if(typeof a[sortIndex] === "number" || typeof b[sortIndex] === "number"){
+                  if (sorttype == "asc") {
+                    return a[sortIndex] - b[sortIndex];
+                  } else {
+                    return b[sortIndex] - a[sortIndex];
+                  }
+                }else{
+                  return 0;
+                }
+                });
+              sortDataSet = [firstRow,...afterSortDataSet];
+            }else{
+              sortDataSet = filterDataSet;
+            }
+        }else {
+          sortDataSet = filterDataSet;
+        }
+        console.log("filterDataSet", filterDataSet);
+        console.log("sortDataSet", sortDataSet);
+        const dataSet: any = [{ source: sortDataSet }];
         const _rows: any = {};
         for (let i = 0, data = dataSet[0].source; i < data?.[0]?.length; i++) {
             const key = data[0][i];
