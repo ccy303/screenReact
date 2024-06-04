@@ -9,7 +9,7 @@ export default (props: any) => {
 
     const { getCurrentItem } = useMain();
 
-    const { dataset, userxindex, useryindex,userseries,datafilter } = getCurrentItem();
+    const { dataset, userxindex, useryindex,userseries,datafilter,sortfield } = getCurrentItem();
   const dataSetRows: any = { source: dataset?.rows };
   const _rows: any = {};
   for (let i = 0, data = dataSetRows.source; i < data?.[0]?.length; i++) {
@@ -65,6 +65,19 @@ export default (props: any) => {
           onChange([{ prop: "datafilter", value: _.uniqBy(datafilter.filter((v: any) => v.key != item),'key') }]);
         }
     };
+    const onSortDrop = (e: any, type: any) => {
+      e.preventDefault();
+      const data = JSON.parse(e.dataTransfer?.getData("dataset"));
+      const sortArray = { key: data.value, sortkey: data.value ,sorttype: "asc"};
+      if (type == "sort") {
+        onChange([{ prop: "sortfield", value: _.uniqBy([...(sortfield || []), sortArray],'key') }]);
+      }
+    };
+    const sortDel = (type: any, item: any) => {
+        if (type == "sort") {
+          onChange([{ prop: "sortfield", value: _.uniqBy(sortfield.filter((v: any) => v.key != item),'key') }]);
+        }
+    };
     const onSeriesDrop = (e: any, type: any) => {
       if(userseries?.length > 0 || useryindex?.length > 1){
         return;
@@ -84,6 +97,19 @@ export default (props: any) => {
       const newfilter = datafilter.filter((v: any) => v.key == key)?.[0];
       newfilter.selectkey = e;
       onChange([{ prop: "datafilter", value: _.uniqBy([...(datafilter || []), newfilter],'key') }]);
+    };
+    const handleSortKeyChange = (e : any , key: any) => {
+      const newsortfield = sortfield.filter((v: any) => v.key == key)?.[0];
+      newsortfield.sortkey = e;
+      onChange([{ prop: "sortfield", value: _.uniqBy([...(sortfield || []), newsortfield],'key') }]);
+      console.log("handleSortKeyChange",sortfield);
+    };
+    const handleSortTypeChange = (e : any , key: any) => {
+      const newsortfield = sortfield.filter((v: any) => v.key == key)?.[0];
+      newsortfield.sorttype = e;
+      onChange([{ prop: "sortfield", value: _.uniqBy([...(sortfield || []), newsortfield],'key') }]);
+      console.log("handleSortTypeChange",sortfield);
+
     };
     const onDrop = (e: any, type: any) => {
         e.preventDefault();
@@ -195,6 +221,41 @@ export default (props: any) => {
                                       })}
                                     </Select></div>
                                         <Icon type='delete' className='del-icon'  onClick={() => filterDel("filter", v.key)}></Icon>
+                                    </div>
+                                );
+                            })}
+                    </div>
+                </div>
+            </div>
+          <div>
+                <div style={{ marginTop: "10px" }}>排序</div>
+                <div className='data-set-dargabled'>
+                    <div className='list' onDragOver={allowDrop} onDrop={e => onSortDrop(e, "sort")}>
+                        {sortfield &&
+                          sortfield.map((v: any, i: any) => {
+                                return (
+                                    <div key={i} className='list-item space-between'>
+                                        {v.key}: <div className='drop-select-warp'><Select  mode="single" value={v.sortkey}  size="small"   style={{ width: "100%", height: "100%" }} showSearch={false} onChange={e => handleSortKeyChange(e,v.key)}>
+                                      {[...(xIndex as any), ...(yIndex as any)].map((item) => {
+                                        return (
+                                          <Option value={item.value} key={item.value}>
+                                            {item.name}
+                                          </Option>
+                                        )
+                                      })}
+                                    </Select>
+                                    </div>
+                                      <div className='drop-select-warp'>
+                                      <Select  mode="single" value={v.sorttype}  size="small"   style={{ width: "100%", height: "100%" }} showSearch={false} onChange={e => handleSortTypeChange(e,v.key)}>
+                                        <Option value="asc" key="asc">
+                                          升序
+                                        </Option>
+                                        <Option value="desc" key="desc">
+                                          降序
+                                        </Option>
+                                      </Select>
+                                        </div>
+                                        <Icon type='delete' className='del-icon'  onClick={() => sortDel("sort", v.key)}></Icon>
                                     </div>
                                 );
                             })}

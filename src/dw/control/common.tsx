@@ -63,16 +63,16 @@ export const DEFAULT_PIE_LABEL = {
     rich: {
         num: {
         color: '#000',
-        fontFamily: 'DIN',
-        fontSize: '30px',
-        fontWeight: '550',
+        fontFamily: 'KINGDEEKB-Bold',
+        fontSize: '34px',
+        fontWeight: '600',
         padding: [0, 0, 0, 0]
         },
         title: {
         color: '#696969',
-        fontSize: '14px',
+        fontSize: '12px',
         fontWeight: '300',
-        padding: [5, 0, 0, 0]
+        padding: [3, 0, 0, 0]
         }
     }
 };
@@ -664,7 +664,7 @@ export const LEGEND_PROP: ControlProProps = {
         { visible: false, id: "content.config.charts.legend.align", editor: { defaultValue: "auto" } },
         { visible: false, id: "content.config.charts.legend.orient", editor: { defaultValue: "horizontal" } },
         { visible: false, id: "content.config.charts.legend.textStyle.fontWeight", editor: { defaultValue: "normal" } },
-        { visible: false, id: "content.config.charts.legend.textStyle.fontStyle", editor: { defaultValue: "normal" } },
+        { visible: false, id: "content.config.charts.legend..fontStyle", editor: { defaultValue: "normal" } },
         {
             visible: true,
             id: "content.config.charts.legend.textStyle.fontSize",
@@ -691,6 +691,12 @@ export const LEGEND_PROP: ControlProProps = {
         },
         {
             visible: true,
+            id: "content.config.charts.legend.right",
+            name: "距离右边",
+            editor: { component: "Stepper", dataType: "number", defaultValue: 200 }
+        },
+        {
+            visible: true,
             id: "content.config.charts.legend.itemWidth",
             name: "图例宽",
             editor: { component: "Stepper", dataType: "number", defaultValue: 15 }
@@ -703,7 +709,7 @@ export const LEGEND_PROP: ControlProProps = {
         },
         {
             visible: true,
-            id: "content.config.charts.legend.textStyle.color",
+            id: "content.config.charts.legend..color",
             name: "字体颜色",
             editor: { component: "ColorPicker", dataType: "string", defaultValue: DEFAULT_STYLE.fontColor }
         },
@@ -1117,7 +1123,7 @@ export const CHART_DARA_SET: any = {
             name: "",
             type: "chartConfig",
             editor: { component: "EchartDataSet" },
-            style: { height: "500px", alignItems: "flex-start" }
+            style: { height: "750px", alignItems: "flex-start" }
         }
     ]
 };
