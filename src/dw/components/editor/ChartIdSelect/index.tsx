@@ -20,7 +20,7 @@ const TextEditor = (props: any) => {
     const formatVersionCfg = () => {
         let list: any = [];
 
-        list = (itemList.filter(v => v.category == "charts") || []).map(v => {
+        list = (itemList.filter(v => v.category == "charts" || v.category == "quota") || []).map(v => {
             return {
                 children: v.chartname,
                 value: v.id

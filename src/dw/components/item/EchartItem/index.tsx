@@ -207,8 +207,6 @@ export default React.memo(
         }else {
           sortDataSet = filterDataSet;
         }
-        console.log("filterDataSet", filterDataSet);
-        console.log("sortDataSet", sortDataSet);
         const dataSet: any = [{ source: sortDataSet }];
         const _rows: any = {};
         for (let i = 0, data = dataSet[0].source; i < data?.[0]?.length; i++) {
