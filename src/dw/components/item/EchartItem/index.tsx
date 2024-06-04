@@ -705,8 +705,42 @@ export default React.memo(
                         type: "highlight",
                         dataIndex: 0 // 要高亮的数据项的索引
                     });
-
-
+                    
+                    // 鼠标滑过事件
+                    (() => {
+                        let downplayIndex = 0;
+                        const hoverFn = (name: any) => {
+                            if (name) {  
+                                const index = data.findIndex((item: any) => item.name === name);
+                                echart.dispatchAction({
+                                    type: "downplay",
+                                    dataIndex: downplayIndex // 取消高亮
+                                });
+                                echart.dispatchAction({
+                                    type: "highlight",
+                                    dataIndex: index // 要高亮的数据项的索引
+                                });
+                            }    
+                        };
+                        const outHoverFn = (name: any) => {
+                            if (name) { 
+                                const index = data.findIndex((item: any) => item.name === name);
+                                downplayIndex = index;
+                                echart.dispatchAction({
+                                    type: "downplay",
+                                    dataIndex: downplayIndex // 取消高亮
+                                });
+                                echart.dispatchAction({
+                                    type: "highlight",
+                                    dataIndex: index // 要高亮的数据项的索引
+                                });
+                            }
+                        };
+                        echart.on("highlight", (e: any) => {hoverFn(e.name)});
+                        echart.on("downplay", (e: any) => {outHoverFn(e.name)});
+                        echart.on("mouseover", (e: any) => {hoverFn(e.name)});
+                        echart.on("mouseout", (e: any) => {outHoverFn(e.name)});
+                    })();
                 }
             }
         }, [chartOption]);
