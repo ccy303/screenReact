@@ -18,7 +18,8 @@ const Quota = (item: ComponentItemProps) => {
         alignItems: "center",
         fontWeight: quota?.fontWeight || "normal",
         fontStyle:  quota?.fontStyle || "normal",
-        textDecoration:  quota?.underline || "none"
+        textDecoration:  quota?.underline || "none",
+        fontFamily: "KINGDEEKB-Bold",
     };
     
     const _rows: any = {};
