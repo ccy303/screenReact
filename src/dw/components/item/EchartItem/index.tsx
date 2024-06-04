@@ -179,8 +179,8 @@ export default React.memo(
                 : defaultDataSet;
         let sortDataSet ;
         if(userxindex && sortfield?.length > 0 && filterDataSet?.length > 1 && sortfield.filter((v: any) => v.key == userxindex?.[0])?.length > 0 ){
-            const sortkey = sortfield[0].sortkey;
-            const sorttype = sortfield[0].sorttype;
+            const sortkey = sortfield.filter((v: any) => v.key == userxindex?.[0])?.[0]?.sortkey;
+            const sorttype = sortfield.filter((v: any) => v.key == userxindex?.[0])?.[0]?.sorttype;
             const sortIndex = firstRow.indexOf(sortkey);
             if(sortkey && sorttype && sortIndex >= 0){
               const afterSortDataSet = filterDataSet.slice(1).sort((a: any, b: any) => {
@@ -477,12 +477,51 @@ export default React.memo(
                 if ((item.type == "bar" || item.type == "line") && userseries?.length > 0) {
                     const firstRow = dataSet?.[0]?.source?.[0];
                     const userseriesIndex = firstRow.indexOf(userseries[0]);
-                    const extractedColumn = dataSet?.[0]?.source
+                    let extractedColumn = dataSet?.[0]?.source
                         ?.slice(1)
                         .map(temprow => temprow[userseriesIndex])
                         .filter((tempvalue, tempindex, tempself) => {
                             return tempself.indexOf(tempvalue) === tempindex;
                         });
+
+                  if(extractedColumn?.length > 1 && sortfield?.length > 0 &&  sortfield.filter((v: any) => v.key == userseries?.[0])?.length > 0 ){
+                      const userseriesSortKey = sortfield.filter((v: any) => v.key == userseries?.[0])?.[0]?.sortkey;
+                      const userseriesSortType = sortfield.filter((v: any) => v.key == userseries?.[0])?.[0]?.sorttype;
+                      const userseriesSortIndex = firstRow.indexOf(userseriesSortKey);
+                      if(userseriesSortKey && userseriesSortType && userseriesSortIndex >= 0){
+                       let extractedColumnBeforeSort =  dataSet?.[0]?.source
+                          ?.slice(1).reduce((acc, current) => {
+                          let index = acc.findIndex(item => item[userseriesIndex] == current[userseriesIndex]);
+                          if (index === -1) {
+                            acc.push(current);
+                          }
+                          return acc;
+                        }, []).map(temprow => [temprow[userseriesIndex], temprow[userseriesSortIndex]]);
+
+                        const extractedColumnAfterSort = extractedColumnBeforeSort.sort((a: any, b: any) => {
+                          if(typeof a[1] === "string" || typeof b[1] === "string"){
+                            if (userseriesSortType == "asc") {
+                              return a[1].localeCompare(b[1]);
+                            } else {
+                              return b[1].localeCompare(a[1]);
+                            }
+                          }else if(typeof a[1] === "number" || typeof b[1] === "number"){
+                            if (userseriesSortType == "asc") {
+                              return a[1] - b[1];
+                            } else {
+                              return b[1] - a[1];
+                            }
+                          }else{
+                            return 0;
+                          }
+                        });
+
+                        if(extractedColumnAfterSort?.length > 0){
+                            extractedColumn = extractedColumnAfterSort.map(temprow => temprow[0]);
+                        }
+
+                      }
+                    }
                     const result = dataSet?.[0]?.source?.slice(1).reduce((acc, current) => {
                         if (!current) {
                             return acc;
