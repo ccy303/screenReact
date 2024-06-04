@@ -130,11 +130,12 @@ const gaugeStyle = {
 
 export default React.memo(
     (item: any) => {
-        const { model } = useContext(ViewItemContext);
-        const { content, userxindex, useryindex, dataset, datafilter, userseries,sortfield } = item;
+        const { model, customProps } = useContext(ViewItemContext);
+        const { content, userxindex, useryindex, dataset, datafilter, userseries, sortfield } = item;
         const { config } = content;
         const { charts } = config;
         const { topnum } = charts;
+        const [echartStyle, setEchartStyle] = useState({});
 
         const [echartKey, setEchartKey] = useState(uuidv4());
 
@@ -177,35 +178,35 @@ export default React.memo(
                       }
                   })
                 : defaultDataSet;
-        let sortDataSet ;
-        if(userxindex && sortfield?.length > 0 && filterDataSet?.length > 1 && sortfield.filter((v: any) => v.key == userxindex?.[0])?.length > 0 ){
+        let sortDataSet;
+        if (userxindex && sortfield?.length > 0 && filterDataSet?.length > 1 && sortfield.filter((v: any) => v.key == userxindex?.[0])?.length > 0) {
             const sortkey = sortfield.filter((v: any) => v.key == userxindex?.[0])?.[0]?.sortkey;
             const sorttype = sortfield.filter((v: any) => v.key == userxindex?.[0])?.[0]?.sorttype;
             const sortIndex = firstRow.indexOf(sortkey);
-            if(sortkey && sorttype && sortIndex >= 0){
-              const afterSortDataSet = filterDataSet.slice(1).sort((a: any, b: any) => {
-                if(typeof a[sortIndex] === "string" || typeof b[sortIndex] === "string"){
-                    if (sorttype == "asc") {
-                        return a[sortIndex].localeCompare(b[sortIndex]);
+            if (sortkey && sorttype && sortIndex >= 0) {
+                const afterSortDataSet = filterDataSet.slice(1).sort((a: any, b: any) => {
+                    if (typeof a[sortIndex] === "string" || typeof b[sortIndex] === "string") {
+                        if (sorttype == "asc") {
+                            return a[sortIndex].localeCompare(b[sortIndex]);
+                        } else {
+                            return b[sortIndex].localeCompare(a[sortIndex]);
+                        }
+                    } else if (typeof a[sortIndex] === "number" || typeof b[sortIndex] === "number") {
+                        if (sorttype == "asc") {
+                            return a[sortIndex] - b[sortIndex];
+                        } else {
+                            return b[sortIndex] - a[sortIndex];
+                        }
                     } else {
-                      return b[sortIndex].localeCompare(a[sortIndex]);
+                        return 0;
                     }
-                }else if(typeof a[sortIndex] === "number" || typeof b[sortIndex] === "number"){
-                  if (sorttype == "asc") {
-                    return a[sortIndex] - b[sortIndex];
-                  } else {
-                    return b[sortIndex] - a[sortIndex];
-                  }
-                }else{
-                  return 0;
-                }
                 });
-              sortDataSet = [firstRow,...afterSortDataSet];
-            }else{
-              sortDataSet = filterDataSet;
+                sortDataSet = [firstRow, ...afterSortDataSet];
+            } else {
+                sortDataSet = filterDataSet;
             }
-        }else {
-          sortDataSet = filterDataSet;
+        } else {
+            sortDataSet = filterDataSet;
         }
         const dataSet: any = [{ source: sortDataSet }];
         const _rows: any = {};
@@ -356,7 +357,7 @@ export default React.memo(
                                 } else if (item.content.config.legendPos == "right") {
                                     position = {
                                         top: i ? 30 * (i + 1) + item.content.config.charts.legend.top : 30 + item.content.config.charts.legend.top,
-                                        left: '55%'
+                                        left: "55%"
                                     };
                                 } else if (item.content.config.legendPos == "top") {
                                     position = {
@@ -418,13 +419,12 @@ export default React.memo(
                         } else if (item.content.config.legendPos == "topCenter") {
                             delete res.bottom;
                             delete res.right;
-                            res = { ...res, left: "center", top: 0  };
+                            res = { ...res, left: "center", top: 0 };
                         } else if (item.content.config.legendPos == "bottomCenter") {
                             delete res.top;
                             delete res.right;
                             res = { ...res, left: "center", bottom: item.content.config.charts.legend.bottom };
                         }
-        
                     }
 
                     return res;
@@ -482,43 +482,44 @@ export default React.memo(
                             return tempself.indexOf(tempvalue) === tempindex;
                         });
 
-                  if(extractedColumn?.length > 1 && sortfield?.length > 0 &&  sortfield.filter((v: any) => v.key == userseries?.[0])?.length > 0 ){
-                      const userseriesSortKey = sortfield.filter((v: any) => v.key == userseries?.[0])?.[0]?.sortkey;
-                      const userseriesSortType = sortfield.filter((v: any) => v.key == userseries?.[0])?.[0]?.sorttype;
-                      const userseriesSortIndex = firstRow.indexOf(userseriesSortKey);
-                      if(userseriesSortKey && userseriesSortType && userseriesSortIndex >= 0){
-                       let extractedColumnBeforeSort =  dataSet?.[0]?.source
-                          ?.slice(1).reduce((acc, current) => {
-                          let index = acc.findIndex(item => item[userseriesIndex] == current[userseriesIndex]);
-                          if (index === -1) {
-                            acc.push(current);
-                          }
-                          return acc;
-                        }, []).map(temprow => [temprow[userseriesIndex], temprow[userseriesSortIndex]]);
+                    if (extractedColumn?.length > 1 && sortfield?.length > 0 && sortfield.filter((v: any) => v.key == userseries?.[0])?.length > 0) {
+                        const userseriesSortKey = sortfield.filter((v: any) => v.key == userseries?.[0])?.[0]?.sortkey;
+                        const userseriesSortType = sortfield.filter((v: any) => v.key == userseries?.[0])?.[0]?.sorttype;
+                        const userseriesSortIndex = firstRow.indexOf(userseriesSortKey);
+                        if (userseriesSortKey && userseriesSortType && userseriesSortIndex >= 0) {
+                            let extractedColumnBeforeSort = dataSet?.[0]?.source
+                                ?.slice(1)
+                                .reduce((acc, current) => {
+                                    let index = acc.findIndex(item => item[userseriesIndex] == current[userseriesIndex]);
+                                    if (index === -1) {
+                                        acc.push(current);
+                                    }
+                                    return acc;
+                                }, [])
+                                .map(temprow => [temprow[userseriesIndex], temprow[userseriesSortIndex]]);
 
-                        const extractedColumnAfterSort = extractedColumnBeforeSort.sort((a: any, b: any) => {
-                          if(typeof a[1] === "string" || typeof b[1] === "string"){
-                            if (userseriesSortType == "asc") {
-                              return a[1].localeCompare(b[1]);
-                            } else {
-                              return b[1].localeCompare(a[1]);
-                            }
-                          }else if(typeof a[1] === "number" || typeof b[1] === "number"){
-                            if (userseriesSortType == "asc") {
-                              return a[1] - b[1];
-                            } else {
-                              return b[1] - a[1];
-                            }
-                          }else{
-                            return 0;
-                          }
-                        });
+                            const extractedColumnAfterSort = extractedColumnBeforeSort.sort((a: any, b: any) => {
+                                if (typeof a[1] === "string" || typeof b[1] === "string") {
+                                    if (userseriesSortType == "asc") {
+                                        return a[1].localeCompare(b[1]);
+                                    } else {
+                                        return b[1].localeCompare(a[1]);
+                                    }
+                                } else if (typeof a[1] === "number" || typeof b[1] === "number") {
+                                    if (userseriesSortType == "asc") {
+                                        return a[1] - b[1];
+                                    } else {
+                                        return b[1] - a[1];
+                                    }
+                                } else {
+                                    return 0;
+                                }
+                            });
 
-                        if(extractedColumnAfterSort?.length > 0){
-                            extractedColumn = extractedColumnAfterSort.map(temprow => temprow[0]);
+                            if (extractedColumnAfterSort?.length > 0) {
+                                extractedColumn = extractedColumnAfterSort.map(temprow => temprow[0]);
+                            }
                         }
-
-                      }
                     }
                     const result = dataSet?.[0]?.source?.slice(1).reduce((acc, current) => {
                         if (!current) {
@@ -616,7 +617,7 @@ export default React.memo(
                 } else if (item.content.config.legendPos == "topCenter") {
                     delete res.bottom;
                     delete res.right;
-                    res = { ...res, left: "center", top: 0  };
+                    res = { ...res, left: "center", top: 0 };
                 } else if (item.content.config.legendPos == "bottomCenter") {
                     delete res.top;
                     delete res.right;
@@ -666,18 +667,18 @@ export default React.memo(
             });
             echart.setOption({ legend: [..._legend] }, { replaceMerge: "legend" });
         };
-        function formatNumberWithEllipsis(number : any ) {
+        function formatNumberWithEllipsis(number: any) {
             // 将数字转换为字符串
             const numberString = String(number);
-            
+
             // 如果数字字符串长度超过8位，则截取前8位并加上三个点
             if (numberString.length > 12) {
-              return numberString.slice(0, 12) + '...';
+                return numberString.slice(0, 12) + "...";
             }
-            
+
             // 如果没有超过8位，则直接返回原数字字符串
             return numberString;
-          }
+        }
         const initScroll = (echart: any, legend: any, data: any, index: any) => {
             clearInterval(timer.current);
             timer.current = setInterval(() => {
@@ -753,12 +754,12 @@ export default React.memo(
                         type: "highlight",
                         dataIndex: 0 // 要高亮的数据项的索引
                     });
-                    
+
                     // 鼠标滑过事件
                     (() => {
                         let downplayIndex = 0;
                         const hoverFn = (name: any) => {
-                            if (name) {  
+                            if (name) {
                                 const index = data.findIndex((item: any) => item.name === name);
                                 echart.dispatchAction({
                                     type: "downplay",
@@ -768,10 +769,10 @@ export default React.memo(
                                     type: "highlight",
                                     dataIndex: index // 要高亮的数据项的索引
                                 });
-                            }    
+                            }
                         };
                         const outHoverFn = (name: any) => {
-                            if (name) { 
+                            if (name) {
                                 const index = data.findIndex((item: any) => item.name === name);
                                 downplayIndex = index;
                                 echart.dispatchAction({
@@ -784,10 +785,18 @@ export default React.memo(
                                 });
                             }
                         };
-                        echart.on("highlight", (e: any) => {hoverFn(e.name)});
-                        echart.on("downplay", (e: any) => {outHoverFn(e.name)});
-                        echart.on("mouseover", (e: any) => {hoverFn(e.name)});
-                        echart.on("mouseout", (e: any) => {outHoverFn(e.name)});
+                        echart.on("highlight", (e: any) => {
+                            hoverFn(e.name);
+                        });
+                        echart.on("downplay", (e: any) => {
+                            outHoverFn(e.name);
+                        });
+                        echart.on("mouseover", (e: any) => {
+                            hoverFn(e.name);
+                        });
+                        echart.on("mouseout", (e: any) => {
+                            outHoverFn(e.name);
+                        });
                     })();
                 }
             }
@@ -809,20 +818,27 @@ export default React.memo(
             }
         }, []);
 
+        useEffect(() => {
+            const parent = ref.current.ele.parentElement;
+            const padding = (getComputedStyle(parent).padding || "0").replace("px", "");
+            setEchartStyle({
+                width: `${parent.clientWidth - Number(padding) * 2}px`,
+                height: `${parent.clientHeight - Number(padding) * 2}px`
+            });
+        }, []);
+
         return (
             <KdCard item={item} showTitle={showTitle}>
                 {showLoading ? (
                     <Spin type='page' spinning={showLoading} style={{ width: "100%", height: "100%", justifyContent: "center" }}></Spin>
                 ) : (
-                    <div style={{ width: "100%", height: "100%" }}>
-                        <ReactECharts
-                            key={echartKey}
-                            style={{ width: "100%", height: "100%" }}
-                            option={{ ...chartOption }}
-                            ref={ref}
-                            onEvents={{ click: onChartClick }}
-                        />
-                    </div>
+                    <ReactECharts
+                        key={echartKey}
+                        style={customProps.isShow ? echartStyle : { width: "100%", height: "100%" }}
+                        option={{ ...chartOption, animationEasing: "cubicInOut", animationDuration: 2000 }}
+                        ref={ref}
+                        onEvents={{ click: onChartClick }}
+                    />
                 )}
             </KdCard>
         );
