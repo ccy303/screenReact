@@ -691,6 +691,12 @@ export const LEGEND_PROP: ControlProProps = {
         },
         {
             visible: true,
+            id: "content.config.charts.legend.right",
+            name: "距离右边",
+            editor: { component: "Stepper", dataType: "number", defaultValue: 200 }
+        },
+        {
+            visible: true,
             id: "content.config.charts.legend.itemWidth",
             name: "图例宽",
             editor: { component: "Stepper", dataType: "number", defaultValue: 15 }
