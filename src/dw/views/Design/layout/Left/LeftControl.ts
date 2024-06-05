@@ -186,6 +186,48 @@ const borderControls = {
         }
     ]
 };
+const pictureControls = {
+    group: [
+        {
+            id: "format",
+            name: "格式",
+            properties: [
+                {
+                    id: "baseInfoCtrl",
+                    name: "基本信息",
+                    defaultOpen: true,
+                    nodes: [
+                        {
+                            visible: true,
+                            id: "name",
+                            name: "组件名称",
+                            editor: { component: "Input", defaultValue: "name" }
+                        },
+                        {
+                            visible: true,
+                            id: "chartcontrol.ispublish",
+                            name: "是否发布",
+                            editor: {
+                                component: "Select",
+                                dataType: "string",
+                                options: [
+                                    { name: "是", value: "1" },
+                                    { name: "否", value: "0" }
+                                ],
+                                defaultValue: "1"
+                            }
+                        }
+                    ]
+                },
+                BACKGROUND_PROP,
+                BORDER_PROP,
+                DESC_PROP,
+                CUSTOM_STYLE_PROP,
+                POSITION_PROP(200, 250)
+            ]
+        }
+    ]
+};
 
 const tableControls: any = {
     group: [
@@ -373,7 +415,8 @@ export const ComponentControlMap: any = {
     radio: radioControls,
     quota: quotaControls,
     tabs: tabsControls,
-    map: mapControls
+    map: mapControls,
+    picture: pictureControls,
 };
 
 export const chartList = [
@@ -498,5 +541,12 @@ export const otherComp = [
         desc: "tabs",
         name: "tabs",
         category: "tabs"
+    },
+    {
+        componentType: "picture",
+        icon: require(`assets/img/analysis_image.png`),
+        desc: "picture",
+        name: "picture",
+        category: "picture"
     }
 ];

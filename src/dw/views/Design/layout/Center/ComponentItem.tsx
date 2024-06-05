@@ -8,6 +8,7 @@ import Radio from "dw/components/item/Radio";
 import Quota from "dw/components/item/Quota";
 import Tabs from "dw/components/item/Tabs";
 import Map from "dw/components/item/Map";
+import Picture from "dw/components/item/Picture";
 import React from "react";
 
 export const ComponentMap: any = {
@@ -19,7 +20,8 @@ export const ComponentMap: any = {
     radio: Radio,
     quota: Quota,
     tabs: Tabs,
-    map: Map
+    map: Map,
+    picture: Picture,
 };
 
 export const ComponentItem = (props: any) => {
