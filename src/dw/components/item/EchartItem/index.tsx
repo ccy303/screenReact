@@ -801,21 +801,21 @@ export default React.memo(
             }
         }, [chartOption]);
 
-        const onChartClick = useCallback((params: any) => {
-            // 在这里处理点击事件，可以获取点击的图形的数据
-            console.log("clickChart", params);
-            const { dataIndex } = params;
-            const { pluginname, dataset } = item;
-            if (dataIndex && pluginname && dataset && dataset.dataindex && dataset.rows && dataset.rows[dataIndex + 1]) {
-                const clickData = {
-                    pluginname: pluginname,
-                    dataindex: dataset.dataindex,
-                    row: dataset.rows[dataIndex + 1]
-                };
-                console.log(clickData);
-                model?.invoke?.("clickcharts", JSON.stringify(clickData));
-            }
-        }, []);
+      const onChartClick = (params: any) => {
+        // 在这里处理点击事件，可以获取点击的图形的数据
+        const { data } = params;
+        const { pluginname,category,type} = item;
+        if (pluginname && category && type) {
+          const clickData = {
+            pluginname: pluginname,
+            data: data,
+            category: category,
+            type: type,
+            selectFilter:item._echartFilter
+          };
+          model?.invoke?.("clickcharts", JSON.stringify(clickData));
+        }
+      }
 
         useEffect(() => {
             if (!ref.current) {

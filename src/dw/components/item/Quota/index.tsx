@@ -1,10 +1,13 @@
 import { Stepper } from "@kdcloudjs/kdesign";
-import React, {useMemo} from "react";
+import React, { useContext, useMemo } from "react";
 import KdCard from "dw/components/common/KdCard";
 import { ComponentItemProps } from "dw/control/interface";
+import _ from "lodash";
+import { ViewItemContext } from "dw/views/ViewItem";
 
 const Quota = (item: ComponentItemProps) => {
-    const showTitle = useMemo(() => item && item.content && item.content.title && item.content.title.show, [item]);
+  const { model } = useContext(ViewItemContext);
+  const showTitle = useMemo(() => item && item.content && item.content.title && item.content.title.show, [item]);
     const { content, userxindex, useryindex, dataset, datafilter } = item;
     const {quota} = content;
     const style = {
@@ -22,7 +25,6 @@ const Quota = (item: ComponentItemProps) => {
     };
 
   const defaultDataSet = item?.dataset?.rows || [];
-  console.log("ckqquota",defaultDataSet);
 
   const firstRow = defaultDataSet[0];
   const filterDataSet =
@@ -61,9 +63,24 @@ const Quota = (item: ComponentItemProps) => {
     }
 
     let value = useryindex? _rows[useryindex]?.reduce((total : number, num: number) => total + num, 0) : 0;
+
+  const handleClick = (item:any,data:any) => {
+    // 在这里处理点击事件，可以获取点击的图形的数据
+    const { pluginname} = item;
+    if (pluginname) {
+      const clickData = {
+        pluginname: pluginname,
+        data: data,
+        category: "quota",
+        type: "quota",
+        selectFilter:item._echartFilter
+      };
+      model?.invoke?.("clickcharts", JSON.stringify(clickData));
+    }
+  };
     return (
         <KdCard item={item} showTitle={showTitle}>
-            {useryindex ? <div style={style}>{value}</div> : <div style={style}>业务指标</div>}
+            {useryindex ? <div style={style} onClick={()=>handleClick(item,value)}>{value}</div> : <div style={style}>业务指标</div>}
         </KdCard>
     );
 };
