@@ -810,13 +810,16 @@ export default React.memo(
         }, []);
 
         useEffect(() => {
-            const parent = ref.current.ele.parentElement;
+            const parent = ref.current?.ele?.parentElement;
+            if (!parent) {
+                return setEchartStyle({ width: `100%`, height: `100%`});
+            }
             const padding = (getComputedStyle(parent).padding || "0").replace("px", "");
             setEchartStyle({
                 width: `${parent.clientWidth - Number(padding) * 2}px`,
                 height: `${parent.clientHeight - Number(padding) * 2}px`
             });
-        }, []);
+        }, [chartOption]);
 
         return (
             <KdCard item={item} showTitle={showTitle}>
