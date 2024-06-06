@@ -130,12 +130,12 @@ const gaugeStyle = {
 
 export default React.memo(
     (item: any) => {
-        const { model } = useContext(ViewItemContext);
+        const { model, customProps } = useContext(ViewItemContext);
         const { content, userxindex, useryindex, dataset, datafilter, userseries,sortfield } = item;
         const { config } = content;
         const { charts } = config;
         const { topnum } = charts;
-
+        const [echartStyle, setEchartStyle] = useState({});
         const [echartKey, setEchartKey] = useState(uuidv4());
 
         const chartOptionRef = useRef<any>({});
@@ -809,20 +809,27 @@ export default React.memo(
             }
         }, []);
 
+        useEffect(() => {
+            const parent = ref.current.ele.parentElement;
+            const padding = (getComputedStyle(parent).padding || "0").replace("px", "");
+            setEchartStyle({
+                width: `${parent.clientWidth - Number(padding) * 2}px`,
+                height: `${parent.clientHeight - Number(padding) * 2}px`
+            });
+        }, []);
+
         return (
             <KdCard item={item} showTitle={showTitle}>
                 {showLoading ? (
                     <Spin type='page' spinning={showLoading} style={{ width: "100%", height: "100%", justifyContent: "center" }}></Spin>
                 ) : (
-                    <div style={{ width: "100%", height: "100%" }}>
-                        <ReactECharts
-                            key={echartKey}
-                            style={{ width: "100%", height: "100%" }}
-                            option={{ ...chartOption }}
-                            ref={ref}
-                            onEvents={{ click: onChartClick }}
-                        />
-                    </div>
+                    <ReactECharts
+                        key={echartKey}
+                        style={customProps.isShow ? echartStyle : { width: "100%", height: "100%" }}
+                        option={{ ...chartOption, animationEasing: "cubicInOut", animationDuration: 2000 }}
+                        ref={ref}
+                        onEvents={{ click: onChartClick }}
+                    />
                 )}
             </KdCard>
         );
