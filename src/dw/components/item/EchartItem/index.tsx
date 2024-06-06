@@ -827,7 +827,7 @@ export default React.memo(
                 width: `${parent.offsetWidth - Number(padding) * 2}px`,
                 height: `${parent.offsetHeight - Number(padding) * 2}px`
             });
-        }, []);
+        }, [customProps]);
 
         return (
             <KdCard item={item} showTitle={showTitle} bodyStyle={{ overflow: "hidden" }}>
