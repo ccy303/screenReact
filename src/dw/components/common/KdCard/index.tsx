@@ -42,7 +42,7 @@ const KdCardTitle: FC<{ item: ComponentItemProps; showDesp: boolean }> = ({ item
     );
 };
 
-const KdCard: FC<KdCardProps> = ({ item, children, showTitle }) => {
+const KdCard = ({ item, children, showTitle, bodyStyle }: any) => {
     const showDesp = useMemo(() => item && item.content && item.content.desp && item.content.desp.show, [item]);
 
     // 十六进制颜色转rgb格式
@@ -78,7 +78,9 @@ const KdCard: FC<KdCardProps> = ({ item, children, showTitle }) => {
                     <Icon type='question' />
                 </Tooltip>
             )}
-            <div className={`${prefix}-main`}>{children}</div>
+            <div className={`${prefix}-main`} style={bodyStyle}>
+                {children}
+            </div>
         </div>
     );
 };
