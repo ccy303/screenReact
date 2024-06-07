@@ -470,6 +470,82 @@ export default React.memo(
                     type: item.type,
                     data: [{ value: isNaN(value) ? 0 : value }]
                 };
+            }else if(item.type == "progressbar"){
+              const y = useryindex?.[0] || "2015";
+              const percent = ((_rows?.[y]?.[0] * 10000) / 100).toFixed(2);
+              return {
+                ...echartOpt,
+                xAxis: { type: "value", min: 0, max: 100, show: false },
+                yAxis: { type: "category", show: false },
+                grid: {
+                  top: 0, // 上边距
+                  left: 0, // 左边距
+                  right: 0, // 左边距
+                  bottom: 0
+                },
+                label: {
+                  show: false
+                },
+                tooltip: {
+                  show: false
+                },
+                series: [{
+                  type: "bar",
+                  data: [100],
+                  itemStyle: {
+                    color: "#ffffff",
+                    borderRadius:10
+                  },
+                  barGap: "-100%",
+                  animation: false,
+                  silent: true
+                },{
+                  type: "bar",
+                  data: [percent],
+                  barGap: "-100%",
+                  itemStyle: {
+                    borderRadius: 10,
+                    color: function(params) {
+                      var value = params.value; // 获取当前柱子的数据值
+                      if (value < 50) {
+                        return {
+                          type: "linear",
+                          x: 0,
+                          y: 1,
+                          colorStops: [
+                            {
+                              offset: 0,
+                              color: "#FAC53E" // 0% 处的颜色
+                            },
+                            {
+                              offset: 1,
+                              color: "#FF9E4C" // 100% 处的颜色
+                            }
+                          ],
+                          global: false // 缺省为 false
+                        };
+                      } else {
+                        return {
+                          type: "linear",
+                          x: 0,
+                          y: 1,
+                          colorStops: [
+                            {
+                              offset: 0,
+                              color: "#246FFF" // 0% 处的颜色
+                            },
+                            {
+                              offset: 1,
+                              color: "#6CAAFF" // 100% 处的颜色
+                            }
+                          ],
+                          global: false // 缺省为 false
+                        };
+                      }
+                    }
+                  }
+                }]
+              };
             } else {
                 if ((item.type == "bar" || item.type == "line") && userseries?.length > 0) {
                     const firstRow = dataSet?.[0]?.source?.[0];

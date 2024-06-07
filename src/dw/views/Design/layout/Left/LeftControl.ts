@@ -489,6 +489,27 @@ export const chartList = [
         desc: "地图",
         name: "地图",
         category: "map"
+    },
+    {
+        componentType: "progressbar",
+        icon: require(`assets/img/progressbar.png`),
+        desc: "进度条",
+        name: "进度条",
+        category: "charts"
+    },
+    {
+        componentType: "progresspie",
+        icon: require(`assets/img/progresspie.png`),
+        desc: "环形进度条",
+        name: "环形进度条",
+        category: "charts"
+    },
+    {
+        componentType: "gauge2",
+        icon: require(`assets/img/gauge2.png`),
+        desc: "仪表盘2",
+        name: "仪表盘2",
+        category: "charts"
     }
 ];
 
