@@ -1,5 +1,5 @@
 import { Select } from "@kdcloudjs/kdesign";
-import React, { useMemo, useState, useContext } from "react";
+import React, { useMemo, useState, useContext, useEffect } from "react";
 import "./index.less";
 import useMain from "@/dw/store/useMain";
 import { ViewItemContext } from "dw/views/ViewItem";
@@ -86,19 +86,7 @@ const SelectEditor = (props: any) => {
             setValue(v);
         });
     };
-
-
-  if(dataValue?.length === 0 && options?.length > 0 || options?.length > 0 && !options?.includes(dataValue) || !target?._echartFilter) {
-      const _list = _.cloneDeep(itemList);
-      const _target: any = _list.find((v: any) => v.id == props.chartctrl?.split(",")?.[0]);
-      const echartFilter = _target?._echartFilter||{};
-      if( props.chartctrl?.split(",")?.[1] && options?.[0]) {
-        echartFilter[ props.chartctrl?.split(",")?.[1]] = options?.[0]
-        _target._echartFilter = echartFilter;
-        setItemList(_list);
-        setValue(options?.[0]);
-      }
-    }
+  
 
     return (
         <div className='select-warp' style={{ backgroundColor: "#FFFFFF"}}>
