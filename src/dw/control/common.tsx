@@ -1247,4 +1247,143 @@ export const CUSTOM_STYLE_PROP: ControlProProps = {
     }
   ]
 };
+export  const GAUGE_STYLE2 = {
+  progress: {
+    show: true,
+    width: 10
+  },
+  axisLine: {
+    lineStyle: {
+      width: 10,
+      color: [
+        [1, "#E5EFFE"]
+      ]
+    },
+    roundCap: true
+  },
+  startAngle: 180,
+  endAngle: 0,
+  pointer: {
+    icon: "triangle", 
+    length: "65%",
+    width: 10,
+    offsetCenter: [0, 0],
+    itemStyle: {
+      color: {
+        type: "radial",
+        x: 0.5,
+        y: 1,
+        r: 0.8,
+        colorStops: [
+          {
+            offset: 0,
+            color: "#89C7FF" // 0% 处的颜色
+          },
+          {
+            offset: 1,
+            color: "#1890FF" // 100% 处的颜色
+          }
+        ]
+      }
+    }
+  },
+  itemStyle: {
+    color: function(param) {
+      const value = param.data.value;
+      if (value <= 5) {
+        return "#1DB363";
+        // {
+        //   type: "linear",
+        //     x: 0,
+        //   y: 1,
+        //   colorStops: [
+        //   {
+        //     offset: 0,
+        //     color: "#34D780" // 0% 处的颜色
+        //   },
+        //   {
+        //     offset: 1,
+        //     color: "#1DB363" // 100% 处的颜色
+        //   }
+        // ],
+        //   global: false // 缺省为 false
+        // };
+      } else if (value > 5 && value <= 10) {
+        return "#FF9E4C";
+        // {
+        //   type: "linear",
+        //   x: 0,
+        //   y: 1,
+        //   colorStops: [
+        //     {
+        //       offset: 0,
+        //       color: "#FAC53E" // 0% 处的颜色
+        //     },
+        //     {
+        //       offset: 1,
+        //       color: "#FF9E4C" // 100% 处的颜色
+        //     }
+        //   ],
+        //   global: false // 缺省为 false
+        // };
+      } else {
+        return "#FF4C4C" ;
+        // {
+        //   type: "linear",
+        //   x: 0,
+        //   y: 1,
+        //   colorStops: [
+        //     {
+        //       offset: 0,
+        //       color: "#FF8686" // 0% 处的颜色
+        //     },
+        //     {
+        //       offset: 1,
+        //       color: "#FF4C4C" // 100% 处的颜色
+        //     }
+        //   ],
+        //   global: false // 缺省为 false
+        // };
+      }
+    },
+    roundCap: true
+  },
+  axisTick: {
+    show: false
+  },
+  splitLine: {
+    show: false
+  },
+  axisLabel: {
+    show: false
+  },
+  anchor: {
+    show: true,
+    showAbove: true,
+    size: 10,
+    icon: "circle",
+    offsetCenter: [0, 0],
+    itemStyle: {
+      color: "#1890FF",
+      shadowColor: "#89C7FF",
+      shadowBlur: 20
+    }
+  },
+  title: {
+    show: false
+  },
+  detail: {
+    fontSize: 32,
+    fontWeight: 700,
+    fontFamily: "KINGDEEKB-Bold",
+    lineHeight: 45,
+    offsetCenter: [0, "30%"],
+    valueAnimation: true,
+    color: "inherit"
+  },
+  min: 0,
+  max: 20,
+  radius: "100%",
+
+};
 

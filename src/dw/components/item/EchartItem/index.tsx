@@ -6,7 +6,7 @@ import _ from "lodash";
 import useMain from "@/dw/store/useMain";
 import { ViewItemContext } from "dw/views/ViewItem";
 import { v4 as uuidv4 } from "uuid";
-import { DEFAULT_CHARTS_COLOR, DEFAULT_PIE_ITEMSTYLE, DEFAULT_PIE_LABEL } from "dw/control/common";
+import { DEFAULT_CHARTS_COLOR, DEFAULT_PIE_ITEMSTYLE, DEFAULT_PIE_LABEL,GAUGE_STYLE2 } from "dw/control/common";
 import Right from "@/dw/views/Design/layout/Right";
 import Left from "@/dw/views/Design/layout/Left";
 
@@ -443,7 +443,7 @@ export default React.memo(
                 };
 
                 return { ...output, legend };
-            } else if (item.type == "gauge") {
+            } else if (item.type == "gauge" || item.type == "gauge2") {
                 const y = useryindex?.[0] || "2015";
                 const x = userxindex?.[0] || "product";
 
@@ -467,7 +467,7 @@ export default React.memo(
                 const value = total;
 
                 series = {
-                    type: item.type,
+                    type: "gauge",
                     data: [{ value: isNaN(value) ? 0 : value }]
                 };
             }else if(item.type == "progressbar"){
@@ -545,6 +545,87 @@ export default React.memo(
                     }
                   }
                 }]
+              };
+            }else if(item.type == "progresspie"){
+              const y = useryindex?.[0] || "2015";
+              const percent = ((_rows?.[y]?.[0] * 10000) / 100).toFixed(2);
+              const percentColor = percent <= 33 ? "#1DB363" : percent <= 66 ?"#FF8F0F":"#F0262D";
+              return {
+                series: [{
+                  name: 'progresspie',
+                  type: 'pie',
+                  radius: ['68%', '80%'], // 设置环形图的内外半径，实现环形效果
+                  clockwise: true, // 是否顺时针展示
+                  hoverAnimation: false, // 禁用鼠标悬停时的放大效果
+                  label: {
+                    show: false,
+                  },
+                  emphasis:{
+                    disabled:true
+                  },
+                  itemStyle: {
+                    color: function(param) {
+                      const value = param.data.value;
+                      if (value <= 33) {
+                        return {
+                          type: "linear",
+                            x: 0,
+                          y: 1,
+                          colorStops: [
+                          {
+                            offset: 0,
+                            color: "#1DB363" // 0% 处的颜色
+                          },
+                          {
+                            offset: 1,
+                            color: "#34D780" // 100% 处的颜色
+                          }
+                        ],
+                          global: false // 缺省为 false
+                        };
+                      } else if (value > 33 && value <= 66) {
+                        return {
+                          type: "linear",
+                          x: 0,
+                          y: 1,
+                          colorStops: [
+                            {
+                              offset: 0,
+                              color: "#FF9E4C" // 0% 处的颜色
+                            },
+                            {
+                              offset: 1,
+                              color: "#FAC53E" // 100% 处的颜色
+                            }
+                          ],
+                          global: false // 缺省为 false
+                        };
+                      } else {
+                        return {
+                          type: "linear",
+                          x: 0,
+                          y: 1,
+                          colorStops: [
+                            {
+                              offset: 0,
+                              color: "#FF4C4C" // 0% 处的颜色
+                            },
+                            {
+                              offset: 1,
+                              color: "#FF8686" // 100% 处的颜色
+                            }
+                          ],
+                          global: false // 缺省为 false
+                        };
+                      }
+                    }
+                  },
+                  data: [
+                    {value: percent, name: 'percentnumber',label:{show:true,position:"center",color:percentColor,fontSize:24,fontFamily:"KINGDEEKB",formatter:percent+"%"}}, // 实际进度数据
+                    {value: 100-percent, name: 'emptynumber', itemStyle: {color: '#E5EFFE'}}  // 剩余未完成数据
+                  ]
+                }
+                ]
               };
             } else {
                 if ((item.type == "bar" || item.type == "line") && userseries?.length > 0) {
@@ -669,6 +750,7 @@ export default React.memo(
             };
 
             item.type == "gauge" && _.assign(output.series, gaugeStyle);
+            item.type == "gauge2" && _.assign(output.series, GAUGE_STYLE2);
 
             if (item.type == "bar" || item.type == "line") {
                 let res = { ...echartOpt.legend };

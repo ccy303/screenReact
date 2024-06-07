@@ -500,8 +500,8 @@ export const chartList = [
     {
         componentType: "progresspie",
         icon: require(`assets/img/progresspie.png`),
-        desc: "环形进度条",
-        name: "环形进度条",
+        desc: "环形进度图",
+        name: "环形进度图",
         category: "charts"
     },
     {
