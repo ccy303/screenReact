@@ -20,7 +20,7 @@ export default (item: any) => {
         return {
             geo: [
                 {
-                    map: "china",
+                    map: "world",
                     aspectScale: 0.8,
                     zoom: 1.2,
                     top: "9%",
@@ -46,7 +46,7 @@ export default (item: any) => {
                     }
                 },
                 {
-                    map: "china",
+                    map: "world",
                     aspectScale: 0.8,
                     zoom: 1.2,
                     top: "9.06%",
