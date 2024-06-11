@@ -959,7 +959,7 @@ export default React.memo(
             }
         }, [chartOption]);
 
-      const onChartClick = (params: any) => {
+      const onChartClick = useCallback((params: any) => {
         // 在这里处理点击事件，可以获取点击的图形的数据
         const { data } = params;
         const { pluginname,category,type} = item;
@@ -973,7 +973,7 @@ export default React.memo(
           };
           model?.invoke?.("clickcharts", JSON.stringify(clickData));
         }
-      }
+      },[]);
 
         useEffect(() => {
             if (!ref.current) {
