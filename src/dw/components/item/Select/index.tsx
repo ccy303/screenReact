@@ -87,6 +87,9 @@ const SelectEditor = (props: any) => {
         });
     };
   
+  if(dataValue?.length === 0 && options?.length > 0) {
+    options?.[0] && changeHandle(options?.[0]);
+  }
 
     return (
         <div className='select-warp' style={{ backgroundColor: "#FFFFFF"}}>
