@@ -230,7 +230,7 @@ export default React.memo(
                 echartOpt = {
                     ...echartOpt,
                     xAxis: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? {} : { type: "category" },
-                    yAxis: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? { type: "category" } : {},
+                    yAxis: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? { type: "category",inverse: true } : {},
                     dataZoom:
                         topnum && topnum > 0
                             ? [
