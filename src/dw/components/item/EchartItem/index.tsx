@@ -833,12 +833,12 @@ export default React.memo(
             // 将数字转换为字符串
             const numberString = String(number);
 
-            // 如果数字字符串长度超过8位，则截取前8位并加上三个点
-            if (numberString.length > 12) {
-                return numberString.slice(0, 12) + "...";
+            // 如果数字字符串长度超过11位，则截取前11位并加上三个点
+            if (numberString.length > 11) {
+                return numberString.slice(0, 11) + "...";
             }
 
-            // 如果没有超过8位，则直接返回原数字字符串
+            // 如果没有超过11位，则直接返回原数字字符串
             return numberString;
         }
         const initScroll = (echart: any, legend: any, data: any, index: any) => {
