@@ -261,6 +261,7 @@ export default React.memo(
 
                 let _data = null;
                 let _center = ["50%", "50%"];
+                let _radius = ["68%", "80%"];
                 if (item._echartFilterValue && item._echartFilterValue?.length) {
                     const x = _rows[item._echartFilterKey];
                     _data = x?.map((v: any, i: any) => {
@@ -292,12 +293,16 @@ export default React.memo(
                 } else if (item.content.config.charts.legend.orient == "horizontal" && item.content.config.legendPos == "top") {
                     _center = ["50%", "57.5%"];
                 }
+                if(item.content.config.legendCustom == "true"){
+                    _center = ["50%", "27%"];
+                    _radius = ["34%", "40%"];
+                }
 
                 series = {
                     ...charts.series[0],
                     type: item.type,
                     areaStyle: item.originname == "面积图" ? {} : null,
-                    radius: item.originname == "环图" ? ["68%", "80%"] : [0, "80%"],
+                    radius: item.originname == "环图" ? _radius : [0, "80%"],
                     label: item.originname == "环图" ? { ...charts.series[0].label, ...DEFAULT_PIE_LABEL } : { ...charts.series[0].label },
                     emphasis: { label: { show: true } },
                     itemStyle: item.originname == "环图" ? DEFAULT_PIE_ITEMSTYLE : {},

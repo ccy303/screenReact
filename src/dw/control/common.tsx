@@ -724,8 +724,6 @@ export const LEGEND_PROP: ControlProProps = {
                     { name: "左", value: "left" },
                     { name: "右", value: "right" },
                     { name: "下", value: "bottom" },
-                    { name: "上居中", value: "topCenter" },
-                    { name: "下居中", value: "bottomCenter" },
                 ],
                 dataType: "string",
                 defaultValue: "top"
@@ -743,6 +741,20 @@ export const LEGEND_PROP: ControlProProps = {
                 ],
                 dataType: "string",
                 defaultValue: "mornal"
+            }
+        },
+        {
+            visible: true,
+            id: "content.config.legendCustom",
+            name: "定制下图例",
+            editor: {
+                component: "Select",
+                options: [
+                    { name: "是", value: "true" },
+                    { name: "否", value: "false" }
+                ],
+                dataType: "string",
+                defaultValue: "false"
             }
         },
         {
