@@ -75,7 +75,20 @@ const Quota = (item: ComponentItemProps) => {
         type: "quota",
         selectFilter:item._echartFilter
       };
-      model?.invoke?.("clickcharts", JSON.stringify(clickData));
+      let pageId = new URLSearchParams(window.location.search).get("sourcePageId");
+      if (pageId) {
+        window.parent.postMessage({
+            pageId: pageId, //该字段是苍穹专用
+            type: 'invokeCustomEvent',
+            content: {
+              param: JSON.stringify(clickData)
+            }
+          },
+          '*',
+        );
+      }else {
+        model?.invoke?.("clickcharts", JSON.stringify(clickData));
+      }
     }
   };
     return (
