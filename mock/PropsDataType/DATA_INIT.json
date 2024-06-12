@@ -1,123 +1,206 @@
 {
     "pageConfig": {
-        "size": "0",
-        "ispublish": "1",
-        "width": 1920,
-        "height": 1080,
-        "versiondesc": "预置版本",
-        "scale": "none",
-        "name": "账户运营",
-        "url": "",
-        "backgroundSize": "autoauto",
-        "themename": "淡雅白",
-        "backgroundColor": "#f2f3f5",
-        "pkid": "1938632125775702023",
-        "themecode": "white",
-        "version": "1",
-        "configtag": "tda_anls_bankacct"
+      "size": "5",
+      "backgroundColor": "#f2f3f5",
+      "backgroundSize": "auto auto",
+      "height": 900,
+      "scale": "none",
+      "url": "",
+      "width": 1600,
+      "id": null,
+      "number": null,
+      "name": null,
+      "configtag": null,
+      "version": null,
+      "versiondescribe": null,
+      "themename": null,
+      "themecode": null,
+      "ispublish": "1",
+      "pkid": ""
     },
     "itemList": [
-        {
-            "_isShow": true,
-            "name": "堆积条形图1",
-            "chartcontrol": {
-                "ispublish": "1"
-            },
-            "content": {
-                "title": {
+      {
+        "_isShow": true,
+        "name": "环图1",
+        "chartcontrol": {
+          "ispublish": "1"
+        },
+        "content": {
+          "title": {
+            "show": true,
+            "fontWeight": "normal",
+            "fontStyle": "normal",
+            "underline": "none",
+            "fontSize": 14,
+            "fontStyleArray": [],
+            "align": "center",
+            "fontColor": "#212121",
+            "backColor": "#fff"
+          },
+          "config": {
+            "charts": {
+              "legend": {
+                "show": true,
+                "left": 10,
+                "right": "auto",
+                "bottom": 5,
+                "top": -5,
+                "align": "auto",
+                "orient": "horizontal",
+                "textStyle": {
+                  "fontWeight": "normal",
+                  "fontSize": 12
+                },
+                "": {
+                  "fontStyle": "normal",
+                  "color": "#212121"
+                },
+                "itemWidth": 15,
+                "itemHeight": 15,
+                "icon": "rect"
+              },
+              "series": [
+                {
+                  "label": {
                     "show": true,
                     "fontWeight": "normal",
                     "fontStyle": "normal",
-                    "underline": "none",
-                    "fontSize": 14,
-                    "fontStyleArray": [],
-                    "align": "center",
-                    "fontColor": "#2a2a2a",
-                    "backColor": "#fff"
-                },
-                "config": {
-                    "charts": {
-                        "legend": {
-                            "show": true,
-                            "left": 0,
-                            "right": "auto",
-                            "bottom": 0,
-                            "top": 0,
-                            "align": "auto",
-                            "orient": "vertical",
-                            "textStyle": {
-                                "fontWeight": "normal",
-                                "fontStyle": "normal",
-                                "fontSize": 12,
-                                "color": "#2a2a2a"
-                            },
-                            "itemWidth": 15,
-                            "itemHeight": 15,
-                            "icon": "rect"
-                        },
-                        "series": [
-                            {
-                                "label": {
-                                    "show": true,
-                                    "fontWeight": "normal",
-                                    "fontStyle": "normal",
-                                    "fontSize": 12,
-                                    "color": "#2a2a2a",
-                                    "position": "outside"
-                                },
-                                "barWidth": 10,
-                                "starAngle": 90
-                            }
-                        ],
-                        "topnum": 0
-                    },
-                    "legendPos": "bottom",
-                    "legendStyle": "mornal",
-                    "fontStyleArray": [],
-                    "label": {
-                        "fontStyleArray": []
-                    },
-                    "digitalFormat": {
-                        "dataLabelType": "classificationdatavalue",
-                        "digitalType": "digital",
-                        "currencySymbols": "¥",
-                        "unit": 1,
-                        "decimalPlace": 2,
-                        "enableThousands": false,
-                        "unitarea": 1
-                    },
-                    "unit": 1,
-                    "showStarAngle": false
-                },
-                "showBak": true,
-                "backgroundColor": "#fff",
-                "opacity": 1,
-                "showBorder": true,
-                "borderColor": "#2a2a2a",
-                "borderOpacity": 1,
-                "borderWidth": 0,
-                "borderStyle": "dotted",
-                "desc": {
-                    "show": false,
-                    "content": ""
-                },
-                "chartParameters": true
+                    "fontSize": 12,
+                    "color": "#212121",
+                    "position": "outside"
+                  },
+                  "barWidth": 10,
+                  "starAngle": 90
+                }
+              ],
+              "topnum": 0
             },
-            "title": "标题",
-            "zindex": 677,
-            "x": 73,
-            "y": 338,
-            "h": 300,
-            "w": 400,
-            "pkid": "",
-            "chartname": "堆积条形图1",
-            "t": "2024-05-31 22:58:59",
-            "id": "74476cea90ca4c8c86d1aac8cb169c45",
-            "type": "bar",
-            "category": "charts",
-            "kdId": "",
-            "originname": "堆积条形图"
-        }
+            "legendPos": "top",
+            "legendStyle": "mornal",
+            "legendCustom": "false",
+            "fontStyleArray": [],
+            "label": {
+              "fontStyleArray": []
+            },
+            "digitalFormat": {
+              "dataLabelType": "classificationdatavalue",
+              "digitalType": "digital",
+              "currencySymbols": "¥",
+              "unit": 1,
+              "decimalPlace": 2,
+              "enableThousands": false,
+              "unitarea": 1
+            },
+            "unit": 1,
+            "showStarAngle": false
+          },
+          "showBak": true,
+          "backgroundColor": "#fff",
+          "opacity": 1,
+          "showBorder": true,
+          "borderColor": "#212121",
+          "borderOpacity": 1,
+          "borderWidth": 0,
+          "borderStyle": "dotted",
+          "desc": {
+            "show": false,
+            "content": ""
+          },
+          "chartParameters": true
+        },
+        "title": "标题",
+        "zindex": 1,
+        "x": 10,
+        "y": 10,
+        "h": 300,
+        "w": 400,
+        "pkid": "",
+        "chartname": "环图1",
+        "t": "2024-06-12 23:11:30",
+        "id": "a7c98157531b4975a932f363e30cb030",
+        "type": "pie",
+        "category": "charts",
+        "kdId": "",
+        "originname": "环图"
+      },
+      {
+        "_isShow": true,
+        "name": "tips2",
+        "chartcontrol": {
+          "ispublish": "1"
+        },
+        "content": "asdasdasdasdasdasdasdasdasdsad",
+        "zindex": 2,
+        "x": 346,
+        "y": 129,
+        "h": 40,
+        "w": 40,
+        "bindchart": "a7c98157531b4975a932f363e30cb030",
+        "chartname": "tips2",
+        "t": "2024-06-12 23:11:34",
+        "id": "f3150a50fd814a2994fb7b9301e0a833",
+        "type": "tips",
+        "category": "tips",
+        "kdId": "",
+        "pkid": "",
+        "originname": "tips"
+      },
+      {
+        "_isShow": true,
+        "name": "enlarge3",
+        "chartcontrol": {
+          "ispublish": "1"
+        },
+        "content": {
+          "showBorder": true,
+          "borderColor": "#212121",
+          "borderOpacity": 1,
+          "borderWidth": 0,
+          "borderStyle": "dotted"
+        },
+        "zindex": 3,
+        "x": 350,
+        "y": 81,
+        "h": 40,
+        "w": 40,
+        "bindchart": "a7c98157531b4975a932f363e30cb030",
+        "chartname": "enlarge3",
+        "t": "2024-06-12 23:11:36",
+        "id": "a02c11f92bf343b0b365531e8db06823",
+        "type": "enlarge",
+        "category": "enlarge",
+        "kdId": "",
+        "pkid": "",
+        "originname": "enlarge"
+      },
+      {
+        "_isShow": true,
+        "name": "refresh4",
+        "chartcontrol": {
+          "ispublish": "1"
+        },
+        "content": {
+          "showBorder": true,
+          "borderColor": "#212121",
+          "borderOpacity": 1,
+          "borderWidth": 0,
+          "borderStyle": "dotted"
+        },
+        "zindex": 4,
+        "x": 350,
+        "y": 185,
+        "h": 40,
+        "w": 40,
+        "bindchart": "a7c98157531b4975a932f363e30cb030",
+        "chartname": "refresh4",
+        "t": "2024-06-12 23:11:38",
+        "id": "796aeece2f894bb08b13493381481ab9",
+        "type": "refresh",
+        "category": "refresh",
+        "kdId": "",
+        "pkid": "",
+        "originname": "refresh"
+      }
     ],
     "deleteList": []
-}
+  }

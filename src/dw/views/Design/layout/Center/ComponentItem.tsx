@@ -9,6 +9,9 @@ import Quota from "dw/components/item/Quota";
 import Tabs from "dw/components/item/Tabs";
 import Map from "dw/components/item/Map";
 import Picture from "dw/components/item/Picture";
+import Refresh from "dw/components/item/Refresh";
+import Enlarge from "dw/components/item/Enlarge";
+import Tips from "dw/components/item/Tips";
 import React from "react";
 
 export const ComponentMap: any = {
@@ -22,6 +25,9 @@ export const ComponentMap: any = {
     tabs: Tabs,
     map: Map,
     picture: Picture,
+    refresh: Refresh,
+    enlarge: Enlarge,
+    tips: Tips
 };
 
 export const ComponentItem = (props: any) => {

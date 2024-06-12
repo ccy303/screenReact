@@ -68,6 +68,7 @@ const globalConfigState = atom<any>({
     default: {
         selectId: "",
         selectType: "",
+        hoverId: "",
         pageControl: {
             pageConfig: DEFAULT_PAGE_CONFIG
         }
@@ -428,6 +429,12 @@ const useMain = () => {
         setProperties([]);
         selectPageGroup();
     };
+
+    // 设置鼠标hover
+    const setHover = (id: any = "") => {
+        setGlobalConfig({ ...globalConfig, hoverId: id });
+    };
+
     return {
         init,
         initPage,
@@ -447,7 +454,8 @@ const useMain = () => {
         addItemWithType,
         getCurrentItem,
         changeItemAll,
-        changeItems
+        changeItems,
+        setHover
     };
 };
 

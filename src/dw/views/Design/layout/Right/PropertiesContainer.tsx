@@ -9,7 +9,6 @@ import _ from "lodash";
 import { ViewItemContext } from "dw/views/ViewItem";
 import { toJS } from "mobx";
 import "./PropertiesContainer.less";
-import itemJson from "../../../../../../mock/PropsDataType/ITEM_TEST.json";
 
 export const PropertiesItem: FC<PropertiesItemProps> = props => {
     const {

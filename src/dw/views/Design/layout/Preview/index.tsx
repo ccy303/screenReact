@@ -7,8 +7,10 @@ const Preview = () => {
     const {
         itemList,
         globalConfig: {
-            pageControl: { pageConfig }
-        }
+            pageControl: { pageConfig },
+            hoverId
+        },
+        setHover
     } = useMain();
 
     const { model } = useContext(ViewItemContext);
@@ -28,6 +30,15 @@ const Preview = () => {
         });
         ro.observe(model.dom || document.querySelector(".dw-view-item"));
     }, [width, height]);
+
+    const mouseEnter = (data: any) => {
+        setHover(data.id);
+    };
+    const mouseLeave = (data: any) => {
+        setHover("");
+    };
+
+    console.log(1234, hoverId);
 
     return (
         <div>
@@ -56,8 +67,12 @@ const Preview = () => {
                             top: Number(y),
                             left: Number(x)
                         };
+                        if (["refresh", "enlarge", "tips"].includes(it.type)) {
+                            style.display = it.bindchart == hoverId ? "" : "none";
+                        }
+
                         return (
-                            <div style={style} key={id}>
+                            <div style={style} key={id} onMouseEnter={() => mouseEnter(it)} onMouseLeave={() => mouseLeave(it)}>
                                 <Component {...it} />
                             </div>
                         );

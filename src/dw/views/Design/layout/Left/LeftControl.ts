@@ -12,7 +12,8 @@ import {
     QUOTA_PROP,
 
     // 文本
-    BASE_PROP, CUSTOM_STYLE_PROP
+    BASE_PROP,
+    CUSTOM_STYLE_PROP
 } from "dw/control/common";
 
 const echartControls: any = {
@@ -186,6 +187,7 @@ const borderControls = {
         }
     ]
 };
+
 const pictureControls = {
     group: [
         {
@@ -406,6 +408,96 @@ const mapControls: any = {
     ]
 };
 
+const refreshControls = {
+    group: [
+        {
+            id: "data",
+            name: "属性",
+            properties: [
+                CHART_BASE_INFO,
+                BORDER_PROP,
+                POSITION_PROP(40, 40),
+                {
+                    defaultOpen: true,
+                    id: "base",
+                    name: "图表绑定",
+                    nodes: [
+                        {
+                            visible: true,
+                            id: "bindchart",
+                            name: "图表绑定",
+                            editor: { component: "Bindchart" },
+                            style: { height: "auto" }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+};
+
+const enlargeControls = {
+    group: [
+        {
+            id: "data",
+            name: "属性",
+            properties: [
+                CHART_BASE_INFO,
+                BORDER_PROP,
+                POSITION_PROP(40, 40),
+                {
+                    defaultOpen: true,
+                    id: "base",
+                    name: "图表绑定",
+                    nodes: [
+                        {
+                            visible: true,
+                            id: "bindchart",
+                            name: "图表绑定",
+                            editor: { component: "Bindchart" },
+                            style: { height: "auto" }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+};
+
+const tipsControls = {
+    group: [
+        {
+            id: "data",
+            name: "属性",
+            properties: [
+                CHART_BASE_INFO,
+                BORDER_PROP,
+                POSITION_PROP(40, 40),
+                {
+                    defaultOpen: true,
+                    id: "base",
+                    name: "图表绑定",
+                    nodes: [
+                        {
+                            visible: true,
+                            id: "bindchart",
+                            name: "图表绑定",
+                            editor: { component: "Bindchart" },
+                            style: { height: "auto" }
+                        },
+                        {
+                            visible: true,
+                            id: "content",
+                            name: "文本",
+                            editor: { component: "Input" },
+                            style: { height: "auto" }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+};
 export const ComponentControlMap: any = {
     charts: echartControls,
     text: textControls,
@@ -417,6 +509,9 @@ export const ComponentControlMap: any = {
     tabs: tabsControls,
     map: mapControls,
     picture: pictureControls,
+    refresh: refreshControls,
+    enlarge: enlargeControls,
+    tips: tipsControls
 };
 
 export const chartList = [
@@ -569,5 +664,26 @@ export const otherComp = [
         desc: "picture",
         name: "picture",
         category: "picture"
+    },
+    {
+        componentType: "refresh",
+        icon: require(`assets/refresh.png`),
+        desc: "refresh",
+        name: "refresh",
+        category: "refresh"
+    },
+    {
+        componentType: "enlarge",
+        icon: require(`assets/enlarge.png`),
+        desc: "enlarge",
+        name: "enlarge",
+        category: "enlarge"
+    },
+    {
+        componentType: "tips",
+        icon: require(`assets/tips.png`),
+        desc: "tips",
+        name: "tips",
+        category: "tips"
     }
 ];
