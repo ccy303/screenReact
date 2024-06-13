@@ -646,12 +646,14 @@ export default React.memo(
                 ]
               };
             }else if(item.type == "combination"){
+              let xAxisSize = _rows[userxindex?.[0]]?.length || 0;
+              let calrotate = xAxisSize > 0 ?  calRotate(w,_rows,userxindex) : 0;
               echartOpt = {
                 ...echartOpt,
                 tooltip: {
                   trigger: 'axis'
                 },
-                xAxis:  { type: "category",axisLabel: { interval: 0,rotate:60 } },
+                xAxis:  { type: "category",axisLabel: { interval: 0,rotate:calrotate } },
                 yAxis:  [{
                   type: 'value'
                 },
