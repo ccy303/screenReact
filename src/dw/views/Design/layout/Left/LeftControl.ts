@@ -605,6 +605,13 @@ export const chartList = [
         desc: "仪表盘2",
         name: "仪表盘2",
         category: "charts"
+    },
+    { 
+        componentType: "combination",
+        icon: require(`assets/img/combination.png`),
+        desc: "组合图",
+        name: "组合图",
+        category: "charts"
     }
 ];
 
