@@ -1,206 +1,224 @@
 {
     "pageConfig": {
-      "size": "5",
-      "backgroundColor": "#f2f3f5",
-      "backgroundSize": "auto auto",
-      "height": 900,
-      "scale": "none",
-      "url": "",
-      "width": 1600,
-      "id": null,
-      "number": null,
-      "name": null,
-      "configtag": null,
-      "version": null,
-      "versiondescribe": null,
-      "themename": null,
-      "themecode": null,
-      "ispublish": "1",
-      "pkid": ""
+        "size": "5",
+        "backgroundColor": "#f2f3f5",
+        "backgroundSize": "auto auto",
+        "height": 900,
+        "scale": "none",
+        "url": "",
+        "width": 1600,
+        "id": null,
+        "number": null,
+        "name": null,
+        "configtag": null,
+        "version": null,
+        "versiondescribe": null,
+        "themename": null,
+        "themecode": null,
+        "ispublish": "1",
+        "pkid": ""
     },
     "itemList": [
-      {
-        "_isShow": true,
-        "name": "环图1",
-        "chartcontrol": {
-          "ispublish": "1"
-        },
-        "content": {
-          "title": {
-            "show": true,
-            "fontWeight": "normal",
-            "fontStyle": "normal",
-            "underline": "none",
-            "fontSize": 14,
-            "fontStyleArray": [],
-            "align": "center",
-            "fontColor": "#212121",
-            "backColor": "#fff"
-          },
-          "config": {
-            "charts": {
-              "legend": {
-                "show": true,
-                "left": 10,
-                "right": "auto",
-                "bottom": 5,
-                "top": -5,
-                "align": "auto",
-                "orient": "horizontal",
-                "textStyle": {
-                  "fontWeight": "normal",
-                  "fontSize": 12
-                },
-                "": {
-                  "fontStyle": "normal",
-                  "color": "#212121"
-                },
-                "itemWidth": 15,
-                "itemHeight": 15,
-                "icon": "rect"
-              },
-              "series": [
-                {
-                  "label": {
+        {
+            "_isShow": true,
+            "name": "环图1",
+            "chartcontrol": {
+                "ispublish": "1"
+            },
+            "dataset": {
+                "dataindex": [
+                    ["bankname", "银行类别", 1, false],
+                    ["dq", "地区", 1, false],
+                    ["acctnum", "账户数量", 3, false],
+                    ["bz", "币种", 1, false]
+                ],
+                "rows": [
+                    ["银行类别", "地区", "账户数量", "币种"],
+                    ["工商银行", "0", 1, "人民币"],
+                    ["结算中心", "1", 2, "美元"],
+                    ["建设银行", "2", 8, "欧元"]
+                ]
+            },
+            "content": {
+                "title": {
                     "show": true,
                     "fontWeight": "normal",
                     "fontStyle": "normal",
-                    "fontSize": 12,
-                    "color": "#212121",
-                    "position": "outside"
-                  },
-                  "barWidth": 10,
-                  "starAngle": 90
-                }
-              ],
-              "topnum": 0
+                    "underline": "none",
+                    "fontSize": 14,
+                    "fontStyleArray": [],
+                    "align": "center",
+                    "fontColor": "#212121",
+                    "backColor": "#fff"
+                },
+                "config": {
+                    "charts": {
+                        "legend": {
+                            "show": true,
+                            "left": 10,
+                            "right": "auto",
+                            "bottom": 5,
+                            "top": -5,
+                            "align": "auto",
+                            "orient": "vertical",
+                            "textStyle": {
+                                "fontWeight": "normal",
+                                "fontSize": 12,
+                                "fontStyle": "normal"
+                            },
+                            "": {
+                                "fontStyle": "normal",
+                                "color": "#212121"
+                            },
+                            "itemWidth": 15,
+                            "itemHeight": 15,
+                            "icon": "rect"
+                        },
+                        "series": [
+                            {
+                                "label": {
+                                    "show": true,
+                                    "fontWeight": "normal",
+                                    "fontStyle": "normal",
+                                    "fontSize": 12,
+                                    "color": "#212121",
+                                    "position": "outside"
+                                },
+                                "barWidth": 10,
+                                "starAngle": 90
+                            }
+                        ],
+                        "topnum": 0
+                    },
+                    "legendPos": "right",
+                    "legendStyle": "customMade",
+                    "legendCustom": "false",
+                    "fontStyleArray": [],
+                    "label": {
+                        "fontStyleArray": []
+                    },
+                    "digitalFormat": {
+                        "dataLabelType": "classificationdatavalue",
+                        "digitalType": "digital",
+                        "currencySymbols": "¥",
+                        "unit": 1,
+                        "decimalPlace": 2,
+                        "enableThousands": false,
+                        "unitarea": 1
+                    },
+                    "unit": 1,
+                    "showStarAngle": false
+                },
+                "showBak": true,
+                "backgroundColor": "#fff",
+                "opacity": 1,
+                "showBorder": true,
+                "borderColor": "#212121",
+                "borderOpacity": 1,
+                "borderWidth": 0,
+                "borderStyle": "dotted",
+                "desc": {
+                    "show": false,
+                    "content": ""
+                },
+                "chartParameters": true
             },
-            "legendPos": "top",
-            "legendStyle": "mornal",
-            "legendCustom": "false",
-            "fontStyleArray": [],
-            "label": {
-              "fontStyleArray": []
+            "title": "标题",
+            "zindex": 1,
+            "x": 10,
+            "y": 10,
+            "h": 658,
+            "w": 899,
+            "pkid": "",
+            "chartname": "环图1",
+            "t": "2024-06-12 23:11:30",
+            "id": "a7c98157531b4975a932f363e30cb030",
+            "type": "pie",
+            "category": "charts",
+            "kdId": "",
+            "originname": "环图",
+            "userxindex": ["银行类别"],
+            "useryindex": ["账户数量"],
+            "legendother": ["账户数量", "币种"]
+        },
+        {
+            "_isShow": true,
+            "name": "tips2",
+            "chartcontrol": {
+                "ispublish": "1"
             },
-            "digitalFormat": {
-              "dataLabelType": "classificationdatavalue",
-              "digitalType": "digital",
-              "currencySymbols": "¥",
-              "unit": 1,
-              "decimalPlace": 2,
-              "enableThousands": false,
-              "unitarea": 1
+            "content": "asdasdasdasdasdasdasdasdasdsad",
+            "zindex": 2,
+            "x": 801,
+            "y": 147,
+            "h": 40,
+            "w": 40,
+            "bindchart": "a7c98157531b4975a932f363e30cb030",
+            "chartname": "tips2",
+            "t": "2024-06-12 23:11:34",
+            "id": "f3150a50fd814a2994fb7b9301e0a833",
+            "type": "tips",
+            "category": "tips",
+            "kdId": "",
+            "pkid": "",
+            "originname": "tips"
+        },
+        {
+            "_isShow": true,
+            "name": "enlarge3",
+            "chartcontrol": {
+                "ispublish": "1"
             },
-            "unit": 1,
-            "showStarAngle": false
-          },
-          "showBak": true,
-          "backgroundColor": "#fff",
-          "opacity": 1,
-          "showBorder": true,
-          "borderColor": "#212121",
-          "borderOpacity": 1,
-          "borderWidth": 0,
-          "borderStyle": "dotted",
-          "desc": {
-            "show": false,
-            "content": ""
-          },
-          "chartParameters": true
+            "content": {
+                "showBorder": true,
+                "borderColor": "#212121",
+                "borderOpacity": 1,
+                "borderWidth": 0,
+                "borderStyle": "dotted"
+            },
+            "zindex": 3,
+            "x": 801,
+            "y": 80,
+            "h": 40,
+            "w": 40,
+            "bindchart": "a7c98157531b4975a932f363e30cb030",
+            "chartname": "enlarge3",
+            "t": "2024-06-12 23:11:36",
+            "id": "a02c11f92bf343b0b365531e8db06823",
+            "type": "enlarge",
+            "category": "enlarge",
+            "kdId": "",
+            "pkid": "",
+            "originname": "enlarge"
         },
-        "title": "标题",
-        "zindex": 1,
-        "x": 10,
-        "y": 10,
-        "h": 300,
-        "w": 400,
-        "pkid": "",
-        "chartname": "环图1",
-        "t": "2024-06-12 23:11:30",
-        "id": "a7c98157531b4975a932f363e30cb030",
-        "type": "pie",
-        "category": "charts",
-        "kdId": "",
-        "originname": "环图"
-      },
-      {
-        "_isShow": true,
-        "name": "tips2",
-        "chartcontrol": {
-          "ispublish": "1"
-        },
-        "content": "asdasdasdasdasdasdasdasdasdsad",
-        "zindex": 2,
-        "x": 346,
-        "y": 129,
-        "h": 40,
-        "w": 40,
-        "bindchart": "a7c98157531b4975a932f363e30cb030",
-        "chartname": "tips2",
-        "t": "2024-06-12 23:11:34",
-        "id": "f3150a50fd814a2994fb7b9301e0a833",
-        "type": "tips",
-        "category": "tips",
-        "kdId": "",
-        "pkid": "",
-        "originname": "tips"
-      },
-      {
-        "_isShow": true,
-        "name": "enlarge3",
-        "chartcontrol": {
-          "ispublish": "1"
-        },
-        "content": {
-          "showBorder": true,
-          "borderColor": "#212121",
-          "borderOpacity": 1,
-          "borderWidth": 0,
-          "borderStyle": "dotted"
-        },
-        "zindex": 3,
-        "x": 350,
-        "y": 81,
-        "h": 40,
-        "w": 40,
-        "bindchart": "a7c98157531b4975a932f363e30cb030",
-        "chartname": "enlarge3",
-        "t": "2024-06-12 23:11:36",
-        "id": "a02c11f92bf343b0b365531e8db06823",
-        "type": "enlarge",
-        "category": "enlarge",
-        "kdId": "",
-        "pkid": "",
-        "originname": "enlarge"
-      },
-      {
-        "_isShow": true,
-        "name": "refresh4",
-        "chartcontrol": {
-          "ispublish": "1"
-        },
-        "content": {
-          "showBorder": true,
-          "borderColor": "#212121",
-          "borderOpacity": 1,
-          "borderWidth": 0,
-          "borderStyle": "dotted"
-        },
-        "zindex": 4,
-        "x": 350,
-        "y": 185,
-        "h": 40,
-        "w": 40,
-        "bindchart": "a7c98157531b4975a932f363e30cb030",
-        "chartname": "refresh4",
-        "t": "2024-06-12 23:11:38",
-        "id": "796aeece2f894bb08b13493381481ab9",
-        "type": "refresh",
-        "category": "refresh",
-        "kdId": "",
-        "pkid": "",
-        "originname": "refresh"
-      }
+        {
+            "_isShow": true,
+            "name": "refresh4",
+            "chartcontrol": {
+                "ispublish": "1"
+            },
+            "content": {
+                "showBorder": true,
+                "borderColor": "#212121",
+                "borderOpacity": 1,
+                "borderWidth": 0,
+                "borderStyle": "dotted"
+            },
+            "zindex": 4,
+            "x": 801,
+            "y": 214,
+            "h": 40,
+            "w": 40,
+            "bindchart": "a7c98157531b4975a932f363e30cb030",
+            "chartname": "refresh4",
+            "t": "2024-06-12 23:11:38",
+            "id": "796aeece2f894bb08b13493381481ab9",
+            "type": "refresh",
+            "category": "refresh",
+            "kdId": "",
+            "pkid": "",
+            "originname": "refresh"
+        }
     ],
     "deleteList": []
-  }
+}

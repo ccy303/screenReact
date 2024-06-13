@@ -6,7 +6,7 @@ import _ from "lodash";
 import useMain from "@/dw/store/useMain";
 import { ViewItemContext } from "dw/views/ViewItem";
 import { v4 as uuidv4 } from "uuid";
-import { DEFAULT_CHARTS_COLOR, DEFAULT_PIE_ITEMSTYLE, DEFAULT_PIE_LABEL,GAUGE_STYLE2 } from "dw/control/common";
+import { DEFAULT_CHARTS_COLOR, DEFAULT_PIE_ITEMSTYLE, DEFAULT_PIE_LABEL, GAUGE_STYLE2 } from "dw/control/common";
 import Right from "@/dw/views/Design/layout/Right";
 import Left from "@/dw/views/Design/layout/Left";
 
@@ -131,7 +131,7 @@ const gaugeStyle = {
 export default React.memo(
     (item: any) => {
         const { model, customProps } = useContext(ViewItemContext);
-        const { content, userxindex, useryindex, useryindex1, dataset, datafilter, userseries, sortfield,w } = item;
+        const { content, userxindex, useryindex, useryindex1, dataset, datafilter, userseries, sortfield, w, legendother } = item;
         const { config } = content;
         const { charts } = config;
         const { topnum } = charts;
@@ -217,18 +217,18 @@ export default React.memo(
             }
         }
 
-      function calRotate( chartWidth:any,chartRow: any, chartUserXIndex: any) {
-          const  uniqueXaxisArr = [...new Set(chartRow[chartUserXIndex[0]])];
-          let avgWidth = chartWidth*0.8 / uniqueXaxisArr.length;
-          for (let i = 0; i < uniqueXaxisArr.length; i++) {
-            if(avgWidth < uniqueXaxisArr[i].length*12){
-              return 45;
+        function calRotate(chartWidth: any, chartRow: any, chartUserXIndex: any) {
+            const uniqueXaxisArr = [...new Set(chartRow[chartUserXIndex[0]])];
+            let avgWidth = (chartWidth * 0.8) / uniqueXaxisArr.length;
+            for (let i = 0; i < uniqueXaxisArr.length; i++) {
+                if (avgWidth < uniqueXaxisArr[i].length * 12) {
+                    return 45;
+                }
             }
-          }
-          return 0;
-      }
+            return 0;
+        }
 
-      let chartOption: any = useMemo(() => {
+        let chartOption: any = useMemo(() => {
             let echartOpt = {
                 color: DEFAULT_CHARTS_COLOR,
                 tooltip: {},
@@ -236,14 +236,17 @@ export default React.memo(
             };
 
             if (["bar", "line"].includes(item.type)) {
-              let xAxisSize = _rows[userxindex?.[0]]?.length || 0;
-              let calrotate = xAxisSize > 0 ?  calRotate(w,_rows,userxindex) : 0;
+                let xAxisSize = _rows[userxindex?.[0]]?.length || 0;
+                let calrotate = xAxisSize > 0 ? calRotate(w, _rows, userxindex) : 0;
                 let xOrYAxisIndex = {};
                 xOrYAxisIndex = item.originname == "横向柱状图" || item.originname == "堆积条形图" ? { yAxisIndex: 0 } : { xAxisIndex: 0 };
                 echartOpt = {
                     ...echartOpt,
-                    xAxis: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? {} : { type: "category",axisLabel: { interval: 0,rotate:calrotate } },
-                    yAxis: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? { type: "category",inverse: true } : {},
+                    xAxis:
+                        item.originname == "横向柱状图" || item.originname == "堆积条形图"
+                            ? {}
+                            : { type: "category", axisLabel: { interval: 0, rotate: calrotate } },
+                    yAxis: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? { type: "category", inverse: true } : {},
                     dataZoom:
                         topnum && topnum > 0
                             ? [
@@ -270,6 +273,11 @@ export default React.memo(
             if (item.type == "pie") {
                 const xshow = _rows[userxindex?.[0] || "product"];
                 const y = _rows[useryindex?.[0] || "2015"];
+
+                const _legendOther = (legendother || []).map((kay: any) => {
+                    return _rows[kay];
+                });
+
                 console.log("_rows!!!!!!!!!", _rows);
 
                 let _data = null;
@@ -278,16 +286,31 @@ export default React.memo(
                 if (item._echartFilterValue && item._echartFilterValue?.length) {
                     const x = _rows[item._echartFilterKey];
                     _data = x?.map((v: any, i: any) => {
-                        return { name: xshow?.[i], value: y?.[i] };
+                        return {
+                            name: xshow?.[i],
+                            value: y?.[i],
+                            legendOther: _legendOther.map((v: any) => {
+                                return { name: v[i] };
+                            })
+                        };
                     });
                 } else {
                     _data = xshow?.map((v: any, i: any) => {
-                        return { name: v, value: y?.[i] };
+                        return {
+                            name: v,
+                            value: y?.[i],
+                            legendOther: _legendOther.map((v: any) => {
+                                return v[i];
+                            })
+                        };
                     });
                     _data = _data?.reduce((accumulator, currentItem) => {
                         const existingItem = accumulator.find(item => item.name === currentItem.name);
                         if (existingItem) {
                             existingItem.value += currentItem.value;
+                            existingItem.legendOther = existingItem.legendOther.map((v: any, i: any) => {
+                                return v + currentItem.legendOther[i];
+                            });
                         } else {
                             accumulator.push(currentItem);
                         }
@@ -306,7 +329,7 @@ export default React.memo(
                 } else if (item.content.config.charts.legend.orient == "horizontal" && item.content.config.legendPos == "top") {
                     _center = ["50%", "57.5%"];
                 }
-                if(item.content.config.legendCustom == "true"){
+                if (item.content.config.legendCustom == "true") {
                     _center = ["50%", "27%"];
                     _radius = ["34%", "40%"];
                 }
@@ -404,7 +427,7 @@ export default React.memo(
                                             target = formatNumberWithEllipsis(_data[i].value);
                                         }
                                     }
-                                    const arr = ["{a|" + name + "}", target];
+                                    const arr = ["{a|" + name + "}", target, ...v.legendOther];
                                     return arr.join("   ");
                                 },
                                 textStyle: {
@@ -488,209 +511,226 @@ export default React.memo(
                     type: "gauge",
                     data: [{ value: isNaN(value) ? 0 : value }]
                 };
-            }else if(item.type == "progressbar"){
-              const y = useryindex?.[0] || "2015";
-              const percent = ((_rows?.[y]?.[0] * 10000) / 100).toFixed(2);
-              return {
-                ...echartOpt,
-                xAxis: { type: "value", min: 0, max: 100, show: false },
-                yAxis: { type: "category", show: false },
-                grid: {
-                  top: 0, // 上边距
-                  left: 0, // 左边距
-                  right: 0, // 左边距
-                  bottom: 0
-                },
-                label: {
-                  show: false
-                },
-                tooltip: {
-                  show: false
-                },
-                series: [{
-                  type: "bar",
-                  data: [100],
-                  itemStyle: {
-                    color: "#ffffff",
-                    borderRadius:10
-                  },
-                  barGap: "-100%",
-                  animation: false,
-                  silent: true
-                },{
-                  type: "bar",
-                  data: [percent],
-                  barGap: "-100%",
-                  itemStyle: {
-                    borderRadius: 10,
-                    color: function(params) {
-                      var value = params.value; // 获取当前柱子的数据值
-                      if (value < 50) {
-                        return {
-                          type: "linear",
-                          x: 0,
-                          y: 1,
-                          colorStops: [
-                            {
-                              offset: 0,
-                              color: "#FAC53E" // 0% 处的颜色
+            } else if (item.type == "progressbar") {
+                const y = useryindex?.[0] || "2015";
+                const percent = ((_rows?.[y]?.[0] * 10000) / 100).toFixed(2);
+                return {
+                    ...echartOpt,
+                    xAxis: { type: "value", min: 0, max: 100, show: false },
+                    yAxis: { type: "category", show: false },
+                    grid: {
+                        top: 0, // 上边距
+                        left: 0, // 左边距
+                        right: 0, // 左边距
+                        bottom: 0
+                    },
+                    label: {
+                        show: false
+                    },
+                    tooltip: {
+                        show: false
+                    },
+                    series: [
+                        {
+                            type: "bar",
+                            data: [100],
+                            itemStyle: {
+                                color: "#ffffff",
+                                borderRadius: 10
                             },
-                            {
-                              offset: 1,
-                              color: "#FF9E4C" // 100% 处的颜色
+                            barGap: "-100%",
+                            animation: false,
+                            silent: true
+                        },
+                        {
+                            type: "bar",
+                            data: [percent],
+                            barGap: "-100%",
+                            itemStyle: {
+                                borderRadius: 10,
+                                color: function (params) {
+                                    var value = params.value; // 获取当前柱子的数据值
+                                    if (value < 50) {
+                                        return {
+                                            type: "linear",
+                                            x: 0,
+                                            y: 1,
+                                            colorStops: [
+                                                {
+                                                    offset: 0,
+                                                    color: "#FAC53E" // 0% 处的颜色
+                                                },
+                                                {
+                                                    offset: 1,
+                                                    color: "#FF9E4C" // 100% 处的颜色
+                                                }
+                                            ],
+                                            global: false // 缺省为 false
+                                        };
+                                    } else {
+                                        return {
+                                            type: "linear",
+                                            x: 0,
+                                            y: 1,
+                                            colorStops: [
+                                                {
+                                                    offset: 0,
+                                                    color: "#246FFF" // 0% 处的颜色
+                                                },
+                                                {
+                                                    offset: 1,
+                                                    color: "#6CAAFF" // 100% 处的颜色
+                                                }
+                                            ],
+                                            global: false // 缺省为 false
+                                        };
+                                    }
+                                }
                             }
-                          ],
-                          global: false // 缺省为 false
-                        };
-                      } else {
-                        return {
-                          type: "linear",
-                          x: 0,
-                          y: 1,
-                          colorStops: [
-                            {
-                              offset: 0,
-                              color: "#246FFF" // 0% 处的颜色
+                        }
+                    ]
+                };
+            } else if (item.type == "progresspie") {
+                const y = useryindex?.[0] || "2015";
+                const percent = ((_rows?.[y]?.[0] * 10000) / 100).toFixed(2);
+                const percentColor = percent <= 33 ? "#1DB363" : percent <= 66 ? "#FF8F0F" : "#F0262D";
+                return {
+                    series: [
+                        {
+                            name: "progresspie",
+                            type: "pie",
+                            radius: ["68%", "80%"], // 设置环形图的内外半径，实现环形效果
+                            clockwise: true, // 是否顺时针展示
+                            hoverAnimation: false, // 禁用鼠标悬停时的放大效果
+                            label: {
+                                show: false
                             },
-                            {
-                              offset: 1,
-                              color: "#6CAAFF" // 100% 处的颜色
-                            }
-                          ],
-                          global: false // 缺省为 false
-                        };
-                      }
+                            emphasis: {
+                                disabled: true
+                            },
+                            itemStyle: {
+                                color: function (param) {
+                                    const value = param.data.value;
+                                    if (value <= 33) {
+                                        return {
+                                            type: "linear",
+                                            x: 0,
+                                            y: 1,
+                                            colorStops: [
+                                                {
+                                                    offset: 0,
+                                                    color: "#1DB363" // 0% 处的颜色
+                                                },
+                                                {
+                                                    offset: 1,
+                                                    color: "#34D780" // 100% 处的颜色
+                                                }
+                                            ],
+                                            global: false // 缺省为 false
+                                        };
+                                    } else if (value > 33 && value <= 66) {
+                                        return {
+                                            type: "linear",
+                                            x: 0,
+                                            y: 1,
+                                            colorStops: [
+                                                {
+                                                    offset: 0,
+                                                    color: "#FF9E4C" // 0% 处的颜色
+                                                },
+                                                {
+                                                    offset: 1,
+                                                    color: "#FAC53E" // 100% 处的颜色
+                                                }
+                                            ],
+                                            global: false // 缺省为 false
+                                        };
+                                    } else {
+                                        return {
+                                            type: "linear",
+                                            x: 0,
+                                            y: 1,
+                                            colorStops: [
+                                                {
+                                                    offset: 0,
+                                                    color: "#FF4C4C" // 0% 处的颜色
+                                                },
+                                                {
+                                                    offset: 1,
+                                                    color: "#FF8686" // 100% 处的颜色
+                                                }
+                                            ],
+                                            global: false // 缺省为 false
+                                        };
+                                    }
+                                }
+                            },
+                            data: [
+                                {
+                                    value: percent,
+                                    name: "percentnumber",
+                                    label: {
+                                        show: true,
+                                        position: "center",
+                                        color: percentColor,
+                                        fontSize: 24,
+                                        fontFamily: "KINGDEEKB",
+                                        formatter: percent + "%"
+                                    }
+                                }, // 实际进度数据
+                                { value: 100 - percent, name: "emptynumber", itemStyle: { color: "#E5EFFE" } } // 剩余未完成数据
+                            ]
+                        }
+                    ]
+                };
+            } else if (item.type == "combination") {
+                let xAxisSize = _rows[userxindex?.[0]]?.length || 0;
+                let calrotate = xAxisSize > 0 ? calRotate(w, _rows, userxindex) : 0;
+                echartOpt = {
+                    ...echartOpt,
+                    tooltip: {
+                        trigger: "axis"
+                    },
+                    xAxis: { type: "category", axisLabel: { interval: 0, rotate: calrotate } },
+                    yAxis: [
+                        {
+                            type: "value"
+                        },
+                        {
+                            type: "value"
+                        }
+                    ],
+                    grid: {
+                        top: "15%", // 上边距
+                        left: 10, // 左边距
+                        bottom: 10, // 下边距
+                        containLabel: true // 自动计算标签大小
                     }
-                  }
-                }]
-              };
-            }else if(item.type == "progresspie"){
-              const y = useryindex?.[0] || "2015";
-              const percent = ((_rows?.[y]?.[0] * 10000) / 100).toFixed(2);
-              const percentColor = percent <= 33 ? "#1DB363" : percent <= 66 ?"#FF8F0F":"#F0262D";
-              return {
-                series: [{
-                  name: 'progresspie',
-                  type: 'pie',
-                  radius: ['68%', '80%'], // 设置环形图的内外半径，实现环形效果
-                  clockwise: true, // 是否顺时针展示
-                  hoverAnimation: false, // 禁用鼠标悬停时的放大效果
-                  label: {
-                    show: false,
-                  },
-                  emphasis:{
-                    disabled:true
-                  },
-                  itemStyle: {
-                    color: function(param) {
-                      const value = param.data.value;
-                      if (value <= 33) {
-                        return {
-                          type: "linear",
-                            x: 0,
-                          y: 1,
-                          colorStops: [
-                          {
-                            offset: 0,
-                            color: "#1DB363" // 0% 处的颜色
-                          },
-                          {
-                            offset: 1,
-                            color: "#34D780" // 100% 处的颜色
-                          }
-                        ],
-                          global: false // 缺省为 false
-                        };
-                      } else if (value > 33 && value <= 66) {
-                        return {
-                          type: "linear",
-                          x: 0,
-                          y: 1,
-                          colorStops: [
-                            {
-                              offset: 0,
-                              color: "#FF9E4C" // 0% 处的颜色
-                            },
-                            {
-                              offset: 1,
-                              color: "#FAC53E" // 100% 处的颜色
-                            }
-                          ],
-                          global: false // 缺省为 false
-                        };
-                      } else {
-                        return {
-                          type: "linear",
-                          x: 0,
-                          y: 1,
-                          colorStops: [
-                            {
-                              offset: 0,
-                              color: "#FF4C4C" // 0% 处的颜色
-                            },
-                            {
-                              offset: 1,
-                              color: "#FF8686" // 100% 处的颜色
-                            }
-                          ],
-                          global: false // 缺省为 false
-                        };
-                      }
+                };
+                // 组合图
+                series = (useryindex || dataSet?.[0]?.source?.[0].slice(1, 3)).map((v: any, i: any) => ({
+                    ...charts.series[0],
+                    type: "bar",
+                    yAxisIndex: 0,
+                    stack: item.originname == "堆积条形图" || item.originname == "堆积柱形图" ? "stack" : "",
+                    areaStyle: item.originname == "面积图" ? {} : null,
+                    encode: {
+                        x: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? [v] : userxindex || ["product"],
+                        y: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? userxindex || ["product"] : [v],
+                        seriesName: v
                     }
-                  },
-                  data: [
-                    {value: percent, name: 'percentnumber',label:{show:true,position:"center",color:percentColor,fontSize:24,fontFamily:"KINGDEEKB",formatter:percent+"%"}}, // 实际进度数据
-                    {value: 100-percent, name: 'emptynumber', itemStyle: {color: '#E5EFFE'}}  // 剩余未完成数据
-                  ]
-                }
-                ]
-              };
-            }else if(item.type == "combination"){
-              let xAxisSize = _rows[userxindex?.[0]]?.length || 0;
-              let calrotate = xAxisSize > 0 ?  calRotate(w,_rows,userxindex) : 0;
-              echartOpt = {
-                ...echartOpt,
-                tooltip: {
-                  trigger: 'axis'
-                },
-                xAxis:  { type: "category",axisLabel: { interval: 0,rotate:calrotate } },
-                yAxis:  [{
-                  type: 'value'
-                },
-                  {
-                    type: 'value'
-                  }],
-                grid: {
-                  top: "15%", // 上边距
-                  left: 10, // 左边距
-                  bottom: 10, // 下边距
-                  containLabel: true // 自动计算标签大小
-                }
-              };
-              // 组合图
-              series = (useryindex || dataSet?.[0]?.source?.[0].slice(1,3)).map((v: any, i: any) => ({
-                ...charts.series[0],
-                type: "bar",
-                yAxisIndex: 0,
-                stack: item.originname == "堆积条形图" || item.originname == "堆积柱形图" ? "stack" : "",
-                areaStyle: item.originname == "面积图" ? {} : null,
-                encode: {
-                  x: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? [v] : userxindex || ["product"],
-                  y: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? userxindex || ["product"] : [v],
-                  seriesName: v
-                }
-              }));
-              let lineseries = (useryindex1 || dataSet?.[0]?.source?.[0].slice(3,4)).map((v: any, i: any) => ({
-                ...charts.series[0],
-                type: "line",
-                yAxisIndex: 1,
-                encode: {
-                  x:  userxindex || ["product"],
-                  y:  [v],
-                  seriesName: v
-                }
-              }));
-              series = series.concat(lineseries);
+                }));
+                let lineseries = (useryindex1 || dataSet?.[0]?.source?.[0].slice(3, 4)).map((v: any, i: any) => ({
+                    ...charts.series[0],
+                    type: "line",
+                    yAxisIndex: 1,
+                    encode: {
+                        x: userxindex || ["product"],
+                        y: [v],
+                        seriesName: v
+                    }
+                }));
+                series = series.concat(lineseries);
             } else {
                 if ((item.type == "bar" || item.type == "line") && userseries?.length > 0) {
                     const firstRow = dataSet?.[0]?.source?.[0];
@@ -1022,34 +1062,35 @@ export default React.memo(
             }
         }, [chartOption]);
 
-      const onChartClick = useCallback((params: any) => {
-        // 在这里处理点击事件，可以获取点击的图形的数据
-        const { data } = params;
-        const { pluginname,category,type} = item;
-        if (pluginname && category && type) {
-          const clickData = {
-            pluginname: pluginname,
-            data: data,
-            category: category,
-            type: type,
-            selectFilter:item._echartFilter
-          };
-          let pageId = new URLSearchParams(window.location.search).get("sourcePageId");
-          if (pageId) {
-            window.parent.postMessage({
-                pageId: pageId, //该字段是苍穹专用
-                type: 'invokeCustomEvent',
-                content: {
-                  param: JSON.stringify(clickData)
+        const onChartClick = useCallback((params: any) => {
+            // 在这里处理点击事件，可以获取点击的图形的数据
+            const { data } = params;
+            const { pluginname, category, type } = item;
+            if (pluginname && category && type) {
+                const clickData = {
+                    pluginname: pluginname,
+                    data: data,
+                    category: category,
+                    type: type,
+                    selectFilter: item._echartFilter
+                };
+                let pageId = new URLSearchParams(window.location.search).get("sourcePageId");
+                if (pageId) {
+                    window.parent.postMessage(
+                        {
+                            pageId: pageId, //该字段是苍穹专用
+                            type: "invokeCustomEvent",
+                            content: {
+                                param: JSON.stringify(clickData)
+                            }
+                        },
+                        "*"
+                    );
+                } else {
+                    model?.invoke?.("clickcharts", JSON.stringify(clickData));
                 }
-              },
-              '*',
-            );
-          }else{
-            model?.invoke?.("clickcharts", JSON.stringify(clickData));
-          }
-        }
-      },[]);
+            }
+        }, []);
 
         useEffect(() => {
             if (!ref.current) {
