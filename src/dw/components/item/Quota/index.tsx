@@ -62,8 +62,9 @@ const Quota = (item: ComponentItemProps) => {
         }
     }
 
-    let value = useryindex? _rows[useryindex]?.reduce((total : number, num: number) => total + num, 0) : 0;
-
+    let valueSource = useryindex? _rows[useryindex]?.reduce((total : number, num: number) => total + num, 0) : 0;
+    let formattedValue = valueSource.toFixed(2); 
+    let value = parseFloat(formattedValue); 
   const handleClick = (item:any,data:any) => {
     // 在这里处理点击事件，可以获取点击的图形的数据
     const { pluginname} = item;
