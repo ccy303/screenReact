@@ -131,7 +131,7 @@ const gaugeStyle = {
 export default React.memo(
     (item: any) => {
         const { model, customProps } = useContext(ViewItemContext);
-        const { content, userxindex, useryindex, dataset, datafilter, userseries, sortfield } = item;
+        const { content, userxindex, useryindex, useryindex1, dataset, datafilter, userseries, sortfield,w } = item;
         const { config } = content;
         const { charts } = config;
         const { topnum } = charts;
@@ -217,7 +217,18 @@ export default React.memo(
             }
         }
 
-        let chartOption: any = useMemo(() => {
+      function calRotate( chartWidth:any,chartRow: any, chartUserXIndex: any) {
+          const  uniqueXaxisArr = [...new Set(chartRow[chartUserXIndex[0]])];
+          let avgWidth = chartWidth*0.8 / uniqueXaxisArr.length;
+          for (let i = 0; i < uniqueXaxisArr.length; i++) {
+            if(avgWidth < uniqueXaxisArr[i].length*12){
+              return 45;
+            }
+          }
+          return 0;
+      }
+
+      let chartOption: any = useMemo(() => {
             let echartOpt = {
                 color: DEFAULT_CHARTS_COLOR,
                 tooltip: {},
@@ -225,11 +236,13 @@ export default React.memo(
             };
 
             if (["bar", "line"].includes(item.type)) {
+              let xAxisSize = _rows[userxindex?.[0]]?.length || 0;
+              let calrotate = xAxisSize > 0 ?  calRotate(w,_rows,userxindex) : 0;
                 let xOrYAxisIndex = {};
                 xOrYAxisIndex = item.originname == "横向柱状图" || item.originname == "堆积条形图" ? { yAxisIndex: 0 } : { xAxisIndex: 0 };
                 echartOpt = {
                     ...echartOpt,
-                    xAxis: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? {} : { type: "category",axisLabel: { interval: 0 } },
+                    xAxis: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? {} : { type: "category",axisLabel: { interval: 0,rotate:calrotate } },
                     yAxis: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? { type: "category",inverse: true } : {},
                     dataZoom:
                         topnum && topnum > 0
@@ -632,6 +645,50 @@ export default React.memo(
                 }
                 ]
               };
+            }else if(item.type == "combination"){
+              echartOpt = {
+                ...echartOpt,
+                tooltip: {
+                  trigger: 'axis'
+                },
+                xAxis:  { type: "category",axisLabel: { interval: 0,rotate:60 } },
+                yAxis:  [{
+                  type: 'value'
+                },
+                  {
+                    type: 'value'
+                  }],
+                grid: {
+                  top: "15%", // 上边距
+                  left: 10, // 左边距
+                  bottom: 10, // 下边距
+                  containLabel: true // 自动计算标签大小
+                }
+              };
+              // 组合图
+              series = (useryindex || dataSet?.[0]?.source?.[0].slice(1,3)).map((v: any, i: any) => ({
+                ...charts.series[0],
+                type: "bar",
+                yAxisIndex: 0,
+                stack: item.originname == "堆积条形图" || item.originname == "堆积柱形图" ? "stack" : "",
+                areaStyle: item.originname == "面积图" ? {} : null,
+                encode: {
+                  x: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? [v] : userxindex || ["product"],
+                  y: item.originname == "横向柱状图" || item.originname == "堆积条形图" ? userxindex || ["product"] : [v],
+                  seriesName: v
+                }
+              }));
+              let lineseries = (useryindex1 || dataSet?.[0]?.source?.[0].slice(3,4)).map((v: any, i: any) => ({
+                ...charts.series[0],
+                type: "line",
+                yAxisIndex: 1,
+                encode: {
+                  x:  userxindex || ["product"],
+                  y:  [v],
+                  seriesName: v
+                }
+              }));
+              series = series.concat(lineseries);
             } else {
                 if ((item.type == "bar" || item.type == "line") && userseries?.length > 0) {
                     const firstRow = dataSet?.[0]?.source?.[0];
@@ -745,7 +802,6 @@ export default React.memo(
             }
 
             let output = { ...echartOpt, dataset: dataSet, series };
-
             if (!_.isEqual(chartOptionRef.current.option, output)) {
                 setEchartKey(uuidv4());
             }

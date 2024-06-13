@@ -9,7 +9,7 @@ export default (props: any) => {
 
     const { getCurrentItem } = useMain();
 
-    const { dataset, userxindex, useryindex,userseries,datafilter,sortfield } = getCurrentItem();
+    const { dataset, userxindex, useryindex, useryindex1,userseries,datafilter,sortfield } = getCurrentItem();
   const dataSetRows: any = { source: dataset?.rows };
   const _rows: any = {};
   for (let i = 0, data = dataSetRows.source; i < data?.[0]?.length; i++) {
@@ -93,6 +93,19 @@ export default (props: any) => {
           onChange([{ prop: "userseries", value: _.uniq(userseries.filter((v: any) => v != item)) }]);
         }
     };
+    const onCombinationDrop = (e: any, type: any) => {
+      e.preventDefault();
+      const data = JSON.parse(e.dataTransfer?.getData("dataset"));
+      if ("y" != data.type) {
+        return;
+      }
+        onChange([{ prop: "useryindex1", value: _.uniq([...(useryindex1 || []), data.value]) }]);
+    };
+    const combinationDel = (type: any, item: any) => {
+        if (type == "y1") {
+          onChange([{ prop: "useryindex1", value: _.uniq(useryindex1.filter((v: any) => v != item)) }]);
+        }
+    };
     const handleFilterChange = (e : any , key: any) => {
       const newfilter = datafilter.filter((v: any) => v.key == key)?.[0];
       newfilter.selectkey = e;
@@ -102,13 +115,11 @@ export default (props: any) => {
       const newsortfield = sortfield.filter((v: any) => v.key == key)?.[0];
       newsortfield.sortkey = e;
       onChange([{ prop: "sortfield", value: _.uniqBy([...(sortfield || []), newsortfield],'key') }]);
-      console.log("handleSortKeyChange",sortfield);
     };
     const handleSortTypeChange = (e : any , key: any) => {
       const newsortfield = sortfield.filter((v: any) => v.key == key)?.[0];
       newsortfield.sorttype = e;
       onChange([{ prop: "sortfield", value: _.uniqBy([...(sortfield || []), newsortfield],'key') }]);
-      console.log("handleSortTypeChange",sortfield);
 
     };
     const onDrop = (e: any, type: any) => {
@@ -187,9 +198,25 @@ export default (props: any) => {
                     </div>
                 </div>
             </div>
+            <div>
+                <div style={{ marginTop: "10px" }}>组合图折线系列</div>
+                <div className='data-set-dargabled' style={{ height: "50px"}}>
+                    <div className='list' onDragOver={allowDrop} onDrop={e => onCombinationDrop(e, "y1")}>
+                        {useryindex1 &&
+                            useryindex1.map((v: any, i: any) => {
+                                return (
+                                    <div key={i} className='list-item space-between' onClick={() => combinationDel("y1", v)}>
+                                        {v}(数字)
+                                        <Icon type='delete' className='del-icon'></Icon>
+                                    </div>
+                                );
+                            })}
+                    </div>
+                </div>
+            </div>
           <div>
                 <div style={{ marginTop: "10px" }}>系列</div>
-                <div className='data-set-dargabled'>
+                <div className='data-set-dargabled' style={{ height: "50px"}}>
                     <div className='list' onDragOver={allowDrop} onDrop={e => onSeriesDrop(e, "series")}>
                         {userseries &&
                           userseries.map((v: any, i: any) => {
@@ -205,7 +232,7 @@ export default (props: any) => {
             </div>
           <div>
                 <div style={{ marginTop: "10px" }}>筛选器</div>
-                <div className='data-set-dargabled'>
+                <div className='data-set-dargabled' style={{ height: "50px"}}>
                     <div className='list' onDragOver={allowDrop} onDrop={e => onFilterDrop(e, "filter")}>
                         {datafilter &&
                           datafilter.map((v: any, i: any) => {
