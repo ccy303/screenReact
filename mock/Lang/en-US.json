@@ -139,12 +139,17 @@
   "dataset11": "Multiline Dataset",
   "dataset20": "Data Preview",
 
-  "units1": "Thousands",
-  "units2": "Ten thousand",
-  "units3": "Millions",
-  "units4": "Ten million",
-  "units5": "100 million",
 
+  "unitsthousandth": "Thousandth",
+  "unitsonepercent": "OnePercent",
+  "units1": "Hundred",
+  "units2": "Thousands",
+  "units3": "Ten Thousands",
+  "units4": "One Hundred Thousands",
+  "units5": "Millions",
+  "units6": "Ten Million",
+  "units7": "One Hundred Million",
+  
   "positions1": "Up",
   "positions2": "Down",
   "positions3": "Left",
