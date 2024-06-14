@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import enlargeIcon from "@/assets/enlarge.png";
 import useMain from "dw/store/useMain";
 import { Modal } from "@kdcloudjs/kdesign";
@@ -8,6 +8,7 @@ import "./index.less";
 const Enlarge = (props: any) => {
     const { itemList } = useMain();
     const [visible, setVisible] = useState(false);
+    const [size, setSize] = useState<any>([]);
 
     const enlarge = (e: any) => {
         if (!props.bindchart) {
@@ -21,14 +22,18 @@ const Enlarge = (props: any) => {
         return <EchartItem {...target} />;
     };
 
+    useEffect(() => {
+        setSize([document.body.clientWidth * 0.8, document.body.clientHeight * 0.8]);
+    }, []);
+
     return (
         <>
             <div className='refresh-warp' onClick={enlarge}>
                 <img src={enlargeIcon} />
             </div>
             <Modal
-                width={600}
-                height={600}
+                width={size[0]}
+                height={size[1]}
                 body={<ModalBody />}
                 type='normal'
                 closable={true}
