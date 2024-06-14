@@ -5,20 +5,20 @@ import "./index.less";
 import _ from "lodash";
 export default (props: any) => {
     const { onChange } = props;
-    const { Option } = Select
+    const { Option } = Select;
 
     const { getCurrentItem } = useMain();
 
-    const { dataset, userxindex, useryindex, useryindex1,userseries,datafilter,sortfield } = getCurrentItem();
-  const dataSetRows: any = { source: dataset?.rows };
-  const _rows: any = {};
-  for (let i = 0, data = dataSetRows.source; i < data?.[0]?.length; i++) {
-    const key = data[0][i];
-    _rows[key] = [];
-    for (let j = 1; j < data.length; j++) {
-      _rows[key].push(data[j][i]);
+    const { dataset, userxindex, useryindex, useryindex1, userseries, datafilter, sortfield, legendother } = getCurrentItem();
+    const dataSetRows: any = { source: dataset?.rows };
+    const _rows: any = {};
+    for (let i = 0, data = dataSetRows.source; i < data?.[0]?.length; i++) {
+        const key = data[0][i];
+        _rows[key] = [];
+        for (let j = 1; j < data.length; j++) {
+            _rows[key].push(data[j][i]);
+        }
     }
-  }
     const xIndex = useMemo(() => {
         const { dataindex } = dataset || {};
         if (!dataindex) return [];
@@ -50,77 +50,92 @@ export default (props: any) => {
     };
 
     const onFilterDrop = (e: any, type: any) => {
-      e.preventDefault();
-      const data = JSON.parse(e.dataTransfer?.getData("dataset"));
-      const filterArray = { key: data.value, value: _.uniq(_rows[data.value]) ,selectkey: []};
-      if(datafilter?.length > 0){
-        return;
-      }
-      if (type == "filter") {
-        onChange([{ prop: "datafilter", value: _.uniqBy([...(datafilter || []), filterArray],'key') }]);
-      }
+        e.preventDefault();
+        const data = JSON.parse(e.dataTransfer?.getData("dataset"));
+        const filterArray = { key: data.value, value: _.uniq(_rows[data.value]), selectkey: [] };
+        if (datafilter?.length > 0) {
+            return;
+        }
+        if (type == "filter") {
+            onChange([{ prop: "datafilter", value: _.uniqBy([...(datafilter || []), filterArray], "key") }]);
+        }
     };
     const filterDel = (type: any, item: any) => {
         if (type == "filter") {
-          onChange([{ prop: "datafilter", value: _.uniqBy(datafilter.filter((v: any) => v.key != item),'key') }]);
+            onChange([
+                {
+                    prop: "datafilter",
+                    value: _.uniqBy(
+                        datafilter.filter((v: any) => v.key != item),
+                        "key"
+                    )
+                }
+            ]);
         }
     };
     const onSortDrop = (e: any, type: any) => {
-      e.preventDefault();
-      const data = JSON.parse(e.dataTransfer?.getData("dataset"));
-      const sortArray = { key: data.value, sortkey: data.value ,sorttype: "asc"};
-      if (type == "sort") {
-        onChange([{ prop: "sortfield", value: _.uniqBy([...(sortfield || []), sortArray],'key') }]);
-      }
+        e.preventDefault();
+        const data = JSON.parse(e.dataTransfer?.getData("dataset"));
+        const sortArray = { key: data.value, sortkey: data.value, sorttype: "asc" };
+        if (type == "sort") {
+            onChange([{ prop: "sortfield", value: _.uniqBy([...(sortfield || []), sortArray], "key") }]);
+        }
     };
     const sortDel = (type: any, item: any) => {
         if (type == "sort") {
-          onChange([{ prop: "sortfield", value: _.uniqBy(sortfield.filter((v: any) => v.key != item),'key') }]);
+            onChange([
+                {
+                    prop: "sortfield",
+                    value: _.uniqBy(
+                        sortfield.filter((v: any) => v.key != item),
+                        "key"
+                    )
+                }
+            ]);
         }
     };
     const onSeriesDrop = (e: any, type: any) => {
-      if(userseries?.length > 0 || useryindex?.length > 1){
-        return;
-      }
-      e.preventDefault();
-      const data = JSON.parse(e.dataTransfer?.getData("dataset"));
-      if (type == "series" && data.type == "x") {
-        onChange([{ prop: "userseries", value: _.uniq([...(userseries || []), data.value]) }]);
-      }
+        if (userseries?.length > 0 || useryindex?.length > 1) {
+            return;
+        }
+        e.preventDefault();
+        const data = JSON.parse(e.dataTransfer?.getData("dataset"));
+        if (type == "series" && data.type == "x") {
+            onChange([{ prop: "userseries", value: _.uniq([...(userseries || []), data.value]) }]);
+        }
     };
     const seriesDel = (type: any, item: any) => {
         if (type == "series") {
-          onChange([{ prop: "userseries", value: _.uniq(userseries.filter((v: any) => v != item)) }]);
+            onChange([{ prop: "userseries", value: _.uniq(userseries.filter((v: any) => v != item)) }]);
         }
     };
     const onCombinationDrop = (e: any, type: any) => {
-      e.preventDefault();
-      const data = JSON.parse(e.dataTransfer?.getData("dataset"));
-      if ("y" != data.type) {
-        return;
-      }
+        e.preventDefault();
+        const data = JSON.parse(e.dataTransfer?.getData("dataset"));
+        if ("y" != data.type) {
+            return;
+        }
         onChange([{ prop: "useryindex1", value: _.uniq([...(useryindex1 || []), data.value]) }]);
     };
     const combinationDel = (type: any, item: any) => {
         if (type == "y1") {
-          onChange([{ prop: "useryindex1", value: _.uniq(useryindex1.filter((v: any) => v != item)) }]);
+            onChange([{ prop: "useryindex1", value: _.uniq(useryindex1.filter((v: any) => v != item)) }]);
         }
     };
-    const handleFilterChange = (e : any , key: any) => {
-      const newfilter = datafilter.filter((v: any) => v.key == key)?.[0];
-      newfilter.selectkey = e;
-      onChange([{ prop: "datafilter", value: _.uniqBy([...(datafilter || []), newfilter],'key') }]);
+    const handleFilterChange = (e: any, key: any) => {
+        const newfilter = datafilter.filter((v: any) => v.key == key)?.[0];
+        newfilter.selectkey = e;
+        onChange([{ prop: "datafilter", value: _.uniqBy([...(datafilter || []), newfilter], "key") }]);
     };
-    const handleSortKeyChange = (e : any , key: any) => {
-      const newsortfield = sortfield.filter((v: any) => v.key == key)?.[0];
-      newsortfield.sortkey = e;
-      onChange([{ prop: "sortfield", value: _.uniqBy([...(sortfield || []), newsortfield],'key') }]);
+    const handleSortKeyChange = (e: any, key: any) => {
+        const newsortfield = sortfield.filter((v: any) => v.key == key)?.[0];
+        newsortfield.sortkey = e;
+        onChange([{ prop: "sortfield", value: _.uniqBy([...(sortfield || []), newsortfield], "key") }]);
     };
-    const handleSortTypeChange = (e : any , key: any) => {
-      const newsortfield = sortfield.filter((v: any) => v.key == key)?.[0];
-      newsortfield.sorttype = e;
-      onChange([{ prop: "sortfield", value: _.uniqBy([...(sortfield || []), newsortfield],'key') }]);
-
+    const handleSortTypeChange = (e: any, key: any) => {
+        const newsortfield = sortfield.filter((v: any) => v.key == key)?.[0];
+        newsortfield.sorttype = e;
+        onChange([{ prop: "sortfield", value: _.uniqBy([...(sortfield || []), newsortfield], "key") }]);
     };
     const onDrop = (e: any, type: any) => {
         e.preventDefault();
@@ -128,8 +143,8 @@ export default (props: any) => {
         if (type != data.type) {
             return;
         }
-        if(userseries?.length > 0 && useryindex?.length > 0 && type == "y"){
-          return;
+        if (userseries?.length > 0 && useryindex?.length > 0 && type == "y") {
+            return;
         }
         if (type == "x") {
             onChange([{ prop: "userxindex", value: _.uniq([...(userxindex || []), data.value]) }]);
@@ -148,6 +163,16 @@ export default (props: any) => {
         } else {
             onChange([{ prop: "useryindex", value: _.uniq(useryindex.filter((v: any) => v != item)) }]);
         }
+    };
+
+    const onLegendDrop = (e: any, key: any) => {
+        e.preventDefault();
+        const data = JSON.parse(e.dataTransfer?.getData("dataset"));
+        onChange([{ prop: "legendother", value: _.uniq([...(legendother || []), data.value]) }]);
+    };
+
+    const delLegend = (item: any) => {
+        onChange([{ prop: "legendother", value: _.uniq(legendother.filter((v: any) => v != item)) }]);
     };
 
     return (
@@ -200,7 +225,7 @@ export default (props: any) => {
             </div>
             <div>
                 <div style={{ marginTop: "10px" }}>组合图折线系列</div>
-                <div className='data-set-dargabled' style={{ height: "50px"}}>
+                <div className='data-set-dargabled' style={{ height: "50px" }}>
                     <div className='list' onDragOver={allowDrop} onDrop={e => onCombinationDrop(e, "y1")}>
                         {useryindex1 &&
                             useryindex1.map((v: any, i: any) => {
@@ -214,12 +239,12 @@ export default (props: any) => {
                     </div>
                 </div>
             </div>
-          <div>
+            <div>
                 <div style={{ marginTop: "10px" }}>系列</div>
-                <div className='data-set-dargabled' style={{ height: "50px"}}>
+                <div className='data-set-dargabled' style={{ height: "50px" }}>
                     <div className='list' onDragOver={allowDrop} onDrop={e => onSeriesDrop(e, "series")}>
                         {userseries &&
-                          userseries.map((v: any, i: any) => {
+                            userseries.map((v: any, i: any) => {
                                 return (
                                     <div key={i} className='list-item space-between' onClick={() => seriesDel("series", v)}>
                                         {v}(文字)
@@ -230,59 +255,102 @@ export default (props: any) => {
                     </div>
                 </div>
             </div>
-          <div>
+            <div>
                 <div style={{ marginTop: "10px" }}>筛选器</div>
-                <div className='data-set-dargabled' style={{ height: "50px"}}>
+                <div className='data-set-dargabled' style={{ height: "50px" }}>
                     <div className='list' onDragOver={allowDrop} onDrop={e => onFilterDrop(e, "filter")}>
                         {datafilter &&
-                          datafilter.map((v: any, i: any) => {
+                            datafilter.map((v: any, i: any) => {
                                 return (
                                     <div key={i} className='list-item space-between'>
-                                        {v.key}: <div className='drop-select-warp'><Select  mode="multiple" value={v.selectkey} size="small"  maxTagCount={1}   style={{ width: "100%", height: "100%" }} optionFilterProp="children" onChange={e => handleFilterChange(e,v.key)}>
-                                      {v.value.map((item) => {
-                                        return (
-                                          <Option value={item} key={item}>
-                                            {item.toString()}
-                                          </Option>
-                                        )
-                                      })}
-                                    </Select></div>
-                                        <Icon type='delete' className='del-icon'  onClick={() => filterDel("filter", v.key)}></Icon>
+                                        {v.key}:{" "}
+                                        <div className='drop-select-warp'>
+                                            <Select
+                                                mode='multiple'
+                                                value={v.selectkey}
+                                                size='small'
+                                                maxTagCount={1}
+                                                style={{ width: "100%", height: "100%" }}
+                                                optionFilterProp='children'
+                                                onChange={e => handleFilterChange(e, v.key)}
+                                            >
+                                                {v.value.map(item => {
+                                                    return (
+                                                        <Option value={item} key={item}>
+                                                            {item.toString()}
+                                                        </Option>
+                                                    );
+                                                })}
+                                            </Select>
+                                        </div>
+                                        <Icon type='delete' className='del-icon' onClick={() => filterDel("filter", v.key)}></Icon>
                                     </div>
                                 );
                             })}
                     </div>
                 </div>
             </div>
-          <div>
+            <div>
                 <div style={{ marginTop: "10px" }}>排序</div>
                 <div className='data-set-dargabled'>
                     <div className='list' onDragOver={allowDrop} onDrop={e => onSortDrop(e, "sort")}>
                         {sortfield &&
-                          sortfield.map((v: any, i: any) => {
+                            sortfield.map((v: any, i: any) => {
                                 return (
                                     <div key={i} className='list-item space-between'>
-                                        {v.key}: <div className='drop-select-warp'><Select  mode="single" value={v.sortkey}  size="small"   style={{ width: "100%", height: "100%" }} showSearch={false} onChange={e => handleSortKeyChange(e,v.key)}>
-                                      {[...(xIndex as any), ...(yIndex as any)].map((item) => {
-                                        return (
-                                          <Option value={item.value} key={item.value}>
-                                            {item.name}
-                                          </Option>
-                                        )
-                                      })}
-                                    </Select>
-                                    </div>
-                                      <div className='drop-select-warp'>
-                                      <Select  mode="single" value={v.sorttype}  size="small"   style={{ width: "100%", height: "100%" }} showSearch={false} onChange={e => handleSortTypeChange(e,v.key)}>
-                                        <Option value="asc" key="asc">
-                                          升序
-                                        </Option>
-                                        <Option value="desc" key="desc">
-                                          降序
-                                        </Option>
-                                      </Select>
+                                        {v.key}:{" "}
+                                        <div className='drop-select-warp'>
+                                            <Select
+                                                mode='single'
+                                                value={v.sortkey}
+                                                size='small'
+                                                style={{ width: "100%", height: "100%" }}
+                                                showSearch={false}
+                                                onChange={e => handleSortKeyChange(e, v.key)}
+                                            >
+                                                {[...(xIndex as any), ...(yIndex as any)].map(item => {
+                                                    return (
+                                                        <Option value={item.value} key={item.value}>
+                                                            {item.name}
+                                                        </Option>
+                                                    );
+                                                })}
+                                            </Select>
                                         </div>
-                                        <Icon type='delete' className='del-icon'  onClick={() => sortDel("sort", v.key)}></Icon>
+                                        <div className='drop-select-warp'>
+                                            <Select
+                                                mode='single'
+                                                value={v.sorttype}
+                                                size='small'
+                                                style={{ width: "100%", height: "100%" }}
+                                                showSearch={false}
+                                                onChange={e => handleSortTypeChange(e, v.key)}
+                                            >
+                                                <Option value='asc' key='asc'>
+                                                    升序
+                                                </Option>
+                                                <Option value='desc' key='desc'>
+                                                    降序
+                                                </Option>
+                                            </Select>
+                                        </div>
+                                        <Icon type='delete' className='del-icon' onClick={() => sortDel("sort", v.key)}></Icon>
+                                    </div>
+                                );
+                            })}
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div style={{ marginTop: "10px" }}>图例附加信息</div>
+                <div className='data-set-dargabled'>
+                    <div className='list' onDragOver={allowDrop} onDrop={e => onLegendDrop(e, "legendother")}>
+                        {legendother &&
+                            legendother.map((v: any, i: any) => {
+                                return (
+                                    <div key={i} className='list-item space-between'>
+                                        {v}
+                                        <Icon type='delete' className='del-icon' onClick={() => delLegend(v)}></Icon>
                                     </div>
                                 );
                             })}
