@@ -439,11 +439,11 @@ export default React.memo(
                                     // 添加
                                     rich: { 
                                       a: { width: 100, padding: [5, 0, 0, 0] },
-                                      b: { width: 120,
+                                      b: { width: 110,
                                            align: "right",
                                            padding: [5, 0, 0, 0],
                                         },
-                                      c: { width: 120,      
+                                      c: { width: 110,      
                                            align: "right",
                                            padding: [5, -20, 0, 0],
                                          } 
