@@ -244,28 +244,48 @@ export const units = [
     value: 1,
   },
   {
+    label: i18n.msg('unitsthousandth'),
+    labelId: 'unitsthousandth',
+    value: 0.001,
+  },
+  {
+    label: i18n.msg('unitsonepercent'),
+    labelId: 'unitsonepercent',
+    value: 0.01,
+  },
+  {
     label: i18n.msg('units1'),
     labelId: 'units1',
-    value: 1000,
+    value: 100,
   },
   {
     label: i18n.msg('units2'),
     labelId: 'units2',
-    value: 10000,
+    value: 1000,
   },
   {
     label: i18n.msg('units3'),
     labelId: 'units3',
-    value: 1000000,
+    value: 10000,
   },
   {
     label: i18n.msg('units4'),
     labelId: 'units4',
-    value: 10000000,
+    value: 100000,
   },
   {
     label: i18n.msg('units5'),
     labelId: 'units5',
+    value: 1000000,
+  },
+  {
+    label: i18n.msg('units6'),
+    labelId: 'units6',
+    value: 10000000,
+  },
+  {
+    label: i18n.msg('units7'),
+    labelId: 'units7',
     value: 100000000,
   },
 ]

@@ -10,6 +10,7 @@ import {
     CHART_BASE_INFO,
     CHART_DARA_SET,
     QUOTA_PROP,
+    NUMBER_FORMAT_PROP,
 
     // 文本
     BASE_PROP,
@@ -360,7 +361,7 @@ const quotaControls: any = {
         {
             id: "data",
             name: "属性",
-            properties: [CHART_BASE_INFO, BACKGROUND_PROP, BORDER_PROP, DESC_PROP, QUOTA_PROP, POSITION_PROP(150, 50)]
+            properties: [CHART_BASE_INFO, BACKGROUND_PROP, BORDER_PROP, DESC_PROP, QUOTA_PROP,NUMBER_FORMAT_PROP, POSITION_PROP(150, 50)]
         },
         {
             id: "dataset",

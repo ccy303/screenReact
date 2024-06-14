@@ -4,12 +4,14 @@ import KdCard from "dw/components/common/KdCard";
 import { ComponentItemProps } from "dw/control/interface";
 import _ from "lodash";
 import { ViewItemContext } from "dw/views/ViewItem";
+import { formatNumber } from "../../../../../util";
 
 const Quota = (item: ComponentItemProps) => {
   const { model } = useContext(ViewItemContext);
   const showTitle = useMemo(() => item && item.content && item.content.title && item.content.title.show, [item]);
     const { content, userxindex, useryindex, dataset, datafilter } = item;
     const {quota} = content;
+    const {numberformat} = content;
     const style = {
         width: "100%",
         height: "100%",
@@ -63,7 +65,6 @@ const Quota = (item: ComponentItemProps) => {
     }
 
     let value = useryindex? _rows[useryindex]?.reduce((total : number, num: number) => total + num, 0) : 0;
-
   const handleClick = (item:any,data:any) => {
     // 在这里处理点击事件，可以获取点击的图形的数据
     const { pluginname} = item;
@@ -93,7 +94,7 @@ const Quota = (item: ComponentItemProps) => {
   };
     return (
         <KdCard item={item} showTitle={showTitle}>
-            {useryindex ? <div style={style} onClick={()=>handleClick(item,value)}>{value}</div> : <div style={style}>业务指标</div>}
+            {useryindex ? <div style={style} onClick={()=>handleClick(item,value)}>{numberformat ? formatNumber(value,numberformat.decimalPlace,numberformat.enableThousands,numberformat.isPencent,numberformat.unit) : value}</div> : <div style={style}>业务指标</div>}
         </KdCard>
     );
 };

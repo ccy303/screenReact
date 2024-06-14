@@ -765,6 +765,20 @@ export const LEGEND_PROP: ControlProProps = {
         },
         {
             visible: true,
+            id: "content.config.legendFormat",
+            name: "图例格式",
+            editor: {
+                component: "Select",
+                options: [
+                    { name: "2列", value: "1" },
+                    { name: "3列", value: "2" }
+                ],
+                dataType: "string",
+                defaultValue: "1"
+            }
+        },
+        {
+            visible: true,
             id: "content.config.fontStyleArray",
             name: "样式",
             editor: {
@@ -1228,6 +1242,62 @@ export const QUOTA_PROP: ControlProProps = {
                 defaultValue: DEFAULT_STYLE.fontColor
             }
         }
+    ]
+};
+
+export const NUMBER_FORMAT_PROP: ControlProProps = {
+    id: "content.numberformat",
+    name: "数字格式",
+    defaultOpen: true,
+    nodes: [
+        {
+            visible: false,
+            id: "content.numberformat.show",
+            editor: { defaultValue: true }
+        },
+      {
+        visible: true,
+        id: "content.numberformat.decimalPlace",
+        name: i18n.msg("c34"),
+        editor: {
+          component: "Stepper",
+          dataType: "number",
+          defaultValue: 2,
+          min: 0,
+          max: 10
+        }
+      },
+      {
+        visible: true,
+        id: "content.numberformat.enableThousands",
+        name: i18n.msg("c35"),
+        editor: {
+          component: "Switch",
+          dataType: "boolean",
+          defaultValue: false
+        }
+      },
+      {
+        visible: true,
+        id: "content.numberformat.isPencent",
+        name: "百分号后缀",
+        editor: {
+          component: "Switch",
+          dataType: "boolean",
+          defaultValue: false
+        }
+      },
+      {
+        visible: true,
+        id: "content.numberformat.unit",
+        name: i18n.msg("displayElement"),
+        editor: {
+          component: "Select",
+          dataType: "number",
+          defaultValue: 1,
+          options: getUpdateArray(units)
+        }
+      }
     ]
 };
 
