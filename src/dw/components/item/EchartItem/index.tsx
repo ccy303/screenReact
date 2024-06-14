@@ -427,9 +427,10 @@ export default React.memo(
                                             target = formatNumberWithEllipsis(_data[i].value);
                                         }
                                     }
+
                                     let arr = ["{a|" + name + "}", "{b|" + target + "}"];
                                     if(item.content.config.legendFormat == "2"){                          
-                                        arr = ["{a|" + name + "}", "{b|" + target + "}", "{c|" + v.legendOther + "%}"];
+                                        arr = ["{a|" + name + "}", "{b|" + target + "}", "{c|" + v.legendOther + "}"];
                                     }
                                     return arr.join("   ");
                                 },
