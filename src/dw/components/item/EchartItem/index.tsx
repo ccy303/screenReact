@@ -414,6 +414,7 @@ export default React.memo(
                                     };
                                 }
                             }
+                         
                             return {
                                 ...echartOpt.legend,
                                 ...position,
@@ -431,6 +432,7 @@ export default React.memo(
                                     let arr = ["{a|" + name + "}", "{b|" + target + "}"];
                                     if(item.content.config.legendFormat == "2"){                          
                                         arr = ["{a|" + name + "}", "{b|" + target + "}", "{c|" + v.legendOther + "}"];
+                                        return arr.join("                          ")
                                     }
                                     return arr.join("   ");
                                 },
@@ -438,17 +440,18 @@ export default React.memo(
                                     padding: 5,
                                     // 添加
                                     rich: { 
-                                      a: { width: 100, padding: [5, 0, 0, 0] },
-                                      b: { width: 110,
+                                      a: { width: 80, padding: [5, 0, 0, 0] },
+                                      b: { width: 80,
                                            align: "right",
                                            padding: [5, 0, 0, 0],
                                         },
-                                      c: { width: 110,      
+                                      c: { width: 80,      
                                            align: "right",
                                            padding: [5, -20, 0, 0],
                                          } 
+                                     }
                                 }
-                                }
+                                
                             };
                         });
                     } else {

@@ -27,8 +27,8 @@ const Enlarge = (props: any) => {
                 <img src={enlargeIcon} />
             </div>
             <Modal
-                width={600}
-                height={600}
+                width={1500}
+                height={1000}
                 body={<ModalBody />}
                 type='normal'
                 closable={true}
