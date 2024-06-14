@@ -1245,6 +1245,62 @@ export const QUOTA_PROP: ControlProProps = {
     ]
 };
 
+export const NUMBER_FORMAT_PROP: ControlProProps = {
+    id: "content.numberformat",
+    name: "数字格式",
+    defaultOpen: true,
+    nodes: [
+        {
+            visible: false,
+            id: "content.numberformat.show",
+            editor: { defaultValue: true }
+        },
+      {
+        visible: true,
+        id: "content.numberformat.decimalPlace",
+        name: i18n.msg("c34"),
+        editor: {
+          component: "Stepper",
+          dataType: "number",
+          defaultValue: 2,
+          min: 0,
+          max: 10
+        }
+      },
+      {
+        visible: true,
+        id: "content.numberformat.enableThousands",
+        name: i18n.msg("c35"),
+        editor: {
+          component: "Switch",
+          dataType: "boolean",
+          defaultValue: false
+        }
+      },
+      {
+        visible: true,
+        id: "content.numberformat.isPencent",
+        name: "百分号后缀",
+        editor: {
+          component: "Switch",
+          dataType: "boolean",
+          defaultValue: false
+        }
+      },
+      {
+        visible: true,
+        id: "content.numberformat.unit",
+        name: i18n.msg("displayElement"),
+        editor: {
+          component: "Select",
+          dataType: "number",
+          defaultValue: 1,
+          options: getUpdateArray(units)
+        }
+      }
+    ]
+};
+
 export const CUSTOM_STYLE_PROP: ControlProProps = {
   id: "content.customStyle",
   name: "自定义样式",
