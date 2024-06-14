@@ -765,6 +765,20 @@ export const LEGEND_PROP: ControlProProps = {
         },
         {
             visible: true,
+            id: "content.config.legendFormat",
+            name: "图例格式",
+            editor: {
+                component: "Select",
+                options: [
+                    { name: "2列", value: "1" },
+                    { name: "3列末尾%", value: "2" }
+                ],
+                dataType: "string",
+                defaultValue: "1"
+            }
+        },
+        {
+            visible: true,
             id: "content.config.fontStyleArray",
             name: "样式",
             editor: {

@@ -427,13 +427,26 @@ export default React.memo(
                                             target = formatNumberWithEllipsis(_data[i].value);
                                         }
                                     }
-                                    const arr = ["{a|" + name + "}", target, ...v.legendOther];
+                                    let arr = ["{a|" + name + "}", "{b|" + target + "}"];
+                                    if(item.content.config.legendFormat == "2"){                          
+                                        arr = ["{a|" + name + "}", "{b|" + target + "}", "{c|" + v.legendOther + "%}"];
+                                    }
                                     return arr.join("   ");
                                 },
                                 textStyle: {
                                     padding: 5,
                                     // 添加
-                                    rich: { a: { width: 100 } }
+                                    rich: { 
+                                      a: { width: 100, padding: [5, 0, 0, 0] },
+                                      b: { width: 120,
+                                           align: "right",
+                                           padding: [5, 0, 0, 0],
+                                        },
+                                      c: { width: 120,      
+                                           align: "right",
+                                           padding: [5, -20, 0, 0],
+                                         } 
+                                }
                                 }
                             };
                         });
