@@ -272,6 +272,27 @@ const tableControls: any = {
                 DESC_PROP,
                 POSITION_PROP()
             ]
+        },
+        {
+            id: "dataset",
+            name: "数据配置",
+            properties: [
+                {
+                    id: "userDataSelct",
+                    name: "数据配置",
+                    defaultOpen: true,
+                    nodes: [
+                        {
+                            visible: true,
+                            id: "tableColumns",
+                            name: "",
+                            type: "tableConfig",
+                            editor: { component: "TableDataSet" },
+                            style: { height: "750px", alignItems: "flex-start" }
+                        }
+                    ]
+                }
+            ]
         }
     ]
 };
@@ -361,7 +382,7 @@ const quotaControls: any = {
         {
             id: "data",
             name: "属性",
-            properties: [CHART_BASE_INFO, BACKGROUND_PROP, BORDER_PROP, DESC_PROP, QUOTA_PROP,NUMBER_FORMAT_PROP, POSITION_PROP(150, 50)]
+            properties: [CHART_BASE_INFO, BACKGROUND_PROP, BORDER_PROP, DESC_PROP, QUOTA_PROP, NUMBER_FORMAT_PROP, POSITION_PROP(150, 50)]
         },
         {
             id: "dataset",
@@ -607,7 +628,7 @@ export const chartList = [
         name: "仪表盘2",
         category: "charts"
     },
-    { 
+    {
         componentType: "combination",
         icon: require(`assets/img/combination.png`),
         desc: "组合图",

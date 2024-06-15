@@ -9,6 +9,7 @@ import SwitchEditor from "dw/components/editor/SwitchEditor";
 import TextAreaEditor from "dw/components/editor/TextAreaEditor";
 import TextEditor from "dw/components/editor/TextEditor";
 import EchartDataSet from "dw/components/editor/EchartDataSet";
+import TableDataSet from "dw/components/editor/TableDataSet";
 import VersionSelect from "dw/components/editor/VersionSelect";
 import ChartIdSelect from "dw/components/editor/ChartIdSelect";
 import RadiosOptions from "dw/components/editor/RadiosOptions";
@@ -43,10 +44,11 @@ const editorMap: EditorMapProp = {
     TextArea: TextAreaEditor,
     Text: TextEditor,
     EchartDataSet: EchartDataSet,
+    TableDataSet: TableDataSet,
     VersionSelect: VersionSelect,
     ChartIdSelect: ChartIdSelect,
     RadiosOptions: RadiosOptions,
     Bindscreens: Bindscreens,
-    Bindchart: Bindchart,
+    Bindchart: Bindchart
 };
 export default editorMap;

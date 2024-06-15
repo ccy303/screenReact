@@ -14,124 +14,106 @@
     },
     "itemList": [
         {
-            "useryindex": ["账户数量"],
-            "userxindex": ["银行类别"],
-            "h": 300,
-            "chartname": "环图2",
-            "name": "环图2",
-            "originname": "环图",
-            "t": "2024-05-2919:02:31",
-            "pkid": "1961070845015537664",
-            "w": 400,
-            "x": "663",
-            "dataset": {
-                "dataindex": [
-                    ["bankname", "银行类别", 1, false],
-                    ["dq", "地区", 1, false],
-                    ["acctnum", "账户数量", 3, false],
-                    ["bz", "币种", 1, false]
-                ],
-                "rows": [
-                    ["银行类别", "地区", "账户数量", "币种"],
-                    ["工商银行", "0", 1, "人民币"],
-                    ["结算中心", "1", 2, "美元"],
-                    ["建设银行", "2", 8, "欧元"]
-                ]
+            "_isShow": true,
+            "name": "表格1",
+            "chartcontrol": {
+                "ispublish": "1"
             },
-            "zindex": 804,
-            "title": "标题",
-            "y": "170",
-            "content": {
-                "config": {
-                    "charts": {
-                        "topnum": 0,
-                        "legend": {
-                            "textStyle": {
-                                "color": "#2a2a2a",
-                                "fontSize": 12,
-                                "fontStyle": "normal",
-                                "fontWeight": "normal"
-                            },
-                            "orient": "horizontal",
-                            "align": "auto",
-                            "left": 10,
-                            "bottom": 5,
-                            "itemWidth": 15,
-                            "top": -5,
-                            "icon": "rect",
-                            "itemHeight": 15,
-                            "right": "auto",
-                            "show": true
-                        },
-                        "series": [
-                            {
-                                "barWidth": 10,
-                                "starAngle": 90,
-                                "label": {
-                                    "color": "#2a2a2a",
-                                    "show": true,
-                                    "fontSize": 12,
-                                    "position": "outside",
-                                    "fontStyle": "normal",
-                                    "fontWeight": "normal"
-                                }
-                            }
-                        ]
-                    },
-                    "unit": 1,
-                    "digitalFormat": {
-                        "unit": 1,
-                        "unitarea": 1,
-                        "enableThousands": false,
-                        "dataLabelType": "classificationdatavalue",
-                        "currencySymbols": "¥",
-                        "digitalType": "digital",
-                        "decimalPlace": 2
-                    },
-                    "legendPos": "top",
-                    "legendStyle": "mornal",
-                    "label": {
-                        "fontStyleArray": []
-                    },
-                    "showStarAngle": false,
-                    "fontStyleArray": []
+            "dataSource": [
+                {
+                    "id": "1",
+                    "No": 1,
+                    "order": "AP-202009-00001",
+                    "from": "陕西环宇科技",
+                    "to": "深圳环球科技",
+                    "amount": "26,800.00",
+                    "balance": "5,200.00"
                 },
-                "borderStyle": "dotted",
-                "chartParameters": true,
-                "showBorder": true,
-                "opacity": 1,
+                {
+                    "id": "2",
+                    "No": 2,
+                    "order": "AP-202009-00001",
+                    "from": "陕西环宇科技",
+                    "to": "深圳环球科技",
+                    "amount": "236,800.00",
+                    "balance": "1,500.00"
+                },
+                {
+                    "id": "3",
+                    "No": 3,
+                    "order": "AP-202009-00002",
+                    "from": "陕西环宇科技",
+                    "to": "深圳环球科技",
+                    "amount": "246,800.00",
+                    "balance": "5,300.00"
+                },
+                {
+                    "id": "4",
+                    "No": 4,
+                    "order": "AP-202009-00003",
+                    "from": "陕西环宇科技",
+                    "to": "深圳环球科技",
+                    "amount": "216,800.00",
+                    "balance": "5,400.00"
+                },
+                {
+                    "id": "5",
+                    "No": 5,
+                    "order": "AP-202009-00004",
+                    "from": "陕西环宇科技",
+                    "to": "深圳环球科技",
+                    "amount": "236,800.00",
+                    "balance": "1,500.00"
+                }
+            ],
+            "columns": [
+                { "code": "No", "name": "序号", "width": 100 },
+                { "code": "order", "name": "单据号", "width": 100 },
+                { "code": "from", "name": "来户", "width": 100 },
+                { "code": "to", "name": "往户", "width": 100 },
+                { "code": "amount", "name": "应付金额", "width": 100 },
+                { "code": "balance", "name": "应收余额", "width": 100 }
+            ],
+            "content": {
+                "title": {
+                    "show": true,
+                    "fontWeight": "normal",
+                    "fontStyle": "normal",
+                    "underline": "none",
+                    "fontSize": 14,
+                    "fontStyleArray": [],
+                    "align": "center",
+                    "fontColor": "#212121",
+                    "backColor": "#fff"
+                },
                 "showBak": true,
+                "backgroundColor": "#fff",
+                "opacity": 1,
+                "showBorder": true,
+                "borderColor": "#212121",
+                "borderOpacity": 1,
+                "borderWidth": 0,
+                "borderStyle": "dotted",
                 "desc": {
                     "show": false,
                     "content": ""
-                },
-                "backgroundColor": "#fff",
-                "borderColor": "#2a2a2a",
-                "title": {
-                    "fontStyle": "normal",
-                    "align": "center",
-                    "fontWeight": "normal",
-                    "underline": "none",
-                    "fontSize": 14,
-                    "fontColor": "#2a2a2a",
-                    "fontStyleArray": [],
-                    "backColor": "#fff",
-                    "show": true
-                },
-                "borderWidth": 0,
-                "borderOpacity": 1
+                }
             },
-            "type": "pie",
-            "id": "5061ee8f6cd7444892ed15fcea09e776",
-            "pluginname": "kd.tmc.tda.report.bankacct.qing.data.AcctDisplayByBankQingAnlsPlugin",
-            "category": "charts",
-            "chartcontrol": {
-                "versiondesc": "1",
-                "pluginname": "kd.tmc.tda.report.bankacct.qing.data.AcctDisplayByBankQingAnlsPlugin",
-                "ispublish": "1",
-                "version": "1"
-            }
+            "title": "标题",
+            "zindex": 804,
+            "x": 179,
+            "y": 151,
+            "h": 494,
+            "w": 666,
+            "chartname": "表格1",
+            "t": "2024-06-15 14:05:49",
+            "id": "7933b348d61742b38a4f47cb834ea9df",
+            "type": "table",
+            "category": "table",
+            "kdId": "",
+            "pkid": "",
+            "originname": "表格"
         }
     ],
-    "deleteList": []
+    "deleteList": ["5061ee8f6cd7444892ed15fcea09e776"]
 }
