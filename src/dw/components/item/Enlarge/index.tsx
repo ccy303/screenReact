@@ -3,6 +3,7 @@ import enlargeIcon from "@/assets/enlarge.png";
 import useMain from "dw/store/useMain";
 import { Modal } from "@kdcloudjs/kdesign";
 import EchartItem from "@/dw/components/item/EchartItem";
+import _ from "lodash";
 import "./index.less";
 
 const Enlarge = (props: any) => {
@@ -19,7 +20,9 @@ const Enlarge = (props: any) => {
 
     const ModalBody: any = () => {
         const target = itemList.find((v: any) => v.id == props.bindchart);
-        return <EchartItem {...target} />;
+        const _target = _.cloneDeep(target);
+        _.set(_target, "content.config.charts.topnum", 20);
+        return <EchartItem {..._target} />;
     };
 
     useEffect(() => {
