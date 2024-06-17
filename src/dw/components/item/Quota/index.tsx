@@ -7,7 +7,7 @@ import { ViewItemContext } from "dw/views/ViewItem";
 import { formatNumber } from "../../../../../util";
 
 const Quota = (item: ComponentItemProps) => {
-  const { model } = useContext(ViewItemContext);
+  const { model,customProps } = useContext(ViewItemContext);
   const showTitle = useMemo(() => item && item.content && item.content.title && item.content.title.show, [item]);
     const { content, userxindex, useryindex, dataset, datafilter } = item;
     const {quota} = content;
@@ -66,6 +66,9 @@ const Quota = (item: ComponentItemProps) => {
 
     let value = useryindex? _rows[useryindex]?.reduce((total : number, num: number) => total + num, 0) : 0;
   const handleClick = (item:any,data:any) => {
+    if(!customProps?.isShow){
+      return;
+    }
     // 在这里处理点击事件，可以获取点击的图形的数据
     const { pluginname} = item;
     if (pluginname) {

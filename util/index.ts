@@ -43,6 +43,9 @@ export function formatCombinationNumber(chartParam,chartitem, decimalPlaces,isth
 }
 
 export function formatNumber(num, decimalPlaces,isthousands,ispercent,unit) {
+  if(typeof(num) != 'number' || Number.isNaN(num)){
+    return num;
+  }
   const tranUnitNum = unit ? num/unit : num;
   const k = decimalPlaces?Math.pow(10, decimalPlaces):1;
   const bigNum = decimalPlaces?Math.round(tranUnitNum *k)/k.toFixed(decimalPlaces):tranUnitNum;//解决精度问题
