@@ -9,6 +9,8 @@ import { v4 as uuidv4 } from "uuid";
 import { DEFAULT_CHARTS_COLOR, DEFAULT_PIE_ITEMSTYLE, DEFAULT_PIE_LABEL, GAUGE_STYLE2 } from "dw/control/common";
 import Right from "@/dw/views/Design/layout/Right";
 import Left from "@/dw/views/Design/layout/Left";
+import { formatChartNumber, formatCombinationNumber, formatNumber } from "../../../../../util";
+
 
 const gaugeStyle = {
     startAngle: 180,
@@ -121,9 +123,6 @@ const gaugeStyle = {
         lineHeight: 45,
         offsetCenter: [0, "30%"],
         valueAnimation: true,
-        formatter: function (value: number) {
-            return ((value * 10000) / 100).toFixed(2) + "%"; //精度问题 例如 0.11255 * 100 = 11.254999999999999
-        },
         color: "inherit"
     }
 };
@@ -131,9 +130,10 @@ const gaugeStyle = {
 export default React.memo(
     (item: any) => {
         const { model, customProps } = useContext(ViewItemContext);
-        const { content, userxindex, useryindex, useryindex1, dataset, datafilter, userseries, sortfield, w, legendother } = item;
+        const { content, userxindex, useryindex, useryindex1, dataset, datafilter, userseries, sortfield, w, legendother,numberformat } = item;
         const { config } = content;
         const { charts } = config;
+        const {chartnumberformat} = content;
         const { topnum } = charts;
         const [echartStyle, setEchartStyle] = useState<any>(null);
         const [echartKey, setEchartKey] = useState(uuidv4());
@@ -231,7 +231,7 @@ export default React.memo(
         let chartOption: any = useMemo(() => {
             let echartOpt = {
                 color: DEFAULT_CHARTS_COLOR,
-                tooltip: {},
+                tooltip: chartnumberformat?{formatter:(param)=>{return formatChartNumber(param,item,chartnumberformat.decimalPlace,chartnumberformat.enableThousands,chartnumberformat.isPencent,chartnumberformat.unit,numberformat)}}:{},
                 ...charts
             };
 
@@ -333,13 +333,32 @@ export default React.memo(
                     _center = ["50%", "27%"];
                     _radius = ["34%", "40%"];
                 }
-
+                const defaultPieLabel = {
+                  position: "center",
+                  show: false,
+                  formatter: chartnumberformat?(param)=>{;return '{num|'+formatNumber(param.data.value,chartnumberformat.decimalPlace,chartnumberformat.enableThousands,chartnumberformat.isPencent,chartnumberformat.unit)+'}\n{title|'+param.data.name+'}'} : '{num|{c}}\n{title|{b}}',
+                  rich: {
+                    num: {
+                      color: '#000',
+                      fontFamily: 'KINGDEEKB-Bold',
+                      fontSize: '34px',
+                      fontWeight: '600',
+                      padding: [0, 0, 0, 0]
+                    },
+                    title: {
+                      color: '#696969',
+                      fontSize: '12px',
+                      fontWeight: '300',
+                      padding: [3, 0, 0, 0]
+                    }
+                  }
+                }
                 series = {
                     ...charts.series[0],
                     type: item.type,
                     areaStyle: item.originname == "面积图" ? {} : null,
                     radius: item.originname == "环图" ? _radius : [0, "80%"],
-                    label: item.originname == "环图" ? { ...charts.series[0].label, ...DEFAULT_PIE_LABEL } : { ...charts.series[0].label },
+                    label: item.originname == "环图" ? { ...charts.series[0].label, ...defaultPieLabel } : { ...charts.series[0].label },
                     emphasis: { label: { show: true } },
                     itemStyle: item.originname == "环图" ? DEFAULT_PIE_ITEMSTYLE : {},
                     center: _center,
@@ -425,13 +444,16 @@ export default React.memo(
                                     let target;
                                     for (let i = 0; i < _data.length; i++) {
                                         if (_data[i].name === name) {
-                                            target = formatNumberWithEllipsis(_data[i].value);
+                                            const tempFormatNumber = chartnumberformat?formatNumber(_data[i].value,chartnumberformat.decimalPlace,chartnumberformat.enableThousands,chartnumberformat.isPencent,chartnumberformat.unit):_data[i].value
+                                            target = formatNumberWithEllipsis(tempFormatNumber);
                                         }
                                     }
 
                                     let arr = ["{a|" + name + "}", "{b|" + target + "}"];
-                                    if(item.content.config.legendFormat == "2"){                          
-                                        arr = ["{a|" + name + "}", "{b|" + target + "}", "{c|" + v.legendOther + "}"];
+                                    if(item.content.config.legendFormat == "2"){
+                                      const legendOtherNumberFormat = numberformat?.filter((v: any) => v.key == legendother?.[0])?.[0];
+                                      const tempLegendOther = legendOtherNumberFormat? formatNumber(v.legendOther,legendOtherNumberFormat.decimalPlace,legendOtherNumberFormat.enableThousands,legendOtherNumberFormat.isPencent,legendOtherNumberFormat.unit):v.legendOther;
+                                      arr = ["{a|" + name + "}", "{b|" + target + "}", "{c|" + tempLegendOther + "}"];
                                         return arr.join("                          ")
                                     }
                                     return arr.join("   ");
@@ -706,7 +728,8 @@ export default React.memo(
                 echartOpt = {
                     ...echartOpt,
                     tooltip: {
-                        trigger: "axis"
+                        trigger: "axis",
+                        formatter:chartnumberformat ? (param)=>{return formatCombinationNumber(param,item,chartnumberformat.decimalPlace,chartnumberformat.enableThousands,chartnumberformat.isPencent,chartnumberformat.unit,numberformat)} : {}
                     },
                     xAxis: { type: "category", axisLabel: { interval: 0, rotate: calrotate } },
                     yAxis: [
@@ -868,9 +891,23 @@ export default React.memo(
             chartOptionRef.current = {
                 option: _.cloneDeep(output)
             };
-
-            item.type == "gauge" && _.assign(output.series, gaugeStyle);
-            item.type == "gauge2" && _.assign(output.series, GAUGE_STYLE2);
+            
+            const gaugeDetail = {
+                detail: {
+                  fontSize: 32,
+                  fontWeight: 700,
+                  fontFamily: "KINGDEEKB-Bold",
+                  lineHeight: 45,
+                  offsetCenter: [0, "30%"],
+                  valueAnimation: true,
+                  formatter:function (value: number) {
+                    return chartnumberformat?formatNumber(value,chartnumberformat.decimalPlace,chartnumberformat.enableThousands,chartnumberformat.isPencent,chartnumberformat.unit):value;
+                  },
+                  color: "inherit"
+                }
+              }
+            item.type == "gauge" && _.assign(output.series, gaugeStyle,gaugeDetail);
+            item.type == "gauge2" && _.assign(output.series, GAUGE_STYLE2,gaugeDetail);
 
             if (item.type == "bar" || item.type == "line") {
                 let res = { ...echartOpt.legend };

@@ -11,7 +11,7 @@ const Quota = (item: ComponentItemProps) => {
   const showTitle = useMemo(() => item && item.content && item.content.title && item.content.title.show, [item]);
     const { content, userxindex, useryindex, dataset, datafilter } = item;
     const {quota} = content;
-    const {numberformat} = content;
+    const {chartnumberformat} = content;
     const style = {
         width: "100%",
         height: "100%",
@@ -94,7 +94,7 @@ const Quota = (item: ComponentItemProps) => {
   };
     return (
         <KdCard item={item} showTitle={showTitle}>
-            {useryindex ? <div style={style} onClick={()=>handleClick(item,value)}>{numberformat ? formatNumber(value,numberformat.decimalPlace,numberformat.enableThousands,numberformat.isPencent,numberformat.unit) : value}</div> : <div style={style}>业务指标</div>}
+            {useryindex ? <div style={style} onClick={()=>handleClick(item,value)}>{chartnumberformat ? formatNumber(value,chartnumberformat.decimalPlace,chartnumberformat.enableThousands,chartnumberformat.isPencent,chartnumberformat.unit) : value}</div> : <div style={style}>业务指标</div>}
         </KdCard>
     );
 };

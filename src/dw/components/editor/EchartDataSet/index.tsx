@@ -1,15 +1,17 @@
 import useMain from "@/dw/store/useMain";
-import { Select, Icon } from "@kdcloudjs/kdesign";
+import { Select, Icon, Stepper, Switch } from "@kdcloudjs/kdesign";
 import React, { useMemo } from "react";
 import "./index.less";
 import _ from "lodash";
+import { units } from "dw/api/EchartsOption";
+
 export default (props: any) => {
     const { onChange } = props;
     const { Option } = Select;
 
     const { getCurrentItem } = useMain();
 
-    const { dataset, userxindex, useryindex, useryindex1, userseries, datafilter, sortfield, legendother } = getCurrentItem();
+    const { dataset, userxindex, useryindex, useryindex1, userseries, datafilter, sortfield, legendother,numberformat } = getCurrentItem();
     const dataSetRows: any = { source: dataset?.rows };
     const _rows: any = {};
     for (let i = 0, data = dataSetRows.source; i < data?.[0]?.length; i++) {
@@ -94,6 +96,30 @@ export default (props: any) => {
             ]);
         }
     };
+    const onNumberFormatDrop = (e: any, type: any) => {
+        e.preventDefault();
+        const data = JSON.parse(e.dataTransfer?.getData("dataset"));
+        if ("y" != data.type) {
+          return;
+        }
+        const numberFormatArray = { key: data.value, decimalPlace: 2, enableThousands: false,isPencent:false,unit:1 };
+        if (type == "format") {
+            onChange([{ prop: "numberformat", value: _.uniqBy([...(numberformat || []), numberFormatArray], "key") }]);
+        }
+    };
+    const numberFormatDel = (type: any, item: any) => {
+        if (type == "format") {
+            onChange([
+                {
+                    prop: "numberformat",
+                    value: _.uniqBy(
+                      numberformat.filter((v: any) => v.key != item),
+                        "key"
+                    )
+                }
+            ]);
+        }
+    };
     const onSeriesDrop = (e: any, type: any) => {
         if (userseries?.length > 0 || useryindex?.length > 1) {
             return;
@@ -136,6 +162,32 @@ export default (props: any) => {
         const newsortfield = sortfield.filter((v: any) => v.key == key)?.[0];
         newsortfield.sorttype = e;
         onChange([{ prop: "sortfield", value: _.uniqBy([...(sortfield || []), newsortfield], "key") }]);
+    };
+    const changeDecimalPlaceHandle = (e: any, key: any) => {
+        const newnumberformat = numberformat.filter((v: any) => v.key == key)?.[0];
+        newnumberformat.decimalPlace = Number(e.target.value);
+        onChange([{ prop: "numberformat", value: _.uniqBy([...(numberformat || []), newnumberformat], "key") }]);
+    };
+    const changeEnableThousands = (e: any, key: any) => {
+        console.log("ckq",e,key);
+        const newnumberformat = numberformat.filter((v: any) => v.key == key)?.[0];
+        newnumberformat.enableThousands = e;
+        onChange([{ prop: "numberformat", value: _.uniqBy([...(numberformat || []), newnumberformat], "key") }]);
+        console.log("ckqnumberformat",numberformat);
+
+    };
+    const changeIsPencent = (e: any, key: any) => {
+      const newnumberformat = numberformat.filter((v: any) => v.key == key)?.[0];
+      newnumberformat.isPencent = e;
+      onChange([{ prop: "numberformat", value: _.uniqBy([...(numberformat || []), newnumberformat], "key") }]);
+    };
+    const changeUnit = (e: any, key: any) => {
+      console.log("ckq",e,key);
+      const newnumberformat = numberformat.filter((v: any) => v.key == key)?.[0];
+      newnumberformat.unit = e;
+      onChange([{ prop: "numberformat", value: _.uniqBy([...(numberformat || []), newnumberformat], "key") }]);
+      console.log("ckqnumberformat",numberformat);
+
     };
     const onDrop = (e: any, type: any) => {
         e.preventDefault();
@@ -292,7 +344,7 @@ export default (props: any) => {
             </div>
             <div>
                 <div style={{ marginTop: "10px" }}>排序</div>
-                <div className='data-set-dargabled'>
+                <div className='data-set-dargabled' style={{ height: "50px" }}>
                     <div className='list' onDragOver={allowDrop} onDrop={e => onSortDrop(e, "sort")}>
                         {sortfield &&
                             sortfield.map((v: any, i: any) => {
@@ -342,8 +394,51 @@ export default (props: any) => {
                 </div>
             </div>
             <div>
+                <div style={{ marginTop: "10px" }}>数字格式</div>
+                <div className='data-set-dargabled' style={{ height: "50px" }}>
+                    <div className='list' onDragOver={allowDrop} onDrop={e => onNumberFormatDrop(e, "format")}>
+                        {numberformat &&
+                          numberformat.map((v: any, i: any) => {
+                                return (
+                                    <div key={i} className='list-item space-between'>
+                                        {v.key}:{" "}
+                                        <div className='drop-select-warp'>
+                                          <Stepper value={v.decimalPlace} onChange={e => changeDecimalPlaceHandle(e, v.key)} />
+                                        </div>
+                                        <div className='drop-select-warp'>
+                                          千分位<Switch checked={v.enableThousands} onChange={e => changeEnableThousands(e, v.key)} />
+                                        </div>
+                                        <div className='drop-select-warp'>
+                                          百分号后缀<Switch checked={v.isPencent} onChange={e => changeIsPencent(e, v.key)} />
+                                        </div>
+                                        <div className='drop-select-warp'>
+                                            显示单位<Select
+                                                mode='single'
+                                                value={v.unit}
+                                                size='small'
+                                                style={{ width: "100%", height: "100%" }}
+                                                showSearch={false}
+                                                onChange={e => changeUnit(e, v.key)}
+                                            >
+                                              {units.map(item => {
+                                                return (
+                                                  <Option value={item.value} key={item.value}>
+                                                    {item.label}
+                                                  </Option>
+                                                );
+                                              })}
+                                            </Select>
+                                        </div>
+                                        <Icon type='delete' className='del-icon' onClick={() => numberFormatDel("format", v.key)}></Icon>
+                                    </div>
+                                );
+                            })}
+                    </div>
+                </div>
+            </div>
+            <div>
                 <div style={{ marginTop: "10px" }}>图例附加信息</div>
-                <div className='data-set-dargabled'>
+                <div className='data-set-dargabled' style={{ height: "50px" }}>
                     <div className='list' onDragOver={allowDrop} onDrop={e => onLegendDrop(e, "legendother")}>
                         {legendother &&
                             legendother.map((v: any, i: any) => {

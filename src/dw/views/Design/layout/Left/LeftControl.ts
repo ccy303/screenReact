@@ -31,6 +31,7 @@ const echartControls: any = {
                 BORDER_PROP,
                 DESC_PROP,
                 PIE_OTHER_PROP,
+                NUMBER_FORMAT_PROP,
                 POSITION_PROP()
             ]
         },

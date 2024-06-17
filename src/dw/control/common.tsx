@@ -3,6 +3,8 @@ import { Icon } from "@kdcloudjs/kdesign";
 import React from "react";
 import _ from "lodash";
 import i18n from "dw/api/I18n";
+import { formatNumber } from "../../../util";
+
 import {
     getUpdateArray,
     legendPosition0,
@@ -59,7 +61,7 @@ export const DEFAULT_DATASET = {
 export const DEFAULT_PIE_LABEL = {
     position: "center",
     show: false,
-    formatter: '{num|{c}}\n{title|{b}}',
+    formatter: (param)=>{;return '{num|'+formatNumber(param.data.value,2,true,false,1)+'}\n{title|'+param.data.name+'}'},
     rich: {
         num: {
         color: '#000',
@@ -1246,18 +1248,18 @@ export const QUOTA_PROP: ControlProProps = {
 };
 
 export const NUMBER_FORMAT_PROP: ControlProProps = {
-    id: "content.numberformat",
+    id: "content.chartnumberformat",
     name: "数字格式",
     defaultOpen: true,
     nodes: [
         {
             visible: false,
-            id: "content.numberformat.show",
+            id: "content.chartnumberformat.show",
             editor: { defaultValue: true }
         },
       {
         visible: true,
-        id: "content.numberformat.decimalPlace",
+        id: "content.chartnumberformat.decimalPlace",
         name: i18n.msg("c34"),
         editor: {
           component: "Stepper",
@@ -1269,7 +1271,7 @@ export const NUMBER_FORMAT_PROP: ControlProProps = {
       },
       {
         visible: true,
-        id: "content.numberformat.enableThousands",
+        id: "content.chartnumberformat.enableThousands",
         name: i18n.msg("c35"),
         editor: {
           component: "Switch",
@@ -1279,7 +1281,7 @@ export const NUMBER_FORMAT_PROP: ControlProProps = {
       },
       {
         visible: true,
-        id: "content.numberformat.isPencent",
+        id: "content.chartnumberformat.isPencent",
         name: "百分号后缀",
         editor: {
           component: "Switch",
@@ -1289,7 +1291,7 @@ export const NUMBER_FORMAT_PROP: ControlProProps = {
       },
       {
         visible: true,
-        id: "content.numberformat.unit",
+        id: "content.chartnumberformat.unit",
         name: i18n.msg("displayElement"),
         editor: {
           component: "Select",
