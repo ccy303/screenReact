@@ -35,7 +35,7 @@ const TextEditor = (props: any) => {
 
     return (
         <div className='warp'>
-            {innerValue.map((item: any, idx: any) => {
+            {innerValue?.map((item: any, idx: any) => {
                 return (
                     <div className='row' key={idx}>
                         <div style={{ width: "90%" }}>
