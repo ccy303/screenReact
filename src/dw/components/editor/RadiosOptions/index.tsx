@@ -15,9 +15,9 @@ const TextEditor = (props: any) => {
 
     const [innerValue, setInnerValue] = useState(value);
 
-    useEffect(() => {
-        setInnerValue(value);
-    }, [value]);
+    // useEffect(() => {
+    //     setInnerValue(value);
+    // }, [value]);
 
     const add = () => {
         setInnerValue([...innerValue, { key: "", value: "" }]);

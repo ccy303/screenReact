@@ -48,7 +48,7 @@ const init = () => {};
             this.root = createRoot(model.dom);
         },
         init: function (props) {
-            console.log("version", "0.0.65");
+            console.log("version", "0.0.67");
             console.log("-----init", this.model, props);
             this.model.dom.style.height = "100%";
             this.model.dom.style.width = "100%";

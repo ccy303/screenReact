@@ -20,7 +20,7 @@ const TextEditor = (props: any) => {
     const formatVersionCfg = () => {
         let list: any = [];
 
-        list = (itemList.filter(v => v.category == "charts" || v.category == "quota") || []).map(v => {
+        list = (itemList.filter(v => v.category == "charts" || v.category == "quota" || v.category == "table") || []).map(v => {
             return {
                 children: v.chartname,
                 value: v.id
@@ -40,13 +40,30 @@ const TextEditor = (props: any) => {
 
     const dataControl = useMemo(() => {
         const dataSet: any = itemList.find(v => v.id == value?.split(",")?.[0])?.dataset;
-        const { dataindex } = dataSet || {};
-        if (!dataindex) return [];
+        const columns: any = itemList.find(v => v.id == value?.split(",")?.[0])?.columns;
+        let category: any = itemList.find(v => v.id == value?.split(",")?.[0])?.category;
         const xIndex = [];
-        for (let i = 0; i < dataindex.length; i++) {
-            const item = dataindex[i];
-            if (item[2] != 2 && item[2] != 3) {
-                xIndex.push(item[1]);
+        if(category ="table"){
+            console.log("columns:",columns);
+            for (let i = 0; i < columns.length; i++) {
+                // console.log("dataindex[i].name:",dataindex[i].name);
+                
+                // const item = dataindex[i].name;
+                // if (item[2] != 2 && item[2] != 3) {
+                //     xIndex.push(item[1]);
+                // }
+            }
+        }else{
+        //  const { dataindex } = columns || {};
+  
+            const { dataindex } = dataSet || {};
+            if (!dataindex) return [];
+        
+            for (let i = 0; i < dataindex.length; i++) {
+                const item = dataindex[i];
+                if (item[2] != 2 && item[2] != 3) {
+                    xIndex.push(item[1]);
+                }
             }
         }
         return xIndex;
