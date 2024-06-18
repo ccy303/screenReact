@@ -25,7 +25,7 @@ export default (props: any) => {
     return (
         <div>
             <Select mode='multiple' style={{ width: "100%" }} onChange={change} value={localValue}>
-                {columns.map((item: any) => {
+                {columns?.map((item: any) => {
                     return (
                         <Select.Option key={item.code} value={item.code}>
                             {item.name}

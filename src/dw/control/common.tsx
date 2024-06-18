@@ -44,6 +44,7 @@ export const DEFAULT_REQUEST_PROP: RequestProps = {
     smallSeriesChartNumber: null,
     yAxisLineNumbers: [],
     TableColumns: [],
+    columnResize: [],
     legendNumber: "",
     displayValueNumber: "",
     legendDetailNumber: ""
