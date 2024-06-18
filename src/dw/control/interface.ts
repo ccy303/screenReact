@@ -86,6 +86,7 @@ export type RequestProps = {
   smallSeriesChartNumber: any
   yAxisLineNumbers: any[]
   TableColumns: any[]
+  columnResize: any[]
 }
 
 export type RequestKeys = keyof RequestProps

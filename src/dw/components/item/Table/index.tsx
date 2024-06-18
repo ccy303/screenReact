@@ -5,15 +5,23 @@ import _ from "lodash";
 
 const Chart = (item: any) => {
     const showTitle = useMemo(() => item && item.content && item.content.title && item.content.title.show, [item]);
-
     const ref: any = useRef(null);
-
+    // 此处配置的单据号列宽度100，优先级高于column配置的200
+  const [columnSize, setColumnSize] = React.useState({
+    order: 100
+  })
     return (
         <KdCard item={item} showTitle={showTitle}>
             <>
                 <Table
                     style={{ width: "100%", height: "100%" }}
                     dataSource={item.dataSource || []}
+                    columnResize={{
+                        maxSize: 500,
+                        columnSize,
+                        minSize: 60,
+                        onChangeSize: (newColumnSize) => setColumnSize(newColumnSize)
+                    }}
                     columns={(item.columns || [])
                         .filter((v: any) => {
                             if (!item.tableColumns || !item.tableColumns.length) {
@@ -23,10 +31,8 @@ const Chart = (item: any) => {
                             }
                         })
                         .map((v: any) => {
-                            if (!v.width) {
-                                v.width = 100;
-                            }
-                            return v;
+     
+                            return {...v};
                         })}
                     ref={ref}
                 />

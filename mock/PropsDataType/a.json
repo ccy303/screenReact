@@ -112,7 +112,8 @@
             "category": "table",
             "kdId": "",
             "pkid": "",
-            "originname": "表格"
+            "originname": "表格",
+            "tableColumns":  ["order", "from", "to", "amount"]
         }
     ],
     "deleteList": ["5061ee8f6cd7444892ed15fcea09e776"]
