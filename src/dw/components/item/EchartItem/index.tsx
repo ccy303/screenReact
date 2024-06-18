@@ -316,10 +316,7 @@ export default React.memo(
                                     };
                                 } else if (item.content.config.legendPos == "bottom") {
                                     position = {
-                                        top: "auto",
-                                        bottom: i
-                                            ? 30 * (i + 1) + item.content.config.charts.legend.bottom
-                                            : 30 + item.content.config.charts.legend.bottom,
+                                        top: i ? 30 * (i + 1) + (item.content.config.charts.legend.bottom+150) : 30 + (item.content.config.charts.legend.bottom+150),
                                         Left: "center"
                                     };
                                 }
