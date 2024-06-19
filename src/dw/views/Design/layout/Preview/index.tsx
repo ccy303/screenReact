@@ -38,7 +38,6 @@ const Preview = () => {
         setHover("");
     };
 
-    console.log(1234, hoverId);
 
     return (
         <div>
