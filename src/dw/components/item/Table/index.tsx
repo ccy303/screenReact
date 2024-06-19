@@ -7,9 +7,8 @@ const Chart = (item: any) => {
     const showTitle = useMemo(() => item && item.content && item.content.title && item.content.title.show, [item]);
     const ref: any = useRef(null);
     // 此处配置的单据号列宽度100，优先级高于column配置的200
-  const [columnSize, setColumnSize] = React.useState({
-    order: 100
-  })
+    const [columnSize, setColumnSize] = React.useState({ order: 100 });
+
     return (
         <KdCard item={item} showTitle={showTitle}>
             <>
@@ -20,19 +19,20 @@ const Chart = (item: any) => {
                         maxSize: 500,
                         columnSize,
                         minSize: 60,
-                        onChangeSize: (newColumnSize) => setColumnSize(newColumnSize)
+                        onChangeSize: newColumnSize => setColumnSize(newColumnSize)
                     }}
                     columns={(item.columns || [])
                         .filter((v: any) => {
-                            if (!item.tableColumns || !item.tableColumns.length) {
-                                return true;
-                            } else {
+                            if (item._echartFilter && item._echartFilter.length) {
+                                return item._echartFilter.includes(v.code);
+                            } else if (item.tableColumns && item.tableColumns.length) {
                                 return item.tableColumns.includes(v.code);
+                            } else {
+                                return true;
                             }
                         })
                         .map((v: any) => {
-     
-                            return {...v};
+                            return { ...v };
                         })}
                     ref={ref}
                 />

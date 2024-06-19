@@ -15,6 +15,7 @@ import ChartIdSelect from "dw/components/editor/ChartIdSelect";
 import RadiosOptions from "dw/components/editor/RadiosOptions";
 import Bindscreens from "dw/components/editor/Bindscreens";
 import Bindchart from "dw/components/editor/Bindchart";
+import MapDataSet from "dw/components/editor/MapDataSet";
 
 export type EditorMapProp = {
     Checkbox: any;
@@ -49,6 +50,7 @@ const editorMap: EditorMapProp = {
     ChartIdSelect: ChartIdSelect,
     RadiosOptions: RadiosOptions,
     Bindscreens: Bindscreens,
-    Bindchart: Bindchart
+    Bindchart: Bindchart,
+    MapDataSet: MapDataSet
 };
 export default editorMap;

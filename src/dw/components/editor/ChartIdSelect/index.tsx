@@ -43,22 +43,11 @@ const TextEditor = (props: any) => {
         const columns: any = itemList.find(v => v.id == value?.split(",")?.[0])?.columns;
         let category: any = itemList.find(v => v.id == value?.split(",")?.[0])?.category;
         const xIndex = [];
-        if(category ="table"){
-            console.log("columns:",columns);
-            for (let i = 0; i < columns.length; i++) {
-                // console.log("dataindex[i].name:",dataindex[i].name);
-                
-                // const item = dataindex[i].name;
-                // if (item[2] != 2 && item[2] != 3) {
-                //     xIndex.push(item[1]);
-                // }
-            }
-        }else{
-        //  const { dataindex } = columns || {};
-  
+        if (category == "table") {
+        } else {
             const { dataindex } = dataSet || {};
             if (!dataindex) return [];
-        
+
             for (let i = 0; i < dataindex.length; i++) {
                 const item = dataindex[i];
                 if (item[2] != 2 && item[2] != 3) {
@@ -80,15 +69,17 @@ const TextEditor = (props: any) => {
                     );
                 })}
             </Select>
-            <Select placeholder='控制项' style={{ width: "100%", height: "40px" }} onChange={dataControlChange} value={innerValue?.[1]}>
-                {dataControl.map((item: any) => {
-                    return (
-                        <Select.Option style={{ width: "100%" }} value={item} key={`${item}`}>
-                            {item}
-                        </Select.Option>
-                    );
-                })}
-            </Select>
+            {!!dataControl.length && (
+                <Select placeholder='控制项' style={{ width: "100%", height: "40px" }} onChange={dataControlChange} value={innerValue?.[1]}>
+                    {dataControl.map((item: any) => {
+                        return (
+                            <Select.Option style={{ width: "100%" }} value={item} key={`${item}`}>
+                                {item}
+                            </Select.Option>
+                        );
+                    })}
+                </Select>
+            )}
         </div>
     );
 };

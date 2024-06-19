@@ -105,10 +105,10 @@ const BaseView = () => {
         observe(observableTag, "loading", ({ newValue }: any) => {
             setLoading(newValue);
         });
-        observableTag.invoke = {
-            key: "selectconfig",
-            data: { ...JSONData }
-        };
+        // observableTag.invoke = {
+        //     key: "selectconfig",
+        //     data: { ...JSONData }
+        // };
 
         return () => observeRef.current?.();
     }, []);

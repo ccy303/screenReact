@@ -427,6 +427,27 @@ const mapControls: any = {
             id: "data",
             name: "属性",
             properties: [CHART_BASE_INFO, BORDER_PROP, POSITION_PROP()]
+        },
+        {
+            id: "dataset",
+            name: "数据配置",
+            properties: [
+                {
+                    id: "userDataSelct",
+                    name: "数据配置",
+                    defaultOpen: true,
+                    nodes: [
+                        {
+                            visible: true,
+                            id: "mapData",
+                            name: "",
+                            type: "mapConfig",
+                            editor: { component: "MapDataSet" },
+                            style: { height: "750px", alignItems: "flex-start" }
+                        }
+                    ]
+                }
+            ]
         }
     ]
 };
@@ -521,6 +542,7 @@ const tipsControls = {
         }
     ]
 };
+
 export const ComponentControlMap: any = {
     charts: echartControls,
     text: textControls,

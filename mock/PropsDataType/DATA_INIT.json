@@ -20,204 +20,61 @@
     },
     "itemList": [
         {
-            "_isShow": true,
-            "name": "环图1",
-            "chartcontrol": {
-                "ispublish": "1"
-            },
+            "h": 848,
+            "chartname": "地图1",
+            "name": "地图1",
+            "originname": "地图",
+            "t": "2024-06-1819:19:29",
+            "pkid": "1975597459288088576",
+            "w": 1480,
+            "x": 0,
             "dataset": {
                 "dataindex": [
-                    ["bankname", "银行类别", 1, false],
-                    ["dq", "地区", 1, false],
-                    ["acctnum", "账户数量", 3, false],
-                    ["bz", "币种", 1, false]
+                    ["country", "国家", 1, false],
+                    ["countryname", "国家名称", 1, false],
+                    ["balance", "当前余额", 2, false],
+                    ["qingsort", "排序", 2, false]
                 ],
                 "rows": [
-                    ["银行类别", "地区", "账户数量", "币种"],
-                    ["工商银行", "0", 1, "人民币"],
-                    ["结算中心", "1", 2, "美元"],
-                    ["建设银行", "2", 8, "欧元"]
+                    ["国家", "国家名称", "当前余额", "排序"],
+                    [1000001, "中国大陆", 434.73, 0],
+                    [1000003, "香港(中国特别行政区)", 88, 1],
+                    [1000008, "新加坡", 522, 2],
+                    [1000002, "美国", 998, 3],
+                    [1394069619282569200, "nationtest2304", 235, 4],
+                    [1000007, "韩国", "075", 5],
+                    [1000014, "意大利", 105, 6],
+                    [1000018, "瑞士", 23, 7],
+                    [1000006, "加拿大", 84, 8],
+                    [1000009, "日本", 5, 9],
+                    [1000010, "泰国", 102, 10],
+                    [1000019, "澳大利亚", 90, 11],
+                    [1000016, "荷兰", 56, 12],
+                    [1000015, "法国", 780, 13],
+                    [1000004, "澳门(中国特别行政区)", 12, 14],
+                    [0, "其他国家", 0, 15]
                 ]
             },
+            "zindex": 1,
+            "title": "",
+            "y": 40,
             "content": {
-                "title": {
-                    "show": true,
-                    "fontWeight": "normal",
-                    "fontStyle": "normal",
-                    "underline": "none",
-                    "fontSize": 14,
-                    "fontStyleArray": [],
-                    "align": "center",
-                    "fontColor": "#212121",
-                    "backColor": "#fff"
-                },
-                "config": {
-                    "charts": {
-                        "legend": {
-                            "show": true,
-                            "left": 10,
-                            "right": "auto",
-                            "bottom": 5,
-                            "top": -5,
-                            "align": "auto",
-                            "orient": "vertical",
-                            "textStyle": {
-                                "fontWeight": "normal",
-                                "fontSize": 12,
-                                "fontStyle": "normal"
-                            },
-                            "": {
-                                "fontStyle": "normal",
-                                "color": "#212121"
-                            },
-                            "itemWidth": 15,
-                            "itemHeight": 15,
-                            "icon": "rect"
-                        },
-                        "series": [
-                            {
-                                "label": {
-                                    "show": true,
-                                    "fontWeight": "normal",
-                                    "fontStyle": "normal",
-                                    "fontSize": 12,
-                                    "color": "#212121",
-                                    "position": "outside"
-                                },
-                                "barWidth": 10,
-                                "starAngle": 90
-                            }
-                        ],
-                        "topnum": 0
-                    },
-                    "legendPos": "right",
-                    "legendStyle": "customMade",
-                    "legendCustom": "false",
-                    "fontStyleArray": [],
-                    "label": {
-                        "fontStyleArray": []
-                    },
-                    "digitalFormat": {
-                        "dataLabelType": "classificationdatavalue",
-                        "digitalType": "digital",
-                        "currencySymbols": "¥",
-                        "unit": 1,
-                        "decimalPlace": 2,
-                        "enableThousands": false,
-                        "unitarea": 1
-                    },
-                    "unit": 1,
-                    "showStarAngle": false
-                },
-                "showBak": true,
-                "backgroundColor": "#fff",
-                "opacity": 1,
-                "showBorder": true,
                 "borderColor": "#212121",
                 "borderOpacity": 1,
                 "borderWidth": 0,
                 "borderStyle": "dotted",
-                "desc": {
-                    "show": false,
-                    "content": ""
-                },
-                "chartParameters": true
+                "showBorder": true
             },
-            "title": "标题",
-            "zindex": 1,
-            "x": 10,
-            "y": 10,
-            "h": 658,
-            "w": 899,
-            "pkid": "",
-            "chartname": "环图1",
-            "t": "2024-06-12 23:11:30",
-            "id": "a7c98157531b4975a932f363e30cb030",
-            "type": "pie",
-            "category": "charts",
-            "kdId": "",
-            "originname": "环图",
-            "userxindex": ["银行类别"],
-            "useryindex": ["账户数量"],
-            "legendother": ["账户数量", "币种"]
-        },
-        {
-            "_isShow": true,
-            "name": "tips2",
+            "type": "map",
+            "id": "da0440b265104854a844f3ac03cbe7e7",
+            "pluginname": "kd.tmc.tda.report.cash.qing.data.CashDistributionByAreaDataPlugin",
+            "category": "map",
             "chartcontrol": {
+                "pluginname": "kd.tmc.tda.report.cash.qing.data.CashDistributionByAreaDataPlugin",
                 "ispublish": "1"
             },
-            "content": "asdasdasdasdasdasdasdasdasdsad",
-            "zindex": 2,
-            "x": 801,
-            "y": 147,
-            "h": 40,
-            "w": 40,
-            "bindchart": "a7c98157531b4975a932f363e30cb030",
-            "chartname": "tips2",
-            "t": "2024-06-12 23:11:34",
-            "id": "f3150a50fd814a2994fb7b9301e0a833",
-            "type": "tips",
-            "category": "tips",
-            "kdId": "",
-            "pkid": "",
-            "originname": "tips"
-        },
-        {
             "_isShow": true,
-            "name": "enlarge3",
-            "chartcontrol": {
-                "ispublish": "1"
-            },
-            "content": {
-                "showBorder": true,
-                "borderColor": "#212121",
-                "borderOpacity": 1,
-                "borderWidth": 0,
-                "borderStyle": "dotted"
-            },
-            "zindex": 3,
-            "x": 801,
-            "y": 80,
-            "h": 40,
-            "w": 40,
-            "bindchart": "a7c98157531b4975a932f363e30cb030",
-            "chartname": "enlarge3",
-            "t": "2024-06-12 23:11:36",
-            "id": "a02c11f92bf343b0b365531e8db06823",
-            "type": "enlarge",
-            "category": "enlarge",
-            "kdId": "",
-            "pkid": "",
-            "originname": "enlarge"
-        },
-        {
-            "_isShow": true,
-            "name": "refresh4",
-            "chartcontrol": {
-                "ispublish": "1"
-            },
-            "content": {
-                "showBorder": true,
-                "borderColor": "#212121",
-                "borderOpacity": 1,
-                "borderWidth": 0,
-                "borderStyle": "dotted"
-            },
-            "zindex": 4,
-            "x": 801,
-            "y": 214,
-            "h": 40,
-            "w": 40,
-            "bindchart": "a7c98157531b4975a932f363e30cb030",
-            "chartname": "refresh4",
-            "t": "2024-06-12 23:11:38",
-            "id": "796aeece2f894bb08b13493381481ab9",
-            "type": "refresh",
-            "category": "refresh",
-            "kdId": "",
-            "pkid": "",
-            "originname": "refresh"
+            "mapData": "当前余额"
         }
     ],
     "deleteList": []
