@@ -774,7 +774,8 @@ export const LEGEND_PROP: ControlProProps = {
                 component: "Select",
                 options: [
                     { name: "2列", value: "1" },
-                    { name: "3列", value: "2" }
+                    { name: "3列", value: "2" },
+                    { name: "3列窄", value: "3" }
                 ],
                 dataType: "string",
                 defaultValue: "1"

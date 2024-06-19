@@ -298,10 +298,17 @@ export default React.memo(
                                         [item.content.config.legendPos]: 5
                                     };
                                 } else if (item.content.config.legendPos == "right") {
+                                    if(item.content.config.legendFormat == "3"){
+                                        position = {
+                                            top: i ? 30 * (i + 1) + item.content.config.charts.legend.top : 30 + item.content.config.charts.legend.top,
+                                            left: "50%"
+                                        };
+                                    }else{
                                     position = {
                                         top: i ? 30 * (i + 1) + item.content.config.charts.legend.top : 30 + item.content.config.charts.legend.top,
                                         left: "52%"
                                     };
+                                }
                                 } else if (item.content.config.legendPos == "top") {
                                     position = {
                                         top: i ? 30 * (i + 1) + item.content.config.charts.legend.top : 30 + item.content.config.charts.legend.top,
@@ -309,10 +316,7 @@ export default React.memo(
                                     };
                                 } else if (item.content.config.legendPos == "bottom") {
                                     position = {
-                                        top: "auto",
-                                        bottom: i
-                                            ? 30 * (i + 1) + item.content.config.charts.legend.bottom
-                                            : 30 + item.content.config.charts.legend.bottom,
+                                        top: i ? 30 * (i + 1) + (item.content.config.charts.legend.bottom+150) : 30 + (item.content.config.charts.legend.bottom+150),
                                         Left: "center"
                                     };
                                 }
@@ -332,14 +336,17 @@ export default React.memo(
                                             target = formatNumberWithEllipsis(tempFormatNumber);
                                         }
                                     }
-
+                                    const legendOtherNumberFormat = numberformat?.filter((v: any) => v.key == legendother?.[0])?.[0];
+                                    const tempLegendOther = legendOtherNumberFormat? formatNumber(v.legendOther,legendOtherNumberFormat.decimalPlace,legendOtherNumberFormat.enableThousands,legendOtherNumberFormat.isPencent,legendOtherNumberFormat.unit):v.legendOther;
                                     let arr = ["{a|" + name + "}", "{b|" + target + "}"];
                                     if(item.content.config.legendFormat == "2"){
-                                      const legendOtherNumberFormat = numberformat?.filter((v: any) => v.key == legendother?.[0])?.[0];
-                                      const tempLegendOther = legendOtherNumberFormat? formatNumber(v.legendOther,legendOtherNumberFormat.decimalPlace,legendOtherNumberFormat.enableThousands,legendOtherNumberFormat.isPencent,legendOtherNumberFormat.unit):v.legendOther;
                                       arr = ["{a|" + name + "}", "{b|" + target + "}", "{c|" + tempLegendOther + "}"];
                                         return arr.join("                          ")
                                     }
+                                    if(item.content.config.legendFormat == "3"){
+                                        arr = ["{a|" + name + "}", "{b|" + target + "}", "{c|" + tempLegendOther + "}"];
+                                          return arr.join("")
+                                      }
                                     return arr.join("   ");
                                 },
                                 textStyle: {

@@ -169,11 +169,9 @@ export default (props: any) => {
         onChange([{ prop: "numberformat", value: _.uniqBy([...(numberformat || []), newnumberformat], "key") }]);
     };
     const changeEnableThousands = (e: any, key: any) => {
-        console.log("ckq",e,key);
         const newnumberformat = numberformat.filter((v: any) => v.key == key)?.[0];
         newnumberformat.enableThousands = e;
         onChange([{ prop: "numberformat", value: _.uniqBy([...(numberformat || []), newnumberformat], "key") }]);
-        console.log("ckqnumberformat",numberformat);
 
     };
     const changeIsPencent = (e: any, key: any) => {
@@ -182,11 +180,9 @@ export default (props: any) => {
       onChange([{ prop: "numberformat", value: _.uniqBy([...(numberformat || []), newnumberformat], "key") }]);
     };
     const changeUnit = (e: any, key: any) => {
-      console.log("ckq",e,key);
       const newnumberformat = numberformat.filter((v: any) => v.key == key)?.[0];
       newnumberformat.unit = e;
       onChange([{ prop: "numberformat", value: _.uniqBy([...(numberformat || []), newnumberformat], "key") }]);
-      console.log("ckqnumberformat",numberformat);
 
     };
     const onDrop = (e: any, type: any) => {
