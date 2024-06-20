@@ -1,7 +1,8 @@
 import { ComponentMap } from "dw/views/Design/layout/Center/ComponentItem";
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext, useState, useRef } from "react";
 import { ViewItemContext } from "dw/views/ViewItem";
 import useMain from "dw/store/useMain";
+import { v4 as uuidv4 } from "uuid";
 
 const Preview = () => {
     const {
@@ -13,11 +14,31 @@ const Preview = () => {
         setHover
     } = useMain();
 
+    const observar = useRef<any>(null);
+    const renderKey = useRef<any>("");
+
     const { model } = useContext(ViewItemContext);
 
     const { width, height, backgroundSize, backgroundColor, url } = pageConfig;
 
     const [scale, setScale] = useState(1);
+
+    (() => {
+        if (observar.current) {
+            observar.current?.disconnect?.();
+            observar.current = null;
+        }
+
+        observar.current = new MutationObserver((mutationList: any, observer: any) => {
+            for (const mutation of mutationList) {
+                if (mutation.type === "attributes" && mutation.attributeName == "style") {
+                    renderKey.current = uuidv4();
+                }
+            }
+        });
+
+        observar.current.observe(model.dom, { attributes: true });
+    })();
 
     useEffect(() => {
         const ro = new ResizeObserver((entries, observer) => {
@@ -38,9 +59,8 @@ const Preview = () => {
         setHover("");
     };
 
-
     return (
-        <div>
+        <div key={renderKey.current}>
             <div
                 style={{
                     transform: `scale(${scale})`,

@@ -20,14 +20,14 @@
     },
     "itemList": [
         {
-            "h": 848,
-            "chartname": "地图1",
-            "name": "地图1",
+            "h": 569,
+            "chartname": "地图11",
+            "name": "地图11",
             "originname": "地图",
-            "t": "2024-06-1819:19:29",
-            "pkid": "1975597459288088576",
-            "w": 1480,
-            "x": 0,
+            "t": "2024-06-2020:43:52",
+            "pkid": "1971009333991049216",
+            "w": 914,
+            "x": "501",
             "dataset": {
                 "dataindex": [
                     ["country", "国家", 1, false],
@@ -37,44 +37,42 @@
                 ],
                 "rows": [
                     ["国家", "国家名称", "当前余额", "排序"],
-                    [1000001, "中国大陆", 434.73, 0],
-                    [1000003, "香港(中国特别行政区)", 88, 1],
-                    [1000008, "新加坡", 522, 2],
-                    [1000002, "美国", 998, 3],
-                    [1394069619282569200, "nationtest2304", 235, 4],
-                    [1000007, "韩国", "075", 5],
-                    [1000014, "意大利", 105, 6],
-                    [1000018, "瑞士", 23, 7],
-                    [1000006, "加拿大", 84, 8],
-                    [1000009, "日本", 5, 9],
-                    [1000010, "泰国", 102, 10],
-                    [1000019, "澳大利亚", 90, 11],
-                    [1000016, "荷兰", 56, 12],
-                    [1000015, "法国", 780, 13],
-                    [1000004, "澳门(中国特别行政区)", 12, 14],
+                    [1000001, "中国大陆", 431.75, 0],
+                    [1000003, "香港(中国特别行政区)", 0.8, 1],
+                    [1000008, "新加坡", 0.08, 2],
+                    [1000002, "美国", 0.01, 3],
+                    [1394069619282569200, "nationtest2304", 0, 4],
+                    [1000007, "韩国", 0, 5],
+                    [1000014, "意大利", 0, 6],
+                    [1000018, "瑞士", 0, 7],
+                    [1000006, "加拿大", 0, 8],
+                    [1000009, "日本", 0, 9],
+                    [1000010, "泰国", 0, 10],
+                    [1000019, "澳大利亚", 0, 11],
+                    [1000016, "荷兰", 0, 12],
+                    [1000015, "法国", 0, 13],
+                    [1000004, "澳门(中国特别行政区)", 0, 14],
                     [0, "其他国家", 0, 15]
                 ]
             },
-            "zindex": 1,
+            "zindex": 24,
             "title": "",
-            "y": 40,
+            "y": "272",
             "content": {
-                "borderColor": "#212121",
-                "borderOpacity": 1,
+                "borderColor": "#fff",
+                "borderOpacity": 0,
                 "borderWidth": 0,
                 "borderStyle": "dotted",
-                "showBorder": true
+                "showBorder": false
             },
             "type": "map",
-            "id": "da0440b265104854a844f3ac03cbe7e7",
+            "id": "bd4e85884cef45f2a5e5067989f8bb7c",
             "pluginname": "kd.tmc.tda.report.cash.qing.data.CashDistributionByAreaDataPlugin",
             "category": "map",
             "chartcontrol": {
-                "pluginname": "kd.tmc.tda.report.cash.qing.data.CashDistributionByAreaDataPlugin",
-                "ispublish": "1"
-            },
-            "_isShow": true,
-            "mapData": "当前余额"
+                "ispublish": "1",
+                "pluginname": "kd.tmc.tda.report.cash.qing.data.CashDistributionByAreaDataPlugin"
+            }
         }
     ],
     "deleteList": []

@@ -31,20 +31,21 @@ export default (item: any) => {
 
     const data: any = [];
 
-    country?.map((v: any, i: any) => {
-        if (!/中国/.test(v)) {
-            data.push({ name: v, value: value[i] });
-        } else {
-            const target = data.find((item: any) => {
-                item.name == "中国";
-            });
-            if (target) {
-                target.value = target.value + value[i];
+    value &&
+        country?.map((v: any, i: any) => {
+            if (!/中国/.test(v)) {
+                data.push({ name: v, value: value[i] });
             } else {
-                data.push({ name: "中国", value: value[i] });
+                const target = data.find((item: any) => {
+                    item.name == "中国";
+                });
+                if (target) {
+                    target.value = target.value + value[i];
+                } else {
+                    data.push({ name: "中国", value: value[i] });
+                }
             }
-        }
-    });
+        });
 
     const chartOption = useMemo(() => {
         return {

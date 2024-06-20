@@ -9,8 +9,6 @@ const Chart = (item: any) => {
     // 此处配置的单据号列宽度100，优先级高于column配置的200
     const [columnSize, setColumnSize] = React.useState({ order: 100 });
 
-    console.log(item._echartFilter);
-
     return (
         <KdCard item={item} showTitle={showTitle}>
             <>
