@@ -441,7 +441,9 @@ export default React.memo(
                     type: "gauge",
                     data: [{ 
                         value: isNaN(value) ? 0 : value,
-                        offsetCenter: [0, '30%'] 
+                        detail: {
+                            offsetCenter: [0, "30%"]
+                        }
                     }]
                 };
             } else if (item.type == "progressbar") {
