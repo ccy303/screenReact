@@ -17,11 +17,11 @@ export default (item: any) => {
 
     const { mapData, dataset } = item;
 
-    const rows = dataset.rows || [];
+    const rows = dataset?.rows || [];
 
     const _data: any = {};
 
-    for (let i = 0; i < rows[0].length; i++) {
+    for (let i = 0; i < rows[0]?.length; i++) {
         const key = rows[0][i];
         _data[key] = rows.slice(1).map((row: any) => row[i]);
     }
@@ -31,7 +31,7 @@ export default (item: any) => {
 
     const data: any = [];
 
-    country.map((v: any, i: any) => {
+    country?.map((v: any, i: any) => {
         if (!/中国/.test(v)) {
             data.push({ name: v, value: value[i] });
         } else {
@@ -97,17 +97,23 @@ export default (item: any) => {
             },
             visualMap: {
                 type: "piecewise",
-                // min: 0,
-                // max: 20000,
+                // pieces: [
+                //     {gt: 5000, label: '5000'}, 
+                //     {gt: 4000, lte: 5000, label: '4000'}, 
+                //     {gt: 3000, lte: 4000, label: '3000'},
+                //     {gt: 2000, lte: 3000, label: '2000'},
+                //     {gt: 1000, lte: 2000, label: '1000'},
+                //     {gt: 0, lte: 1000, label: ' 0'},
+                // ],
                 text: [mapData],
                 splitNumber: 5,
-                maxOpen: true,
+                // maxOpen: true,
                 align: "left",
-                left: "5%",
-                bottom: "5%",
+                left: "3%",
+                bottom: "2%",
                 showLabel: true,
-                orient: "vertical"
-                // inRange: { color: ["lightskyblue", "yellow", "orange"] }
+                orient: "vertical",
+                inRange: { color: ["#8DB5FE", "#518DFE", "#3379FF", "#3C76FF", "#5D75FE", "#7175FE"] }
             },
             series: [
                 {
@@ -115,13 +121,19 @@ export default (item: any) => {
                     map: "world",
                     name: mapData,
                     data: data,
+                    aspectScale: 0.8,
+                    zoom: 1.2,
+                    top: "9%",
+                    z: 5,
                     itemStyle: {
                         areaColor: "#D9E7FE",
-                        borderColor: "#aaa",
-                        borderWidth: 0.5,
-                        shadowColor: "#D9E7FE",
-                        shadowOffsetX: 0,
-                        shadowOffsetY: 0,
+                        borderColor:'#667B99',
+                        borderWidth: 0.1,
+                        shadowColor: "#667B99",
+                        shadowBlur: 2,
+                        opacity:2,
+                        shadowOffsetX: -1,
+                        shadowOffsetY: 1,
                         emphasis: {
                             show: true,
                             areaColor: "#6895FE",
