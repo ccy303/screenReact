@@ -441,7 +441,9 @@ export default React.memo(
                     type: "gauge",
                     data: [{ 
                         value: isNaN(value) ? 0 : value,
-                        offsetCenter: [0, '30%'] 
+                        detail: {
+                            offsetCenter: [0, "30%"]
+                        }
                     }]
                 };
             } else if (item.type == "progressbar") {
@@ -532,7 +534,7 @@ export default React.memo(
                         {
                             name: "progresspie",
                             type: "pie",
-                            radius: ["68%", "80%"], // 设置环形图的内外半径，实现环形效果
+                            radius: ["60%", "80%"], // 设置环形图的内外半径，实现环形效果
                             clockwise: true, // 是否顺时针展示
                             hoverAnimation: false, // 禁用鼠标悬停时的放大效果
                             label: {

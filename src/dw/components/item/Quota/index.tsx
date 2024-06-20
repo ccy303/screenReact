@@ -24,6 +24,7 @@ const Quota = (item: ComponentItemProps) => {
         fontStyle:  quota?.fontStyle || "normal",
         textDecoration:  quota?.underline || "none",
         fontFamily: "KINGDEEKB-Bold",
+        cursor:"pointer"
     };
 
   const defaultDataSet = item?.dataset?.rows || [];
