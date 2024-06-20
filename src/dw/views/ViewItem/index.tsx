@@ -6,8 +6,8 @@ import "@kdcloudjs/kdesign/dist/kdesign.css";
 import "dw/style/reset-kdesign.less";
 import { v4 as uuidv4 } from "uuid";
 // import JSONData from "../../../../mock/PropsDataType/ITEM_TEST.json";
-import JSONData from "../../../../mock/PropsDataType/a.json";
-// import JSONData from "../../../../mock/PropsDataType/DATA_INIT.json";
+// import JSONData from "../../../../mock/PropsDataType/a.json";
+import JSONData from "../../../../mock/PropsDataType/DATA_INIT.json";
 import "./index.less";
 import Design from "dw/views/Design/Design";
 import useMain from "@/dw/store/useMain";
@@ -105,10 +105,10 @@ const BaseView = () => {
         observe(observableTag, "loading", ({ newValue }: any) => {
             setLoading(newValue);
         });
-        // observableTag.invoke = {
-        //     key: "selectconfig",
-        //     data: { ...JSONData }
-        // };
+        observableTag.invoke = {
+            key: "selectconfig",
+            data: { ...JSONData }
+        };
 
         return () => observeRef.current?.();
     }, []);
