@@ -67,12 +67,36 @@
                 }
             ],
             "columns": [
-                { "code": "No", "name": "序号", "width": 100 },
-                { "code": "order", "name": "单据号", "width": 100 },
-                { "code": "from", "name": "来户", "width": 100 },
-                { "code": "to", "name": "往户", "width": 100 },
-                { "code": "amount", "name": "应付金额", "width": 100 },
-                { "code": "balance", "name": "应收余额", "width": 100 }
+                {
+                    "code": "No",
+                    "name": "序号",
+                    "width": 100
+                },
+                {
+                    "code": "order",
+                    "name": "单据号",
+                    "width": 100
+                },
+                {
+                    "code": "from",
+                    "name": "来户",
+                    "width": 100
+                },
+                {
+                    "code": "to",
+                    "name": "往户",
+                    "width": 100
+                },
+                {
+                    "code": "amount",
+                    "name": "应付金额",
+                    "width": 100
+                },
+                {
+                    "code": "balance",
+                    "name": "应收余额",
+                    "width": 100
+                }
             ],
             "content": {
                 "title": {
@@ -113,8 +137,29 @@
             "kdId": "",
             "pkid": "",
             "originname": "表格",
-            "tableColumns":  ["order", "from", "to", "amount"]
+            "tableColumns": ["order", "from", "to", "amount"]
+        },
+        {
+            "_isShow": true,
+            "name": "下拉选择1",
+            "chartctrl": "7933b348d61742b38a4f47cb834ea9df,order",
+            "chartcontrol": {
+                "ispublish": "1"
+            },
+            "zindex": 804,
+            "x": 10,
+            "y": 10,
+            "h": 30,
+            "w": 100,
+            "chartname": "下拉选择1",
+            "t": "2024-06-20 18:56:19",
+            "id": "3373ca55c13b48a09f08db4695dcf087",
+            "type": "select",
+            "category": "select",
+            "kdId": "",
+            "pkid": "",
+            "originname": "下拉选择"
         }
     ],
-    "deleteList": ["5061ee8f6cd7444892ed15fcea09e776"]
+    "deleteList": []
 }

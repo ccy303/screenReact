@@ -17,6 +17,10 @@ const TextEditor = (props: any) => {
         setInnerValue(value?.split(","));
     }, [value]);
 
+    const dataSet: any = itemList.find((v: any) => v.id == value?.split(",")?.[0])?.dataset;
+
+    const category: any = itemList.find((v: any) => v.id == value?.split(",")?.[0])?.category;
+
     const formatVersionCfg = () => {
         let list: any = [];
 
@@ -39,11 +43,13 @@ const TextEditor = (props: any) => {
     };
 
     const dataControl = useMemo(() => {
-        const dataSet: any = itemList.find(v => v.id == value?.split(",")?.[0])?.dataset;
-        const columns: any = itemList.find(v => v.id == value?.split(",")?.[0])?.columns;
-        let category: any = itemList.find(v => v.id == value?.split(",")?.[0])?.category;
-        const xIndex = [];
+        const tableColumns: any = itemList.find((v: any) => v.id == value?.split(",")?.[0])?.tableColumns;
+        const columns: any = itemList.find((v: any) => v.id == value?.split(",")?.[0])?.columns;
+        let xIndex = [];
         if (category == "table") {
+            columns.map((item: any) => {
+                tableColumns.includes(item.code) && xIndex.push({ label: item.name, value: item.code });
+            });
         } else {
             const { dataindex } = dataSet || {};
             if (!dataindex) return [];
@@ -69,17 +75,23 @@ const TextEditor = (props: any) => {
                     );
                 })}
             </Select>
-            {!!dataControl.length && (
-                <Select placeholder='控制项' style={{ width: "100%", height: "40px" }} onChange={dataControlChange} value={innerValue?.[1]}>
-                    {dataControl.map((item: any) => {
+
+            <Select placeholder='控制项' style={{ width: "100%", height: "40px" }} onChange={dataControlChange} value={innerValue?.[1]}>
+                {dataControl.map((item: any) => {
+                    if (category == "table") {
                         return (
-                            <Select.Option style={{ width: "100%" }} value={item} key={`${item}`}>
-                                {item}
+                            <Select.Option style={{ width: "100%" }} value={item.value} key={`${item.value}`}>
+                                {item.label}
                             </Select.Option>
                         );
-                    })}
-                </Select>
-            )}
+                    }
+                    return (
+                        <Select.Option style={{ width: "100%" }} value={item} key={`${item}`}>
+                            {item}
+                        </Select.Option>
+                    );
+                })}
+            </Select>
         </div>
     );
 };

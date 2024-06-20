@@ -21,7 +21,13 @@ const SelectEditor = (props: any) => {
         if (target?.category == "table") {
             const _list = _.cloneDeep(itemList);
             const _target: any = _list.find((v: any) => v.id == props.chartctrl?.split(",")?.[0]);
-            _target._echartFilter = v;
+
+            const echartFilter = _target?._echartFilter || {};
+            if (props.chartctrl?.split(",")?.[1] && v) {
+                echartFilter[props.chartctrl?.split(",")?.[1]] = v;
+            }
+            _target._echartFilter = echartFilter;
+
             setTimeout(() => {
                 setItemList(_list);
                 setValue(v);
@@ -29,12 +35,13 @@ const SelectEditor = (props: any) => {
         } else {
             const _list = _.cloneDeep(itemList);
             const _target: any = _list.find((v: any) => v.id == props.chartctrl?.split(",")?.[0]);
-            const echartFilter = _target?._echartFilter || {};
 
+            const echartFilter = _target?._echartFilter || {};
             if (props.chartctrl?.split(",")?.[1] && v) {
                 echartFilter[props.chartctrl?.split(",")?.[1]] = v;
             }
             _target._echartFilter = echartFilter;
+
             setTimeout(() => {
                 setItemList(_list);
                 setValue(v);
@@ -44,19 +51,11 @@ const SelectEditor = (props: any) => {
 
     let options = [];
     if (target?.category == "table") {
-        const { columns, tableColumns } = target || {};
-        options = tableColumns?.map((code: any) => {
-            const item = columns.find((v: any) => v.code == code);
-            if (item) {
-                return { label: item.name, value: item.code };
-            }
+        const code = props.chartctrl?.split(",")?.[1];
+        const { dataSource } = target || {};
+        options = dataSource.map((v: any) => {
+            return v[code];
         });
-        console.log(isSetValue.current);
-        !isSetValue.current &&
-            setTimeout(() => {
-                isSetValue.current = true;
-                setValue(tableColumns);
-            });
     } else {
         const index = target?.dataset?.dataindex?.findIndex?.((v: any) => v[1] == props.chartctrl?.split(",")?.[1]);
         const defaultDataSet = target?.dataset?.rows;
@@ -131,7 +130,7 @@ const SelectEditor = (props: any) => {
                 onChange={changeHandle}
                 placeholder='请选择'
                 showSearch={false}
-                mode={target.category == "table" ? "multiple" : "single"}
+                mode={"single"}
                 borderType='bordered'
                 getPopupContainer={(triggerNode: any): any => {
                     if (customProps?.isShow) {
@@ -141,21 +140,13 @@ const SelectEditor = (props: any) => {
                     }
                 }}
             >
-                {target.category == "table"
-                    ? (options || []).map((v: any) => {
-                          return (
-                              <Select.Option key={v.value} value={v.value}>
-                                  {v.label}
-                              </Select.Option>
-                          );
-                      })
-                    : (Array.from(new Set(options)) || []).map((v: any, idx: any) => {
-                          return (
-                              <Select.Option key={idx} value={v}>
-                                  {v}
-                              </Select.Option>
-                          );
-                      })}
+                {(Array.from(new Set(options)) || []).map((v: any, idx: any) => {
+                    return (
+                        <Select.Option key={idx} value={v}>
+                            {v}
+                        </Select.Option>
+                    );
+                })}
             </Select>
         </div>
     );

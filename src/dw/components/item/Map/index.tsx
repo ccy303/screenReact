@@ -17,11 +17,11 @@ export default (item: any) => {
 
     const { mapData, dataset } = item;
 
-    const rows = dataset.rows || [];
+    const rows = dataset?.rows || [];
 
     const _data: any = {};
 
-    for (let i = 0; i < rows[0].length; i++) {
+    for (let i = 0; i < rows[0]?.length; i++) {
         const key = rows[0][i];
         _data[key] = rows.slice(1).map((row: any) => row[i]);
     }
@@ -31,7 +31,7 @@ export default (item: any) => {
 
     const data: any = [];
 
-    country.map((v: any, i: any) => {
+    country?.map((v: any, i: any) => {
         if (!/中国/.test(v)) {
             data.push({ name: v, value: value[i] });
         } else {

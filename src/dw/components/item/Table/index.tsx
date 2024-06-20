@@ -9,12 +9,24 @@ const Chart = (item: any) => {
     // 此处配置的单据号列宽度100，优先级高于column配置的200
     const [columnSize, setColumnSize] = React.useState({ order: 100 });
 
+    console.log(item._echartFilter);
+
     return (
         <KdCard item={item} showTitle={showTitle}>
             <>
                 <Table
                     style={{ width: "100%", height: "100%" }}
-                    dataSource={item.dataSource || []}
+                    dataSource={(item.dataSource || []).filter((dataItem: any) => {
+                        let flag = true;
+                        if (item._echartFilter) {
+                            for (const key in item._echartFilter) {
+                                if (dataItem[key] != item._echartFilter[key]) {
+                                    flag = false;
+                                }
+                            }
+                        }
+                        return flag;
+                    })}
                     columnResize={{
                         maxSize: 500,
                         columnSize,
@@ -23,9 +35,7 @@ const Chart = (item: any) => {
                     }}
                     columns={(item.columns || [])
                         .filter((v: any) => {
-                            if (item._echartFilter && item._echartFilter.length) {
-                                return item._echartFilter.includes(v.code);
-                            } else if (item.tableColumns && item.tableColumns.length) {
+                            if (item.tableColumns && item.tableColumns.length) {
                                 return item.tableColumns.includes(v.code);
                             } else {
                                 return true;
