@@ -1389,7 +1389,9 @@ export const GAUGE_STYLE = {
         itemStyle: {
             color: "#1890FF",
             shadowColor: "#89C7FF",
-            shadowBlur: 20
+            shadowBlur: 20,
+            shadowOffsetX: 0,
+            shadowOffsetY: 0
         }
     },
     axisTick: {
@@ -1465,9 +1467,9 @@ export  const GAUGE_STYLE2 = {
   startAngle: 180,
   endAngle: 0,
   pointer: {
-    icon: "triangle", 
-    length: "65%",
-    width: 10,
+    icon: "roundRect", 
+    length: "40%",
+    width: 3,
     offsetCenter: [0, 0],
     itemStyle: {
       color: {
@@ -1561,13 +1563,15 @@ export  const GAUGE_STYLE2 = {
   anchor: {
     show: true,
     showAbove: true,
-    size: 10,
+    size: 5,
     icon: "circle",
     offsetCenter: [0, 0],
     itemStyle: {
       color: "#1890FF",
+      shadowBlur: 10,
       shadowColor: "#89C7FF",
-      shadowBlur: 20
+      shadowOffsetX: 0,
+      shadowOffsetY: 0
     }
   },
   title: {
