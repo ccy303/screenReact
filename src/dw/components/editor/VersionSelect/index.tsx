@@ -41,11 +41,11 @@ const TextEditor = (props: any) => {
   const versinChange = (id: any) => {
     if (node.type == 'screenConfig') {
       const target = configversion.find((item: any) => item.version == id)
-      console.log(`%c大屏版本修改`, 'color:#00ff00', target)
+      console.log(`%c大屏版本修改-${model.key}`, 'color:#f00', target)
       model.invokeAsync?.('configversion', JSON.stringify(target))
     } else {
       const target = currentItem.optionversion.find((item: any) => item.version == id)
-      console.log(`%c图表版本修改`, 'color:#00ff00', target)
+      console.log(`%c图表版本修改-${model.key}`, 'color:#f00', target)
       model.invokeAsync?.('optionversion', JSON.stringify(target))
     }
   }

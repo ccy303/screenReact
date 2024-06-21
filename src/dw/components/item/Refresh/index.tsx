@@ -19,7 +19,7 @@ const Refresh = (props: any) => {
             return item.id == props.bindchart;
         });
         const _query = { ...data, configparentid: pageControl.pageConfig.id };
-        console.info(`%c刷新`, "color:#00ff00", _query);
+        console.info(`%c刷新-${model.key}`, "color:#f00", _query);
         model?.invoke?.("refresh", JSON.stringify(_query));
     };
 

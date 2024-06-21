@@ -37,7 +37,7 @@ const BaseView = () => {
         data = toJS(data);
         if (key == "selectconfig") {
             // 大屏查询
-            console.log(`%c大屏查询`, "color:#00ff00", JSON.parse(JSON.stringify(data)));
+            console.log(`%c大屏查询-${model.key}`, "color:#00f", JSON.parse(JSON.stringify(data)));
             isForPluginData.current = false;
             initPage({ ...data });
             observableTag.deletes = [];
@@ -45,26 +45,26 @@ const BaseView = () => {
             _itemList.current = data.itemList;
         } else if (["refresh", "optionversion", "selectTable"].includes(key)) {
             // 图表刷新/图表版本修改
-            console.log(`%c${key}`, "color:#00ff00", JSON.parse(JSON.stringify(data)));
+            console.log(`%c${key}-${model.key}`, "color:#00f", JSON.parse(JSON.stringify(data)));
             changeLocalItemList([data]);
         } else if (key == "configversion") {
             // 大屏版本修改
-            console.log(`%c大屏版本修改`, "color:#00ff00", JSON.parse(JSON.stringify(data)));
+            console.log(`%c大屏版本修改-${model.key}`, "color:#00f", JSON.parse(JSON.stringify(data)));
             isForPluginData.current = false;
             initPage({ ...data });
             observableTag.deletes = [];
             _itemList.current = data.itemList;
         } else if (key == "init") {
-            console.log(`%c大屏init`, "color:#00ff00", JSON.parse(JSON.stringify(data)));
+            console.log(`%c大屏init-${model.key}`, "color:#00f", JSON.parse(JSON.stringify(data)));
             isForPluginData.current = false;
             initPage({ ...data });
             observableTag.deletes = [];
             _itemList.current = data.itemList;
         } else if (key == "selectoption") {
-            console.log(`%c(selectoption)回调返回`, "color:#00ff00", JSON.parse(JSON.stringify(data)));
+            console.log(`%c(selectoption)回调返回-${model.key}`, "color:#00f", JSON.parse(JSON.stringify(data)));
             changeLocalItemList(data?.itemList);
         } else if (key == "screenchange") {
-            console.log(`%c(screenchange)回调返回`, "color:#00ff00", JSON.parse(JSON.stringify(data)));
+            console.log(`%c(screenchange)回调返回-${model.key}`, "color:#00f", JSON.parse(JSON.stringify(data)));
             const { itemList } = data;
             let zindex = 0;
             itemList.map((item: any) => item.zindex > zindex && (zindex = item.zindex));
@@ -122,7 +122,7 @@ const BaseView = () => {
             pluginSet.map((item: any, idx: any) => {
                 setTimeout(() => {
                     const t = uuidv4();
-                    console.log(`%c触发selectoption/${t}`, "color:#00ff00", item);
+                    console.log(`%c触发selectoption/${t}-${model.key}`, "color:#f00", item);
                     model?.invokeAsync?.(`selectoption/${t}`, item);
                 });
             });

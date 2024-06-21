@@ -14,31 +14,11 @@ const Preview = () => {
         setHover
     } = useMain();
 
-    const observar = useRef<any>(null);
-    const renderKey = useRef<any>("");
-
-    const { model } = useContext(ViewItemContext);
+    const { model, customProps } = useContext(ViewItemContext);
 
     const { width, height, backgroundSize, backgroundColor, url } = pageConfig;
 
     const [scale, setScale] = useState(1);
-
-    (() => {
-        if (observar.current) {
-            observar.current?.disconnect?.();
-            observar.current = null;
-        }
-
-        observar.current = new MutationObserver((mutationList: any, observer: any) => {
-            for (const mutation of mutationList) {
-                if (mutation.type === "attributes" && mutation.attributeName == "style") {
-                    renderKey.current = uuidv4();
-                }
-            }
-        });
-
-        observar.current.observe(model.dom, { attributes: true });
-    })();
 
     useEffect(() => {
         const ro = new ResizeObserver((entries, observer) => {
@@ -59,8 +39,19 @@ const Preview = () => {
         setHover("");
     };
 
+    // useEffect(() => {
+    //     document.querySelector(".dw-view-item")?.addEventListener("click", (e: any) => {
+    //         const dom = document.querySelector(".display-none");
+    //         if (dom?.style.display == "none") {
+    //             dom.style.display = "block";
+    //         } else {
+    //             dom.style.display = "none";
+    //         }
+    //     });
+    // }, []);
+
     return (
-        <div key={renderKey.current}>
+        <div>
             <div
                 style={{
                     transform: `scale(${scale})`,
@@ -89,10 +80,9 @@ const Preview = () => {
                         if (["refresh", "enlarge", "tips"].includes(it.type)) {
                             style.display = it.bindchart == hoverId ? "" : "none";
                         }
-
                         return (
                             <div style={style} key={id} onMouseEnter={() => mouseEnter(it)} onMouseLeave={() => mouseLeave(it)}>
-                                <Component {...it} />
+                                <Component {...it} customProps={customProps} />
                             </div>
                         );
                     })}

@@ -24,7 +24,7 @@ export const PropertiesItem: FC<PropertiesItemProps> = props => {
         if (!tag) {
             return Message.warning("请输入大屏标识");
         }
-        console.log(`%c大屏标识查询`, "color:#00ff00", tag);
+        console.log(`%c大屏标识查询-${model.key}`, "color:#f00", tag);
         observableTag.loading = true;
         model?.invoke?.("selectconfig", tag);
     };
@@ -34,7 +34,7 @@ export const PropertiesItem: FC<PropertiesItemProps> = props => {
         if (!pluginname) {
             return Message.warning("请输入插件名称");
         }
-        console.log(`%ctable插件名称查询`, "color:#00ff00", pluginname);
+        console.log(`%ctable插件名称查询-${model.key}`, "color:#f00", pluginname);
         model?.invoke?.("selectTable", pluginname);
     };
 
@@ -43,7 +43,7 @@ export const PropertiesItem: FC<PropertiesItemProps> = props => {
         if (!pluginname) {
             return Message.warning("请输入插件名称");
         }
-        console.log(`%c下拉列表插件名称查询`, "color:#00ff00", pluginname);
+        console.log(`%c下拉列表插件名称查询-${model.key}`, "color:#f00", pluginname);
         model?.invoke?.("searchSelect", pluginname);
     };
 
@@ -169,24 +169,23 @@ export const PropertiesContainer: FC<any> = props => {
 
             {
                 <div className='w-100 flex-center mb-20'>
-                 
                     {group.category == "screenConfig" && (
-                       <div className='action-group'>
-                       <Button
-                           type='primary'
-                           onClick={() => {
-                               const data = {
-                                   pageConfig: { ...(pageControl.pageConfig as any) },
-                                   itemList,
-                                   deleteList: toJS(observableTag.deletes)
-                               };
-                               console.log(`%c提交数据`, "color:#00ff00", data);
-                               model?.invoke?.("save", JSON.stringify({ ...data }));
-                           }}
-                       >
-                           保存
-                       </Button>
-                   </div>
+                        <div className='action-group'>
+                            <Button
+                                type='primary'
+                                onClick={() => {
+                                    const data = {
+                                        pageConfig: { ...(pageControl.pageConfig as any) },
+                                        itemList,
+                                        deleteList: toJS(observableTag.deletes)
+                                    };
+                                    console.log(`%c提交数据-${model.key}`, "color:#f00", data);
+                                    model?.invoke?.("save", JSON.stringify({ ...data }));
+                                }}
+                            >
+                                保存
+                            </Button>
+                        </div>
                     )}
                     {group.category == "charts" && (
                         <>
@@ -196,7 +195,7 @@ export const PropertiesContainer: FC<any> = props => {
                                 onClick={() => {
                                     let data = getCurrentItem();
                                     data = { ...data, configparentid: pageControl.pageConfig.id };
-                                    console.log(`%c刷新`, "color:#00ff00", data);
+                                    console.log(`%c刷新-${model.key}`, "color:#f00", data);
                                     model?.invoke?.("refresh", JSON.stringify(data));
                                 }}
                             >

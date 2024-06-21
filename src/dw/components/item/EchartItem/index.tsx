@@ -14,10 +14,10 @@ import { formatChartNumber, formatCombinationNumber, formatNumber } from "../../
 export default React.memo(
     (item: any) => {
         const { model, customProps } = useContext(ViewItemContext);
-        const { content, userxindex, useryindex, useryindex1, dataset, datafilter, userseries, sortfield, w, legendother,numberformat } = item;
+        const { content, userxindex, useryindex, useryindex1, dataset, datafilter, userseries, sortfield, w, legendother, numberformat } = item;
         const { config } = content;
         const { charts } = config;
-        const {chartnumberformat} = content;
+        const { chartnumberformat } = content;
         const { topnum } = charts;
         const [echartStyle, setEchartStyle] = useState<any>(null);
         const [echartKey, setEchartKey] = useState(uuidv4());
@@ -115,7 +115,21 @@ export default React.memo(
         let chartOption: any = useMemo(() => {
             let echartOpt = {
                 color: DEFAULT_CHARTS_COLOR,
-                tooltip: chartnumberformat?{formatter:(param)=>{return formatChartNumber(param,item,chartnumberformat.decimalPlace,chartnumberformat.enableThousands,chartnumberformat.isPencent,chartnumberformat.unit,numberformat)}}:{},
+                tooltip: chartnumberformat
+                    ? {
+                          formatter: param => {
+                              return formatChartNumber(
+                                  param,
+                                  item,
+                                  chartnumberformat.decimalPlace,
+                                  chartnumberformat.enableThousands,
+                                  chartnumberformat.isPencent,
+                                  chartnumberformat.unit,
+                                  numberformat
+                              );
+                          }
+                      }
+                    : {},
                 ...charts
             };
 
@@ -218,25 +232,41 @@ export default React.memo(
                     _radius = ["34%", "40%"];
                 }
                 const defaultPieLabel = {
-                  position: "center",
-                  show: false,
-                  formatter: chartnumberformat?(param)=>{;return '{num|'+formatNumber(param.data.value,chartnumberformat.decimalPlace,chartnumberformat.enableThousands,chartnumberformat.isPencent,chartnumberformat.unit)+'}\n{title|'+param.data.name+'}'} : '{num|{c}}\n{title|{b}}',
-                  rich: {
-                    num: {
-                      color: '#000',
-                      fontFamily: 'KINGDEEKB-Bold',
-                      fontSize: '34px',
-                      fontWeight: '600',
-                      padding: [0, 0, 0, 0]
-                    },
-                    title: {
-                      color: '#696969',
-                      fontSize: '12px',
-                      fontWeight: '300',
-                      padding: [3, 0, 0, 0]
+                    position: "center",
+                    show: false,
+                    formatter: chartnumberformat
+                        ? param => {
+                              return (
+                                  "{num|" +
+                                  formatNumber(
+                                      param.data.value,
+                                      chartnumberformat.decimalPlace,
+                                      chartnumberformat.enableThousands,
+                                      chartnumberformat.isPencent,
+                                      chartnumberformat.unit
+                                  ) +
+                                  "}\n{title|" +
+                                  param.data.name +
+                                  "}"
+                              );
+                          }
+                        : "{num|{c}}\n{title|{b}}",
+                    rich: {
+                        num: {
+                            color: "#000",
+                            fontFamily: "KINGDEEKB-Bold",
+                            fontSize: "34px",
+                            fontWeight: "600",
+                            padding: [0, 0, 0, 0]
+                        },
+                        title: {
+                            color: "#696969",
+                            fontSize: "12px",
+                            fontWeight: "300",
+                            padding: [3, 0, 0, 0]
+                        }
                     }
-                  }
-                }
+                };
                 series = {
                     ...charts.series[0],
                     type: item.type,
@@ -298,17 +328,21 @@ export default React.memo(
                                         [item.content.config.legendPos]: 5
                                     };
                                 } else if (item.content.config.legendPos == "right") {
-                                    if(item.content.config.legendFormat == "3"){
+                                    if (item.content.config.legendFormat == "3") {
                                         position = {
-                                            top: i ? 30 * (i + 1) + item.content.config.charts.legend.top : 30 + item.content.config.charts.legend.top,
+                                            top: i
+                                                ? 30 * (i + 1) + item.content.config.charts.legend.top
+                                                : 30 + item.content.config.charts.legend.top,
                                             left: "50%"
                                         };
-                                    }else{
-                                    position = {
-                                        top: i ? 30 * (i + 1) + item.content.config.charts.legend.top : 30 + item.content.config.charts.legend.top,
-                                        left: "52%"
-                                    };
-                                }
+                                    } else {
+                                        position = {
+                                            top: i
+                                                ? 30 * (i + 1) + item.content.config.charts.legend.top
+                                                : 30 + item.content.config.charts.legend.top,
+                                            left: "52%"
+                                        };
+                                    }
                                 } else if (item.content.config.legendPos == "top") {
                                     position = {
                                         top: i ? 30 * (i + 1) + item.content.config.charts.legend.top : 30 + item.content.config.charts.legend.top,
@@ -316,12 +350,14 @@ export default React.memo(
                                     };
                                 } else if (item.content.config.legendPos == "bottom") {
                                     position = {
-                                        top: i ? 30 * (i + 1) + (item.content.config.charts.legend.bottom+150) : 30 + (item.content.config.charts.legend.bottom+150),
+                                        top: i
+                                            ? 30 * (i + 1) + (item.content.config.charts.legend.bottom + 150)
+                                            : 30 + (item.content.config.charts.legend.bottom + 150),
                                         Left: "center"
                                     };
                                 }
                             }
-                         
+
                             return {
                                 ...echartOpt.legend,
                                 ...position,
@@ -332,39 +368,48 @@ export default React.memo(
                                     let target;
                                     for (let i = 0; i < _data.length; i++) {
                                         if (_data[i].name === name) {
-                                            const tempFormatNumber = chartnumberformat?formatNumber(_data[i].value,chartnumberformat.decimalPlace,chartnumberformat.enableThousands,chartnumberformat.isPencent,chartnumberformat.unit):_data[i].value
+                                            const tempFormatNumber = chartnumberformat
+                                                ? formatNumber(
+                                                      _data[i].value,
+                                                      chartnumberformat.decimalPlace,
+                                                      chartnumberformat.enableThousands,
+                                                      chartnumberformat.isPencent,
+                                                      chartnumberformat.unit
+                                                  )
+                                                : _data[i].value;
                                             target = formatNumberWithEllipsis(tempFormatNumber);
                                         }
                                     }
                                     const legendOtherNumberFormat = numberformat?.filter((v: any) => v.key == legendother?.[0])?.[0];
-                                    const tempLegendOther = legendOtherNumberFormat? formatNumber(v.legendOther,legendOtherNumberFormat.decimalPlace,legendOtherNumberFormat.enableThousands,legendOtherNumberFormat.isPencent,legendOtherNumberFormat.unit):v.legendOther;
+                                    const tempLegendOther = legendOtherNumberFormat
+                                        ? formatNumber(
+                                              v.legendOther,
+                                              legendOtherNumberFormat.decimalPlace,
+                                              legendOtherNumberFormat.enableThousands,
+                                              legendOtherNumberFormat.isPencent,
+                                              legendOtherNumberFormat.unit
+                                          )
+                                        : v.legendOther;
                                     let arr = ["{a|" + name + "}", "{b|" + target + "}"];
-                                    if(item.content.config.legendFormat == "2"){
-                                      arr = ["{a|" + name + "}", "{b|" + target + "}", "{c|" + tempLegendOther + "}"];
-                                        return arr.join("                          ")
-                                    }
-                                    if(item.content.config.legendFormat == "3"){
+                                    if (item.content.config.legendFormat == "2") {
                                         arr = ["{a|" + name + "}", "{b|" + target + "}", "{c|" + tempLegendOther + "}"];
-                                          return arr.join("")
-                                      }
+                                        return arr.join("                          ");
+                                    }
+                                    if (item.content.config.legendFormat == "3") {
+                                        arr = ["{a|" + name + "}", "{b|" + target + "}", "{c|" + tempLegendOther + "}"];
+                                        return arr.join("");
+                                    }
                                     return arr.join("   ");
                                 },
                                 textStyle: {
                                     padding: 5,
                                     // 添加
-                                    rich: { 
-                                      a: { width: 80, padding: [5, 0, 0, 0] },
-                                      b: { width: 80,
-                                           align: "right",
-                                           padding: [5, 0, 0, 0],
-                                        },
-                                      c: { width: 80,      
-                                           align: "right",
-                                           padding: [5, -20, 0, 0],
-                                         } 
-                                     }
+                                    rich: {
+                                        a: { width: 80, padding: [5, 0, 0, 0] },
+                                        b: { width: 80, align: "right", padding: [5, 0, 0, 0] },
+                                        c: { width: 80, align: "right", padding: [5, -20, 0, 0] }
+                                    }
                                 }
-                                
                             };
                         });
                     } else {
@@ -439,12 +484,14 @@ export default React.memo(
 
                 series = {
                     type: "gauge",
-                    data: [{ 
-                        value: isNaN(value) ? 0 : value,
-                        detail: {
-                            offsetCenter: [0, "30%"]
+                    data: [
+                        {
+                            value: isNaN(value) ? 0 : value,
+                            detail: {
+                                offsetCenter: [0, "30%"]
+                            }
                         }
-                    }]
+                    ]
                 };
             } else if (item.type == "progressbar") {
                 const y = useryindex?.[0] || "2015";
@@ -625,7 +672,19 @@ export default React.memo(
                     ...echartOpt,
                     tooltip: {
                         trigger: "axis",
-                        formatter:chartnumberformat ? (param)=>{return formatCombinationNumber(param,item,chartnumberformat.decimalPlace,chartnumberformat.enableThousands,chartnumberformat.isPencent,chartnumberformat.unit,numberformat)} : {}
+                        formatter: chartnumberformat
+                            ? param => {
+                                  return formatCombinationNumber(
+                                      param,
+                                      item,
+                                      chartnumberformat.decimalPlace,
+                                      chartnumberformat.enableThousands,
+                                      chartnumberformat.isPencent,
+                                      chartnumberformat.unit,
+                                      numberformat
+                                  );
+                              }
+                            : {}
                     },
                     xAxis: { type: "category", axisLabel: { interval: 0, rotate: calrotate } },
                     yAxis: [
@@ -787,20 +846,28 @@ export default React.memo(
             chartOptionRef.current = {
                 option: _.cloneDeep(output)
             };
-            
+
             const gaugeDetail = {
                 detail: {
-                  fontSize: 32,
-                  fontWeight: 700,
-                  fontFamily: "KINGDEEKB-Bold",
-                  lineHeight: 45,
-                  valueAnimation: true,
-                  formatter:function (value: number) {
-                    return chartnumberformat?formatNumber(value,chartnumberformat.decimalPlace,chartnumberformat.enableThousands,chartnumberformat.isPencent,chartnumberformat.unit):value;
-                  },
-                  color: "inherit"
+                    fontSize: 32,
+                    fontWeight: 700,
+                    fontFamily: "KINGDEEKB-Bold",
+                    lineHeight: 45,
+                    valueAnimation: true,
+                    formatter: function (value: number) {
+                        return chartnumberformat
+                            ? formatNumber(
+                                  value,
+                                  chartnumberformat.decimalPlace,
+                                  chartnumberformat.enableThousands,
+                                  chartnumberformat.isPencent,
+                                  chartnumberformat.unit
+                              )
+                            : value;
+                    },
+                    color: "inherit"
                 }
-              }
+            };
             item.type == "gauge" && _.assign(output.series, GAUGE_STYLE, gaugeDetail);
             item.type == "gauge2" && _.assign(output.series, GAUGE_STYLE2, gaugeDetail);
 
@@ -852,6 +919,16 @@ export default React.memo(
         }, [item]);
 
         useEffect(() => {
+            if (ref.current) {
+                const parent = ref.current.ele.parentElement;
+                console.log(parent);
+
+                const padding = (getComputedStyle(parent).padding || "0").replace("px", "");
+                setEchartStyle({
+                    width: `${parent.offsetWidth - Number(padding) * 2}px`,
+                    height: `${parent.offsetHeight - Number(padding) * 2}px`
+                });
+            }
             return () => {
                 clearInterval(timer.current);
             };
@@ -1041,26 +1118,23 @@ export default React.memo(
             }
         }, []);
 
-        useEffect(() => {
-            if (!ref.current) {
-                return;
+        const h = useMemo(() => {
+            let height = item.h;
+            if (item.content.title.show) {
+                height -= Number(item.content.title.fontSize) + 20 + 4;
             }
-            const parent = ref.current.ele.parentElement;
-            const padding = (getComputedStyle(parent).padding || "0").replace("px", "");
-            setEchartStyle({
-                width: `${parent.offsetWidth - Number(padding) * 2}px`,
-                height: `${parent.offsetHeight - Number(padding) * 2}px`
-            });
-        }, [chartOption]);
+            return height;
+        }, [item]);
 
         return (
             <KdCard item={item} showTitle={showTitle} bodyStyle={{ overflow: "hidden" }}>
-                {showLoading ? (
+                {!showLoading ? (
                     <Spin type='page' spinning={showLoading} style={{ width: "100%", height: "100%", justifyContent: "center" }}></Spin>
                 ) : (
                     <ReactECharts
                         key={echartKey}
-                        style={customProps.isShow && echartStyle ? echartStyle : { width: "100%", height: "100%" }}
+                        // style={{ width: `100%`, height: `100%` }}
+                        style={{ width: `${item.w}px`, height: `${h}px` }}
                         option={{ ...chartOption, animationEasing: "cubicInOut", animationDuration: 2000 }}
                         ref={ref}
                         onEvents={{ click: onChartClick }}
